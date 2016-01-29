@@ -138,7 +138,7 @@ class WgteamsInfofieldsHandler extends XoopsPersistableObjectHandler
      */
     public function __construct(&$db)
     {
-        parent::__construct($db, 'mod_wgteams_infofields', 'wgteamsinfofields', 'infofield_id', 'infofield_name');
+        parent::__construct($db, 'wgteams_infofields', 'wgteamsinfofields', 'infofield_id', 'infofield_name');
 		$this->wgteams = WgteamsHelper::getInstance();
     }
 

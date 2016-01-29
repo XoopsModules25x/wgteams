@@ -103,10 +103,10 @@ $modversion['templates'][] = array('file' => 'wgteams_block_teamsmembers.tpl', '
 // ------------------- Mysql ------------------- //
 $modversion['sqlfile']['mysql'] = 'sql/mysql.sql';
 // Tables
-$modversion['tables'][1] = 'mod_wgteams_teams';
-$modversion['tables'][2] = 'mod_wgteams_members';
-$modversion['tables'][3] = 'mod_wgteams_relations';
-$modversion['tables'][4] = 'mod_wgteams_infofields';
+$modversion['tables'][1] = 'wgteams_teams';
+$modversion['tables'][2] = 'wgteams_members';
+$modversion['tables'][3] = 'wgteams_relations';
+$modversion['tables'][4] = 'wgteams_infofields';
 
 // ------------------- Search ------------------- //
 $modversion['hasSearch'] = 1;

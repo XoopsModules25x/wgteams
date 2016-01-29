@@ -195,7 +195,7 @@ class WgteamsMembersHandler extends XoopsPersistableObjectHandler
      */
     public function __construct(&$db)
     {
-        parent::__construct($db, 'mod_wgteams_members', 'wgteamsmembers', 'member_id', 'member_firstname');
+        parent::__construct($db, 'wgteams_members', 'wgteamsmembers', 'member_id', 'member_firstname');
 		$this->wgteams = WgteamsHelper::getInstance();
     }
 
