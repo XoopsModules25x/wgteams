@@ -8,10 +8,10 @@
 # PHP Version: 5.5.11
 
 #
-# Structure table for `mod_wgteams_teams` 8
+# Structure table for `wgteams_teams` 8
 #
 
-CREATE TABLE `mod_wgteams_teams` (
+CREATE TABLE `wgteams_teams` (
   `team_id` INT(8) UNSIGNED NOT NULL AUTO_INCREMENT,
   `team_name` VARCHAR(200) NOT NULL DEFAULT '',
   `team_descr` TEXT NULL ,
@@ -28,10 +28,10 @@ CREATE TABLE `mod_wgteams_teams` (
 ) ENGINE=InnoDB;
 
 #
-# Structure table for `mod_wgteams_members` 10
+# Structure table for `wgteams_members` 10
 #
 
-CREATE TABLE `mod_wgteams_members` (
+CREATE TABLE `wgteams_members` (
   `member_id` INT(8) UNSIGNED NOT NULL AUTO_INCREMENT,
   `member_firstname` VARCHAR(200) NOT NULL DEFAULT '',
   `member_lastname` VARCHAR(200) NULL DEFAULT '',
@@ -46,10 +46,10 @@ CREATE TABLE `mod_wgteams_members` (
 ) ENGINE=InnoDB;
 
 #
-# Structure table for `mod_wgteams_relations` 12
+# Structure table for `wgteams_relations` 12
 #
 
-CREATE TABLE `mod_wgteams_relations` (
+CREATE TABLE `wgteams_relations` (
   `rel_id` INT(8) UNSIGNED NOT NULL AUTO_INCREMENT,
   `rel_team_id` INT(10) NOT NULL DEFAULT '0',
   `rel_member_id` INT(10) NOT NULL DEFAULT '0',
@@ -70,10 +70,10 @@ CREATE TABLE `mod_wgteams_relations` (
 ) ENGINE=InnoDB;
 
 #
-# Structure table for `mod_wgteams_infofields` 4
+# Structure table for `wgteams_infofields` 4
 #
 
-CREATE TABLE `mod_wgteams_infofields` (
+CREATE TABLE `wgteams_infofields` (
   `infofield_id` INT(8) UNSIGNED NOT NULL AUTO_INCREMENT,
   `infofield_name` VARCHAR(200) NOT NULL DEFAULT '',
   `infofield_submitter` INT(10) NOT NULL DEFAULT '0',
