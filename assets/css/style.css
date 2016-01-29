@@ -1,0 +1,69 @@
+@charset "UTF-8";
+/*
+ You may not change or alter any portion of this comment or credits
+ of supporting developers from this source code or any supporting source code
+ which is considered copyrighted (c) material of the original comment or credit authors.
+
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+*/
+/**
+ * wgTeams module for xoops
+ *
+ * @copyright       The XOOPS Project (http://xoops.org)
+ * @license         GPL 2.0 or later
+ * @package         wgteams
+ * @since           1.0
+ * @min_xoops       2.5.7
+ * @author          Goffy - Wedega.com - Email:<webmaster@wedega.com> - Website:<http://wedega.com>
+ * @version         $Id: 1.0 style.css 1 Sun 2015/12/27 23:18:02Z Goffy - Wedega $
+ */
+
+.container-team {
+}
+
+.team-img, .member-img  .img-responsive{
+    width:100%;
+}
+
+.team-name {}
+.team-descr {}
+.team-readmore {
+	text-align: right;
+}
+.member-table {
+    width: 100%;
+    padding: 0px;
+    margin-bottom:50px;
+}
+.member-label {
+    padding: 2px;
+    vertical-align:top;
+}
+.member-text {
+    padding: 2px;
+    vertical-align:top;
+}
+.member-info {
+    height: auto;
+}
+.wgteams-odd div {
+    background-color: #DFDFDF;
+	padding: 5px;
+	border-bottom: 1px solid #ccc;
+}
+.wgteams-even div {
+    background-color: #EFEFEF;
+	padding: 5px;
+	border-bottom: 1px solid #ccc;
+}
+.wgteams-bordered div {
+    border: 1px solid #e9e9e9;
+}
+.wgteams-lined div {
+    border-top: 1px solid #e9e9e9;
+    border-left: 0px;
+    border-right: 0px;
+    border-bottom: 0px;
+}
