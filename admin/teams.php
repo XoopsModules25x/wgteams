@@ -59,6 +59,21 @@ switch ($op)
         }
 	break;
     
+    case 'set_onoff':
+        if (isset($teamId)) {
+            $teamsObj =& $teamsHandler->get($teamId);
+            // get Var team_online
+            $team_online = ($teamsObj->getVar('team_online') == 1) ? '0' : '1';
+            // Set Var team_online
+            $teamsObj->setVar('team_online', $team_online);
+            if ($teamsHandler->insert($teamsObj, true)) {
+               redirect_header('teams.php?op=list', 2, _AM_WGTEAMS_FORM_OK);
+            }
+        } else {
+            echo "invalid params";
+        }
+        break;
+    
 	case 'new':
 		$templateMain = 'wgteams_admin_teams.tpl';
         $adminMenu->addItemButton(_AM_WGTEAMS_TEAMS_LIST, 'teams.php', 'list');
@@ -87,8 +102,8 @@ switch ($op)
         // Set Var team_image
         include_once XOOPS_ROOT_PATH .'/class/uploader.php';
         $uploader = new XoopsMediaUploader(WGTEAMS_UPLOAD_PATH.'/teams/images',
-														$wgteams->getConfig('mimetypes'),
-                                                        $wgteams->getConfig('maxsize'), null, null);
+														$wgteams->getConfig('wgteams_img_mimetypes'),
+                                                        $wgteams->getConfig('wgteams_img_maxsize'), null, null);
         if ($uploader->fetchMedia($_POST['xoops_upload_file'][0])) {
 			$extension = preg_replace( '/^.+\.([^.]+)$/sU' , '' , $_FILES['attachedfile']['name']);
             $imgName = str_replace(' ', '', $_POST['team_name']).'.'.$extension;

@@ -25,7 +25,7 @@
             <td class="center">
                 <{if $team.image}>
                     <img src="<{$wgteams_upload_url}>/teams/images/<{$team.image}>" alt="teams" style='max-width:50px' />
-                <else>
+                <{else}>
                     &nbsp;
                 <{/if}>
             </td>
@@ -34,7 +34,15 @@
             <td class="center"><{$team.imagestyle}></td>
             <td class="center"><{$team.displaystyle}></td>
             <td class="center"><{$team.weight}></td>
-            <td class="center"><{$team.online}></td>
+            <td class="center">
+                <a href="teams.php?op=set_onoff&amp;team_id=<{$team.id}>" title="<{$team.online}>">
+                    <{if $team.online == $smarty.const._YES}>
+                        <img src="<{xoModuleIcons16 on.png}>" alt="teams" />
+                    <{else}>
+                        <img src="<{xoModuleIcons16 off.png}>" alt="teams" />
+                    <{/if}>
+                </a>
+            </td>
             <td class="center"><{$team.submitter}></td>
             <td class="center"><{$team.date_create}></td>
             <td class="center  width5">

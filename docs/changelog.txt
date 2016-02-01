@@ -1,6 +1,14 @@
 
 ==============================================================
-Change Log for wgTeams - 2016/01/21 16:08:02 Version 1.03
+Change Log for wgTeams - 2016/01/31 16:08:02 Version 1.04
+==============================================================
+fixed bug with config wgteams_img_maxsize/wgteams_img_mimetypes (goffy)
+added label with wgteams_img_maxsize to form teams/members (goffy)
+fixed bug with none show email (goffy)
+added quick link to set team on or offline (goffy)
+
+==============================================================
+Change Log for wgTeams - 2016/01/29 16:08:02 Version 1.03
 ==============================================================
 added editor selection for textboxes (mamba/goffy)
 added config for image size (goffy)

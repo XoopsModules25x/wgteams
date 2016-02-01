@@ -127,8 +127,8 @@ class WgteamsMembers extends XoopsObject
         $imageTray->addElement( new XoopsFormLabel( '', "<br /><img src='".XOOPS_URL."/".$imageDirectory."/".$memberImage."' name='image2' id='image2' alt='' style='max-width:100px' />" ) );
         // Form File
         $fileSelectTray = new XoopsFormElementTray('','<br />');
-        $fileSelectTray->addElement(new XoopsFormFile(_AM_WGTEAMS_FORM_UPLOAD_IMG , 'attachedfile', $this->wgteams->getConfig('maxsize')));
-        $fileSelectTray->addElement(new XoopsFormLabel(''));
+        $fileSelectTray->addElement(new XoopsFormFile(_AM_WGTEAMS_FORM_UPLOAD_IMG , 'attachedfile', $this->wgteams->getConfig('wgteams_img_maxsize')));
+        $fileSelectTray->addElement(new XoopsFormLabel(_AM_WGTEAMS_MAX_FILESIZE .  $this->wgteams->getConfig('wgteams_img_maxsize')));
         $imageTray->addElement($fileSelectTray);
         $form->addElement( $imageTray );
         // Form Select User

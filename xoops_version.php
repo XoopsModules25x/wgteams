@@ -25,7 +25,7 @@ defined('XOOPS_ROOT_PATH') or die('Restricted access');
 // ------------------- Informations ------------------- //
 $modversion = array(
     'name' => _MI_WGTEAMS_NAME,
-    'version' => '1.03',
+    'version' => '1.04',
     'description' => _MI_WGTEAMS_DESC,
     'author' => 'Goffy - Wedega.com',
     'author_mail' => 'webmaster@wedega.com',
@@ -38,7 +38,7 @@ $modversion = array(
     //
     'release_info' => 'release_info',
     'release_file' => XOOPS_URL . '/modules/wgteams/docs/release_info file',
-    'release_date' => '2016/01/12',
+    'release_date' => '2016/01/31',
     //
     'manual' => 'link to manual file',
     'manual_file' => XOOPS_URL . '/modules/wgteams/docs/install.txt',
