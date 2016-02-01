@@ -153,7 +153,9 @@ function wgteamsGetTeamMemberDetails(&$teamsAll)
             $member_address = $member_obj->getVar('member_address');
             if (!$member_address == '') $nb_infos++;
             $member_phone   = $member_obj->getVar('member_phone');
-            if (!$member_phone == '') $nb_infos++;
+			if (!$member_phone == '') $nb_infos++;
+            $member_email   = $member_obj->getVar('member_email');
+            if (!$member_email == '') $nb_infos++;
             $member_image   = $member_obj->getVar('member_image');       
             
             // reset info field
@@ -224,6 +226,7 @@ function wgteamsGetTeamMemberDetails(&$teamsAll)
                                'member_name' => $member_name, 
                                'member_address' => $member_address, 
                                'member_phone' => $member_phone, 
+							   'member_email' => $member_email,
                                'member_image' => $member_image, 
                                'member_image_url' => $member_image_url,
                                'info_1_name' => $rel_info_1_name,

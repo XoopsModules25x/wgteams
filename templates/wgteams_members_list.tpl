@@ -15,6 +15,6 @@
         <{else}>
             <{include file='db:wgteams_member_default.tpl' member=$member}>
         <{/if}>
-        </div>
+            </div>
     <{/foreach}>
 </div>
