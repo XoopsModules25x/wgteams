@@ -56,4 +56,7 @@ define('_MI_WGTEAMS_STARTPAGE_DESC', "Define, what should be shown when calling 
 define('_MI_WGTEAMS_STARTPAGE_LIST', "An overview with all teams (but without members)");
 define('_MI_WGTEAMS_STARTPAGE_ALL', "All teams with all members");
 define('_MI_WGTEAMS_STARTPAGE_FIRST', "The first team");
+define('_MI_WGTEAMS_LABELS', "Show labels");
+define('_MI_WGTEAMS_LABELS_DESC', "Please decide, whether there should be a label before the information, e.g. before the name the label 'first and last name' will be shown. If you select 'No', only the name himself, the phone number himself an so one will be shown");
+// ---------------- End ----------------
 // ---------------- End ----------------

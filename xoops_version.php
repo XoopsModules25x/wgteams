@@ -25,7 +25,7 @@ defined('XOOPS_ROOT_PATH') or die('Restricted access');
 // ------------------- Informations ------------------- //
 $modversion = array(
     'name' => _MI_WGTEAMS_NAME,
-    'version' => '1.04',
+    'version' => '1.05',
     'description' => _MI_WGTEAMS_DESC,
     'author' => 'Goffy - Wedega.com',
     'author_mail' => 'webmaster@wedega.com',
@@ -221,3 +221,11 @@ $modversion['config'][] = array(
     'options' => array("bmp" => "image/bmp","gif" => "image/gif","pjpeg" => "image/pjpeg",
                        "jpeg" => "image/jpeg","jpg" => "image/jpg","jpe" => "image/jpe",
                        "png" => "image/png"));
+
+$modversion['config'][] = array(
+    'name' => "wgteams_labels",
+    'title' => "_MI_WGTEAMS_LABELS",
+    'description' => "_MI_WGTEAMS_LABELS_DESC",
+    'formtype' => "yesno",
+    'valuetype' => "int",
+    'default' => 1);

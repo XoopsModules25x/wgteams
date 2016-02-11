@@ -75,6 +75,7 @@ function wgteamsGetTeamDetails(&$teamsAll, $show_descr = true)
     {
 		$team_id = $teamsAll[$i]->getVar('team_id');
         $team_name = $teamsAll[$i]->getVar('team_name');
+        $team_descr = '';
         if ($show_descr) $team_descr = $teamsAll[$i]->getVar('team_descr');
         if ($teamsAll[$i]->getVar('team_image') == 'blank.gif') { 
             $team_image = '';
@@ -127,6 +128,7 @@ function wgteamsGetTeamMemberDetails(&$teamsAll)
         $team_tablestyle = ($teamsAll[$i]->getVar('team_tablestyle') == 'default') ? '' : $teamsAll[$i]->getVar('team_tablestyle');
         $team_imagestyle = ($teamsAll[$i]->getVar('team_imagestyle') == 'default') ? '' : $teamsAll[$i]->getVar('team_imagestyle');
         $team_displaystyle = $teamsAll[$i]->getVar('team_displaystyle');
+        $member_labels = $wgteams->getConfig('wgteams_labels')== 1 ? true : false;
         
         $crit_rels = new CriteriaCompo();
         $crit_rels->add(new Criteria('rel_team_id', $team_id));
@@ -243,7 +245,8 @@ function wgteamsGetTeamMemberDetails(&$teamsAll)
                                'rel_tablestyle' => $team_tablestyle,
                                'rel_imagestyle' => $team_imagestyle,
                                'rel_displaystyle' => $team_displaystyle,
-                               'rel_nb_infos' => $nb_infos
+                               'rel_nb_infos' => $nb_infos,
+                               'member_labels' => $member_labels
                                );            
         }
         $teams_list[] = array('team_id' => $team_id, 
