@@ -76,9 +76,12 @@ if ($teamsCount > $limit) {
     $GLOBALS['xoopsTpl']->assign('pagenav', $nav->renderNav(4));
 }
 // Breadcrumbs
-$xoBreadcrumbs[] = array('title' => _MA_WGTEAMS_TEAMS, 'link' => WGTEAMS_URL . '/index.php');
-if ($team_id > 0 && !$team_name == '') {
-    $xoBreadcrumbs[] = array('title' => $team_name);
+if ($wgteams->getConfig('wgteams_showbreadcrumbs') == 1) {
+    $xoBreadcrumbs[] = array('title' => _MA_WGTEAMS_TEAMS, 'link' => WGTEAMS_URL . '/index.php');
+    if ($team_id > 0 && !$team_name == '') {
+        $xoBreadcrumbs[] = array('title' => $team_name);
+    }
+    $GLOBALS['xoopsTpl']->assign('showbreadcrumbs', '1');
 }
 // keywords
 wgteamsMetaKeywords($wgteams->getConfig('keywords').', '. implode(', ', $keywords));

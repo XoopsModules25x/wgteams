@@ -58,5 +58,6 @@ define('_MI_WGTEAMS_STARTPAGE_ALL', "All teams with all members");
 define('_MI_WGTEAMS_STARTPAGE_FIRST', "The first team");
 define('_MI_WGTEAMS_LABELS', "Show labels");
 define('_MI_WGTEAMS_LABELS_DESC', "Please decide, whether there should be a label before the information, e.g. before the name the label 'first and last name' will be shown. If you select 'No', only the name himself, the phone number himself an so one will be shown");
-// ---------------- End ----------------
+define('_MI_WGTEAMS_SHOWBREADCRUMBS', "Show breadcrumbs-navigation");
+define('_MI_WGTEAMS_SHOWBREADCRUMBS_DESC', "Please decide, whether a breadcrumbs-navigation should be shown.");
 // ---------------- End ----------------

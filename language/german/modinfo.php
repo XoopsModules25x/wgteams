@@ -58,4 +58,6 @@ define('_MI_WGTEAMS_STARTPAGE_ALL', "Alle Teams mit allen Mitgliedern");
 define('_MI_WGTEAMS_STARTPAGE_FIRST', "Das erste Team");
 define('_MI_WGTEAMS_LABELS', "Bezeichnungsfelder anzeigen");
 define('_MI_WGTEAMS_LABELS_DESC', "Definieren Sie bitte, ob vor den jeweiligen Informationen ein Bezeichnungsfeld angezeigt werden soll, z.B. vor dem Namen wie 'Vor- und Zuname' angezeigt. Wenn sie 'Nein' wählen, wird nur der Name selbst, die Telefonnummer selbst, usw. angezeigt");
+define('_MI_WGTEAMS_SHOWBREADCRUMBS', "Breadcrumb-Navigation anzeigen");
+define('_MI_WGTEAMS_SHOWBREADCRUMBS_DESC', "Definieren Sie bitte, ob eine Breadcrumb-Navigation angezeigt werden soll.");
 // ---------------- End ----------------
