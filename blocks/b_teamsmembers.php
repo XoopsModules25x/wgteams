@@ -19,49 +19,50 @@
  * @author          Goffy - Wedega.com - Email:<webmaster@wedega.com> - Website:<http://wedega.com>
  * @version         $Id: 1.0 teams.php 1 Sun 2015/12/27 23:18:00Z Goffy - Wedega $
  */
-include_once XOOPS_ROOT_PATH.'/modules/wgteams/include/common.php';
+include_once XOOPS_ROOT_PATH . '/modules/wgteams/include/common.php';
 
 // Function show block
 function b_wgteams_teamsmembers_show($options)
 {
-    
-	include_once XOOPS_ROOT_PATH.'/modules/wgteams/include/functions.php';
 
-    $GLOBALS['xoTheme']->addStylesheet(XOOPS_URL .'/modules/wgteams/assets/css/style.css');
-    
-    $typeBlock   = $options[0];
-    $team_id     = $options[1];
+    include_once XOOPS_ROOT_PATH . '/modules/wgteams/include/functions.php';
+
+    $GLOBALS['xoTheme']->addStylesheet(XOOPS_URL . '/modules/wgteams/assets/css/style.css');
+
+    $typeBlock = $options[0];
+    $team_id   = $options[1];
     array_shift($options);
     array_shift($options);
-    
-    $wgteams = WgteamsHelper::getInstance();
+
+    $wgteams      = WgteamsHelper::getInstance();
     $teamsHandler =& $wgteams->getHandler('teams');
-    
+
     $crit_teams = new CriteriaCompo();
     $crit_teams->add(new Criteria('team_id', $team_id));
     $crit_teams->add(new Criteria('team_online', '1'));
     $crit_teams->setSort('team_weight');
     $crit_teams->setOrder('ASC');
     $teamsCount = $teamsHandler->getCount($crit_teams);
-    $teamsAll = $teamsHandler->getAll($crit_teams);
-    
+    $teamsAll   = $teamsHandler->getAll($crit_teams);
+
     if ($teamsCount > 0) {
         $block = wgteamsGetTeamMemberDetails($teamsAll);
     } else {
         $block = array();
     }
+
     return $block;
 }
 
 // Function edit block
 function b_wgteams_teamsmembers_edit($options)
 {
-    include_once XOOPS_ROOT_PATH.'/modules/wgteams/class/teams.php';
-    $wgteams = WgteamsHelper::getInstance();
+    include_once XOOPS_ROOT_PATH . '/modules/wgteams/class/teams.php';
+    $wgteams      = WgteamsHelper::getInstance();
     $teamsHandler =& $wgteams->getHandler('teams');
     $GLOBALS['xoopsTpl']->assign('wgteams_upload_url', WGTEAMS_UPLOAD_URL);
-    $form  = _MB_WGTEAMS_TEAM_TO_DISPLAY;
-    $form .= "<input type='hidden' name='options[0]' value='".$options[0]."' />";
+    $form = _MB_WGTEAMS_TEAM_TO_DISPLAY;
+    $form .= "<input type='hidden' name='options[0]' value='" . $options[0] . "' />";
     array_shift($options);
     $criteria = new CriteriaCompo();
     $criteria->add(new Criteria('team_id', 0, '!='));
@@ -73,8 +74,9 @@ function b_wgteams_teamsmembers_edit($options)
     $form .= "<select name='options[]' size='5'>";
     foreach (array_keys($teamsAll) as $i) {
         $team_id = $teamsAll[$i]->getVar('team_id');
-        $form .= "<option value='" . $team_id . "' " . (array_search($team_id, $options) === false ? "" : "selected='selected'") . ">".$teamsAll[$i]->getVar('team_name')."</option>";
+        $form .= "<option value='" . $team_id . "' " . (array_search($team_id, $options) === false ? "" : "selected='selected'") . ">" . $teamsAll[$i]->getVar('team_name') . "</option>";
     }
     $form .= "</select>";
+
     return $form;
 }

@@ -19,18 +19,19 @@
  * @author          Goffy - Wedega.com - Email:<webmaster@wedega.com> - Website:<http://wedega.com>
  * @version         $Id: 1.0 core.php 1 Sun 2015/12/27 23:18:02Z Goffy - Wedega $
  */
+
 /**
  * Wgteams core preloads
  *
  */
 class WgteamsCorePreload extends XoopsPreloadItem
 {
-	// Here your functions method
-	// Example:
-	/**
+    // Here your functions method
+    // Example:
+    /**
      * @param $args
      */
-    function eventCoreYourNameStart($args)
+    public function eventCoreYourNameStart($args)
     {
         // Here your event
         exit();

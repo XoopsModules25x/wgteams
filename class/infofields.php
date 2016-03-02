@@ -20,9 +20,11 @@
  * @version         $Id: 1.0 infofields.php 1 Sun 2015/12/27 23:18:00Z Goffy - Wedega $
  */
 defined('XOOPS_ROOT_PATH') or die('Restricted access');
+
 /*
  * Class Object WgteamsInfofields
  */
+
 class WgteamsInfofields extends XoopsObject
 {
     /*
@@ -30,7 +32,7 @@ class WgteamsInfofields extends XoopsObject
     */
     private $wgteams = null;
 
-	/*
+    /*
      * Constructor
      *
      * @param null
@@ -42,7 +44,7 @@ class WgteamsInfofields extends XoopsObject
         $this->initVar('infofield_name', XOBJ_DTYPE_TXTBOX);
         $this->initVar('infofield_submitter', XOBJ_DTYPE_INT);
         $this->initVar('infofield_date_created', XOBJ_DTYPE_INT);
-	}
+    }
 
     /*
     *  @static function &getInstance
@@ -51,9 +53,10 @@ class WgteamsInfofields extends XoopsObject
     public static function &getInstance()
     {
         static $instance = false;
-        if(!$instance) {
+        if (!$instance) {
             $instance = new self();
         }
+
         return $instance;
     }
 
@@ -65,44 +68,45 @@ class WgteamsInfofields extends XoopsObject
     public function getFormInfofields($action = false)
     {
         global $xoopsUser;
-        
-        if($action === false) {
+
+        if ($action === false) {
             $action = $_SERVER['REQUEST_URI'];
         }
-        
-		// Title
+
+        // Title
         $title = $this->isNew() ? sprintf(_AM_WGTEAMS_INFOFIELD_ADD) : sprintf(_AM_WGTEAMS_INFOFIELD_EDIT);
         // Get Theme Form
         xoops_load('XoopsFormLoader');
         $form = new XoopsThemeForm($title, 'form', $action, 'post', true);
         $form->setExtra('enctype="multipart/form-data"');
-		// Infofields handler
-		//$infofieldsHandler =& $this->wgteams->getHandler('infofields');
+        // Infofields handler
+        //$infofieldsHandler =& $this->wgteams->getHandler('infofields');
         // Form Text AddField_name
-        $form->addElement( new XoopsFormText(_AM_WGTEAMS_INFOFIELD_NAME, 'infofield_name', 50, 255, $this->getVar('infofield_name')), true );
+        $form->addElement(new XoopsFormText(_AM_WGTEAMS_INFOFIELD_NAME, 'infofield_name', 50, 255, $this->getVar('infofield_name')), true);
         // Form Select User
         $submitter = $this->isNew() ? $xoopsUser->getVar('uid') : $this->getVar('infofield_submitter');
-        $form->addElement( new XoopsFormSelectUser(_AM_WGTEAMS_SUBMITTER, 'infofield_submitter', false, $submitter, 1, false) );
+        $form->addElement(new XoopsFormSelectUser(_AM_WGTEAMS_SUBMITTER, 'infofield_submitter', false, $submitter, 1, false));
         // Form Text Date Select
-        $form->addElement( new XoopsFormTextDateSelect(_AM_WGTEAMS_DATE_CREATE, 'infofield_date_created', '', $this->getVar('infofield_date_created')) );
+        $form->addElement(new XoopsFormTextDateSelect(_AM_WGTEAMS_DATE_CREATE, 'infofield_date_created', '', $this->getVar('infofield_date_created')));
         // Send
         $form->addElement(new XoopsFormHidden('op', 'save'));
-        $form->addElement(new XoopsFormButtonTray( '', _SUBMIT, 'submit', '', false ));
+        $form->addElement(new XoopsFormButtonTray('', _SUBMIT, 'submit', '', false));
+
         return $form;
     }
 
-	/**
+    /**
      * Get Values
      */
-	public function getValuesInfofields($keys = null, $format = null, $maxDepth = null)
+    public function getValuesInfofields($keys = null, $format = null, $maxDepth = null)
     {
-		$ret = $this->getValues($keys, $format, $maxDepth);
-		$ret['field_id'] = $this->getVar('infofield_id');
-		$ret['field_name'] = $this->getVar('infofield_name');
-		$ret['field_submitter'] = XoopsUser::getUnameFromId($this->getVar('infofield_submitter'));
-		$ret['field_date_created'] = formatTimeStamp($this->getVar('infofield_date_created'));
+        $ret                       = $this->getValues($keys, $format, $maxDepth);
+        $ret['field_id']           = $this->getVar('infofield_id');
+        $ret['field_name']         = $this->getVar('infofield_name');
+        $ret['field_submitter']    = XoopsUser::getUnameFromId($this->getVar('infofield_submitter'));
+        $ret['field_date_created'] = formatTimestamp($this->getVar('infofield_date_created'));
 
-		return $ret;
+        return $ret;
     }
 
     /**
@@ -112,11 +116,12 @@ class WgteamsInfofields extends XoopsObject
      **/
     public function toArray()
     {
-        $ret = array();
+        $ret  = array();
         $vars = $this->getVars();
-        foreach( array_keys( $vars ) as $var ) {
-            $ret[$var] = $this->getVar( $var );
+        foreach (array_keys($vars) as $var) {
+            $ret[$var] = $this->getVar($var);
         }
+
         return $ret;
     }
 }
@@ -124,6 +129,7 @@ class WgteamsInfofields extends XoopsObject
 /*
  * Class Object Handler WgteamsInfofields
  */
+
 class WgteamsInfofieldsHandler extends XoopsPersistableObjectHandler
 {
     /*
@@ -131,7 +137,7 @@ class WgteamsInfofieldsHandler extends XoopsPersistableObjectHandler
     */
     private $wgteams = null;
 
-	/*
+    /*
      * Constructor
      *
      * @param string $db
@@ -139,10 +145,10 @@ class WgteamsInfofieldsHandler extends XoopsPersistableObjectHandler
     public function __construct(&$db)
     {
         parent::__construct($db, 'wgteams_infofields', 'wgteamsinfofields', 'infofield_id', 'infofield_name');
-		$this->wgteams = WgteamsHelper::getInstance();
+        $this->wgteams = WgteamsHelper::getInstance();
     }
 
-	/**
+    /**
      * @param bool $isNew
      *
      * @return object
@@ -152,7 +158,7 @@ class WgteamsInfofieldsHandler extends XoopsPersistableObjectHandler
         return parent::create($isNew);
     }
 
-	/**
+    /**
      * retrieve a field
      *
      * @param int $i field id
@@ -174,7 +180,7 @@ class WgteamsInfofieldsHandler extends XoopsPersistableObjectHandler
         return $this->db->getInsertId();
     }
 
-	/**
+    /**
      * get IDs of objects matching a condition
      *
      * @param object $criteria {@link CriteriaElement} to match
@@ -185,19 +191,20 @@ class WgteamsInfofieldsHandler extends XoopsPersistableObjectHandler
         return parent::getIds($criteria);
     }
 
-	/**
+    /**
      * insert a new field in the database
      *
      * @param object $field reference to the {@link TDMCreateFields} object
-     * @param bool $force
+     * @param bool   $force
      *
      * @return bool FALSE if failed, TRUE if already present and unchanged or successful
      */
     public function &insert(&$field, $force = false)
     {
-        if(!parent::insert($field, $force)) {
+        if (!parent::insert($field, $force)) {
             return false;
         }
+
         return true;
     }
 
@@ -211,19 +218,21 @@ class WgteamsInfofieldsHandler extends XoopsPersistableObjectHandler
         $criteria->setOrder($order);
         $criteria->setStart($start);
         $criteria->setLimit($limit);
-		return $this->getCount($criteria);
+
+        return $this->getCount($criteria);
     }
 
-	/**
+    /**
      * Get All Infofields
      */
-	public function getAllInfofields($start = 0, $limit = 0, $sort = 'infofield_id ASC, infofield_name', $order = 'ASC')
+    public function getAllInfofields($start = 0, $limit = 0, $sort = 'infofield_id ASC, infofield_name', $order = 'ASC')
     {
         $criteria = new CriteriaCompo();
         $criteria->setSort($sort);
         $criteria->setOrder($order);
         $criteria->setStart($start);
         $criteria->setLimit($limit);
+
         return $this->getAll($criteria);
     }
 

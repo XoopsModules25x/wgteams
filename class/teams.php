@@ -20,9 +20,11 @@
  * @version         $Id: 1.0 teams.php 1 Sun 2015/12/27 23:18:00Z Goffy - Wedega $
  */
 defined('XOOPS_ROOT_PATH') or die('Restricted access');
+
 /*
  * Class Object WgteamsTeams
  */
+
 class WgteamsTeams extends XoopsObject
 {
     /*
@@ -62,6 +64,7 @@ class WgteamsTeams extends XoopsObject
         if(!$instance) {
             $instance = new self();
         }
+
         return $instance;
     }
 
@@ -99,7 +102,7 @@ class WgteamsTeams extends XoopsObject
         $form->addElement( new XoopsFormEditor(_AM_WGTEAMS_TEAM_DESCR, 'team_descr', $editor_configs) );
         // Form Upload Image
         $getTeamImage = $this->getVar('team_image');
-        $teamImage = $getTeamImage ? $getTeamImage : 'blank.gif';
+        $teamImage      = $getTeamImage ?: 'blank.gif';
         $imageDirectory = '/uploads/wgteams/teams/images';
         //
         $imageTray   = new XoopsFormElementTray(_AM_WGTEAMS_TEAM_IMAGE,'<br />');
@@ -162,6 +165,7 @@ class WgteamsTeams extends XoopsObject
         // Send
         $form->addElement(new XoopsFormHidden('op', 'save'));
         $form->addElement(new XoopsFormButtonTray( '', _SUBMIT, 'submit', '', false ));
+
         return $form;
     }
 
@@ -182,7 +186,7 @@ class WgteamsTeams extends XoopsObject
 		$ret['weight'] = $this->getVar('team_weight');
 		$ret['online'] = $this->getVar('team_online') == 1 ? _YES : _NO;
 		$ret['submitter'] = XoopsUser::getUnameFromId($this->getVar('team_submitter'));
-		$ret['date_create'] = formatTimeStamp($this->getVar('team_date_create'), "M");
+        $ret['date_create']  = formatTimestamp($this->getVar('team_date_create'), "M");
 
 		return $ret;
     }
@@ -199,6 +203,7 @@ class WgteamsTeams extends XoopsObject
         foreach( array_keys( $vars ) as $var ) {
             $ret[$var] = $this->getVar( $var );
         }
+
         return $ret;
     }
 }
@@ -206,6 +211,7 @@ class WgteamsTeams extends XoopsObject
 /*
  * Class Object Handler WgteamsTeams
  */
+
 class WgteamsTeamsHandler extends XoopsPersistableObjectHandler
 {
     /*
@@ -280,6 +286,7 @@ class WgteamsTeamsHandler extends XoopsPersistableObjectHandler
         if(!parent::insert($field, $force)) {
             return false;
         }
+
         return true;
     }
 
@@ -293,6 +300,7 @@ class WgteamsTeamsHandler extends XoopsPersistableObjectHandler
         $criteria->setOrder($order);
         $criteria->setStart($start);
         $criteria->setLimit($limit);
+
 		return $this->getCount($criteria);
     }
 

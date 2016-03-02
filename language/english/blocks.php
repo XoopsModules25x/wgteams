@@ -20,6 +20,6 @@
  * @version         $Id: 1.0 blocks.php 1 Sun 2015/12/27 23:18:01Z Goffy - Wedega $
  */
 // Admin Edit
-define('_MB_WGTEAMS_TEAM_TO_DISPLAY', "Team to Display: ");
+define('_MB_WGTEAMS_TEAM_TO_DISPLAY', 'Team to Display: ');
 
 // ---------------- End ----------------
