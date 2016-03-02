@@ -22,39 +22,44 @@
 //
 defined('XOOPS_ROOT_PATH') or die('Restricted access');
 // Copy base file
-$indexFile = XOOPS_UPLOAD_PATH.'/index.html';
-$blankFile = XOOPS_UPLOAD_PATH.'/blank.gif';
+$indexFile = XOOPS_UPLOAD_PATH . '/index.html';
+$blankFile = XOOPS_UPLOAD_PATH . '/blank.gif';
 // Making of "uploads/wgteams" folder
-$wgteams = XOOPS_UPLOAD_PATH.'/wgteams';
-if(!is_dir($wgteams))
+$wgteams = XOOPS_UPLOAD_PATH . '/wgteams';
+if (!is_dir($wgteams)) {
     mkdir($wgteams, 0777);
-    chmod($wgteams, 0777);
-copy($indexFile, $wgteams.'/index.html');
+}
+chmod($wgteams, 0777);
+copy($indexFile, $wgteams . '/index.html');
 
 // Making of teams uploads folder
-$folder = $wgteams.'/teams';
-if(!is_dir($folder))
+$folder = $wgteams . '/teams';
+if (!is_dir($folder)) {
     mkdir($folder, 0777);
-    chmod($folder, 0777);
-copy($indexFile, $folder.'/index.html');
-$folder_img = $folder.'/images';
-if(!is_dir($folder_img))
+}
+chmod($folder, 0777);
+copy($indexFile, $folder . '/index.html');
+$folder_img = $folder . '/images';
+if (!is_dir($folder_img)) {
     mkdir($folder_img, 0777);
-    chmod($folder_img, 0777);
-copy($indexFile, $folder_img.'/index.html');
-copy($blankFile, $folder_img.'/blank.gif');
+}
+chmod($folder_img, 0777);
+copy($indexFile, $folder_img . '/index.html');
+copy($blankFile, $folder_img . '/blank.gif');
 
 // Making of members uploads folder
-$folder = $wgteams.'/members';
-if(!is_dir($folder))
+$folder = $wgteams . '/members';
+if (!is_dir($folder)) {
     mkdir($folder, 0777);
-    chmod($folder, 0777);
-copy($indexFile, $folder.'/index.html');
-$folder_img = $folder.'/images';
-if(!is_dir($folder_img))
+}
+chmod($folder, 0777);
+copy($indexFile, $folder . '/index.html');
+$folder_img = $folder . '/images';
+if (!is_dir($folder_img)) {
     mkdir($folder_img, 0777);
-    chmod($folder_img, 0777);
-copy($indexFile, $folder_img.'/index.html');
-copy($blankFile, $folder_img.'/blank.gif');
+}
+chmod($folder_img, 0777);
+copy($indexFile, $folder_img . '/index.html');
+copy($blankFile, $folder_img . '/blank.gif');
 
 // ---------- Install Footer ---------- //

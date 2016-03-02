@@ -34,4 +34,4 @@ $GLOBALS['xoopsTpl']->assign('fbcomments', xoops_getModuleOption('fbcomments', $
 $GLOBALS['xoopsTpl']->assign('admin', WGTEAMS_ADMIN);
 $GLOBALS['xoopsTpl']->assign('copyright', $copyright);
 // User footer
-include_once XOOPS_ROOT_PATH.'/footer.php';
+include_once XOOPS_ROOT_PATH . '/footer.php';

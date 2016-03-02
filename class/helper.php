@@ -47,15 +47,17 @@ class WgteamsHelper
      * @var array
      */
     private $debugArray = array();
+
     /*
     *  @protected function constructor class
     *  @param mixed $debug
     */
     public function __construct($debug)
     {
-        $this->debug = $debug;
-        $this->dirname =  basename(dirname(__DIR__));
+        $this->debug   = $debug;
+        $this->dirname = basename(dirname(__DIR__));
     }
+
     /*
     *  @static function &getInstance
     *  @param mixed $debug
@@ -66,8 +68,10 @@ class WgteamsHelper
         if (!$instance) {
             $instance = new self($debug);
         }
+
         return $instance;
     }
+
     /*
     *  @static function getModule
     *  @param null
@@ -77,8 +81,10 @@ class WgteamsHelper
         if ($this->module == null) {
             $this->initModule();
         }
+
         return $this->module;
     }
+
     /*
     *  @static function getConfig
     *  @param string $name
@@ -90,28 +96,33 @@ class WgteamsHelper
         }
         if (!$name) {
             $this->addLog("Getting all config");
+
             return $this->config;
         }
         if (!isset($this->config[$name])) {
             $this->addLog("ERROR :: CONFIG '{$name}' does not exist");
+
             return null;
         }
-		if (is_array($this->config[$name])) {
-			if ($index > -1) {
-				$this->addLog("Getting config '{$name}' : " . $this->config[$name][$index]);
-				return $this->config[$name][$index];
-			} else {
-				$this->addLog("Getting config '{$name}' : array " . $name);
-				return $this->config[$name];
-			}
-			
-		} else {
-			return $this->config[$name];
-			$this->addLog("Getting config '{$name}' : " . $this->config[$name]);
-		}
-        
+        if (is_array($this->config[$name])) {
+            if ($index > -1) {
+                $this->addLog("Getting config '{$name}' : " . $this->config[$name][$index]);
+
+                return $this->config[$name][$index];
+            } else {
+                $this->addLog("Getting config '{$name}' : array " . $name);
+
+                return $this->config[$name];
+            }
+
+        } else {
+            return $this->config[$name];
+            $this->addLog("Getting config '{$name}' : " . $this->config[$name]);
+        }
+
         return $this->config[$name];
     }
+
     /*
     *  @static function setConfig
     *  @param string $name
@@ -124,8 +135,10 @@ class WgteamsHelper
         }
         $this->config[$name] = $value;
         $this->addLog("Setting config '{$name}' : " . $this->config[$name]);
+
         return $this->config[$name];
     }
+
     /*
     *  @static function getHandler
     *  @param string $name
@@ -136,8 +149,10 @@ class WgteamsHelper
             $this->initHandler($name);
         }
         $this->addLog("Getting handler '{$name}'");
+
         return $this->handler[$name . '_handler'];
     }
+
     /*
     *  @static function initModule
     *  @param null
@@ -148,11 +163,12 @@ class WgteamsHelper
         if (isset($xoopsModule) && is_object($xoopsModule) && $xoopsModule->getVar('dirname') == $this->dirname) {
             $this->module = $xoopsModule;
         } else {
-            $hModule = xoops_gethandler('module');
+            $hModule      = xoops_getHandler('module');
             $this->module = $hModule->getByDirname($this->dirname);
         }
         $this->addLog('INIT MODULE');
     }
+
     /*
     *  @static function initConfig
     *  @param null
@@ -160,9 +176,10 @@ class WgteamsHelper
     public function initConfig()
     {
         $this->addLog('INIT CONFIG');
-        $hModConfig = xoops_gethandler('config');
+        $hModConfig   = xoops_getHandler('config');
         $this->config = $hModConfig->getConfigsByCat(0, $this->getModule()->getVar('mid'));
     }
+
     /*
     *  @static function initHandler
     *  @param string $name
@@ -172,6 +189,7 @@ class WgteamsHelper
         $this->addLog('INIT ' . $name . ' HANDLER');
         $this->handler[$name . '_handler'] = xoops_getModuleHandler($name, $this->dirname);
     }
+
     /*
     *  @static function addLog
     *  @param string $log

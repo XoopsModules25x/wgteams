@@ -20,26 +20,26 @@
  * @version         $Id: 1.0 header.php 1 Sun 2015/12/27 23:18:01Z Goffy - Wedega $
  */
 
-include dirname(dirname(dirname(__DIR__))). '/include/cp_header.php';
+include dirname(dirname(dirname(__DIR__))) . '/include/cp_header.php';
 $thisPath = dirname(__DIR__);
-include_once $thisPath.'/include/common.php';
-$sysPathIcon16 = '../' . $GLOBALS['xoopsModule']->getInfo('sysicons16');
-$sysPathIcon32 = '../' . $GLOBALS['xoopsModule']->getInfo('sysicons32');
+include_once $thisPath . '/include/common.php';
+$sysPathIcon16   = '../' . $GLOBALS['xoopsModule']->getInfo('sysicons16');
+$sysPathIcon32   = '../' . $GLOBALS['xoopsModule']->getInfo('sysicons32');
 $pathModuleAdmin = $GLOBALS['xoopsModule']->getInfo('dirmoduleadmin');
 //
 $modPathIcon16 = $GLOBALS['xoopsModule']->getInfo('modicons16');
 $modPathIcon32 = $GLOBALS['xoopsModule']->getInfo('modicons32');
 // Get instance of module
-$wgteams = WgteamsHelper::getInstance();
-$teamsHandler =& $wgteams->getHandler('teams');
-$membersHandler =& $wgteams->getHandler('members');
-$relationsHandler =& $wgteams->getHandler('relations');
+$wgteams           = WgteamsHelper::getInstance();
+$teamsHandler      =& $wgteams->getHandler('teams');
+$membersHandler    =& $wgteams->getHandler('members');
+$relationsHandler  =& $wgteams->getHandler('relations');
 $infofieldsHandler =& $wgteams->getHandler('infofields');
 
 //
-$myts =& MyTextSanitizer::getInstance();
+$myts = MyTextSanitizer::getInstance();
 if (!isset($xoopsTpl) || !is_object($xoopsTpl)) {
-    include_once(XOOPS_ROOT_PATH."/class/template.php");
+    include_once(XOOPS_ROOT_PATH . "/class/template.php");
     $xoopsTpl = new XoopsTpl();
 }
 // System icons path
@@ -53,9 +53,9 @@ $xoopsTpl->assign('modPathIcon32', $modPathIcon32);
 xoops_loadLanguage('admin');
 xoops_loadLanguage('modinfo');
 // Local admin menu class
-if ( file_exists($GLOBALS['xoops']->path($pathModuleAdmin.'/moduleadmin.php'))){
-    include_once $GLOBALS['xoops']->path($pathModuleAdmin.'/moduleadmin.php');
-}else{
+if (file_exists($GLOBALS['xoops']->path($pathModuleAdmin . '/moduleadmin.php'))) {
+    include_once $GLOBALS['xoops']->path($pathModuleAdmin . '/moduleadmin.php');
+} else {
     redirect_header("../../../admin.php", 5, _AM_MODULEADMIN_MISSING, false);
 }
 xoops_cp_header();

@@ -1,40 +1,41 @@
 
 ==============================================================
-Change Log for wgTeams - 2016/02/23 16:08:02 Version 1.06
+1.06                2016/02/23
 ==============================================================
-added config 'showbreadcrumbs' (goffy)
+- added config 'showbreadcrumbs' (goffy)
+- cosmeticts (mamba)
 
 ==============================================================
-Change Log for wgTeams - 2016/01/31 16:08:02 Version 1.05
+1.05                2016/01/31
 ==============================================================
-added config 'show labels' (goffy)
+- added config 'show labels' (goffy)
 
 ==============================================================
-Change Log for wgTeams - 2016/01/31 16:08:02 Version 1.04
+1.04                2016/01/31
 ==============================================================
-fixed bug with config wgteams_img_maxsize/wgteams_img_mimetypes (goffy)
-added label with wgteams_img_maxsize to form teams/members (goffy)
-fixed bug with none show email (goffy)
-added quick link to set team on or offline (goffy)
+- fixed bug with config wgteams_img_maxsize/wgteams_img_mimetypes (goffy)
+- added label with wgteams_img_maxsize to form teams/members (goffy)
+- fixed bug with none show email (goffy)
+- added quick link to set team on or offline (goffy)
 
 ==============================================================
-Change Log for wgTeams - 2016/01/29 16:08:02 Version 1.03
+1.03 Beta 1           2016/01/21
 ==============================================================
-added editor selection for textboxes (mamba/goffy)
-added config for image size (goffy)
-added deleting image of member when deleting the member (mamba/goffy)
-added deleting image of team when deleting the team (mamba/goffy)
-changed tablename persons to members (mamba/goffy)
-added block for team list (goffy)
-added config for type of index page (goffy)
+- added editor selection for textboxes (mamba/goffy)
+- added config for image size (goffy)
+- added deleting image of member when deleting the member (mamba/goffy)
+- added deleting image of team when deleting the team (mamba/goffy)
+- changed tablename persons to members (mamba/goffy)
+- added block for team list (goffy)
+- added config for type of index page (goffy)
 
 ==============================================================
-Change Log for wgTeams - 2016/01/21 16:08:02 Version 1.02
+1.02                    2016/01/21
 ==============================================================
-fix wrong upload path for team image (mamba/goffy)
-fixed various bugs
+- fix wrong upload path for team image (mamba/goffy)
+- fixed various bugs
 
 ==============================================================
-Change Log for wgTeams - 2015/12/27 23:18:02 Version 1.01
+1.01                    2015/12/27
 ==============================================================
- - Original release wgteams (Goffy - Wedega.com)
+- Original release wgteams (Goffy - Wedega.com)
