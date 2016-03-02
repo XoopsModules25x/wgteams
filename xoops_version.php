@@ -119,7 +119,7 @@ if (is_object($xoopsModule) && $xoopsModule->getVar('dirname') == $modversion['d
 
     $s = 0;
 
-    $wgteams      = WgteamsHelper::getInstance();
+    $wgteams      =& WgteamsHelper::getInstance();
     $teamsHandler =& $wgteams->getHandler('teams');
 
     $crit_teams = new CriteriaCompo();
@@ -130,7 +130,7 @@ if (is_object($xoopsModule) && $xoopsModule->getVar('dirname') == $modversion['d
     foreach (array_keys($teamsAll) as $i) {
         $s++;
         $modversion['sub'][$s]['name'] = $teamsAll[$i]->getVar('team_name');
-        $modversion['sub'][$s]['url']  = "index.php?team_id=" . $teamsAll[$i]->getVar('team_id');;
+        $modversion['sub'][$s]['url']  = 'index.php?team_id=' . $teamsAll[$i]->getVar('team_id');
     }
 }
 // ------------------- Blocks ------------------- //
@@ -182,8 +182,8 @@ $modversion['config'][] = array(
     'name'        => 'startpage',
     'title'       => '_MI_WGTEAMS_STARTPAGE',
     'description' => '_MI_WGTEAMS_STARTPAGE_DESC',
-    'formtype'    => "select",
-    'valuetype'   => "array",
+    'formtype'    => 'select',
+    'valuetype'   => 'array',
     'default'     => 1,
     'options'     => array(_MI_WGTEAMS_STARTPAGE_LIST => 1, _MI_WGTEAMS_STARTPAGE_ALL => 2, _MI_WGTEAMS_STARTPAGE_FIRST => 3));
 
@@ -191,52 +191,52 @@ $modversion['config'][] = array(
 xoops_load('xoopseditorhandler');
 $editorHandler          = XoopsEditorHandler::getInstance();
 $modversion['config'][] = array(
-    'name'        => "wgteams_editor",
-    'title'       => "_MI_WGTEAMS_EDITOR",
-    'description' => "_MI_WGTEAMS_EDITOR_DESC",
-    'formtype'    => "select",
-    'valuetype'   => "text",
+    'name'        => 'wgteams_editor',
+    'title'       => '_MI_WGTEAMS_EDITOR',
+    'description' => '_MI_WGTEAMS_EDITOR_DESC',
+    'formtype'    => 'select',
+    'valuetype'   => 'text',
     'options'     => array_flip($editorHandler->getList()),
-    'default'     => "dhtmltextarea");
+    'default'     => 'dhtmltextarea');
 
 //Uploads : max size for image upload 
 $modversion['config'][] = array(
-    'name'        => "wgteams_img_maxsize",
-    'title'       => "_MI_WGTEAMS_IMG_MAXSIZE",
-    'description' => "_MI_WGTEAMS_IMG_MAXSIZE_DESC",
-    'formtype'    => "textbox",
-    'valuetype'   => "int",
+    'name'        => 'wgteams_img_maxsize',
+    'title'       => '_MI_WGTEAMS_IMG_MAXSIZE',
+    'description' => '_MI_WGTEAMS_IMG_MAXSIZE_DESC',
+    'formtype'    => 'textbox',
+    'valuetype'   => 'int',
     'default'     => 10485760); // 1 MB
 
 //Uploads : mimetypes of images
 $modversion['config'][] = array(
-    'name'        => "wgteams_img_mimetypes",
-    'title'       => "_MI_WGTEAMS_IMG_MIMETYPES",
-    'description' => "_MI_WGTEAMS_IMG_MIMETYPES_DESC",
-    'formtype'    => "select_multi",
-    'valuetype'   => "array",
-    'default'     => array("image/gif", "image/jpeg", "image/png", "image/jpg"),
+    'name'        => 'wgteams_img_mimetypes',
+    'title'       => '_MI_WGTEAMS_IMG_MIMETYPES',
+    'description' => '_MI_WGTEAMS_IMG_MIMETYPES_DESC',
+    'formtype'    => 'select_multi',
+    'valuetype'   => 'array',
+    'default'     => array('image/gif', 'image/jpeg', 'image/png', 'image/jpg'),
     'options'     => array(
-        "bmp"   => "image/bmp",
-        "gif"   => "image/gif",
-        "pjpeg" => "image/pjpeg",
-        "jpeg"  => "image/jpeg",
-        "jpg"   => "image/jpg",
-        "jpe"   => "image/jpe",
-        "png"   => "image/png"));
+        'bmp'   => 'image/bmp',
+        'gif'   => 'image/gif',
+        'pjpeg' => 'image/pjpeg',
+        'jpeg'  => 'image/jpeg',
+        'jpg'   => 'image/jpg',
+        'jpe'   => 'image/jpe',
+        'png'   => 'image/png'));
 
 $modversion['config'][] = array(
-    'name'        => "wgteams_labels",
-    'title'       => "_MI_WGTEAMS_LABELS",
-    'description' => "_MI_WGTEAMS_LABELS_DESC",
-    'formtype'    => "yesno",
-    'valuetype'   => "int",
+    'name'        => 'wgteams_labels',
+    'title'       => '_MI_WGTEAMS_LABELS',
+    'description' => '_MI_WGTEAMS_LABELS_DESC',
+    'formtype'    => 'yesno',
+    'valuetype'   => 'int',
     'default'     => 1);
 
 $modversion['config'][] = array(
-    'name'        => "wgteams_showbreadcrumbs",
-    'title'       => "_MI_WGTEAMS_SHOWBREADCRUMBS",
-    'description' => "_MI_WGTEAMS_SHOWBREADCRUMBS_DESC",
-    'formtype'    => "yesno",
-    'valuetype'   => "int",
+    'name'        => 'wgteams_showbreadcrumbs',
+    'title'       => '_MI_WGTEAMS_SHOWBREADCRUMBS',
+    'description' => '_MI_WGTEAMS_SHOWBREADCRUMBS_DESC',
+    'formtype'    => 'yesno',
+    'valuetype'   => 'int',
     'default'     => 1);

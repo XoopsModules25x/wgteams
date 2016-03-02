@@ -21,6 +21,9 @@
  */
 defined('XOOPS_ROOT_PATH') or die('Restricted access');
 
+/**
+ * Class WgteamsHelper
+ */
 class WgteamsHelper
 {
     /**
@@ -52,6 +55,10 @@ class WgteamsHelper
     *  @protected function constructor class
     *  @param mixed $debug
     */
+    /**
+     * WgteamsHelper constructor.
+     * @param $debug
+     */
     public function __construct($debug)
     {
         $this->debug   = $debug;
@@ -62,6 +69,10 @@ class WgteamsHelper
     *  @static function &getInstance
     *  @param mixed $debug
     */
+    /**
+     * @param bool $debug
+     * @return bool|WgteamsHelper
+     */
     public static function &getInstance($debug = false)
     {
         static $instance = false;
@@ -76,6 +87,9 @@ class WgteamsHelper
     *  @static function getModule
     *  @param null
     */
+    /**
+     * @return string
+     */
     public function &getModule()
     {
         if ($this->module == null) {
@@ -89,13 +103,18 @@ class WgteamsHelper
     *  @static function getConfig
     *  @param string $name
     */
+    /**
+     * @param null $name
+     * @param int  $index
+     * @return null|string
+     */
     public function getConfig($name = null, $index = -1)
     {
         if ($this->config == null) {
             $this->initConfig();
         }
         if (!$name) {
-            $this->addLog("Getting all config");
+            $this->addLog('Getting all config');
 
             return $this->config;
         }
@@ -128,6 +147,11 @@ class WgteamsHelper
     *  @param string $name
     *  @param mixed $value
     */
+    /**
+     * @param null $name
+     * @param null $value
+     * @return mixed
+     */
     public function setConfig($name = null, $value = null)
     {
         if ($this->config == null) {
@@ -143,6 +167,10 @@ class WgteamsHelper
     *  @static function getHandler
     *  @param string $name
     */
+    /**
+     * @param $name
+     * @return mixed
+     */
     public function &getHandler($name)
     {
         if (!isset($this->handler[$name . '_handler'])) {
@@ -184,6 +212,9 @@ class WgteamsHelper
     *  @static function initHandler
     *  @param string $name
     */
+    /**
+     * @param $name
+     */
     public function initHandler($name)
     {
         $this->addLog('INIT ' . $name . ' HANDLER');
@@ -194,12 +225,13 @@ class WgteamsHelper
     *  @static function addLog
     *  @param string $log
     */
+    /**
+     * @param $log
+     */
     public function addLog($log)
     {
-        if ($this->debug) {
-            if (is_object($GLOBALS['xoopsLogger'])) {
-                $GLOBALS['xoopsLogger']->addExtra($this->module->name(), $log);
-            }
+        if ($this->debug && is_object($GLOBALS['xoopsLogger'])) {
+            $GLOBALS['xoopsLogger']->addExtra($this->module->name(), $log);
         }
     }
 }

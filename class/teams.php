@@ -21,10 +21,9 @@
  */
 defined('XOOPS_ROOT_PATH') or die('Restricted access');
 
-/*
- * Class Object WgteamsTeams
+/**
+ * Class WgteamsTeams
  */
-
 class WgteamsTeams extends XoopsObject
 {
     /*
@@ -32,14 +31,15 @@ class WgteamsTeams extends XoopsObject
     */
     private $wgteams = null;
 
-	/*
+    /*
      * Constructor
      *
      * @param null
+     * WgteamsTeams constructor.
      */
     public function __construct()
     {
-        $this->wgteams = WgteamsHelper::getInstance();
+        $this->wgteams =& WgteamsHelper::getInstance();
         $this->initVar('team_id', XOBJ_DTYPE_INT);
         $this->initVar('team_name', XOBJ_DTYPE_TXTBOX);
         $this->initVar('team_descr', XOBJ_DTYPE_TXTAREA);
@@ -52,16 +52,17 @@ class WgteamsTeams extends XoopsObject
         $this->initVar('team_online', XOBJ_DTYPE_INT);
         $this->initVar('team_submitter', XOBJ_DTYPE_INT);
         $this->initVar('team_date_create', XOBJ_DTYPE_INT);
-	}
+    }
 
     /*
     *  @static function &getInstance
     *  @param null
+    * @return bool|WgteamsTeams
     */
     public static function &getInstance()
     {
         static $instance = false;
-        if(!$instance) {
+        if (!$instance) {
             $instance = new self();
         }
 
@@ -72,56 +73,58 @@ class WgteamsTeams extends XoopsObject
      * Get form
      *
      * @param mixed $action
+     * @param bool $action
+     * @return XoopsThemeForm
      */
     public function getFormTeams($action = false)
     {
         global $xoopsUser;
-        
-        if($action === false) {
+
+        if ($action === false) {
             $action = $_SERVER['REQUEST_URI'];
         }
-		// Title
+        // Title
         $title = $this->isNew() ? sprintf(_AM_WGTEAMS_TEAM_ADD) : sprintf(_AM_WGTEAMS_TEAM_EDIT);
         // Get Theme Form
         xoops_load('XoopsFormLoader');
         $form = new XoopsThemeForm($title, 'form', $action, 'post', true);
         $form->setExtra('enctype="multipart/form-data"');
-		// Teams handler
-		//$teamsHandler =& $this->wgteams->getHandler('teams');
+        // Teams handler
+        //$teamsHandler =& $this->wgteams->getHandler('teams');
         // Form Text TeamName
-        $form->addElement( new XoopsFormText(_AM_WGTEAMS_TEAM_NAME, 'team_name', 50, 255, $this->getVar('team_name')), true );
+        $form->addElement(new XoopsFormText(_AM_WGTEAMS_TEAM_NAME, 'team_name', 50, 255, $this->getVar('team_name')), true);
         // Form Text Area team_descr
-        $editor_configs = array();
-        $editor_configs['name'] = 'team_descr';
-        $editor_configs['value'] = $this->getVar('team_descr', 'e');
-        $editor_configs['rows'] = 5;
-        $editor_configs['cols'] = 40;
-        $editor_configs['width'] = '100%';
+        $editor_configs           = array();
+        $editor_configs['name']   = 'team_descr';
+        $editor_configs['value']  = $this->getVar('team_descr', 'e');
+        $editor_configs['rows']   = 5;
+        $editor_configs['cols']   = 40;
+        $editor_configs['width']  = '100%';
         $editor_configs['height'] = '400px';
         $editor_configs['editor'] = $this->wgteams->getConfig('wgteams_editor');
-        $form->addElement( new XoopsFormEditor(_AM_WGTEAMS_TEAM_DESCR, 'team_descr', $editor_configs) );
+        $form->addElement(new XoopsFormEditor(_AM_WGTEAMS_TEAM_DESCR, 'team_descr', $editor_configs));
         // Form Upload Image
-        $getTeamImage = $this->getVar('team_image');
+        $getTeamImage   = $this->getVar('team_image');
         $teamImage      = $getTeamImage ?: 'blank.gif';
         $imageDirectory = '/uploads/wgteams/teams/images';
         //
-        $imageTray   = new XoopsFormElementTray(_AM_WGTEAMS_TEAM_IMAGE,'<br />');
+        $imageTray   = new XoopsFormElementTray(_AM_WGTEAMS_TEAM_IMAGE, '<br />');
         $imageSelect = new XoopsFormSelect(_AM_WGTEAMS_FORM_IMAGE_EXIST, 'team_image', $teamImage, 5);
-        $imageArray  = XoopsLists::getImgListAsArray( XOOPS_ROOT_PATH . $imageDirectory );
-        foreach( $imageArray as $image ) {
+        $imageArray  = XoopsLists::getImgListAsArray(XOOPS_ROOT_PATH . $imageDirectory);
+        foreach ($imageArray as $image) {
             $imageSelect->addOption("{$image}", $image);
         }
-        $imageSelect->setExtra( "onchange='showImgSelected(\"image2\", \"team_image\", \"".$imageDirectory."\", \"\", \"".XOOPS_URL."\")'" );
+        $imageSelect->setExtra("onchange='showImgSelected(\"image2\", \"team_image\", \"" . $imageDirectory . "\", \"\", \"" . XOOPS_URL . "\")'");
         $imageTray->addElement($imageSelect, false);
-        $imageTray->addElement( new XoopsFormLabel( '', "<br /><img src='".XOOPS_URL."/".$imageDirectory."/".$teamImage."' name='image2' id='image2' alt='' style='max-width:100px' />" ) );
+        $imageTray->addElement(new XoopsFormLabel('', "<br /><img src='" . XOOPS_URL . '/' . $imageDirectory . '/' . $teamImage . "' name='image2' id='image2' alt='' style='max-width:100px;' />"));
         // Form File
-        $fileSelectTray = new XoopsFormElementTray('','<br />');
-        $fileSelectTray->addElement(new XoopsFormFile(_AM_WGTEAMS_FORM_UPLOAD_IMG , 'attachedfile', $this->wgteams->getConfig('wgteams_img_maxsize')));
-        $fileSelectTray->addElement(new XoopsFormLabel(_AM_WGTEAMS_MAX_FILESIZE .  $this->wgteams->getConfig('wgteams_img_maxsize')));
+        $fileSelectTray = new XoopsFormElementTray('', '<br />');
+        $fileSelectTray->addElement(new XoopsFormFile(_AM_WGTEAMS_FORM_UPLOAD_IMG, 'attachedfile', $this->wgteams->getConfig('wgteams_img_maxsize')));
+        $fileSelectTray->addElement(new XoopsFormLabel(_AM_WGTEAMS_MAX_FILESIZE . $this->wgteams->getConfig('wgteams_img_maxsize')));
         $imageTray->addElement($fileSelectTray);
-        $form->addElement( $imageTray );
+        $form->addElement($imageTray);
         // Form Text TeamNb_cols
-		$teamNb_cols = $this->isNew() ? 2 : $this->getVar('team_nb_cols');
+        $teamNb_cols        = $this->isNew() ? 2 : $this->getVar('team_nb_cols');
         $team_nb_colsSelect = new XoopsFormSelect(_AM_WGTEAMS_TEAM_NB_COLS, 'team_nb_cols', $teamNb_cols);
         $team_nb_colsSelect->addOption(1, '  1  ');
         $team_nb_colsSelect->addOption(2, '  2  ');
@@ -129,66 +132,70 @@ class WgteamsTeams extends XoopsObject
         $team_nb_colsSelect->addOption(4, '  4  ');
         $form->addElement($team_nb_colsSelect, false);
         // Form Text TeamTabletype
-		$team_tablestyle = $this->isNew() ? 'default' : $this->getVar('team_tablestyle');
+        $team_tablestyle       = $this->isNew() ? 'default' : $this->getVar('team_tablestyle');
         $team_tablestyleSelect = new XoopsFormSelect(_AM_WGTEAMS_TEAM_TABLESTYLE, 'team_tablestyle', $team_tablestyle);
         $team_tablestyleSelect->addOption('default', _AM_WGTEAMS_TEAM_TABLESTYLE_DEF);
         $team_tablestyleSelect->addOption('wgteams-bordered', _AM_WGTEAMS_TEAM_TABLESTYLE_BORDERED);
         $team_tablestyleSelect->addOption('wgteams-striped', _AM_WGTEAMS_TEAM_TABLESTYLE_STRIPED);
-        $team_tablestyleSelect->addOption('wgteams-lined',_AM_WGTEAMS_TEAM_TABLESTYLE_LINED);
-        $form->addElement($team_tablestyleSelect, false);    
+        $team_tablestyleSelect->addOption('wgteams-lined', _AM_WGTEAMS_TEAM_TABLESTYLE_LINED);
+        $form->addElement($team_tablestyleSelect, false);
         // Form Text TeamImagetype
-		$team_imagestyle = $this->isNew() ? 'default' : $this->getVar('team_imagestyle');
+        $team_imagestyle       = $this->isNew() ? 'default' : $this->getVar('team_imagestyle');
         $team_imagestyleSelect = new XoopsFormSelect(_AM_WGTEAMS_TEAM_IMAGESTYLE, 'team_imagestyle', $team_imagestyle);
         $team_imagestyleSelect->addOption('default', _AM_WGTEAMS_TEAM_IMAGESTYLE_DEF);
         $team_imagestyleSelect->addOption('img-circle', _AM_WGTEAMS_TEAM_IMAGESTYLE_CIRCLE);
         $team_imagestyleSelect->addOption('img-rounded', _AM_WGTEAMS_TEAM_IMAGESTYLE_ROUNDED);
         $team_imagestyleSelect->addOption('img-thumbnail', _AM_WGTEAMS_TEAM_IMAGESTYLE_THUMBNAIL);
-        $form->addElement($team_imagestyleSelect, false);          
+        $form->addElement($team_imagestyleSelect, false);
         // Form Text Teamdisplaystyle
-		$team_displaystyle = $this->isNew() ? 'default' : $this->getVar('team_displaystyle');
+        $team_displaystyle       = $this->isNew() ? 'default' : $this->getVar('team_displaystyle');
         $team_displaystyleSelect = new XoopsFormSelect(_AM_WGTEAMS_TEAM_DISPLAYSTYLE, 'team_displaystyle', $team_displaystyle);
         $team_displaystyleSelect->addOption('left', _AM_WGTEAMS_TEAM_DISPLAYSTYLE_LEFT);
         $team_displaystyleSelect->addOption('default', _AM_WGTEAMS_TEAM_DISPLAYSTYLE_DEF);
         $team_displaystyleSelect->addOption('right', _AM_WGTEAMS_TEAM_DISPLAYSTYLE_RIGHT);
-        $form->addElement($team_displaystyleSelect, false);    
+        $form->addElement($team_displaystyleSelect, false);
         // Form Text TeamWeight
-		$teamWeight = $this->isNew() ? '0' : $this->getVar('team_weight');
-        $form->addElement( new XoopsFormText(_AM_WGTEAMS_TEAM_WEIGHT, 'team_weight', 20, 150, $teamWeight), true );
+        $teamWeight = $this->isNew() ? '0' : $this->getVar('team_weight');
+        $form->addElement(new XoopsFormText(_AM_WGTEAMS_TEAM_WEIGHT, 'team_weight', 20, 150, $teamWeight), true);
         // Form Radio Yes/No
         $teamOnline = $this->isNew() ? 0 : $this->getVar('team_online');
-        $form->addElement( new XoopsFormRadioYN(_AM_WGTEAMS_TEAM_ONLINE, 'team_online', $teamOnline) );
+        $form->addElement(new XoopsFormRadioYN(_AM_WGTEAMS_TEAM_ONLINE, 'team_online', $teamOnline));
         // Form Select User
         $submitter = $this->isNew() ? $xoopsUser->getVar('uid') : $this->getVar('team_submitter');
-        $form->addElement( new XoopsFormSelectUser(_AM_WGTEAMS_SUBMITTER, 'team_submitter', false, $submitter, 1, false) );
+        $form->addElement(new XoopsFormSelectUser(_AM_WGTEAMS_SUBMITTER, 'team_submitter', false, $submitter, 1, false));
         // Form Text Date Select
-        $form->addElement( new XoopsFormTextDateSelect(_AM_WGTEAMS_DATE_CREATE, 'team_date_create', '', $this->getVar('team_date_create')) );
+        $form->addElement(new XoopsFormTextDateSelect(_AM_WGTEAMS_DATE_CREATE, 'team_date_create', '', $this->getVar('team_date_create')));
         // Send
         $form->addElement(new XoopsFormHidden('op', 'save'));
-        $form->addElement(new XoopsFormButtonTray( '', _SUBMIT, 'submit', '', false ));
+        $form->addElement(new XoopsFormButtonTray('', _SUBMIT, 'submit', '', false));
 
         return $form;
     }
 
-	/**
+    /**
      * Get Values
+     * @param null $keys
+     * @param null $format
+     * @param null $maxDepth
+     * @return array
      */
-	public function getValuesTeams($keys = null, $format = null, $maxDepth = null)
+    public function getValuesTeams($keys = null, $format = null, $maxDepth = null)
     {
-		$ret = $this->getValues($keys, $format, $maxDepth);
-		$ret['id'] = $this->getVar('team_id');
-		$ret['name'] = strip_tags($this->getVar('team_name'));
-		$ret['descr'] = strip_tags($this->getVar('team_descr'));
-        $ret['image'] = $this->getVar('team_image');
-		$ret['nb_cols'] = $this->getVar('team_nb_cols');
-        $ret['tablestyle'] = $this->getVar('team_tablestyle');
-        $ret['imagestyle'] = $this->getVar('team_imagestyle');
+        $ret                 = $this->getValues($keys, $format, $maxDepth);
+        $ret['id']           = $this->getVar('team_id');
+        $ret['name']         = strip_tags($this->getVar('team_name'));
+        $ret['descr']        = strip_tags($this->getVar('team_descr'));
+        $ret['image']        = $this->getVar('team_image');
+        $ret['nb_cols']      = $this->getVar('team_nb_cols');
+        $ret['tablestyle']   = $this->getVar('team_tablestyle');
+        $ret['imagestyle']   = $this->getVar('team_imagestyle');
         $ret['displaystyle'] = $this->getVar('team_displaystyle');
-		$ret['weight'] = $this->getVar('team_weight');
-		$ret['online'] = $this->getVar('team_online') == 1 ? _YES : _NO;
-		$ret['submitter'] = XoopsUser::getUnameFromId($this->getVar('team_submitter'));
-        $ret['date_create']  = formatTimestamp($this->getVar('team_date_create'), "M");
+        $ret['weight']       = $this->getVar('team_weight');
+        $ret['online']       = $this->getVar('team_online') == 1 ? _YES : _NO;
+        $ret['submitter']    = XoopsUser::getUnameFromId($this->getVar('team_submitter'));
+        $ret['date_create']  = formatTimestamp($this->getVar('team_date_create'), 'M');
 
-		return $ret;
+        return $ret;
     }
 
     /**
@@ -198,10 +205,10 @@ class WgteamsTeams extends XoopsObject
      **/
     public function toArray()
     {
-        $ret = array();
-        $vars = $this->getVars();
-        foreach( array_keys( $vars ) as $var ) {
-            $ret[$var] = $this->getVar( $var );
+        $ret  = array();
+        $vars =& $this->getVars();
+        foreach (array_keys($vars) as $var) {
+            $ret[$var] = $this->getVar($var);
         }
 
         return $ret;
@@ -212,6 +219,9 @@ class WgteamsTeams extends XoopsObject
  * Class Object Handler WgteamsTeams
  */
 
+/**
+ * Class WgteamsTeamsHandler
+ */
 class WgteamsTeamsHandler extends XoopsPersistableObjectHandler
 {
     /*
@@ -219,36 +229,44 @@ class WgteamsTeamsHandler extends XoopsPersistableObjectHandler
     */
     private $wgteams = null;
 
-	/*
+    /*
      * Constructor
      *
      * @param string $db
+     * WgteamsTeamsHandler constructor.
+     * @param XoopsDatabase $db
      */
     public function __construct(&$db)
     {
         parent::__construct($db, 'wgteams_teams', 'wgteamsteams', 'team_id', 'team_name');
-		$this->wgteams = WgteamsHelper::getInstance();
+        $this->wgteams =& WgteamsHelper::getInstance();
     }
 
-	/**
+    /**
      * @param bool $isNew
      *
-     * @return object
+     * @return XoopsObject $temp
      */
     public function &create($isNew = true)
     {
-        return parent::create($isNew);
+        $temp = parent::create($isNew);
+
+        return $temp;
     }
 
-	/**
+    /**
      * retrieve a field
      *
-     * @param int $i field id
-     * @return mixed reference to the {@link TDMCreateFields} object
+     * @param int  $i field id
+     * @param null $fields
+     * @return mixed reference to the <a href='psi_element://TDMCreateFields'>TDMCreateFields</a> object
+     *                object
      */
     public function &get($i = null, $fields = null)
     {
-        return parent::get($i, $fields);
+        $temp = parent::get($i, $fields);
+
+        return $temp;
     }
 
     /**
@@ -262,28 +280,28 @@ class WgteamsTeamsHandler extends XoopsPersistableObjectHandler
         return $this->db->getInsertId();
     }
 
-	/**
+    /**
      * get IDs of objects matching a condition
      *
-     * @param object $criteria {@link CriteriaElement} to match
+     * @param CriteriaElement $criteria {@link CriteriaElement} to match
      * @return array of object IDs
      */
-    public function &getIds($criteria)
+    public function &getIds(CriteriaElement $criteria = null)
     {
         return parent::getIds($criteria);
     }
 
-	/**
+    /**
      * insert a new field in the database
      *
-     * @param object $field reference to the {@link TDMCreateFields} object
-     * @param bool $force
-     *
+     * @param XoopsObject $object        $object reference to the {@link TDMCreateFields}
+     *                                   object
+     * @param bool        $force
      * @return bool FALSE if failed, TRUE if already present and unchanged or successful
      */
-    public function &insert(&$field, $force = false)
+    public function insert(XoopsObject $object, $force = true)// &insert(&$field, $force = false)
     {
-        if(!parent::insert($field, $force)) {
+        if (!parent::insert($object, $force)) {
             return false;
         }
 
@@ -292,6 +310,11 @@ class WgteamsTeamsHandler extends XoopsPersistableObjectHandler
 
     /**
      * Get Count Teams
+     * @param int    $start
+     * @param int    $limit
+     * @param string $sort
+     * @param string $order
+     * @return int
      */
     public function getCountTeams($start = 0, $limit = 0, $sort = 'team_id ASC, team_name', $order = 'ASC')
     {
@@ -301,19 +324,25 @@ class WgteamsTeamsHandler extends XoopsPersistableObjectHandler
         $criteria->setStart($start);
         $criteria->setLimit($limit);
 
-		return $this->getCount($criteria);
+        return $this->getCount($criteria);
     }
 
-	/**
+    /**
      * Get All Teams
+     * @param int    $start
+     * @param int    $limit
+     * @param string $sort
+     * @param string $order
+     * @return array
      */
-	public function getAllTeams($start = 0, $limit = 0, $sort = 'team_id ASC, team_name', $order = 'ASC')
+    public function getAllTeams($start = 0, $limit = 0, $sort = 'team_id ASC, team_name', $order = 'ASC')
     {
         $criteria = new CriteriaCompo();
         $criteria->setSort($sort);
         $criteria->setOrder($order);
         $criteria->setStart($start);
         $criteria->setLimit($limit);
+
         return $this->getAll($criteria);
     }
 

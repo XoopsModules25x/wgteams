@@ -22,18 +22,22 @@
 include_once XOOPS_ROOT_PATH . '/modules/wgteams/include/common.php';
 
 // Function show block
+/**
+ * @param $options
+ * @return array
+ */
 function b_wgteams_teams_show($options)
 {
     include_once XOOPS_ROOT_PATH . '/modules/wgteams/include/functions.php';
 
     $GLOBALS['xoTheme']->addStylesheet(XOOPS_URL . '/modules/wgteams/assets/css/style.css');
 
-    $GLOBALS['xoopsTpl']->assign('wgteams_teams_upload_url', WGTEAMS_UPLOAD_URL . "/teams/images/");
+    $GLOBALS['xoopsTpl']->assign('wgteams_teams_upload_url', WGTEAMS_UPLOAD_URL . '/teams/images/');
 
     $typeBlock = $options[0];
     array_shift($options);
 
-    $wgteams      = WgteamsHelper::getInstance();
+    $wgteams      =& WgteamsHelper::getInstance();
     $teamsHandler =& $wgteams->getHandler('teams');
 
     $crit_teams = new CriteriaCompo();
@@ -43,10 +47,9 @@ function b_wgteams_teams_show($options)
     $teamsCount = $teamsHandler->getCount($crit_teams);
     $teamsAll   = $teamsHandler->getAll($crit_teams);
 
+    $block = array();
     if ($teamsCount > 0) {
         $block = wgteamsGetTeamDetails($teamsAll, false);
-    } else {
-        $block = array();
     }
 
     return $block;
