@@ -1,17 +1,13 @@
 Read Me First
 =============
+wgTeams is a module for presentation of one or more teams in your CMS Xoops.
 
-Please make sure that you download the XOOPS Icon Set, and upload it to uploads/images directory
-Read the table in admin help for the accurate description of the functionality of this module
-
-Using the new class xoopsrequest.php
+You can defined various teams and people. After that you can link each person to one or
+more teams. The default information of a person (e.g. email address) will be used for all
+teams. You can define additional information fields, which will be used for a team/member
+combination, e.g. skills for this team, postion in the team, and so on.
+All used templates on user side are fully responsive.
 
 Version of xoops
 ----------------
-TDMCreate is a module that create other basic modules for CMS Xoops.
-
-Tested with xoops 2.5.7, you can not use it with earlier versions, unless because you do not fit some core files in the background and after some tests.
-
-Now that is ahead xoops versions, and goes to 2.6.0, you should download xoops 2.5.7 and use with this latest version.
-
-Therefore recommended not to use TDMCreate 1.91, with previous versions, to xoops 2.5.7
+Tested with xoops 2.5.7, you can not use it with earlier versions.
