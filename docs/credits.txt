@@ -3,6 +3,10 @@ Read Me First
 
 This module was originally developed by Goffy (www.wedega.com).
 
+Contributors:
+-------------
+Mamba
+
 Special thanks to TDM Team.
 This module was created with TDMCreate from TDM Team
 Modified by Timgno (http://www.txmodxoops.org)
