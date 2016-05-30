@@ -24,7 +24,7 @@
             <td class="center"><{$team.descr}></td>
             <td class="center">
                 <{if $team.image}>
-                    <img src="<{$wgteams_upload_url}>/teams/images/<{$team.image}>" alt="teams" style='max-width:50px' />
+                    <img src="<{$wgteams_upload_url}>/teams/images/<{$team.image}>" alt="teams" style='max-width:50px;' />
                 <{else}>
                     &nbsp;
                 <{/if}>

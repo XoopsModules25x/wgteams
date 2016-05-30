@@ -21,20 +21,28 @@
  */
 
 // search callback functions
+
+/**
+* @param $queryarray
+* @param $andor
+* @param $limit
+* @param $offset
+* @param $userid
+*/
 function wgteams_search($queryarray, $andor, $limit, $offset, $userid)
 {
     global $xoopsDB;
-    $sql = "SELECT 'infofield_id', 'infofield_name' FROM " . $xoopsDB->prefix('wgteams_infofields') . " WHERE infofield_id != 0";
+    $sql = "SELECT 'infofield_id', 'infofield_name' FROM " . $xoopsDB->prefix('wgteams_infofields') . ' WHERE infofield_id != 0';
     if ($userid != 0) {
-        $sql .= " AND infofield_submitter=" . (int)$userid;
+        $sql .= ' AND infofield_submitter=' . (int)$userid;
     }
     if (is_array($queryarray) && $count = count($queryarray)) {
-        $sql .= " AND ((a LIKE %$queryarray[0]%)";
+        $sql .= ' AND ((a LIKE %$queryarray[0]%)';
         for ($i = 1; $i < $count; ++$i) {
             $sql .= " $andor ";
             $sql .= "(a LIKE %$queryarray[0]%)";
         }
-        $sql .= ")";
+        $sql .= ')';
     }
     $sql .= " ORDER BY 'infofield_id' DESC";
     $result = $xoopsDB->query($sql, $limit, $offset);

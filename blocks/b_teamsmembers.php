@@ -22,6 +22,10 @@
 include_once XOOPS_ROOT_PATH . '/modules/wgteams/include/common.php';
 
 // Function show block
+/**
+* @param $options
+* @return array
+*/
 function b_wgteams_teamsmembers_show($options)
 {
 
@@ -34,7 +38,7 @@ function b_wgteams_teamsmembers_show($options)
     array_shift($options);
     array_shift($options);
 
-    $wgteams      = WgteamsHelper::getInstance();
+    $wgteams      =& WgteamsHelper::getInstance();
     $teamsHandler =& $wgteams->getHandler('teams');
 
     $crit_teams = new CriteriaCompo();
@@ -45,20 +49,23 @@ function b_wgteams_teamsmembers_show($options)
     $teamsCount = $teamsHandler->getCount($crit_teams);
     $teamsAll   = $teamsHandler->getAll($crit_teams);
 
+    $block = array();
     if ($teamsCount > 0) {
         $block = wgteamsGetTeamMemberDetails($teamsAll);
-    } else {
-        $block = array();
     }
 
     return $block;
 }
 
 // Function edit block
+/**
+* @param $options
+* @return string
+*/
 function b_wgteams_teamsmembers_edit($options)
 {
     include_once XOOPS_ROOT_PATH . '/modules/wgteams/class/teams.php';
-    $wgteams      = WgteamsHelper::getInstance();
+    $wgteams      =& WgteamsHelper::getInstance();
     $teamsHandler =& $wgteams->getHandler('teams');
     $GLOBALS['xoopsTpl']->assign('wgteams_upload_url', WGTEAMS_UPLOAD_URL);
     $form = _MB_WGTEAMS_TEAM_TO_DISPLAY;
@@ -74,9 +81,9 @@ function b_wgteams_teamsmembers_edit($options)
     $form .= "<select name='options[]' size='5'>";
     foreach (array_keys($teamsAll) as $i) {
         $team_id = $teamsAll[$i]->getVar('team_id');
-        $form .= "<option value='" . $team_id . "' " . (array_search($team_id, $options) === false ? "" : "selected='selected'") . ">" . $teamsAll[$i]->getVar('team_name') . "</option>";
+        $form .= "<option value='" . $team_id . "' " . (array_search($team_id, $options) === false ? '' : "selected='selected'") . '>' . $teamsAll[$i]->getVar('team_name') . '</option>';
     }
-    $form .= "</select>";
+    $form .= '</select>';
 
     return $form;
 }

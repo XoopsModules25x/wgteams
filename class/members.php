@@ -21,10 +21,9 @@
  */
 defined('XOOPS_ROOT_PATH') or die('Restricted access');
 
-/*
- * Class Object WgteamsMembers
+/**
+ * Class WgteamsMembers
  */
-
 class WgteamsMembers extends XoopsObject
 {
     /*
@@ -33,13 +32,13 @@ class WgteamsMembers extends XoopsObject
     private $wgteams = null;
 
     /*
-     * Constructor
+     * WgteamsMembers Constructor
      *
      * @param null
      */
     public function __construct()
     {
-        $this->wgteams = WgteamsHelper::getInstance();
+        $this->wgteams =& WgteamsHelper::getInstance();
         $this->initVar('member_id', XOBJ_DTYPE_INT);
         $this->initVar('member_firstname', XOBJ_DTYPE_TXTBOX);
         $this->initVar('member_lastname', XOBJ_DTYPE_TXTBOX);
@@ -53,8 +52,9 @@ class WgteamsMembers extends XoopsObject
     }
 
     /*
-    *  @static function &getInstance
-    *  @param null
+    * @static function &getInstance
+    * @param null
+    * @return bool|WgteamsMembers
     */
     public static function &getInstance()
     {
@@ -69,7 +69,8 @@ class WgteamsMembers extends XoopsObject
     /*
      * Get form
      *
-     * @param mixed $action
+     * @param bool $action
+     * @return XoopsThemeForm
      */
     public function getFormMembers($action = false)
     {
@@ -127,11 +128,11 @@ class WgteamsMembers extends XoopsObject
         }
         $imageSelect->setExtra("onchange='showImgSelected(\"image2\", \"member_image\", \"" . $imageDirectory . "\", \"\", \"" . XOOPS_URL . "\")'");
         $imageTray->addElement($imageSelect, false);
-        $imageTray->addElement(new XoopsFormLabel('', "<br /><img src='" . XOOPS_URL . "/" . $imageDirectory . "/" . $memberImage . "' name='image2' id='image2' alt='' style='max-width:100px' />"));
+        $imageTray->addElement(new XoopsFormLabel("<br /><img src='" . XOOPS_URL . '/' . $imageDirectory . '/' . $memberImage . "' name='image2' id='image2' alt='' style='max-width:100px;' />", ''));
         // Form File
         $fileSelectTray = new XoopsFormElementTray('', '<br />');
-        $fileSelectTray->addElement(new XoopsFormFile(_AM_WGTEAMS_FORM_UPLOAD_IMG , 'attachedfile', $this->wgteams->getConfig('wgteams_img_maxsize')));
-        $fileSelectTray->addElement(new XoopsFormLabel(_AM_WGTEAMS_MAX_FILESIZE .  $this->wgteams->getConfig('wgteams_img_maxsize')));
+        $fileSelectTray->addElement(new XoopsFormFile(_AM_WGTEAMS_FORM_UPLOAD_IMG, 'attachedfile', $this->wgteams->getConfig('wgteams_img_maxsize')));
+        $fileSelectTray->addElement(new XoopsFormLabel(_AM_WGTEAMS_MAX_FILESIZE . $this->wgteams->getConfig('wgteams_img_maxsize')));
         $imageTray->addElement($fileSelectTray);
         $form->addElement($imageTray);
         // Form Select User
@@ -148,6 +149,10 @@ class WgteamsMembers extends XoopsObject
 
     /**
      * Get Values
+     * @param null $keys
+     * @param null $format
+     * @param null $maxDepth
+     * @return array
      */
     public function getValuesMember($keys = null, $format = null, $maxDepth = null)
     {
@@ -174,7 +179,7 @@ class WgteamsMembers extends XoopsObject
     public function toArray()
     {
         $ret  = array();
-        $vars = $this->getVars();
+        $vars =& $this->getVars();
         foreach (array_keys($vars) as $var) {
             $ret[$var] = $this->getVar($var);
         }
@@ -184,9 +189,8 @@ class WgteamsMembers extends XoopsObject
 }
 
 /*
- * Class Object Handler WgteamsMembers
+ * Class WgteamsMembersHandler
  */
-
 class WgteamsMembersHandler extends XoopsPersistableObjectHandler
 {
     /*
@@ -194,11 +198,11 @@ class WgteamsMembersHandler extends XoopsPersistableObjectHandler
     */
     private $wgteams = null;
 
-    /*
-     * Constructor
-     *
-     * @param string $db
-     */
+    /**
+    * WgteamsMembersHandlerConstructor
+    *
+    * @param string $db
+    */
     public function __construct(&$db)
     {
         parent::__construct($db, 'wgteams_members', 'wgteamsmembers', 'member_id', 'member_firstname');
@@ -208,57 +212,63 @@ class WgteamsMembersHandler extends XoopsPersistableObjectHandler
     /**
      * @param bool $isNew
      *
-     * @return object
+     * @return XoopsObject $temp
      */
     public function &create($isNew = true)
     {
-        return parent::create($isNew);
+        $temp = parent::create($isNew);
+
+        return $temp;
     }
 
     /**
-     * retrieve a field
-     *
-     * @param int $i field id
-     * @return mixed reference to the {@link TDMCreateFields} object
-     */
+    * retrieve a field
+    *
+    * @param int  $i field id
+    * @param null $fields
+    * @return mixed reference to the <a href='psi_element://TDMCreateFields'>TDMCreateFields</a> object
+    *                object
+    */
     public function &get($i = null, $fields = null)
     {
-        return parent::get($i, $fields);
+        $temp = parent::get($i, $fields);
+
+        return $temp;
     }
 
     /**
-     * get inserted id
-     *
-     * @param null
-     * @return integer reference to the {@link TDMCreateFields} object
-     */
+    * get inserted id
+    *
+    * @param null
+    * @return integer reference to the {@link TDMCreateFields} object
+    */
     public function &getInsertId()
     {
         return $this->db->getInsertId();
     }
 
     /**
-     * get IDs of objects matching a condition
-     *
-     * @param object $criteria {@link CriteriaElement} to match
-     * @return array of object IDs
-     */
-    public function &getIds($criteria)
+    * get IDs of objects matching a condition
+    *
+    * @param CriteriaElement $criteria {@link CriteriaElement} to match
+    * @return array of object IDs
+    */
+    public function &getIds(CriteriaElement $criteria = null)
     {
         return parent::getIds($criteria);
     }
 
     /**
-     * insert a new field in the database
-     *
-     * @param object $field reference to the {@link TDMCreateFields} object
-     * @param bool   $force
-     *
-     * @return bool FALSE if failed, TRUE if already present and unchanged or successful
-     */
-    public function &insert(&$field, $force = false)
+    * insert a new field in the database
+    *
+    * @param XoopsObject $object reference to the {@link TDMCreateFields} object
+    * @param bool        $force
+    *
+    * @return bool FALSE if failed, TRUE if already present and unchanged or successful
+    */
+    public function &insert(XoopsObject $object, $force = false)
     {
-        if (!parent::insert($field, $force)) {
+        if (!parent::insert($object, $force)) {
             return false;
         }
 
@@ -266,8 +276,13 @@ class WgteamsMembersHandler extends XoopsPersistableObjectHandler
     }
 
     /**
-     * Get Count members
-     */
+    * Get Count members
+    * @param int    $start
+    * @param int    $limit
+    * @param string $sort
+    * @param string $order
+    * @return int
+    */
     public function getCountMembers($start = 0, $limit = 0, $sort = 'member_id ASC, member_firstname', $order = 'ASC')
     {
         $criteria = new CriteriaCompo();
@@ -280,8 +295,13 @@ class WgteamsMembersHandler extends XoopsPersistableObjectHandler
     }
 
     /**
-     * Get All members
-     */
+    * Get All members
+    * @param int    $start
+    * @param int    $limit
+    * @param string $sort
+    * @param string $order
+    * @return array
+    */
     public function getAllMembers($start = 0, $limit = 0, $sort = 'member_id ASC, member_firstname', $order = 'ASC')
     {
         $criteria = new CriteriaCompo();
