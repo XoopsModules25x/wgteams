@@ -30,7 +30,7 @@ $pathModuleAdmin = $GLOBALS['xoopsModule']->getInfo('dirmoduleadmin');
 $modPathIcon16 = $GLOBALS['xoopsModule']->getInfo('modicons16');
 $modPathIcon32 = $GLOBALS['xoopsModule']->getInfo('modicons32');
 // Get instance of module
-$wgteams           = WgteamsHelper::getInstance();
+$wgteams           =& WgteamsHelper::getInstance();
 $teamsHandler      =& $wgteams->getHandler('teams');
 $membersHandler    =& $wgteams->getHandler('members');
 $relationsHandler  =& $wgteams->getHandler('relations');
@@ -39,7 +39,7 @@ $infofieldsHandler =& $wgteams->getHandler('infofields');
 //
 $myts = MyTextSanitizer::getInstance();
 if (!isset($xoopsTpl) || !is_object($xoopsTpl)) {
-    include_once(XOOPS_ROOT_PATH . "/class/template.php");
+    include_once(XOOPS_ROOT_PATH . '/class/template.php');
     $xoopsTpl = new XoopsTpl();
 }
 // System icons path
@@ -56,7 +56,7 @@ xoops_loadLanguage('modinfo');
 if (file_exists($GLOBALS['xoops']->path($pathModuleAdmin . '/moduleadmin.php'))) {
     include_once $GLOBALS['xoops']->path($pathModuleAdmin . '/moduleadmin.php');
 } else {
-    redirect_header("../../../admin.php", 5, _AM_MODULEADMIN_MISSING, false);
+    redirect_header('../../../admin.php', 5, _AM_MODULEADMIN_MISSING, false);
 }
 xoops_cp_header();
 $adminMenu = new ModuleAdmin();
