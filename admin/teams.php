@@ -58,7 +58,7 @@ switch ($op) {
 
     case 'set_onoff':
         if (isset($teamId)) {
-            $teamsObj =& $teamsHandler->get($teamId);
+            $teamsObj = $teamsHandler->get($teamId);
             // get Var team_online
             $team_online = ($teamsObj->getVar('team_online') == 1) ? '0' : '1';
             // Set Var team_online
@@ -77,7 +77,7 @@ switch ($op) {
         $GLOBALS['xoopsTpl']->assign('navigation', $adminMenu->addNavigation('teams.php'));
         $GLOBALS['xoopsTpl']->assign('buttons', $adminMenu->renderButton());
         // Get Form
-        $teamsObj =& $teamsHandler->create();
+        $teamsObj = $teamsHandler->create();
         $form     = $teamsObj->getFormTeams();
         $GLOBALS['xoopsTpl']->assign('form', $form->render());
         break;
@@ -87,9 +87,9 @@ switch ($op) {
             redirect_header('teams.php', 3, implode(',', $GLOBALS['xoopsSecurity']->getErrors()));
         }
         if (isset($teamId)) {
-            $teamsObj =& $teamsHandler->get($teamId);
+            $teamsObj = $teamsHandler->get($teamId);
         } else {
-            $teamsObj =& $teamsHandler->create();
+            $teamsObj = $teamsHandler->create();
         }
         // Set Vars
         // Set Var team_name
@@ -98,7 +98,9 @@ switch ($op) {
         $teamsObj->setVar('team_descr', $_POST['team_descr']);
         // Set Var team_image
         include_once XOOPS_ROOT_PATH . '/class/uploader.php';
-        $uploader = new XoopsMediaUploader(WGTEAMS_UPLOAD_PATH.'/teams/images', $wgteams->getConfig('wgteams_img_mimetypes'), $wgteams->getConfig('wgteams_img_maxsize'), null, null);
+        $uploader = new XoopsMediaUploader(WGTEAMS_UPLOAD_PATH.'/teams/images',
+                                                        $wgteams->getConfig('wgteams_img_mimetypes'),
+                                                        $wgteams->getConfig('wgteams_img_maxsize'), null, null);
         if ($uploader->fetchMedia($_POST['xoops_upload_file'][0])) {
             $extension = preg_replace('/^.+\.([^.]+)$/sU', '', $_FILES['attachedfile']['name']);
             $imgName   = str_replace(' ', '', $_POST['team_name']) . '.' . $extension;
@@ -135,7 +137,7 @@ switch ($op) {
         }
         // Get Form
         $GLOBALS['xoopsTpl']->assign('error', $teamsObj->getHtmlErrors());
-        $form =& $teamsObj->getFormTeams();
+        $form = $teamsObj->getFormTeams();
         $GLOBALS['xoopsTpl']->assign('form', $form->render());
         break;
 
@@ -152,14 +154,14 @@ switch ($op) {
         break;
 
     case 'delete':
-        $teamsObj =& $teamsHandler->get($teamId);
+        $teamsObj = $teamsHandler->get($teamId);
         if (isset($_REQUEST['ok']) && 1 == $_REQUEST['ok']) {
             if (!$GLOBALS['xoopsSecurity']->check()) {
                 redirect_header('teams.php', 3, implode(', ', $GLOBALS['xoopsSecurity']->getErrors()));
             }
             $team_img = $teamsObj->getVar('team_image');
             if ($teamsHandler->delete($teamsObj)) {
-                if (!$team_img == '') {
+                if (!$team_img === '') {
                     unlink(WGTEAMS_UPLOAD_PATH . '/teams/images/' . $team_img);
                 }
                 redirect_header('teams.php', 3, _AM_WGTEAMS_FORM_DELETE_OK);

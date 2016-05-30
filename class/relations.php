@@ -19,26 +19,27 @@
  * @author          Goffy - Wedega.com - Email:<webmaster@wedega.com> - Website:<http://wedega.com>
  * @version         $Id: 1.0 relations.php 1 Sun 2015/12/27 23:18:00Z Goffy - Wedega $
  */
-defined('XOOPS_ROOT_PATH') or die('Restricted access');
+defined('XOOPS_ROOT_PATH') || exit('Restricted access');
 
-/*
- * Class WgteamsRelations
+/**
+ * Class Object WgteamsRelations
  */
+
 class WgteamsRelations extends XoopsObject
 {
-    /*
+    /**
     * @var mixed
     */
     private $wgteams = null;
 
-    /*
-    * WgteamsRelations Constructor
-    *
-    * @param null
-    */
+    /**
+     * Constructor
+     *
+     * @param null
+     */
     public function __construct()
     {
-        $this->wgteams =& WgteamsHelper::getInstance();
+        $this->wgteams = WgteamsHelper::getInstance();
         $this->initVar('rel_id', XOBJ_DTYPE_INT);
         $this->initVar('rel_team_id', XOBJ_DTYPE_INT);
         $this->initVar('rel_member_id', XOBJ_DTYPE_INT);
@@ -57,27 +58,27 @@ class WgteamsRelations extends XoopsObject
         $this->initVar('rel_date_create', XOBJ_DTYPE_INT);
     }
 
-    /*
-    * @static function &getInstance
-    * @param null
-    * @return bool|WgteamsRelations
-    */
-    public static function &getInstance()
+    /**
+     * @static function getInstance
+     * @param null
+     * @return static
+     */
+    public static function getInstance()
     {
-        static $instance = false;
-        if (!$instance) {
-            $instance = new self();
+        static $instance;
+        if (null === $instance) {
+            $instance = new static();
         }
 
         return $instance;
     }
 
-    /*
-    * Get form
-    *
-    * @param bool $action
-    * @return XoopsThemeForm
-    */
+    /**
+     * Get form
+     *
+     * @param mixed $action
+     * @return XoopsThemeForm
+     */
     public function getFormRelations($action = false)
     {
         global $xoopsUser;
@@ -85,9 +86,9 @@ class WgteamsRelations extends XoopsObject
             $action = $_SERVER['REQUEST_URI'];
         }
 
-        $infofieldsHandler =& $this->wgteams->getHandler('infofields');
-        $teamsHandler      =& $this->wgteams->getHandler('teams');
-        $membersHandler    =& $this->wgteams->getHandler('members');
+        $infofieldsHandler = $this->wgteams->getHandler('infofields');
+        $teamsHandler      = $this->wgteams->getHandler('teams');
+        $membersHandler    = $this->wgteams->getHandler('members');
 
         if ($infofieldsHandler->getCountInfofields() == 0) {
             redirect_header('infofields.php', 3, _AM_WGTEAMS_THEREARENT_INFOFIELDS);
@@ -106,7 +107,7 @@ class WgteamsRelations extends XoopsObject
         $form = new XoopsThemeForm($title, 'form', $action, 'post', true);
         $form->setExtra('enctype="multipart/form-data"');
         // Relations handler
-        //$relationsHandler =& $this->wgteams->getHandler('relations');
+        //$relationsHandler = $this->wgteams->getHandler('relations');
         // Form select team
         $relTeam_idSelect = new XoopsFormSelect(_AM_WGTEAMS_RELATION_TEAM_ID, 'rel_team_id', $this->getVar('rel_team_id'));
         $relTeam_idSelect->addOptionArray($teamsHandler->getList());
@@ -219,18 +220,19 @@ class WgteamsRelations extends XoopsObject
     }
 
     /**
-    * Get Values
-    * @param null $keys
-    * @param null $format
-    * @param null $maxDepth
-    * @return array
-    */
+     * Get Values
+     * @param null $keys
+     * @param null $format
+     * @param null $maxDepth
+     * @return array
+     */
     public function getValuesRelations($keys = null, $format = null, $maxDepth = null)
     {
         $ret                 = $this->getValues($keys, $format, $maxDepth);
         $ret['id']           = $this->getVar('rel_id');
         $ret['team_id']      = $this->wgteams->getHandler('teams')->get($this->getVar('rel_team_id'))->getVar('team_name');
-        $ret['member_id']    = trim($this->wgteams->getHandler('members')->get($this->getVar('rel_member_id'))->getVar('member_firstname') . ' ' . $this->wgteams->getHandler('members')->get($this->getVar('rel_member_id'))->getVar('member_lastname'));
+        $ret['member_id']    = trim($this->wgteams->getHandler('members')->get($this->getVar('rel_member_id'))->getVar('member_firstname') .
+                                    ' ' . $this->wgteams->getHandler('members')->get($this->getVar('rel_member_id'))->getVar('member_lastname'));
         $ret['info_1_field'] = $this->wgteams->getHandler('infofields')->get($this->getVar('rel_info_1_field'))->getVar('infofield_name');
         $ret['info_1']       = strip_tags($this->getVar('rel_info_1'));
         $ret['info_2_field'] = $this->wgteams->getHandler('infofields')->get($this->getVar('rel_info_2_field'))->getVar('infofield_name');
@@ -266,19 +268,21 @@ class WgteamsRelations extends XoopsObject
 }
 
 /**
- * Class WgteamsRelationsHandler
+ * Class Object Handler WgteamsRelations
  */
+
 class WgteamsRelationsHandler extends XoopsPersistableObjectHandler
 {
-    /*
+    /**
     * @var mixed
     */
     private $wgteams = null;
 
-    /*
-    * WgteamsRelationsHandler constructor.
-    * @param XoopsDatabase $db
-    */
+    /**
+     * Constructor
+     *
+     * @param string $db
+     */
     public function __construct(&$db)
     {
         parent::__construct($db, 'wgteams_relations', 'wgteamsrelations', 'rel_id', 'rel_team_id');
@@ -288,63 +292,63 @@ class WgteamsRelationsHandler extends XoopsPersistableObjectHandler
     /**
      * @param bool $isNew
      *
-     * @return XoopsObject $temp
+     * @return XoopsObject
      */
-    public function &create($isNew = true)
+    public function create($isNew = true)
     {
         $temp = parent::create($isNew);
-        
+        return $temp; 
+    }
+
+    /**
+     * retrieve a field
+     *
+     * @param  int $i field id
+     * @param null $fields
+     * @return mixed reference to the <a href='psi_element://TDMCreateFields'>TDMCreateFields</a> object
+     *                object
+     */
+    public function get($i = null, $fields = null)
+    {
+        $temp =  parent::get($i, $fields);
         return $temp;
     }
 
     /**
-    * retrieve a field
-    *
-    * @param int  $i field id
-    * @param null $fields
-    * @return mixed reference to the <a href='psi_element://TDMCreateFields'>TDMCreateFields</a> object
-    *                object
-    */
-    public function &get($i = null, $fields = null)
+     * get inserted id
+     *
+     * @param null
+     * @return integer reference to the {@link TDMCreateFields} object
+     */
+    public function getInsertId()
     {
-        $temp = parent::get($i, $fields);
-
+        $temp =  $this->db->getInsertId();
         return $temp;
     }
 
     /**
-    * get inserted id
-    *
-    * @param null
-    * @return integer reference to the {@link TDMCreateFields} object
-    */
-    public function &getInsertId()
+     * get IDs of objects matching a condition
+     *
+     * @param  CriteriaElement $criteria {@link CriteriaElement} to match
+     * @return array  of object IDs
+     */
+    public function &getIds(CriteriaElement $criteria = null)
     {
-        return $this->db->getInsertId();
+        $temp =&  parent::getIds($criteria);
+        return $temp;
     }
 
     /**
-    * get IDs of objects matching a condition
-    *
-    * @param CriteriaElement $criteria {@link CriteriaElement} to match
-    * @return array of object IDs
-    */
-    public function &getIds($criteria)
+     * insert a new field in the database
+     *
+     * @param XoopsObject $field reference to the {@link TDMCreateFields} object
+     * @param bool   $force
+     *
+     * @return bool FALSE if failed, TRUE if already present and unchanged or successful
+     */
+    public function insert(XoopsObject $field, $force = false)
     {
-        return parent::getIds($criteria);
-    }
-
-    /**
-    * insert a new field in the database
-    *
-    * @param XoopsObject $object reference to the {@link TDMCreateFields} object
-    * @param bool        $force
-    *
-    * @return bool FALSE if failed, TRUE if already present and unchanged or successful
-    */
-    public function &insert(XoopsObject $object, $force = false)
-    {
-        if (!parent::insert($object, $force)) {
+        if (!parent::insert($field, $force)) {
             return false;
         }
 
@@ -352,13 +356,13 @@ class WgteamsRelationsHandler extends XoopsPersistableObjectHandler
     }
 
     /**
-    * Get Count Relations
-    * @param int    $start
-    * @param int    $limit
-    * @param string $sort
-    * @param string $order
-    * @return int
-    */
+     * Get Count Relations
+     * @param int    $start
+     * @param int    $limit
+     * @param string $sort
+     * @param string $order
+     * @return int
+     */
     public function getCountRelations($start = 0, $limit = 0, $sort = 'rel_id ASC, rel_team_id', $order = 'ASC')
     {
         $criteria = new CriteriaCompo();
@@ -371,13 +375,13 @@ class WgteamsRelationsHandler extends XoopsPersistableObjectHandler
     }
 
     /**
-    * Get All Relations
-    * @param int    $start
-    * @param int    $limit
-    * @param string $sort
-    * @param string $order
-    * @return array
-    */
+     * Get All Relations
+     * @param int    $start
+     * @param int    $limit
+     * @param string $sort
+     * @param string $order
+     * @return
+     */
     public function getAllRelations($start = 0, $limit = 0, $sort = 'rel_team_id ASC, rel_weight ASC, rel_id', $order = 'ASC')
     {
         $criteria = new CriteriaCompo();
@@ -388,5 +392,4 @@ class WgteamsRelationsHandler extends XoopsPersistableObjectHandler
 
         return $this->getAll($criteria);
     }
-
 }

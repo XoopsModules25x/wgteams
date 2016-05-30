@@ -26,17 +26,18 @@ $dirname = basename(__DIR__);
 $xoBreadcrumbs   = array();
 $xoBreadcrumbs[] = array('title' => $GLOBALS['xoopsModule']->getVar('name'), 'link' => WGTEAMS_URL . '/');
 // Get instance of module
-$wgteams           =& WgteamsHelper::getInstance();
-$teamsHandler      =& $wgteams->getHandler('teams');
-$membersHandler    =& $wgteams->getHandler('members');
-$relationsHandler  =& $wgteams->getHandler('relations');
-$infofieldsHandler =& $wgteams->getHandler('infofields');
+$wgteams           = WgteamsHelper::getInstance();
+$teamsHandler      = $wgteams->getHandler('teams');
+$membersHandler    = $wgteams->getHandler('members');
+$relationsHandler  = $wgteams->getHandler('relations');
+$infofieldsHandler = $wgteams->getHandler('infofields');
 // Permission
 include_once XOOPS_ROOT_PATH . '/class/xoopsform/grouppermform.php';
 $gperm_handler = xoops_getHandler('groupperm');
-$groups        = XOOPS_GROUP_ANONYMOUS;
 if (is_object($xoopsUser)) {
     $groups = $xoopsUser->getGroups();
+} else {
+    $groups = XOOPS_GROUP_ANONYMOUS;
 }
 //
 $myts = MyTextSanitizer::getInstance();

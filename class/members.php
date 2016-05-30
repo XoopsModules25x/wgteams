@@ -19,26 +19,26 @@
  * @author          Goffy - Wedega.com - Email:<webmaster@wedega.com> - Website:<http://wedega.com>
  * @version         $Id: 1.0 members.php 1 Sun 2015/12/27 23:18:00Z Goffy - Wedega $
  */
-defined('XOOPS_ROOT_PATH') or die('Restricted access');
+defined('XOOPS_ROOT_PATH') || exit('Restricted access');
 
 /**
  * Class WgteamsMembers
  */
 class WgteamsMembers extends XoopsObject
 {
-    /*
+    /**
     * @var mixed
     */
     private $wgteams = null;
 
-    /*
-     * WgteamsMembers Constructor
+    /**
+     * Constructor
      *
-     * @param null
+     * WgteamsMembers constructor.
      */
     public function __construct()
     {
-        $this->wgteams =& WgteamsHelper::getInstance();
+        $this->wgteams = WgteamsHelper::getInstance();
         $this->initVar('member_id', XOBJ_DTYPE_INT);
         $this->initVar('member_firstname', XOBJ_DTYPE_TXTBOX);
         $this->initVar('member_lastname', XOBJ_DTYPE_TXTBOX);
@@ -51,25 +51,24 @@ class WgteamsMembers extends XoopsObject
         $this->initVar('member_date_create', XOBJ_DTYPE_INT);
     }
 
-    /*
-    * @static function &getInstance
-    * @param null
-    * @return bool|WgteamsMembers
-    */
-    public static function &getInstance()
+    /**
+    *  @static function getInstance
+     * @return static
+     */
+    public static function getInstance()
     {
-        static $instance = false;
-        if (!$instance) {
-            $instance = new self();
+        static $instance;
+        if (null === $instance) {
+            $instance = new static();
         }
 
         return $instance;
     }
 
-    /*
+    /**
      * Get form
      *
-     * @param bool $action
+     * @param mixed $action
      * @return XoopsThemeForm
      */
     public function getFormMembers($action = false)
@@ -86,7 +85,7 @@ class WgteamsMembers extends XoopsObject
         $form = new XoopsThemeForm($title, 'form', $action, 'post', true);
         $form->setExtra('enctype="multipart/form-data"');
         // member handler
-        //$membersHandler =& $this->wgteams->getHandler('members');
+        //$membersHandler = $this->wgteams->getHandler('members');
         // Form Text memberFirstname
         $form->addElement(new XoopsFormText(_AM_WGTEAMS_MEMBER_FIRSTNAME, 'member_firstname', 50, 255, $this->getVar('member_firstname')), true);
         // Form Text memberLastname
@@ -120,7 +119,7 @@ class WgteamsMembers extends XoopsObject
         $memberImage    = $getMemberImage ?: 'blank.gif';
         $imageDirectory = '/uploads/wgteams/members/images';
 
-        $imageTray   = new XoopsFormElementTray(_AM_WGTEAMS_MEMBER_IMAGE, '<br />');
+        $imageTray   = new XoopsFormElementTray(_AM_WGTEAMS_MEMBER_IMAGE, '<br>');
         $imageSelect = new XoopsFormSelect(_AM_WGTEAMS_FORM_IMAGE_EXIST, 'member_image', $memberImage, 5);
         $imageArray  = XoopsLists::getImgListAsArray(XOOPS_ROOT_PATH . $imageDirectory);
         foreach ($imageArray as $image) {
@@ -128,11 +127,11 @@ class WgteamsMembers extends XoopsObject
         }
         $imageSelect->setExtra("onchange='showImgSelected(\"image2\", \"member_image\", \"" . $imageDirectory . "\", \"\", \"" . XOOPS_URL . "\")'");
         $imageTray->addElement($imageSelect, false);
-        $imageTray->addElement(new XoopsFormLabel("<br /><img src='" . XOOPS_URL . '/' . $imageDirectory . '/' . $memberImage . "' name='image2' id='image2' alt='' style='max-width:100px;' />", ''));
+        $imageTray->addElement(new XoopsFormLabel('', "<br><img src='" . XOOPS_URL . '/' . $imageDirectory . '/' . $memberImage . "' name='image2' id='image2' alt='' style='max-width:100px;' />"));
         // Form File
-        $fileSelectTray = new XoopsFormElementTray('', '<br />');
+        $fileSelectTray = new XoopsFormElementTray('', '<br>');
         $fileSelectTray->addElement(new XoopsFormFile(_AM_WGTEAMS_FORM_UPLOAD_IMG, 'attachedfile', $this->wgteams->getConfig('wgteams_img_maxsize')));
-        $fileSelectTray->addElement(new XoopsFormLabel(_AM_WGTEAMS_MAX_FILESIZE . $this->wgteams->getConfig('wgteams_img_maxsize')));
+        $fileSelectTray->addElement(new XoopsFormLabel(_AM_WGTEAMS_MAX_FILESIZE .  $this->wgteams->getConfig('wgteams_img_maxsize')));
         $imageTray->addElement($fileSelectTray);
         $form->addElement($imageTray);
         // Form Select User
@@ -188,21 +187,22 @@ class WgteamsMembers extends XoopsObject
     }
 }
 
-/*
- * Class WgteamsMembersHandler
+/**
+ * Class Object Handler WgteamsMembers
  */
+
 class WgteamsMembersHandler extends XoopsPersistableObjectHandler
 {
-    /*
+    /**
     * @var mixed
     */
     private $wgteams = null;
 
     /**
-    * WgteamsMembersHandlerConstructor
-    *
-    * @param string $db
-    */
+     * Constructor
+     *
+     * @param string $db
+     */
     public function __construct(&$db)
     {
         parent::__construct($db, 'wgteams_members', 'wgteamsmembers', 'member_id', 'member_firstname');
@@ -212,63 +212,63 @@ class WgteamsMembersHandler extends XoopsPersistableObjectHandler
     /**
      * @param bool $isNew
      *
-     * @return XoopsObject $temp
+     * @return XoopsObject
      */
-    public function &create($isNew = true)
+    public function create($isNew = true)
     {
         $temp = parent::create($isNew);
-
         return $temp;
     }
 
     /**
-    * retrieve a field
-    *
-    * @param int  $i field id
-    * @param null $fields
-    * @return mixed reference to the <a href='psi_element://TDMCreateFields'>TDMCreateFields</a> object
-    *                object
-    */
-    public function &get($i = null, $fields = null)
+     * retrieve a field
+     *
+     * @param  int $i field id
+     * @param null $fields
+     * @return mixed reference to the <a href='psi_element://TDMCreateFields'>TDMCreateFields</a> object
+     *                object
+     */
+    public function get($i = null, $fields = null)
     {
         $temp = parent::get($i, $fields);
-
         return $temp;
     }
 
     /**
-    * get inserted id
-    *
-    * @param null
-    * @return integer reference to the {@link TDMCreateFields} object
-    */
-    public function &getInsertId()
+     * get inserted id
+     *
+     * @param null
+     * @return integer reference to the {@link TDMCreateFields} object
+     */
+    public function getInsertId()
     {
-        return $this->db->getInsertId();
+        $temp = $this->db->getInsertId();
+        return $temp;
     }
 
     /**
-    * get IDs of objects matching a condition
-    *
-    * @param CriteriaElement $criteria {@link CriteriaElement} to match
-    * @return array of object IDs
-    */
+     * get IDs of objects matching a condition
+     *
+     * @param  CriteriaElement $criteria {@link CriteriaElement} to match
+     * @return array  of object IDs
+     */
     public function &getIds(CriteriaElement $criteria = null)
     {
-        return parent::getIds($criteria);
+        $temp =& parent::getIds($criteria);
+        return $temp;
     }
 
     /**
-    * insert a new field in the database
-    *
-    * @param XoopsObject $object reference to the {@link TDMCreateFields} object
-    * @param bool        $force
-    *
-    * @return bool FALSE if failed, TRUE if already present and unchanged or successful
-    */
-    public function &insert(XoopsObject $object, $force = false)
+     * insert a new field in the database
+     *
+     * @param XoopsObject $field reference to the {@link TDMCreateFields} object
+     * @param bool   $force
+     *
+     * @return bool FALSE if failed, TRUE if already present and unchanged or successful
+     */
+    public function insert(XoopsObject $field, $force = false)
     {
-        if (!parent::insert($object, $force)) {
+        if (!parent::insert($field, $force)) {
             return false;
         }
 
@@ -276,13 +276,13 @@ class WgteamsMembersHandler extends XoopsPersistableObjectHandler
     }
 
     /**
-    * Get Count members
-    * @param int    $start
-    * @param int    $limit
-    * @param string $sort
-    * @param string $order
-    * @return int
-    */
+     * Get Count members
+     * @param int    $start
+     * @param int    $limit
+     * @param string $sort
+     * @param string $order
+     * @return int
+     */
     public function getCountMembers($start = 0, $limit = 0, $sort = 'member_id ASC, member_firstname', $order = 'ASC')
     {
         $criteria = new CriteriaCompo();
@@ -295,13 +295,13 @@ class WgteamsMembersHandler extends XoopsPersistableObjectHandler
     }
 
     /**
-    * Get All members
-    * @param int    $start
-    * @param int    $limit
-    * @param string $sort
-    * @param string $order
-    * @return array
-    */
+     * Get All members
+     * @param int    $start
+     * @param int    $limit
+     * @param string $sort
+     * @param string $order
+     * @return
+     */
     public function getAllMembers($start = 0, $limit = 0, $sort = 'member_id ASC, member_firstname', $order = 'ASC')
     {
         $criteria = new CriteriaCompo();
@@ -312,5 +312,4 @@ class WgteamsMembersHandler extends XoopsPersistableObjectHandler
 
         return $this->getAll($criteria);
     }
-
 }

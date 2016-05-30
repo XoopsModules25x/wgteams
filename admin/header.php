@@ -30,11 +30,11 @@ $pathModuleAdmin = $GLOBALS['xoopsModule']->getInfo('dirmoduleadmin');
 $modPathIcon16 = $GLOBALS['xoopsModule']->getInfo('modicons16');
 $modPathIcon32 = $GLOBALS['xoopsModule']->getInfo('modicons32');
 // Get instance of module
-$wgteams           =& WgteamsHelper::getInstance();
-$teamsHandler      =& $wgteams->getHandler('teams');
-$membersHandler    =& $wgteams->getHandler('members');
-$relationsHandler  =& $wgteams->getHandler('relations');
-$infofieldsHandler =& $wgteams->getHandler('infofields');
+$wgteams           = WgteamsHelper::getInstance();
+$teamsHandler      = $wgteams->getHandler('teams');
+$membersHandler    = $wgteams->getHandler('members');
+$relationsHandler  = $wgteams->getHandler('relations');
+$infofieldsHandler = $wgteams->getHandler('infofields');
 
 //
 $myts = MyTextSanitizer::getInstance();

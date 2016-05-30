@@ -20,9 +20,9 @@
  * @version         $Id: 1.0 menu.php 1 Sun 2015/12/27 23:18:01Z Goffy - Wedega $
  */
 $dirname                = basename(dirname(__DIR__));
-$module_handler         = xoops_getHandler('module');
+$moduleHandler          = xoops_getHandler('module');
 $xoopsModule            = XoopsModule::getByDirname($dirname);
-$moduleInfo             = $module_handler->get($xoopsModule->getVar('mid'));
+$moduleInfo             = $moduleHandler->get($xoopsModule->getVar('mid'));
 $sysPathIcon32          = $moduleInfo->getInfo('sysicons32');
 $i                      = 1;
 $adminmenu[$i]['title'] = _MI_WGTEAMS_ADMENU1;

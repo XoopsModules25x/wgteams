@@ -46,11 +46,12 @@ if ($startpage == 3) {
 }
 $teamsCount = $teamsHandler->getCount($crit_teams);
 $teamsAll   = $teamsHandler->getAll($crit_teams);
+$teams_list = array();
 
 if ($teamsCount > 0) {
     // Get All Teams
     $teams_list = wgteamsGetTeamMemberDetails($teamsAll);
-    if ($startpage[0] == 1 && $team_id == 0) {
+    if ($team_id == 0 && $startpage[0] == 1) {
         $teams_list = wgteamsGetTeamDetails($teamsAll);
     }
 } else {
@@ -80,7 +81,7 @@ if ($teamsCount > $limit) {
 // Breadcrumbs
 if ($wgteams->getConfig('wgteams_showbreadcrumbs') == 1) {
     $xoBreadcrumbs[] = array('title' => _MA_WGTEAMS_TEAMS, 'link' => WGTEAMS_URL . '/index.php');
-    if ($team_id > 0 && !$team_name == '') {
+    if ($team_id > 0 && !$team_name === '') {
         $xoBreadcrumbs[] = array('title' => $team_name);
     }
     $GLOBALS['xoopsTpl']->assign('showbreadcrumbs', '1');

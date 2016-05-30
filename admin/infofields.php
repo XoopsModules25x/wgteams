@@ -62,7 +62,7 @@ switch ($op) {
         $GLOBALS['xoopsTpl']->assign('navigation', $adminMenu->addNavigation('infofields.php'));
         $GLOBALS['xoopsTpl']->assign('buttons', $adminMenu->renderButton());
         // Get Form
-        $infofieldsObj =& $infofieldsHandler->create();
+        $infofieldsObj = $infofieldsHandler->create();
         $form          = $infofieldsObj->getFormInfofields();
         $GLOBALS['xoopsTpl']->assign('form', $form->render());
         break;
@@ -72,9 +72,9 @@ switch ($op) {
             redirect_header('infofields.php', 3, implode(',', $GLOBALS['xoopsSecurity']->getErrors()));
         }
         if (isset($addField_id)) {
-            $infofieldsObj =& $infofieldsHandler->get($addField_id);
+            $infofieldsObj = $infofieldsHandler->get($addField_id);
         } else {
-            $infofieldsObj =& $infofieldsHandler->create();
+            $infofieldsObj = $infofieldsHandler->create();
         }
         // Set Vars
         // Set Var infofield_name
@@ -89,7 +89,7 @@ switch ($op) {
         }
         // Get Form
         $GLOBALS['xoopsTpl']->assign('error', $infofieldsObj->getHtmlErrors());
-        $form =& $infofieldsObj->getFormInfofields();
+        $form = $infofieldsObj->getFormInfofields();
         $GLOBALS['xoopsTpl']->assign('form', $form->render());
         break;
 
@@ -106,7 +106,7 @@ switch ($op) {
         break;
 
     case 'delete':
-        $infofieldsObj =& $infofieldsHandler->get($addField_id);
+        $infofieldsObj = $infofieldsHandler->get($addField_id);
         if (isset($_REQUEST['ok']) && 1 == $_REQUEST['ok']) {
             if (!$GLOBALS['xoopsSecurity']->check()) {
                 redirect_header('infofields.php', 3, implode(', ', $GLOBALS['xoopsSecurity']->getErrors()));
