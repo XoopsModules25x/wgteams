@@ -1,6 +1,10 @@
 Read Me First
 =============
 
-Originally created by Goffy (German Xoops)Goffy (German Xoops)
+This module was originally developed by Goffy (www.wedega.com).
 
-Contributors: Mamba (http://www.xoops.org)
+Special thanks to TDM Team.
+This module was created with TDMCreate from TDM Team
+Modified by Timgno (http://www.txmodxoops.org)
+Contributors: Mamba (http://www.xoops.org), Goffy (German Xoops)
+Included ideas for Logo Generator from Trabis (Publisher module) and Suin (Koins module)

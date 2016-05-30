@@ -18,11 +18,6 @@
  * @min_xoops       2.5.7
  * @author          Goffy - Wedega.com - Email:<webmaster@wedega.com> - Website:<http://wedega.com>
  * @version         $Id: 1.0 functions.php 1 Sun 2015/12/27 23:18:01Z Goffy - Wedega $
- * @param        $global
- * @param        $key
- * @param string $default
- * @param string $type
- * @return mixed|string
  */
 
 function wgteams_CleanVars(&$global, $key, $default = '', $type = 'int')
@@ -43,13 +38,10 @@ function wgteams_CleanVars(&$global, $key, $default = '', $type = 'int')
     return $ret;
 }
 
-/**
- * @param $content
- */
 function wgteamsMetaKeywords($content)
 {
     global $xoopsTpl, $xoTheme;
-    $myts    = MyTextSanitizer::getInstance();
+    $myts    =& MyTextSanitizer::getInstance();
     $content = $myts->undoHtmlSpecialChars($myts->displayTarea($content));
     if (isset($xoTheme) && is_object($xoTheme)) {
         $xoTheme->addMeta('meta', 'keywords', strip_tags($content));
@@ -58,13 +50,10 @@ function wgteamsMetaKeywords($content)
     }
 }
 
-/**
- * @param $content
- */
 function wgteamsMetaDescription($content)
 {
     global $xoopsTpl, $xoTheme;
-    $myts    = MyTextSanitizer::getInstance();
+    $myts    =& MyTextSanitizer::getInstance();
     $content = $myts->undoHtmlSpecialChars($myts->displayTarea($content));
     if (isset($xoTheme) && is_object($xoTheme)) {
         $xoTheme->addMeta('meta', 'description', strip_tags($content));
@@ -73,26 +62,21 @@ function wgteamsMetaDescription($content)
     }
 }
 
-/**
- * @param      $teamsAll
- * @param bool $show_descr
- * @return array
- */
 function wgteamsGetTeamDetails(&$teamsAll, $show_descr = true)
 {
     // Get All Teams
     global $xoopsTpl, $xoTheme;
 
-    $wgteams      =& WgteamsHelper::getInstance();
+    $wgteams      = WgteamsHelper::getInstance();
     $teamsHandler =& $wgteams->getHandler('teams');
 
     xoops_loadLanguage('main', WGTEAMS_DIRNAME);
 
-    $team_image_url = WGTEAMS_UPLOAD_URL . '/teams/images/';
+    $team_image_url = WGTEAMS_UPLOAD_URL . "/teams/images/";
 
     foreach (array_keys($teamsAll) as $i) {
-        $team_id    = $teamsAll[$i]->getVar('team_id');
-        $team_name  = $teamsAll[$i]->getVar('team_name');
+        $team_id   = $teamsAll[$i]->getVar('team_id');
+        $team_name = $teamsAll[$i]->getVar('team_name');
         $team_descr = '';
         if ($show_descr) {
             $team_descr = $teamsAll[$i]->getVar('team_descr');
@@ -119,16 +103,12 @@ function wgteamsGetTeamDetails(&$teamsAll, $show_descr = true)
     return $teams_list;
 }
 
-/**
- * @param $teamsAll
- * @return array
- */
 function wgteamsGetTeamMemberDetails(&$teamsAll)
 {
     // Get All Teams
     global $xoopsTpl, $xoTheme;
 
-    $wgteams           =& WgteamsHelper::getInstance();
+    $wgteams           = WgteamsHelper::getInstance();
     $teamsHandler      =& $wgteams->getHandler('teams');
     $membersHandler    =& $wgteams->getHandler('members');
     $relationsHandler  =& $wgteams->getHandler('relations');
@@ -136,8 +116,8 @@ function wgteamsGetTeamMemberDetails(&$teamsAll)
 
     xoops_loadLanguage('main', WGTEAMS_DIRNAME);
 
-    $team_image_url   = WGTEAMS_UPLOAD_URL . '/teams/images/';
-    $member_image_url = WGTEAMS_UPLOAD_URL . '/members/images/';
+    $team_image_url   = WGTEAMS_UPLOAD_URL . "/teams/images/";
+    $member_image_url = WGTEAMS_UPLOAD_URL . "/members/images/";
 
     foreach (array_keys($teamsAll) as $i) {
         $team_id    = $teamsAll[$i]->getVar('team_id');
@@ -152,7 +132,7 @@ function wgteamsGetTeamMemberDetails(&$teamsAll)
         $team_tablestyle   = ($teamsAll[$i]->getVar('team_tablestyle') === 'default') ? '' : $teamsAll[$i]->getVar('team_tablestyle');
         $team_imagestyle   = ($teamsAll[$i]->getVar('team_imagestyle') === 'default') ? '' : $teamsAll[$i]->getVar('team_imagestyle');
         $team_displaystyle = $teamsAll[$i]->getVar('team_displaystyle');
-        $member_labels     = $wgteams->getConfig('wgteams_labels') == 1 ? true : false;
+        $member_labels = $wgteams->getConfig('wgteams_labels')== 1 ? true : false;
 
         $crit_rels = new CriteriaCompo();
         $crit_rels->add(new Criteria('rel_team_id', $team_id));
@@ -174,7 +154,7 @@ function wgteamsGetTeamMemberDetails(&$teamsAll)
             $member_firstname = $member_obj->getVar('member_firstname');
             $member_lastname  = $member_obj->getVar('member_lastname');
             $member_name      = $member_firstname;
-            $member_name .= ' ' . $member_lastname;
+            $member_name .= " " . $member_lastname;
             $member_name = trim($member_name);
             if (!$member_name == '') {
                 $nb_infos++;
@@ -187,10 +167,8 @@ function wgteamsGetTeamMemberDetails(&$teamsAll)
             if (!$member_phone == '') {
                 $nb_infos++;
             }
-            $member_email = $member_obj->getVar('member_email');
-            if (!$member_email == '') {
-                $nb_infos++;
-            }
+            $member_email   = $member_obj->getVar('member_email');
+            if (!$member_email == '') $nb_infos++;
             $member_image = $member_obj->getVar('member_image');
 
             // reset info field
@@ -261,7 +239,7 @@ function wgteamsGetTeamMemberDetails(&$teamsAll)
                 'member_name'      => $member_name,
                 'member_address'   => $member_address,
                 'member_phone'     => $member_phone,
-                'member_email'     => $member_email,
+				'member_email'     => $member_email,
                 'member_image'     => $member_image,
                 'member_image_url' => $member_image_url,
                 'info_1_name'      => $rel_info_1_name,
@@ -278,8 +256,8 @@ function wgteamsGetTeamMemberDetails(&$teamsAll)
                 'rel_tablestyle'   => $team_tablestyle,
                 'rel_imagestyle'   => $team_imagestyle,
                 'rel_displaystyle' => $team_displaystyle,
-                'rel_nb_infos'     => $nb_infos,
-                'member_labels'    => $member_labels);
+                'rel_nb_infos' => $nb_infos,
+                'member_labels' => $member_labels);  
         }
         $teams_list[] = array(
             'team_id'        => $team_id,
