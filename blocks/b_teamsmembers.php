@@ -23,23 +23,23 @@ include_once XOOPS_ROOT_PATH . '/modules/wgteams/include/common.php';
 
 // Function show block
 /**
-* @param $options
-* @return array
-*/
+ * @param $options
+ * @return array
+ */
 function b_wgteams_teamsmembers_show($options)
 {
-
     include_once XOOPS_ROOT_PATH . '/modules/wgteams/include/functions.php';
 
     $GLOBALS['xoTheme']->addStylesheet(XOOPS_URL . '/modules/wgteams/assets/css/style.css');
+    $GLOBALS['xoopsTpl']->assign('wgteams_teams_upload_url', WGTEAMS_UPLOAD_URL . '/teams/images/');
 
     $typeBlock = $options[0];
     $team_id   = $options[1];
     array_shift($options);
     array_shift($options);
 
-    $wgteams      =& WgteamsHelper::getInstance();
-    $teamsHandler =& $wgteams->getHandler('teams');
+    $wgteams      = WgteamsHelper::getInstance();
+    $teamsHandler = $wgteams->getHandler('teams');
 
     $crit_teams = new CriteriaCompo();
     $crit_teams->add(new Criteria('team_id', $team_id));
@@ -49,9 +49,10 @@ function b_wgteams_teamsmembers_show($options)
     $teamsCount = $teamsHandler->getCount($crit_teams);
     $teamsAll   = $teamsHandler->getAll($crit_teams);
 
-    $block = array();
     if ($teamsCount > 0) {
         $block = wgteamsGetTeamMemberDetails($teamsAll);
+    } else {
+        $block = array();
     }
 
     return $block;
@@ -59,14 +60,14 @@ function b_wgteams_teamsmembers_show($options)
 
 // Function edit block
 /**
-* @param $options
-* @return string
-*/
+ * @param $options
+ * @return string
+ */
 function b_wgteams_teamsmembers_edit($options)
 {
     include_once XOOPS_ROOT_PATH . '/modules/wgteams/class/teams.php';
-    $wgteams      =& WgteamsHelper::getInstance();
-    $teamsHandler =& $wgteams->getHandler('teams');
+    $wgteams      = WgteamsHelper::getInstance();
+    $teamsHandler = $wgteams->getHandler('teams');
     $GLOBALS['xoopsTpl']->assign('wgteams_upload_url', WGTEAMS_UPLOAD_URL);
     $form = _MB_WGTEAMS_TEAM_TO_DISPLAY;
     $form .= "<input type='hidden' name='options[0]' value='" . $options[0] . "' />";

@@ -62,7 +62,7 @@ switch ($op) {
         $GLOBALS['xoopsTpl']->assign('navigation', $adminMenu->addNavigation('relations.php'));
         $GLOBALS['xoopsTpl']->assign('buttons', $adminMenu->renderButton());
         // Get Form
-        $relationsObj =& $relationsHandler->create();
+        $relationsObj = $relationsHandler->create();
         $form         = $relationsObj->getFormRelations();
         $GLOBALS['xoopsTpl']->assign('form', $form->render());
         break;
@@ -72,9 +72,9 @@ switch ($op) {
             redirect_header('relations.php', 3, implode(',', $GLOBALS['xoopsSecurity']->getErrors()));
         }
         if (isset($relId)) {
-            $relationsObj =& $relationsHandler->get($relId);
+            $relationsObj = $relationsHandler->get($relId);
         } else {
-            $relationsObj =& $relationsHandler->create();
+            $relationsObj = $relationsHandler->create();
         }
         // Set Vars
         // Set Var rel_team_id
@@ -113,7 +113,7 @@ switch ($op) {
         }
         // Get Form
         $GLOBALS['xoopsTpl']->assign('error', $relationsObj->getHtmlErrors());
-        $form =& $relationsObj->getFormRelations();
+        $form = $relationsObj->getFormRelations();
         $GLOBALS['xoopsTpl']->assign('form', $form->render());
         break;
 
@@ -130,7 +130,7 @@ switch ($op) {
         break;
 
     case 'delete':
-        $relationsObj =& $relationsHandler->get($relId);
+        $relationsObj = $relationsHandler->get($relId);
         if (isset($_REQUEST['ok']) && 1 == $_REQUEST['ok']) {
             if (!$GLOBALS['xoopsSecurity']->check()) {
                 redirect_header('relations.php', 3, implode(', ', $GLOBALS['xoopsSecurity']->getErrors()));

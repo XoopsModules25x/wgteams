@@ -62,7 +62,7 @@ switch ($op) {
         $GLOBALS['xoopsTpl']->assign('navigation', $adminMenu->addNavigation('members.php'));
         $GLOBALS['xoopsTpl']->assign('buttons', $adminMenu->renderButton());
         // Get Form
-        $membersObj =& $membersHandler->create();
+        $membersObj = $membersHandler->create();
         $form       = $membersObj->getFormMembers();
         $GLOBALS['xoopsTpl']->assign('form', $form->render());
         break;
@@ -72,9 +72,9 @@ switch ($op) {
             redirect_header('members.php', 3, implode(',', $GLOBALS['xoopsSecurity']->getErrors()));
         }
         if (isset($memberId)) {
-            $membersObj =& $membersHandler->get($memberId);
+            $membersObj = $membersHandler->get($memberId);
         } else {
-            $membersObj =& $membersHandler->create();
+            $membersObj = $membersHandler->create();
         }
         // Set Vars
         // Set Var member_firstname
@@ -116,7 +116,7 @@ switch ($op) {
         }
         // Get Form
         $GLOBALS['xoopsTpl']->assign('error', $membersObj->getHtmlErrors());
-        $form =& $membersObj->getFormMembers();
+        $form = $membersObj->getFormMembers();
         $GLOBALS['xoopsTpl']->assign('form', $form->render());
         break;
 
@@ -133,7 +133,7 @@ switch ($op) {
         break;
 
     case 'delete':
-        $membersObj =& $membersHandler->get($memberId);
+        $membersObj = $membersHandler->get($memberId);
         if (isset($_REQUEST['ok']) && 1 == $_REQUEST['ok']) {
             if (!$GLOBALS['xoopsSecurity']->check()) {
                 redirect_header('members.php', 3, implode(', ', $GLOBALS['xoopsSecurity']->getErrors()));
@@ -141,7 +141,7 @@ switch ($op) {
             $member_img = $membersObj->getVar('member_image');
             if ($membersHandler->delete($membersObj)) {
                 // delete image of this member
-                if (!$member_img == '') {
+                if (!$member_img === '') {
                     unlink(WGTEAMS_UPLOAD_PATH . '/members/images/' . $member_img);
                 }
                 redirect_header('members.php', 3, _AM_WGTEAMS_FORM_DELETE_OK);

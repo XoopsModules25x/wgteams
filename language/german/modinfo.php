@@ -61,3 +61,4 @@ define('_MI_WGTEAMS_LABELS_DESC', "Definieren Sie bitte, ob vor den jeweiligen I
 define('_MI_WGTEAMS_SHOWBREADCRUMBS', 'Breadcrumb-Navigation anzeigen');
 define('_MI_WGTEAMS_SHOWBREADCRUMBS_DESC', 'Definieren Sie bitte, ob eine Breadcrumb-Navigation angezeigt werden soll.');
 // ---------------- End ----------------
+

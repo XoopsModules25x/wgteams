@@ -20,7 +20,7 @@
  * @version         $Id: 1.0 install.php 1 Sun 2015/12/27 23:18:01Z Goffy - Wedega $
  */
 //
-defined('XOOPS_ROOT_PATH') or die('Restricted access');
+defined('XOOPS_ROOT_PATH') || exit('Restricted access');
 // Copy base file
 $indexFile = XOOPS_UPLOAD_PATH . '/index.html';
 $blankFile = XOOPS_UPLOAD_PATH . '/blank.gif';
@@ -63,3 +63,4 @@ copy($indexFile, $folder_img . '/index.html');
 copy($blankFile, $folder_img . '/blank.gif');
 
 // ---------- Install Footer ---------- //
+

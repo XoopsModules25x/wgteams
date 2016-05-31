@@ -21,7 +21,7 @@
  */
 // ---------------- Admin Main ----------------
 define('_MI_WGTEAMS_NAME', 'wgTeams');
-define('_MI_WGTEAMS_DESC', 'This module is presention your team(s)');
+define('_MI_WGTEAMS_DESC', 'This module shows your team(s) and team members');
 // ---------------- Admin Menu ----------------
 define('_MI_WGTEAMS_ADMENU1', 'Dashboard');
 define('_MI_WGTEAMS_ADMENU3', 'Teams');
@@ -39,7 +39,7 @@ define('_MI_WGTEAMS_USER_PAGER_DESC', 'User per page list');
 define('_MI_WGTEAMS_SMNAME1', 'teams');
 // Blocks
 define('_MI_WGTEAMS_TEAMSMEMBERS_BLOCK', 'Team/Members block');
-define('_MI_WGTEAMS_TEAMSMEMBERS_BLOCK_DESC', 'Show all Teams with related members in block');
+define('_MI_WGTEAMS_TEAMSMEMBERS_BLOCK_DESC', 'Show all Teams with related members in a block');
 define('_MI_WGTEAMS_TEAMS_BLOCK', 'Block Teams');
 define('_MI_WGTEAMS_TEAMS_BLOCK_DESC', 'Show a list of the teams');
 // Config
@@ -61,3 +61,4 @@ define('_MI_WGTEAMS_LABELS_DESC', "Please decide, whether there should be a labe
 define('_MI_WGTEAMS_SHOWBREADCRUMBS', 'Show breadcrumbs-navigation');
 define('_MI_WGTEAMS_SHOWBREADCRUMBS_DESC', 'Please decide, whether a breadcrumbs-navigation should be shown.');
 // ---------------- End ----------------
+

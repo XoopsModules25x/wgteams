@@ -19,13 +19,13 @@
  * @author          Goffy - Wedega.com - Email:<webmaster@wedega.com> - Website:<http://wedega.com>
  * @version         $Id: 1.0 xoops_version.php 1 Sun 2015/12/27 23:18:02Z Goffy - Wedega $
  */
-defined('XOOPS_ROOT_PATH') or die('Restricted access');
+defined('XOOPS_ROOT_PATH') || exit('Restricted access');
 //
 //$dirname = basename(__DIR__);
 // ------------------- Informations ------------------- //
 $modversion = array(
     'name'                => _MI_WGTEAMS_NAME,
-    'version'             => '1.08',
+    'version'             => '1.07',
     'description'         => _MI_WGTEAMS_DESC,
     'author'              => 'Goffy - Wedega.com',
     'author_mail'         => 'webmaster@wedega.com',
@@ -63,7 +63,7 @@ $modversion = array(
     'module_website_url'  => '',
     'module_website_name' => '',
     'release'             => '2016/05/30',
-    'module_status'       => 'RC 1',
+    'module_status'       => 'RC 2',
     // Admin system menu
     'system_menu'         => 1,
     // Admin things
@@ -119,8 +119,8 @@ if (is_object($xoopsModule) && $xoopsModule->getVar('dirname') == $modversion['d
 
     $s = 0;
 
-    $wgteams      =& WgteamsHelper::getInstance();
-    $teamsHandler =& $wgteams->getHandler('teams');
+    $wgteams      = WgteamsHelper::getInstance();
+    $teamsHandler = $wgteams->getHandler('teams');
 
     $crit_teams = new CriteriaCompo();
     $crit_teams->add(new Criteria('team_online', '1'));
@@ -130,7 +130,7 @@ if (is_object($xoopsModule) && $xoopsModule->getVar('dirname') == $modversion['d
     foreach (array_keys($teamsAll) as $i) {
         $s++;
         $modversion['sub'][$s]['name'] = $teamsAll[$i]->getVar('team_name');
-        $modversion['sub'][$s]['url']  = 'index.php?team_id=' . $teamsAll[$i]->getVar('team_id');;
+        $modversion['sub'][$s]['url']  = 'index.php?team_id=' . $teamsAll[$i]->getVar('team_id');        
     }
 }
 // ------------------- Blocks ------------------- //
@@ -197,7 +197,8 @@ $modversion['config'][] = array(
     'formtype'    => 'select',
     'valuetype'   => 'text',
     'options'     => array_flip($editorHandler->getList()),
-    'default'     => 'dhtmltextarea');
+    'default'     => 'dhtmltextarea'
+);
 
 //Uploads : max size for image upload 
 $modversion['config'][] = array(
@@ -223,7 +224,8 @@ $modversion['config'][] = array(
         'jpeg'  => 'image/jpeg',
         'jpg'   => 'image/jpg',
         'jpe'   => 'image/jpe',
-        'png'   => 'image/png'));
+        'png'   => 'image/png'
+    ));
 
 $modversion['config'][] = array(
     'name'        => 'wgteams_labels',

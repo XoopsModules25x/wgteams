@@ -118,7 +118,8 @@ define('_AM_WGTEAMS_FORM_EDIT', 'Ändern');
 define('_AM_WGTEAMS_FORM_DELETE', 'Löschen');
 define('_AM_WGTEAMS_SUBMITTER', 'Ersteller');
 define('_AM_WGTEAMS_DATE_CREATE', 'erstellt am');
-define('_AM_WGTEAMS_MAX_FILESIZE', 'Maximale Dateigröße ');
 // ---------------- Admin Others ----------------
 define('_AM_WGTEAMS_MAINTAINEDBY', ' is maintained by ');
 // ---------------- End ----------------
+
+define('_AM_WGTEAMS_MAX_FILESIZE', 'Max File Size');

@@ -22,6 +22,10 @@
 include_once XOOPS_ROOT_PATH . '/modules/wgteams/include/common.php';
 
 // Function show block
+/**
+ * @param $options
+ * @return array
+ */
 function b_wgteams_teams_show($options)
 {
     include_once XOOPS_ROOT_PATH . '/modules/wgteams/include/functions.php';
@@ -33,8 +37,8 @@ function b_wgteams_teams_show($options)
     $typeBlock = $options[0];
     array_shift($options);
 
-    $wgteams      =& WgteamsHelper::getInstance();
-    $teamsHandler =& $wgteams->getHandler('teams');
+    $wgteams      = WgteamsHelper::getInstance();
+    $teamsHandler = $wgteams->getHandler('teams');
 
     $crit_teams = new CriteriaCompo();
     $crit_teams->add(new Criteria('team_online', '1'));
@@ -43,9 +47,10 @@ function b_wgteams_teams_show($options)
     $teamsCount = $teamsHandler->getCount($crit_teams);
     $teamsAll   = $teamsHandler->getAll($crit_teams);
 
-    $block = array();
     if ($teamsCount > 0) {
         $block = wgteamsGetTeamDetails($teamsAll, false);
+    } else {
+        $block = array();
     }
 
     return $block;

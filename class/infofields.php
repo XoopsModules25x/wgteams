@@ -19,53 +19,54 @@
  * @author          Goffy - Wedega.com - Email:<webmaster@wedega.com> - Website:<http://wedega.com>
  * @version         $Id: 1.0 infofields.php 1 Sun 2015/12/27 23:18:00Z Goffy - Wedega $
  */
-defined('XOOPS_ROOT_PATH') or die('Restricted access');
+defined('XOOPS_ROOT_PATH') || exit('Restricted access');
+
 
 /**
  * Class WgteamsInfofields
  */
 class WgteamsInfofields extends XoopsObject
 {
-    /*
+    /**
     * @var mixed
     */
     private $wgteams = null;
 
     /**
-    * WgteamsInfofieldsConstructor
-    *
-    * @param null
-    */
+     * Constructor
+     *
+     * @param null
+     */
     public function __construct()
     {
-        $this->wgteams =& WgteamsHelper::getInstance();
+        $this->wgteams = WgteamsHelper::getInstance();
         $this->initVar('infofield_id', XOBJ_DTYPE_INT);
         $this->initVar('infofield_name', XOBJ_DTYPE_TXTBOX);
         $this->initVar('infofield_submitter', XOBJ_DTYPE_INT);
         $this->initVar('infofield_date_created', XOBJ_DTYPE_INT);
     }
 
-    /*
-    *  @static function &getInstance
-    *  @param null
-    */
-    public static function &getInstance()
+    /**
+     * @static function getInstance
+     * @param null
+     * @return static
+     */
+    public static function getInstance()
     {
-        static $instance = false;
-        if (!$instance) {
-            $instance = new self();
+        static $instance;
+        if (null === $instance) {
+            $instance = new static();
         }
 
         return $instance;
     }
 
-    /*
-    * Get form
-    *
-    * @param mixed $action
-    * @param bool $action
-    * @return XoopsThemeForm
-    */
+    /**
+     * Get form
+     *
+     * @param bool|mixed $action
+     * @return XoopsThemeForm
+     */
     public function getFormInfofields($action = false)
     {
         global $xoopsUser;
@@ -81,7 +82,7 @@ class WgteamsInfofields extends XoopsObject
         $form = new XoopsThemeForm($title, 'form', $action, 'post', true);
         $form->setExtra('enctype="multipart/form-data"');
         // Infofields handler
-        //$infofieldsHandler =& $this->wgteams->getHandler('infofields');
+        //$infofieldsHandler = $this->wgteams->getHandler('infofields');
         // Form Text AddField_name
         $form->addElement(new XoopsFormText(_AM_WGTEAMS_INFOFIELD_NAME, 'infofield_name', 50, 255, $this->getVar('infofield_name')), true);
         // Form Select User
@@ -131,54 +132,49 @@ class WgteamsInfofields extends XoopsObject
     }
 }
 
-/*
+/**
  * Class WgteamsInfofieldsHandler
  */
 class WgteamsInfofieldsHandler extends XoopsPersistableObjectHandler
 {
-    /*
+    /**
     * @var mixed
     */
     private $wgteams = null;
 
-    /*
-    * Constructor
-    *
-    * @param string $db
-    * WgteamsInfofieldsHandler constructor.
-    * @param XoopsDatabase $db
-    */
-    public function __construct(&$db)
+    /**
+     * Constructor
+     *
+     * @param string $db
+     */
+    public function __construct($db)
     {
         parent::__construct($db, 'wgteams_infofields', 'wgteamsinfofields', 'infofield_id', 'infofield_name');
-        $this->wgteams =& WgteamsHelper::getInstance();
+        $this->wgteams = WgteamsHelper::getInstance();
     }
 
     /**
-    * @param bool $isNew
-    *
-    * @return XoopsObject $temp
-    */
-    public function &create($isNew = true)
+     * @param bool $isNew
+     *
+     * @return XoopsObject
+     */
+    public function create($isNew = true)
     {
         $temp = parent::create($isNew);
-
         return $temp;
     }
 
     /**
      * retrieve a field
      *
-     * @param int $i field id
-     * @param int  $i field id
+     * @param  int $i field id
      * @param null $fields
      * @return mixed reference to the <a href='psi_element://TDMCreateFields'>TDMCreateFields</a> object
      *                object
      */
-    public function &get($i = null, $fields = null)
+    public function get($i = null, $fields = null)
     {
         $temp = parent::get($i, $fields);
-
         return $temp;
     }
 
@@ -188,33 +184,35 @@ class WgteamsInfofieldsHandler extends XoopsPersistableObjectHandler
      * @param null
      * @return integer reference to the {@link TDMCreateFields} object
      */
-    public function &getInsertId()
+    public function getInsertId()
     {
-        return $this->db->getInsertId();
+        $temp = $this->db->getInsertId();
+        return $temp;
     }
 
     /**
      * get IDs of objects matching a condition
      *
-     * @param CriteriaElement $criteria {@link CriteriaElement} to match
-     * @return array of object IDs
+     * @param  CriteriaElement $criteria {@link CriteriaElement} to match
+     * @return array  of object IDs
      */
-    public function &getIds($criteria)
+    public function &getIds(CriteriaElement $criteria = null)
     {
-        return parent::getIds($criteria);
+        $temp =&  parent::getIds($criteria);
+        return $temp;
     }
 
     /**
      * insert a new field in the database
      *
-     * @param XoopsObject $object reference to the {@link TDMCreateFields} object
-     * @param bool        $force
+     * @param XoopsObject $field reference to the {@link TDMCreateFields} object
+     * @param bool   $force
      *
      * @return bool FALSE if failed, TRUE if already present and unchanged or successful
      */
-    public function &insert(XoopsObject $object, $force = false)
+    public function insert(XoopsObject $field, $force = false)
     {
-        if (!parent::insert($object, $force)) {
+        if (!parent::insert($field, $force)) {
             return false;
         }
 
@@ -222,12 +220,12 @@ class WgteamsInfofieldsHandler extends XoopsPersistableObjectHandler
     }
 
     /**
-    * Get Count Infofields
-    * @param int    $start
-    * @param int    $limit
-    * @param string $sort
-    * @param string $order
-    * @return int
+     * Get Count Infofields
+     * @param int    $start
+     * @param int    $limit
+     * @param string $sort
+     * @param string $order
+     * @return int
      */
     public function getCountInfofields($start = 0, $limit = 0, $sort = 'infofield_id ASC, infofield_name', $order = 'ASC')
     {
@@ -241,13 +239,13 @@ class WgteamsInfofieldsHandler extends XoopsPersistableObjectHandler
     }
 
     /**
-    * Get All Infofields
-    * @param int    $start
-    * @param int    $limit
-    * @param string $sort
-    * @param string $order
-    * @return array
-    */
+     * Get All Infofields
+     * @param int    $start
+     * @param int    $limit
+     * @param string $sort
+     * @param string $order
+     * @return
+     */
     public function getAllInfofields($start = 0, $limit = 0, $sort = 'infofield_id ASC, infofield_name', $order = 'ASC')
     {
         $criteria = new CriteriaCompo();
@@ -258,5 +256,4 @@ class WgteamsInfofieldsHandler extends XoopsPersistableObjectHandler
 
         return $this->getAll($criteria);
     }
-
 }

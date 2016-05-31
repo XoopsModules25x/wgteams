@@ -18,17 +18,14 @@
  * @min_xoops       2.5.7
  * @author          Goffy - Wedega.com - Email:<webmaster@wedega.com> - Website:<http://wedega.com>
  * @version         $Id: 1.0 search.inc.php 1 Sun 2015/12/27 23:18:01Z Goffy - Wedega $
+ * @param $queryarray
+ * @param $andor
+ * @param $limit
+ * @param $offset
+ * @param $userid
  */
 
 // search callback functions
-
-/**
-* @param $queryarray
-* @param $andor
-* @param $limit
-* @param $offset
-* @param $userid
-*/
 function wgteams_search($queryarray, $andor, $limit, $offset, $userid)
 {
     global $xoopsDB;
@@ -37,7 +34,7 @@ function wgteams_search($queryarray, $andor, $limit, $offset, $userid)
         $sql .= ' AND infofield_submitter=' . (int)$userid;
     }
     if (is_array($queryarray) && $count = count($queryarray)) {
-        $sql .= ' AND ((a LIKE %$queryarray[0]%)';
+        $sql .= " AND ((a LIKE %$queryarray[0]%)";
         for ($i = 1; $i < $count; ++$i) {
             $sql .= " $andor ";
             $sql .= "(a LIKE %$queryarray[0]%)";
@@ -48,7 +45,7 @@ function wgteams_search($queryarray, $andor, $limit, $offset, $userid)
     $result = $xoopsDB->query($sql, $limit, $offset);
     $ret    = array();
     $i      = 0;
-    while ($myrow = $xoopsDB->fetchArray($result)) {
+    while (false !== ($myrow = $xoopsDB->fetchArray($result))) {
         $ret[$i]['image'] = 'assets/icons/32/blank.gif';
         $ret[$i]['link']  = 'infofields.php?infofield_id=' . $myrow['infofield_id'];
         $ret[$i]['title'] = $myrow['infofield_name'];

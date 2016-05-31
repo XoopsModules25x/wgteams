@@ -50,3 +50,4 @@ define('_MA_WGTEAMS_MEMBER_IMAGE', 'Bild');
 // Admin link
 define('_MA_WGTEAMS_ADMIN', 'Admin');
 // ---------------- End ----------------
+
