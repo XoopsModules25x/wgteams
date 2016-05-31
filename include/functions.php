@@ -95,7 +95,7 @@ function wgteamsGetTeamDetails(&$teamsAll, $show_descr = true)
         $team_name = $teamsAll[$i]->getVar('team_name');
         $team_descr = '';
         if ($show_descr) {
-            $team_descr = $teamsAll[$i]->getVar('team_descr');
+            $team_descr = $teamsAll[$i]->getVar('team_descr', 'n');
         }
         if ($teamsAll[$i]->getVar('team_image') === 'blank.gif') {
             $team_image = '';
@@ -142,7 +142,7 @@ function wgteamsGetTeamMemberDetails(&$teamsAll)
     foreach (array_keys($teamsAll) as $i) {
         $team_id    = $teamsAll[$i]->getVar('team_id');
         $team_name  = $teamsAll[$i]->getVar('team_name');
-        $team_descr = $teamsAll[$i]->getVar('team_descr');
+        $team_descr = $teamsAll[$i]->getVar('team_descr', 'n');
         if ($teamsAll[$i]->getVar('team_image') === 'blank.gif') {
             $team_image = '';
         } else {
@@ -179,15 +179,15 @@ function wgteamsGetTeamMemberDetails(&$teamsAll)
             if (!$member_name === '') {
                 $nb_infos++;
             }
-            $member_address = $member_obj->getVar('member_address');
+            $member_address = $member_obj->getVar('member_address', 'n');
             if (!$member_address === '') {
                 $nb_infos++;
             }
-            $member_phone = $member_obj->getVar('member_phone');
+            $member_phone = $member_obj->getVar('member_phone', 'n');
             if (!$member_phone === '') {
                 $nb_infos++;
             }
-            $member_email   = $member_obj->getVar('member_email');
+            $member_email   = $member_obj->getVar('member_email', 'n');
             if (!$member_email === '') {
                 $nb_infos++;
             }
