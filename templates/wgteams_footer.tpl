@@ -5,7 +5,7 @@
 <{if $fbcomments != 0}>
 <{include file="db:system_fbcomments.html"}>
 <{/if}>
-<div class="pull-left"><{$copyright}></div>
+<div class="pull-right"><{$copyright}></div>
 <{if $pagenav != ''}>
     <div class="pull-right"><{$pagenav}></div>
 <{/if}>

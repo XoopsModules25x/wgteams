@@ -37,7 +37,7 @@ if (!defined('WGTEAMS_MODULE_PATH')) {
 }
 // module information
 $copyright = "<a href='http://wedega.com' title='XOOPS on Wedega' target='_blank'>
-                     <img src='" . $local_logo . "' alt='XOOPS on Wedega' /></a>";
+                     <img src='" . $local_logo . "' alt='XOOPS on Wedega' style='height:40px;'/></a>";
 
 include_once XOOPS_ROOT_PATH . '/class/xoopsrequest.php';
 include_once WGTEAMS_PATH . '/class/helper.php';
