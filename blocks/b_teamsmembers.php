@@ -49,10 +49,9 @@ function b_wgteams_teamsmembers_show($options)
     $teamsCount = $teamsHandler->getCount($crit_teams);
     $teamsAll   = $teamsHandler->getAll($crit_teams);
 
+    $block = array();
     if ($teamsCount > 0) {
         $block = wgteamsGetTeamMemberDetails($teamsAll);
-    } else {
-        $block = array();
     }
 
     return $block;

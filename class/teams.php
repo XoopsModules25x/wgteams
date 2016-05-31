@@ -94,16 +94,16 @@ class WgteamsTeams extends XoopsObject
         $form->addElement(new XoopsFormText(_AM_WGTEAMS_TEAM_NAME, 'team_name', 50, 255, $this->getVar('team_name')), true);
         // Form Text Area team_descr
         $editor_configs = array();
-        $editor_configs['name'] = 'team_descr';
-        $editor_configs['value'] = $this->getVar('team_descr', 'e');
-        $editor_configs['rows'] = 5;
-        $editor_configs['cols'] = 40;
-        $editor_configs['width'] = '100%';
+        $editor_configs['name']   = 'team_descr';
+        $editor_configs['value']  = $this->getVar('team_descr', 'e');
+        $editor_configs['rows']   = 5;
+        $editor_configs['cols']   = 40;
+        $editor_configs['width']  = '100%';
         $editor_configs['height'] = '400px';
         $editor_configs['editor'] = $this->wgteams->getConfig('wgteams_editor');
         $form->addElement(new XoopsFormEditor(_AM_WGTEAMS_TEAM_DESCR, 'team_descr', $editor_configs));
         // Form Upload Image
-        $getTeamImage = $this->getVar('team_image');
+        $getTeamImage   = $this->getVar('team_image');
         $teamImage      = $getTeamImage ?: 'blank.gif';
         $imageDirectory = '/uploads/wgteams/teams/images';
         //
@@ -132,27 +132,27 @@ class WgteamsTeams extends XoopsObject
         $form->addElement($team_nb_colsSelect, false);
         // Form Text TeamTabletype
         $team_tablestyle = $this->isNew() ? 'default' : $this->getVar('team_tablestyle');
-        $team_tablestyleSelect = new XoopsFormSelect(_AM_WGTEAMS_TEAM_TABLESTYLE, 'team_tablestyle', $team_tablestyle);
-        $team_tablestyleSelect->addOption('default', _AM_WGTEAMS_TEAM_TABLESTYLE_DEF);
-        $team_tablestyleSelect->addOption('wgteams-bordered', _AM_WGTEAMS_TEAM_TABLESTYLE_BORDERED);
-        $team_tablestyleSelect->addOption('wgteams-striped', _AM_WGTEAMS_TEAM_TABLESTYLE_STRIPED);
-        $team_tablestyleSelect->addOption('wgteams-lined', _AM_WGTEAMS_TEAM_TABLESTYLE_LINED);
-        $form->addElement($team_tablestyleSelect, false);
+        $team_tablestyleSel = new XoopsFormSelect(_AM_WGTEAMS_TEAM_TABLESTYLE, 'team_tablestyle', $team_tablestyle);
+        $team_tablestyleSel->addOption('default', _AM_WGTEAMS_TEAM_TABLESTYLE_DEF);
+        $team_tablestyleSel->addOption('wgteams-bordered', _AM_WGTEAMS_TEAM_TABLESTYLE_BORDERED);
+        $team_tablestyleSel->addOption('wgteams-striped', _AM_WGTEAMS_TEAM_TABLESTYLE_STRIPED);
+        $team_tablestyleSel->addOption('wgteams-lined', _AM_WGTEAMS_TEAM_TABLESTYLE_LINED);
+        $form->addElement($team_tablestyleSel, false);
         // Form Text TeamImagetype
         $team_imagestyle = $this->isNew() ? 'default' : $this->getVar('team_imagestyle');
-        $team_imagestyleSelect = new XoopsFormSelect(_AM_WGTEAMS_TEAM_IMAGESTYLE, 'team_imagestyle', $team_imagestyle);
-        $team_imagestyleSelect->addOption('default', _AM_WGTEAMS_TEAM_IMAGESTYLE_DEF);
-        $team_imagestyleSelect->addOption('img-circle', _AM_WGTEAMS_TEAM_IMAGESTYLE_CIRCLE);
-        $team_imagestyleSelect->addOption('img-rounded', _AM_WGTEAMS_TEAM_IMAGESTYLE_ROUNDED);
-        $team_imagestyleSelect->addOption('img-thumbnail', _AM_WGTEAMS_TEAM_IMAGESTYLE_THUMBNAIL);
-        $form->addElement($team_imagestyleSelect, false);
+        $team_imagestyleSel = new XoopsFormSelect(_AM_WGTEAMS_TEAM_IMAGESTYLE, 'team_imagestyle', $team_imagestyle);
+        $team_imagestyleSel->addOption('default', _AM_WGTEAMS_TEAM_IMAGESTYLE_DEF);
+        $team_imagestyleSel->addOption('img-circle', _AM_WGTEAMS_TEAM_IMAGESTYLE_CIRCLE);
+        $team_imagestyleSel->addOption('img-rounded', _AM_WGTEAMS_TEAM_IMAGESTYLE_ROUNDED);
+        $team_imagestyleSel->addOption('img-thumbnail', _AM_WGTEAMS_TEAM_IMAGESTYLE_THUMBNAIL);
+        $form->addElement($team_imagestyleSel, false);
         // Form Text Teamdisplaystyle
         $team_displaystyle = $this->isNew() ? 'default' : $this->getVar('team_displaystyle');
-        $team_displaystyleSelect = new XoopsFormSelect(_AM_WGTEAMS_TEAM_DISPLAYSTYLE, 'team_displaystyle', $team_displaystyle);
-        $team_displaystyleSelect->addOption('left', _AM_WGTEAMS_TEAM_DISPLAYSTYLE_LEFT);
-        $team_displaystyleSelect->addOption('default', _AM_WGTEAMS_TEAM_DISPLAYSTYLE_DEF);
-        $team_displaystyleSelect->addOption('right', _AM_WGTEAMS_TEAM_DISPLAYSTYLE_RIGHT);
-        $form->addElement($team_displaystyleSelect, false);
+        $team_displaystyleSel = new XoopsFormSelect(_AM_WGTEAMS_TEAM_DISPLAYSTYLE, 'team_displaystyle', $team_displaystyle);
+        $team_displaystyleSel->addOption('left', _AM_WGTEAMS_TEAM_DISPLAYSTYLE_LEFT);
+        $team_displaystyleSel->addOption('default', _AM_WGTEAMS_TEAM_DISPLAYSTYLE_DEF);
+        $team_displaystyleSel->addOption('right', _AM_WGTEAMS_TEAM_DISPLAYSTYLE_RIGHT);
+        $form->addElement($team_displaystyleSel, false);
         // Form Text TeamWeight
         $teamWeight = $this->isNew() ? '0' : $this->getVar('team_weight');
         $form->addElement(new XoopsFormText(_AM_WGTEAMS_TEAM_WEIGHT, 'team_weight', 20, 150, $teamWeight), true);
@@ -180,19 +180,19 @@ class WgteamsTeams extends XoopsObject
      */
     public function getValuesTeams($keys = null, $format = null, $maxDepth = null)
     {
-        $ret = $this->getValues($keys, $format, $maxDepth);
-        $ret['id'] = $this->getVar('team_id');
-        $ret['name'] = strip_tags($this->getVar('team_name'));
-        $ret['descr'] = strip_tags($this->getVar('team_descr'));
-        $ret['image'] = $this->getVar('team_image');
-        $ret['nb_cols'] = $this->getVar('team_nb_cols');
-        $ret['tablestyle'] = $this->getVar('team_tablestyle');
-        $ret['imagestyle'] = $this->getVar('team_imagestyle');
-        $ret['displaystyle'] = $this->getVar('team_displaystyle');
-        $ret['weight'] = $this->getVar('team_weight');
-        $ret['online'] = $this->getVar('team_online') == 1 ? _YES : _NO;
-        $ret['submitter'] = XoopsUser::getUnameFromId($this->getVar('team_submitter'));
-        $ret['date_create']  = formatTimestamp($this->getVar('team_date_create'), 'M');
+        $ret                  = $this->getValues($keys, $format, $maxDepth);
+        $ret['id']            = $this->getVar('team_id');
+        $ret['name']          = strip_tags($this->getVar('team_name'));
+        $ret['descr']         = strip_tags($this->getVar('team_descr'));
+        $ret['image']         = $this->getVar('team_image');
+        $ret['nb_cols']       = $this->getVar('team_nb_cols');
+        $ret['tablestyle']    = $this->getVar('team_tablestyle');
+        $ret['imagestyle']    = $this->getVar('team_imagestyle');
+        $ret['displaystyle']  = $this->getVar('team_displaystyle');
+        $ret['weight']        = $this->getVar('team_weight');
+        $ret['online']        = $this->getVar('team_online') == 1 ? _YES : _NO;
+        $ret['submitter']     = XoopsUser::getUnameFromId($this->getVar('team_submitter'));
+        $ret['date_create']   = formatTimestamp($this->getVar('team_date_create'), 'M');
 
         return $ret;
     }
