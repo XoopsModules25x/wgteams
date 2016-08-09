@@ -21,8 +21,8 @@
  */
 defined('XOOPS_ROOT_PATH') || exit('Restricted access');
 if (!defined('WGTEAMS_MODULE_PATH')) {
-    define('XOOPS_ICONS32_PATH', XOOPS_ROOT_PATH . '/Frameworks/moduleclasses/icons/32');
-    define('XOOPS_ICONS32_URL', XOOPS_URL . '/Frameworks/moduleclasses/icons/32');
+    if (!defined('XOOPS_ICONS32_PATH')) {define('XOOPS_ICONS32_PATH', XOOPS_ROOT_PATH . '/Frameworks/moduleclasses/icons/32');}
+    if (!defined('XOOPS_ICONS32_URL')) {define('XOOPS_ICONS32_URL', XOOPS_URL . '/Frameworks/moduleclasses/icons/32');}
     define('WGTEAMS_DIRNAME', 'wgteams');
     define('WGTEAMS_PATH', XOOPS_ROOT_PATH . '/modules/' . WGTEAMS_DIRNAME);
     define('WGTEAMS_URL', XOOPS_URL . '/modules/' . WGTEAMS_DIRNAME);
