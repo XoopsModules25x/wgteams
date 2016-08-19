@@ -161,9 +161,22 @@ switch ($op) {
                 redirect_header('teams.php', 3, implode(', ', $GLOBALS['xoopsSecurity']->getErrors()));
             }
             $team_img = $teamsObj->getVar('team_image');
+            $team_id  = $teamsObj->getVar('team_id');
             if ($teamsHandler->delete($teamsObj)) {
+                //delete team image
                 if (!$team_img === '') {
                     unlink(WGTEAMS_UPLOAD_PATH . '/teams/images/' . $team_img);
+                }
+                //delete relations
+                $crit_rels = new CriteriaCompo();
+                $crit_rels->add(new Criteria('rel_team_id', $team_id));
+                $relsCount = $relationsHandler->getCount($crit_rels);
+                if ( $relsCount > 0 ) {
+                    $relationsAll   = $relationsHandler->getAll($crit_rels);
+                    foreach (array_keys($relationsAll) as $i) {
+                        $relationsObj = $relationsHandler->get($relationsAll[$i]->getVar('rel_id'));
+                        $relationsHandler->delete($relationsObj);
+                    }
                 }
                 redirect_header('teams.php', 3, _AM_WGTEAMS_FORM_DELETE_OK);
             } else {

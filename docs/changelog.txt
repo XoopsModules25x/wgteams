@@ -2,6 +2,7 @@
 1.08 RC1              2016/08/19
 ==============================================================
 - added drag&drop ordering of teams/relations (goffy)
+- fixed bug: deleting relations when deleting team (goffy) 
 
 ==============================================================
 1.07 RC3               2016/08/09
