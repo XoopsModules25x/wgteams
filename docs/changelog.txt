@@ -3,6 +3,7 @@
 ==============================================================
 - added drag&drop ordering of teams/relations (goffy)
 - fixed bug: deleting relations when deleting team (goffy) 
+- fixed bug: deleting relations when deleting member (goffy) 
 
 ==============================================================
 1.07 RC3               2016/08/09

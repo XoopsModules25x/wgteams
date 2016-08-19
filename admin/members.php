@@ -139,10 +139,22 @@ switch ($op) {
                 redirect_header('members.php', 3, implode(', ', $GLOBALS['xoopsSecurity']->getErrors()));
             }
             $member_img = $membersObj->getVar('member_image');
+            $member_id  = $membersObj->getVar('member_id');
             if ($membersHandler->delete($membersObj)) {
                 // delete image of this member
                 if (!$member_img === '') {
                     unlink(WGTEAMS_UPLOAD_PATH . '/members/images/' . $member_img);
+                }
+                //delete relations
+                $crit_rels = new CriteriaCompo();
+                $crit_rels->add(new Criteria('rel_member_id', $member_id));
+                $relsCount = $relationsHandler->getCount($crit_rels);
+                if ( $relsCount > 0 ) {
+                    $relationsAll   = $relationsHandler->getAll($crit_rels);
+                    foreach (array_keys($relationsAll) as $i) {
+                        $relationsObj = $relationsHandler->get($relationsAll[$i]->getVar('rel_id'));
+                        $relationsHandler->delete($relationsObj);
+                    }
                 }
                 redirect_header('members.php', 3, _AM_WGTEAMS_FORM_DELETE_OK);
             } else {
