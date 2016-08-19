@@ -155,7 +155,7 @@ class WgteamsTeams extends XoopsObject
         $form->addElement($team_displaystyleSel, false);
         // Form Text TeamWeight
         $teamWeight = $this->isNew() ? '0' : $this->getVar('team_weight');
-        $form->addElement(new XoopsFormText(_AM_WGTEAMS_TEAM_WEIGHT, 'team_weight', 20, 150, $teamWeight), true);
+        $form->addElement(new XoopsFormHidden('team_weight', $teamWeight));
         // Form Radio Yes/No
         $teamOnline = $this->isNew() ? 0 : $this->getVar('team_online');
         $form->addElement(new XoopsFormRadioYN(_AM_WGTEAMS_TEAM_ONLINE, 'team_online', $teamOnline));
@@ -310,7 +310,7 @@ class WgteamsTeamsHandler extends XoopsPersistableObjectHandler
      * @param string $order
      * @return int
      */
-    public function getCountTeams($start = 0, $limit = 0, $sort = 'team_id ASC, team_name', $order = 'ASC')
+    public function getCountTeams($start = 0, $limit = 0, $sort = 'team_id', $order = 'ASC')
     {
         $criteria = new CriteriaCompo();
         $criteria->setSort($sort);
@@ -329,7 +329,7 @@ class WgteamsTeamsHandler extends XoopsPersistableObjectHandler
      * @param string $order
      * @return
      */
-    public function getAllTeams($start = 0, $limit = 0, $sort = 'team_id ASC, team_name', $order = 'ASC')
+    public function getAllTeams($start = 0, $limit = 0, $sort = 'team_weight ASC, team_id', $order = 'ASC')
     {
         $criteria = new CriteriaCompo();
         $criteria->setSort($sort);

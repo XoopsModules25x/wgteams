@@ -39,6 +39,7 @@ switch ($op) {
         $GLOBALS['xoopsTpl']->assign('teams_count', $teamsCount);
         $GLOBALS['xoopsTpl']->assign('wgteams_url', WGTEAMS_URL);
         $GLOBALS['xoopsTpl']->assign('wgteams_upload_url', WGTEAMS_UPLOAD_URL);
+        $GLOBALS['xoopsTpl']->assign('wgteams_icons_url', WGTEAMS_ICONS_URL);
         // Table view
         if ($teamsCount > 0) {
             foreach (array_keys($teamsAll) as $i) {
@@ -172,6 +173,16 @@ switch ($op) {
             xoops_confirm(array('ok' => 1, 'team_id' => $teamId, 'op' => 'delete'), $_SERVER['REQUEST_URI'], sprintf(_AM_WGTEAMS_FORM_SURE_DELETE, $teamsObj->getVar('team_name')));
         }
         break;
+                
+    case 'order':
+        $torder = $_POST['torder'];
+        for ($i = 0; $i < count($torder); $i++){
+            $teamsObj = $teamsHandler->get($torder[$i]);
+            $teamsObj->setVar('team_weight',$i+1);
+            $teamsHandler->insert($teamsObj);
+        }
+        break;
+        
 }
 
 include __DIR__ . '/footer.php';

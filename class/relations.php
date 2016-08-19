@@ -206,7 +206,7 @@ class WgteamsRelations extends XoopsObject
 
         // Form Text RelWeight
         $relWeight = $this->isNew() ? '0' : $this->getVar('rel_weight');
-        $form->addElement(new XoopsFormText(_AM_WGTEAMS_RELATION_WEIGHT, 'rel_weight', 20, 150, $relWeight));
+        $form->addElement(new XoopsFormHidden('rel_weight', $relWeight));
         // Form Select User
         $submitter = $this->isNew() ? $xoopsUser->getVar('uid') : $this->getVar('rel_submitter');
         $form->addElement(new XoopsFormSelectUser(_AM_WGTEAMS_SUBMITTER, 'rel_submitter', false, $submitter, 1, false));
@@ -363,7 +363,7 @@ class WgteamsRelationsHandler extends XoopsPersistableObjectHandler
      * @param string $order
      * @return int
      */
-    public function getCountRelations($start = 0, $limit = 0, $sort = 'rel_id ASC, rel_team_id', $order = 'ASC')
+    public function getCountRelations($start = 0, $limit = 0, $sort = 'rel_id', $order = 'ASC')
     {
         $criteria = new CriteriaCompo();
         $criteria->setSort($sort);

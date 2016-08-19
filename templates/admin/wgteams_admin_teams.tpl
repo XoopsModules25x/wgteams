@@ -1,25 +1,30 @@
-<!-- Header -->
+<!-- Header --> 
 <{include file='db:wgteams_admin_header.tpl'}>
 <{if $teams_list}>
-	<table class="table table-bordered  table-striped">
-        <thead><tr class="head"><th class="center"><{$smarty.const._AM_WGTEAMS_TEAM_ID}></th>
-<th class="center"><{$smarty.const._AM_WGTEAMS_TEAM_NAME}></th>
-<th class="center"><{$smarty.const._AM_WGTEAMS_TEAM_DESCR}></th>
-<th class="center"><{$smarty.const._AM_WGTEAMS_TEAM_IMAGE}></th>
-<th class="center"><{$smarty.const._AM_WGTEAMS_TEAM_NB_COLS}></th>
-<th class="center"><{$smarty.const._AM_WGTEAMS_TEAM_TABLESTYLE}></th>
-<th class="center"><{$smarty.const._AM_WGTEAMS_TEAM_IMAGESTYLE}></th>
-<th class="center"><{$smarty.const._AM_WGTEAMS_TEAM_DISPLAYSTYLE}></th>
-<th class="center"><{$smarty.const._AM_WGTEAMS_TEAM_WEIGHT}></th>
-<th class="center"><{$smarty.const._AM_WGTEAMS_TEAM_ONLINE}></th>
-<th class="center"><{$smarty.const._AM_WGTEAMS_SUBMITTER}></th>
-<th class="center"><{$smarty.const._AM_WGTEAMS_DATE_CREATE}></th>
-<th class="center width5"><{$smarty.const._AM_WGTEAMS_FORM_ACTION}></th>
-</tr>
-</thead>
+	<table class="table table-bordered table-striped ">
+        <thead>
+            <tr class="head">
+                <th class="center">&nbsp;</th>
+                <th class="center"><{$smarty.const._AM_WGTEAMS_TEAM_ID}></th>
+                <th class="center"><{$smarty.const._AM_WGTEAMS_TEAM_NAME}></th>
+                <th class="center"><{$smarty.const._AM_WGTEAMS_TEAM_DESCR}></th>
+                <th class="center"><{$smarty.const._AM_WGTEAMS_TEAM_IMAGE}></th>
+                <th class="center"><{$smarty.const._AM_WGTEAMS_TEAM_NB_COLS}></th>
+                <th class="center"><{$smarty.const._AM_WGTEAMS_TEAM_TABLESTYLE}></th>
+                <th class="center"><{$smarty.const._AM_WGTEAMS_TEAM_IMAGESTYLE}></th>
+                <th class="center"><{$smarty.const._AM_WGTEAMS_TEAM_DISPLAYSTYLE}></th>
+                <th class="center"><{$smarty.const._AM_WGTEAMS_TEAM_ONLINE}></th>
+                <th class="center"><{$smarty.const._AM_WGTEAMS_SUBMITTER}></th>
+                <th class="center"><{$smarty.const._AM_WGTEAMS_DATE_CREATE}></th>
+                <th class="center width5"><{$smarty.const._AM_WGTEAMS_FORM_ACTION}></th>
+            </tr>
+        </thead>
 <{if $teams_count}>
-	<tbody><{foreach item=team from=$teams_list}>
-        <tr class="<{cycle values='odd, even'}>"><td class="center"><{$team.id}></td>
+	<tbody id="teams-list">
+    <{foreach item=team from=$teams_list}>
+        <tr class="even" id="torder_<{$team.id}>" >
+            <td class="center"><img src="<{$wgteams_icons_url}>/16/up_down.png" alt="drag&drop" class="icon-sortable"/></td>
+            <td class="center"><{$team.id}></td>
             <td class="center"><{$team.name}></td>
             <td class="center"><{$team.descr}></td>
             <td class="center">
@@ -33,7 +38,6 @@
             <td class="center"><{$team.tablestyle}></td>
             <td class="center"><{$team.imagestyle}></td>
             <td class="center"><{$team.displaystyle}></td>
-            <td class="center"><{$team.weight}></td>
             <td class="center">
                 <a href="teams.php?op=set_onoff&amp;team_id=<{$team.id}>" title="<{$team.online}>">
                     <{if $team.online == $smarty.const._YES}>

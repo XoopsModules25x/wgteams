@@ -60,3 +60,9 @@ if (file_exists($GLOBALS['xoops']->path($pathModuleAdmin . '/moduleadmin.php')))
 }
 xoops_cp_header();
 $adminMenu = new ModuleAdmin();
+
+//load stylesheets and jquery for sortable
+$GLOBALS['xoTheme']->addStylesheet(WGTEAMS_URL . '/assets/css/admin/style.css');
+$GLOBALS['xoTheme']->addScript(WGTEAMS_URL . '/assets/js/jquery.js');
+$GLOBALS['xoTheme']->addScript(WGTEAMS_URL . '/assets/js/jquery-ui.js');
+$GLOBALS['xoTheme']->addScript(WGTEAMS_URL . '/assets/js/sortable.js');
