@@ -16,11 +16,12 @@ $(document).ready( function(){
 			}
 		}
 	).disableSelection();
+    
     /* Call the container items to reorder relations */
-	$('#relations-list').sortable({ 
-			opacity: 0.6, 
+    $("#sortable > tbody").sortable({
+            items: 'tr:has(td)',
+            opacity: 0.6, 
 			cursor: 'move',
-			connectWith: '#relations-list',
 			update: function(event, ui) {
 				var list = $(this).sortable( 'serialize');
 				$.post( 'relations.php?op=order', list );
@@ -28,7 +29,6 @@ $(document).ready( function(){
 			receive: function(event, ui) {
 				var list = $(this).sortable( 'serialize');                    
 				$.post( 'relations.php?op=order', list );                      
-			}
-		}
-	).disableSelection();	
+			}  
+    }).disableSelection();
 });

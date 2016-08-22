@@ -42,8 +42,15 @@ switch ($op) {
         $GLOBALS['xoopsTpl']->assign('wgteams_icons_url', WGTEAMS_ICONS_URL);
         // Table view
         if ($relationsCount > 0) {
+            $team_id_prev = 0;
             foreach (array_keys($relationsAll) as $i) {
                 $relation = $relationsAll[$i]->getValuesRelations();
+                if ($team_id_prev == $relation['team_id']) {
+                    $relation['new_team'] = 0;
+                } else {
+                    $relation['new_team'] = 1;
+                    $team_id_prev = $relation['team_id'];
+                }
                 $GLOBALS['xoopsTpl']->append('relations_list', $relation);
                 unset($relation);
             }

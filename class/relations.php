@@ -230,7 +230,8 @@ class WgteamsRelations extends XoopsObject
     {
         $ret                 = $this->getValues($keys, $format, $maxDepth);
         $ret['id']           = $this->getVar('rel_id');
-        $ret['team_id']      = $this->wgteams->getHandler('teams')->get($this->getVar('rel_team_id'))->getVar('team_name');
+        $ret['team_id']      = $this->getVar('rel_team_id');
+        $ret['team_name']    = $this->wgteams->getHandler('teams')->get($this->getVar('rel_team_id'))->getVar('team_name');
         $ret['member_id']    = trim($this->wgteams->getHandler('members')->get($this->getVar('rel_member_id'))->getVar('member_firstname') .
                                     ' ' . $this->wgteams->getHandler('members')->get($this->getVar('rel_member_id'))->getVar('member_lastname'));
         $ret['info_1_field'] = $this->wgteams->getHandler('infofields')->get($this->getVar('rel_info_1_field'))->getVar('infofield_name');
