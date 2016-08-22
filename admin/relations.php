@@ -47,8 +47,11 @@ switch ($op) {
                 $relation = $relationsAll[$i]->getValuesRelations();
                 if ($team_id_prev == $relation['team_id']) {
                     $relation['new_team'] = 0;
+                    $relation['nb_rels_team'] = $nb_rels_team;
                 } else {
                     $relation['new_team'] = 1;
+                    $nb_rels_team = $relationsHandler->getCountRelationsTeam($relation['team_id']);
+                    $relation['nb_rels_team'] = $nb_rels_team;
                     $team_id_prev = $relation['team_id'];
                 }
                 $GLOBALS['xoopsTpl']->append('relations_list', $relation);

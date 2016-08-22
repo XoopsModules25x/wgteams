@@ -232,7 +232,8 @@ class WgteamsRelations extends XoopsObject
         $ret['id']           = $this->getVar('rel_id');
         $ret['team_id']      = $this->getVar('rel_team_id');
         $ret['team_name']    = $this->wgteams->getHandler('teams')->get($this->getVar('rel_team_id'))->getVar('team_name');
-        $ret['member_id']    = trim($this->wgteams->getHandler('members')->get($this->getVar('rel_member_id'))->getVar('member_firstname') .
+        $ret['member_id']    = $this->getVar('rel_member_id');
+        $ret['member_name']    = trim($this->wgteams->getHandler('members')->get($this->getVar('rel_member_id'))->getVar('member_firstname') .
                                     ' ' . $this->wgteams->getHandler('members')->get($this->getVar('rel_member_id'))->getVar('member_lastname'));
         $ret['info_1_field'] = $this->wgteams->getHandler('infofields')->get($this->getVar('rel_info_1_field'))->getVar('infofield_name');
         $ret['info_1']       = strip_tags($this->getVar('rel_info_1'));
@@ -371,6 +372,19 @@ class WgteamsRelationsHandler extends XoopsPersistableObjectHandler
         $criteria->setOrder($order);
         $criteria->setStart($start);
         $criteria->setLimit($limit);
+
+        return $this->getCount($criteria);
+    }
+    
+    /**
+     * Get Count Relations per Team
+     * @param int    $team_id
+     * @return int
+     */
+    public function getCountRelationsTeam($team_id = 0)
+    {
+        $criteria = new CriteriaCompo();
+        $criteria->add(new Criteria('rel_team_id', $team_id));
 
         return $this->getCount($criteria);
     }

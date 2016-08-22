@@ -31,9 +31,16 @@
         </tr>
     <{/if}>
         <tr class="even" id="rorder_<{$relation.id}>">
-            <td class="center"><img src="<{$wgteams_icons_url}>/16/up_down.png" alt="drag&drop" class="icon-sortable"/></td>
+            
+            <td class="center">
+            <{if $relation.nb_rels_team > 1}>
+                <img src="<{$wgteams_icons_url}>/16/up_down.png" alt="drag&drop" class="icon-sortable"/>
+            <{else}>
+                &nbsp;
+            <{/if}>
+            </td>
             <td class="center"><{$relation.id}></td>
-            <td class="center"><{$relation.member_id}></td>
+            <td class="center"><{$relation.member_name}></td>
             <td class="center"><{$relation.info_1_field}></td>
             <td class="center"><{$relation.info_1}></td>
             <td class="center"><{$relation.info_2_field}></td>
