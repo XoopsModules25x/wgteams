@@ -20,7 +20,7 @@
             </tr>
         </thead>
 <{if $teams_count}>
-	<tbody id="teams-----list">
+	<tbody id="teams-list">
     <{foreach item=team from=$teams_list}>
         <tr class="even" id="torder_<{$team.id}>" >
             <td class="center"><img src="<{$wgteams_icons_url}>/16/up_down.png" alt="drag&drop" class="icon-sortable"/></td>

@@ -28,6 +28,7 @@ $teamId = XoopsRequest::getInt('team_id', 0);
 switch ($op) {
     case 'list':
     default:
+        $GLOBALS['xoTheme']->addScript(WGTEAMS_URL . '/assets/js/sortable-teams.js');
         $start        = XoopsRequest::getInt('start', 0);
         $limit        = XoopsRequest::getInt('limit', $wgteams->getConfig('adminpager'));
         $templateMain = 'wgteams_admin_teams.tpl';
