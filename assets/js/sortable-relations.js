@@ -3,16 +3,16 @@
 $(document).ready( function(){
     /* Call the container items to reorder relations */
     $("#sortable > tbody").sortable({
-            items: 'tr:has(td)',
+            items: "tr:has(td)",
             opacity: 0.6, 
-			cursor: 'move',
+			cursor: "move",
 			update: function(event, ui) {
-				var list = $(this).sortable( 'serialize');
-				$.post( 'relations.php?op=order', list );
+				var list = $(this).sortable("serialize");
+				$.post("relations.php?op=order", list );
 			},
 			receive: function(event, ui) {
-				var list = $(this).sortable( 'serialize');                    
-				$.post( 'relations.php?op=order', list );                      
+				var list = $(this).sortable("serialize");                    
+				$.post("relations.php?op=order", list );                      
 			}  
     }).disableSelection();
 });
