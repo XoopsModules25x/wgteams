@@ -228,7 +228,8 @@ class WgteamsRelations extends XoopsObject
      */
     public function getValuesRelations($keys = null, $format = null, $maxDepth = null)
     {
-        $ret                 = $this->getValues($keys, $format, $maxDepth);
+        $wgteams             = WgteamsHelper::getInstance();
+		$ret                 = $this->getValues($keys, $format, $maxDepth);
         $ret['id']           = $this->getVar('rel_id');
         $ret['team_id']      = $this->getVar('rel_team_id');
         $ret['team_name']    = $this->wgteams->getHandler('teams')->get($this->getVar('rel_team_id'))->getVar('team_name');
@@ -236,15 +237,15 @@ class WgteamsRelations extends XoopsObject
         $ret['member_name']    = trim($this->wgteams->getHandler('members')->get($this->getVar('rel_member_id'))->getVar('member_firstname') .
                                     ' ' . $this->wgteams->getHandler('members')->get($this->getVar('rel_member_id'))->getVar('member_lastname'));
         $ret['info_1_field'] = $this->wgteams->getHandler('infofields')->get($this->getVar('rel_info_1_field'))->getVar('infofield_name');
-        $ret['info_1']       = strip_tags($this->getVar('rel_info_1'));
+        $ret['info_1']       = $wgteams->truncateHtml($this->getVar('rel_info_1', 'n'));
         $ret['info_2_field'] = $this->wgteams->getHandler('infofields')->get($this->getVar('rel_info_2_field'))->getVar('infofield_name');
-        $ret['info_2']       = strip_tags($this->getVar('rel_info_2'));
+        $ret['info_2']       = $wgteams->truncateHtml($this->getVar('rel_info_2', 'n'));
         $ret['info_3_field'] = $this->wgteams->getHandler('infofields')->get($this->getVar('rel_info_3_field'))->getVar('infofield_name');
-        $ret['info_3']       = strip_tags($this->getVar('rel_info_3'));
+        $ret['info_3']       = $wgteams->truncateHtml($this->getVar('rel_info_3', 'n'));
         $ret['info_4_field'] = $this->wgteams->getHandler('infofields')->get($this->getVar('rel_info_4_field'))->getVar('infofield_name');
-        $ret['info_4']       = strip_tags($this->getVar('rel_info_4'));
+        $ret['info_4']       = $wgteams->truncateHtml($this->getVar('rel_info_4', 'n'));
         $ret['info_5_field'] = $this->wgteams->getHandler('infofields')->get($this->getVar('rel_info_5_field'))->getVar('infofield_name');
-        $ret['info_5']       = strip_tags($this->getVar('rel_info_5'));
+        $ret['info_5']       = $wgteams->truncateHtml($this->getVar('rel_info_5', 'n'));
         $ret['weight']       = $this->getVar('rel_weight');
         $ret['submitter']    = XoopsUser::getUnameFromId($this->getVar('rel_submitter'));
         $ret['date_create']  = formatTimestamp($this->getVar('rel_date_create'));

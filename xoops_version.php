@@ -63,7 +63,7 @@ $modversion = array(
     'module_website_url'  => '',
     'module_website_name' => '',
     'release'             => '2016/08/19',
-    'module_status'       => 'RC 3',
+    'module_status'       => 'RC 4',
     // Admin system menu
     'system_menu'         => 1,
     // Admin things

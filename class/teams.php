@@ -180,10 +180,11 @@ class WgteamsTeams extends XoopsObject
      */
     public function getValuesTeams($keys = null, $format = null, $maxDepth = null)
     {
-        $ret                  = $this->getValues($keys, $format, $maxDepth);
+		$wgteams              = WgteamsHelper::getInstance();
+		$ret                  = $this->getValues($keys, $format, $maxDepth);
         $ret['id']            = $this->getVar('team_id');
         $ret['name']          = strip_tags($this->getVar('team_name'));
-        $ret['descr']         = strip_tags($this->getVar('team_descr'));
+        $ret['descr']         = $wgteams->truncateHtml($this->getVar('team_descr', 'n'));
         $ret['image']         = $this->getVar('team_image');
         $ret['nb_cols']       = $this->getVar('team_nb_cols');
         $ret['tablestyle']    = $this->getVar('team_tablestyle');

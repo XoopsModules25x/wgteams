@@ -155,12 +155,13 @@ class WgteamsMembers extends XoopsObject
      */
     public function getValuesMember($keys = null, $format = null, $maxDepth = null)
     {
-        $ret                = $this->getValues($keys, $format, $maxDepth);
+        $wgteams            = WgteamsHelper::getInstance();
+		$ret                = $this->getValues($keys, $format, $maxDepth);
         $ret['id']          = $this->getVar('member_id');
         $ret['firstname']   = $this->getVar('member_firstname');
         $ret['lastname']    = $this->getVar('member_lastname');
         $ret['title']       = $this->getVar('member_title');
-        $ret['address']     = strip_tags($this->getVar('member_address'));
+        $ret['address']     = $wgteams->truncateHtml($this->getVar('member_address', 'n'));
         $ret['phone']       = strip_tags($this->getVar('member_phone'));
         $ret['email']       = $this->getVar('member_email');
         $ret['image']       = $this->getVar('member_image');
