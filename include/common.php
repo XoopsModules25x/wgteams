@@ -16,7 +16,7 @@
  * @package         wgteams
  * @since           1.0
  * @min_xoops       2.5.7
- * @author          Goffy - Wedega.com - Email:<webmaster@wedega.com> - Website:<http://wedega.com>
+ * @author          Goffy - Wedega.com - Email:<webmaster@wedega.com> - Website:<https://wedega.com>
  * @version         $Id: 1.0 common.php 1 Sun 2015/12/27 23:18:02Z Goffy - Wedega $
  */
 defined('XOOPS_ROOT_PATH') || exit('Restricted access');
@@ -36,7 +36,7 @@ if (!defined('WGTEAMS_PATH')) {
     $local_logo = WGTEAMS_IMAGE_URL . '/wedega.png';
 }
 // module information
-$copyright = "<a href='http://wedega.com' title='XOOPS on Wedega' target='_blank'>
+$copyright = "<a href='https://wedega.com' title='XOOPS on Wedega' target='_blank'>
                      <img src='" . $local_logo . "' alt='XOOPS on Wedega' style='height:40px;'/></a>";
 
 include_once XOOPS_ROOT_PATH . '/class/xoopsrequest.php';

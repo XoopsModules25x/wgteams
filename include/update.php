@@ -16,7 +16,7 @@
  * @package         wgteams
  * @since           1.0
  * @min_xoops       2.5.7
- * @author          Goffy - Wedega.com - Email:<webmaster@wedega.com> - Website:<http://wedega.com>
+ * @author          Goffy - Wedega.com - Email:<webmaster@wedega.com> - Website:<https://wedega.com>
  * @version         $Id: 1.0 update.php 1 Wed 2016/01/27 16:54:11Z Goffy - Wedega $
  */
 /**
@@ -36,10 +36,15 @@ function xoops_module_update_wgteams(&$module, $prev_version = null)
     if (!empty($errors)) {
         print_r($errors);
     }
-
+    
+    // maintenance of tables
+    $ret = maintaintables($module);
+    
     return $ret;
-    // irmtfan bug fix: solve templates duplicate issue
-}// irmtfan bug fix: solve templates duplicate issue
+    
+}
+
+// irmtfan bug fix: solve templates duplicate issue
 /**
  * @param $module
  *
@@ -101,3 +106,31 @@ function update_wgteams_v10(&$module)
 }
 // irmtfan bug fix: solve templates duplicate issue
 
+/**
+ * repair errors in data (caused by former versions of wgteams)
+ * @param: $module
+ *
+ * @return bool
+ */
+function maintaintables(&$module)
+{
+    global $xoopsDB;
+    $sql = 'DELETE ' . $xoopsDB->prefix('wgteams_relations') . '.* FROM ' . $xoopsDB->prefix('wgteams_relations') . ' LEFT JOIN ' . $xoopsDB->prefix('wgteams_members') . 
+            ' ON ' . $xoopsDB->prefix('wgteams_relations') . '.rel_member_id = ' . $xoopsDB->prefix('wgteams_members') . '.member_id WHERE (((' . 
+            $xoopsDB->prefix('wgteams_members') . '.member_id) Is Null));';
+    if (!$result = $xoopsDB->queryF($sql)) {
+        xoops_error($xoopsDB->error() . '<br>' . $sql);
+        $module->setErrors("Error maintain table 'wgteams_relations' concerning members");
+        return false;
+    }    
+    $sql = 'DELETE ' . $xoopsDB->prefix('wgteams_relations') . '.* FROM ' . $xoopsDB->prefix('wgteams_relations') . ' LEFT JOIN ' . $xoopsDB->prefix('wgteams_teams') . 
+            ' ON ' . $xoopsDB->prefix('wgteams_relations') . '.rel_team_id = ' . $xoopsDB->prefix('wgteams_teams') . '.team_id WHERE (((' . 
+            $xoopsDB->prefix('wgteams_teams') . '.team_id) Is Null));';
+    if (!$result = $xoopsDB->queryF($sql)) {
+        xoops_error($xoopsDB->error() . '<br>' . $sql);
+        $module->setErrors("Error maintain table 'wgteams_relations' concerning teams");
+        return false;
+    }
+
+    return true;
+}

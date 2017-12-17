@@ -1,4 +1,16 @@
 ==============================================================
+1.08 RC5              2017/12/17
+==============================================================
+- cosmetics (goffy)
+- added maintenance of tables when updating (goffy)
+- cosmetics (mamba)
+- Array short syntax (mamba)
+- Unnecessary double quotes (mamba)
+- Yoda (mamba)
+- Avoid callables in loop conditionals (mamba)
+- PHPDoc comment matches function/method signature  (mamba)
+
+==============================================================
 1.08 RC4              2016/11/25
 ==============================================================
 - added class truncateHTML (Mamba, Lucio/goffy) 

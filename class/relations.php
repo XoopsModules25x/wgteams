@@ -16,7 +16,7 @@
  * @package         wgteams
  * @since           1.0
  * @min_xoops       2.5.7
- * @author          Goffy - Wedega.com - Email:<webmaster@wedega.com> - Website:<http://wedega.com>
+ * @author          Goffy - Wedega.com - Email:<webmaster@wedega.com> - Website:<https://wedega.com>
  * @version         $Id: 1.0 relations.php 1 Sun 2015/12/27 23:18:00Z Goffy - Wedega $
  */
 defined('XOOPS_ROOT_PATH') || exit('Restricted access');
@@ -234,7 +234,7 @@ class WgteamsRelations extends XoopsObject
         $ret['team_id']      = $this->getVar('rel_team_id');
         $ret['team_name']    = $this->wgteams->getHandler('teams')->get($this->getVar('rel_team_id'))->getVar('team_name');
         $ret['member_id']    = $this->getVar('rel_member_id');
-        $ret['member_name']    = trim($this->wgteams->getHandler('members')->get($this->getVar('rel_member_id'))->getVar('member_firstname') .
+        $ret['member_name']  = trim($this->wgteams->getHandler('members')->get($this->getVar('rel_member_id'))->getVar('member_firstname') .
                                     ' ' . $this->wgteams->getHandler('members')->get($this->getVar('rel_member_id'))->getVar('member_lastname'));
         $ret['info_1_field'] = $this->wgteams->getHandler('infofields')->get($this->getVar('rel_info_1_field'))->getVar('infofield_name');
         $ret['info_1']       = $wgteams->truncateHtml($this->getVar('rel_info_1', 'n'));
