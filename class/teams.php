@@ -113,7 +113,7 @@ class WgteamsTeams extends XoopsObject
         foreach ($imageArray as $image) {
             $imageSelect->addOption("{$image}", $image);
         }
-        $imageSelect->setExtra("onchange='showImgSelected(\"image2\", \"team_image\", \"".$imageDirectory."\", \"\", \"".XOOPS_URL."\")'");
+        $imageSelect->setExtra("onchange='showImgSelected(\"image2\", \"team_image\", \"".$imageDirectory . '", "", "' . XOOPS_URL . "\")'");
         $imageTray->addElement($imageSelect, false);
         $imageTray->addElement(new XoopsFormLabel('', "<br><img src='".XOOPS_URL . '/' . $imageDirectory . '/' . $teamImage . "' name='image2' id='image2' alt='' style='max-width:100px;' />"));
         // Form File
