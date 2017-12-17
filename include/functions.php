@@ -105,7 +105,7 @@ function wgteamsGetTeamDetails(&$teamsAll, $show_descr = true)
         $team_tablestyle = ($teamsAll[$i]->getVar('team_tablestyle') === 'default') ? '' : $teamsAll[$i]->getVar('team_tablestyle');
         $team_imagestyle = ($teamsAll[$i]->getVar('team_imagestyle') === 'default') ? '' : $teamsAll[$i]->getVar('team_imagestyle');
 
-        $teams_list[] = array(
+        $teams_list[] = [
             'team_id'         => $team_id,
             'team_name'       => $team_name,
             'team_descr'      => $team_descr,
@@ -113,7 +113,8 @@ function wgteamsGetTeamDetails(&$teamsAll, $show_descr = true)
             'team_image_url'  => $team_image_url,
             'team_tablestyle' => $team_tablestyle,
             'team_imagestyle' => $team_imagestyle,
-            'team_read_more'  => _MA_WGTEAMS_READMORE);
+            'team_read_more'  => _MA_WGTEAMS_READMORE
+        ];
     }
 
     return $teams_list;
@@ -161,7 +162,7 @@ function wgteamsGetTeamMemberDetails(&$teamsAll)
         $relsCount = $relationsHandler->getCount($crit_rels);
         $relsAll   = $relationsHandler->getAll($crit_rels);
         unset($relations);
-        $relations = array();
+        $relations = [];
         $counter   = 0;
         $nb_infos  = 0;
         foreach (array_keys($relsAll) as $r) {
@@ -252,7 +253,7 @@ function wgteamsGetTeamMemberDetails(&$teamsAll)
             $rel_info_5 = $relsAll[$r]->getVar('rel_info_5', 'n');
             $counter++;
 
-            $relations[] = array(
+            $relations[] = [
                 'rel_counter'      => $counter,
                 'member_id'        => $member_id,
                 'member_title'     => $member_title,
@@ -279,15 +280,17 @@ function wgteamsGetTeamMemberDetails(&$teamsAll)
                 'rel_imagestyle'   => $team_imagestyle,
                 'rel_displaystyle' => $team_displaystyle,
                 'rel_nb_infos' => $nb_infos,
-                'member_labels' => $member_labels);
+                'member_labels' => $member_labels
+            ];
         }
-        $teams_list[] = array(
+        $teams_list[] = [
             'team_id'        => $team_id,
             'team_name'      => $team_name,
             'team_descr'     => $team_descr,
             'team_image'     => $team_image,
             'team_image_url' => $team_image_url,
-            'members'        => $relations);
+            'members'        => $relations
+        ];
     }
 
     return $teams_list;

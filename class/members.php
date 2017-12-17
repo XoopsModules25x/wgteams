@@ -93,7 +93,7 @@ class WgteamsMembers extends XoopsObject
         // Form Text memberTitle
         $form->addElement(new XoopsFormText(_AM_WGTEAMS_MEMBER_TITLE, 'member_title', 50, 255, $this->getVar('member_title')));
         // Form Text Area member_address
-        $editor_configs           = array();
+        $editor_configs           = [];
         $editor_configs['name']   = 'member_address';
         $editor_configs['value']  = $this->getVar('member_address', 'e');
         $editor_configs['rows']   = 5;
@@ -103,7 +103,7 @@ class WgteamsMembers extends XoopsObject
         $editor_configs['editor'] = $this->wgteams->getConfig('wgteams_editor');
         $form->addElement(new XoopsFormEditor(_AM_WGTEAMS_MEMBER_ADDRESS, 'member_address', $editor_configs));
         // Form Text Area member_phone
-        $editor_configs           = array();
+        $editor_configs           = [];
         $editor_configs['name']   = 'member_phone';
         $editor_configs['value']  = $this->getVar('member_phone', 'e');
         $editor_configs['rows']   = 5;
@@ -178,7 +178,7 @@ class WgteamsMembers extends XoopsObject
      **/
     public function toArray()
     {
-        $ret  = array();
+        $ret  = [];
         $vars =& $this->getVars();
         foreach (array_keys($vars) as $var) {
             $ret[$var] = $this->getVar($var);

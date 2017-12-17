@@ -161,7 +161,7 @@ switch ($op) {
                 $GLOBALS['xoopsTpl']->assign('error', $membersObj->getHtmlErrors());
             }
         } else {
-            xoops_confirm(array('ok' => 1, 'member_id' => $memberId, 'op' => 'delete'), $_SERVER['REQUEST_URI'], sprintf(_AM_WGTEAMS_FORM_SURE_DELETE, $membersObj->getVar('member_firstname')));
+            xoops_confirm(['ok' => 1, 'member_id' => $memberId, 'op' => 'delete'], $_SERVER['REQUEST_URI'], sprintf(_AM_WGTEAMS_FORM_SURE_DELETE, $membersObj->getVar('member_firstname')));
         }
         break;
 }

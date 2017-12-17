@@ -117,7 +117,7 @@ switch ($op) {
                 $GLOBALS['xoopsTpl']->assign('error', $infofieldsObj->getHtmlErrors());
             }
         } else {
-            xoops_confirm(array('ok' => 1, 'infofield_id' => $addField_id, 'op' => 'delete'), $_SERVER['REQUEST_URI'], sprintf(_AM_WGTEAMS_FORM_SURE_DELETE, $infofieldsObj->getVar('infofield_name')));
+            xoops_confirm(['ok' => 1, 'infofield_id' => $addField_id, 'op' => 'delete'], $_SERVER['REQUEST_URI'], sprintf(_AM_WGTEAMS_FORM_SURE_DELETE, $infofieldsObj->getVar('infofield_name')));
         }
         break;
 }

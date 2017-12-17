@@ -184,7 +184,7 @@ switch ($op) {
                 $GLOBALS['xoopsTpl']->assign('error', $teamsObj->getHtmlErrors());
             }
         } else {
-            xoops_confirm(array('ok' => 1, 'team_id' => $teamId, 'op' => 'delete'), $_SERVER['REQUEST_URI'], sprintf(_AM_WGTEAMS_FORM_SURE_DELETE, $teamsObj->getVar('team_name')));
+            xoops_confirm(['ok' => 1, 'team_id' => $teamId, 'op' => 'delete'], $_SERVER['REQUEST_URI'], sprintf(_AM_WGTEAMS_FORM_SURE_DELETE, $teamsObj->getVar('team_name')));
         }
         break;
                 

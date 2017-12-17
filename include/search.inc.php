@@ -43,7 +43,7 @@ function wgteams_search($queryarray, $andor, $limit, $offset, $userid)
     }
     $sql .= " ORDER BY 'infofield_id' DESC";
     $result = $xoopsDB->query($sql, $limit, $offset);
-    $ret    = array();
+    $ret    = [];
     $i      = 0;
     while (false !== ($myrow = $xoopsDB->fetchArray($result))) {
         $ret[$i]['image'] = 'assets/icons/32/blank.gif';

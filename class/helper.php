@@ -49,7 +49,7 @@ class WgteamsHelper
     /**
      * @var array
      */
-    private $debugArray = array();
+    private $debugArray = [];
 
     /**
     *  @protected function constructor class
@@ -235,7 +235,7 @@ class WgteamsHelper
 			// splits all html-tags to scanable lines
 			preg_match_all('/(<.+?' . '>)?([^<>]*)/s', $text, $lines, PREG_SET_ORDER);
 			$total_length = strlen($ending);
-			$open_tags    = array();
+			$open_tags    = [];
 			$truncate     = '';
 			foreach ($lines as $line_matchings) {
 				// if there is any html-tag in this line, handle it and add it (uncounted) to the output

@@ -126,7 +126,7 @@ class WgteamsRelations extends XoopsObject
         $relInfo_1_fieldSelect->addOptionArray($infofieldsHandler->getList());
         $form->addElement($relInfo_1_fieldSelect);
         // Form infofield
-        $editor_configs           = array();
+        $editor_configs           = [];
         $editor_configs['name']   = 'rel_info_1';
         $editor_configs['value']  = $this->getVar('rel_info_1', 'e');
         $editor_configs['rows']   = 5;
@@ -143,7 +143,7 @@ class WgteamsRelations extends XoopsObject
         $relInfo_2_fieldSelect->addOptionArray($infofieldsHandler->getList());
         $form->addElement($relInfo_2_fieldSelect);
         // Form infofield 2
-        $editor_configs           = array();
+        $editor_configs           = [];
         $editor_configs['name']   = 'rel_info_2';
         $editor_configs['value']  = $this->getVar('rel_info_2', 'e');
         $editor_configs['rows']   = 5;
@@ -160,7 +160,7 @@ class WgteamsRelations extends XoopsObject
         $relInfo_3_fieldSelect->addOptionArray($infofieldsHandler->getList());
         $form->addElement($relInfo_3_fieldSelect);
         // Form infofield 3
-        $editor_configs           = array();
+        $editor_configs           = [];
         $editor_configs['name']   = 'rel_info_3';
         $editor_configs['value']  = $this->getVar('rel_info_3', 'e');
         $editor_configs['rows']   = 5;
@@ -177,7 +177,7 @@ class WgteamsRelations extends XoopsObject
         $relinfo_4_fieldSelect->addOptionArray($infofieldsHandler->getList());
         $form->addElement($relinfo_4_fieldSelect);
         // Form infofield 4
-        $editor_configs           = array();
+        $editor_configs           = [];
         $editor_configs['name']   = 'rel_info_4';
         $editor_configs['value']  = $this->getVar('rel_info_4', 'e');
         $editor_configs['rows']   = 5;
@@ -194,7 +194,7 @@ class WgteamsRelations extends XoopsObject
         $relinfo_5_fieldSelect->addOptionArray($infofieldsHandler->getList());
         $form->addElement($relinfo_5_fieldSelect);
         // Form infofield 5
-        $editor_configs           = array();
+        $editor_configs           = [];
         $editor_configs['name']   = 'rel_info_5';
         $editor_configs['value']  = $this->getVar('rel_info_5', 'e');
         $editor_configs['rows']   = 5;
@@ -260,7 +260,7 @@ class WgteamsRelations extends XoopsObject
      **/
     public function toArray()
     {
-        $ret  = array();
+        $ret  = [];
         $vars =& $this->getVars();
         foreach (array_keys($vars) as $var) {
             $ret[$var] = $this->getVar($var);

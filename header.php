@@ -23,8 +23,8 @@ include dirname(dirname(__DIR__)) . '/mainfile.php';
 include __DIR__ . '/include/common.php';
 $dirname = basename(__DIR__);
 // Breadcrumbs
-$xoBreadcrumbs   = array();
-$xoBreadcrumbs[] = array('title' => $GLOBALS['xoopsModule']->getVar('name'), 'link' => WGTEAMS_URL . '/');
+$xoBreadcrumbs   = [];
+$xoBreadcrumbs[] = ['title' => $GLOBALS['xoopsModule']->getVar('name'), 'link' => WGTEAMS_URL . '/'];
 // Get instance of module
 $wgteams           = WgteamsHelper::getInstance();
 $teamsHandler      = $wgteams->getHandler('teams');

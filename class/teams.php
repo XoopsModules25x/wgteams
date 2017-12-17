@@ -93,7 +93,7 @@ class WgteamsTeams extends XoopsObject
         // Form Text TeamName
         $form->addElement(new XoopsFormText(_AM_WGTEAMS_TEAM_NAME, 'team_name', 50, 255, $this->getVar('team_name')), true);
         // Form Text Area team_descr
-        $editor_configs = array();
+        $editor_configs = [];
         $editor_configs['name']   = 'team_descr';
         $editor_configs['value']  = $this->getVar('team_descr', 'e');
         $editor_configs['rows']   = 5;
@@ -205,7 +205,7 @@ class WgteamsTeams extends XoopsObject
      **/
     public function toArray()
     {
-        $ret = array();
+        $ret = [];
         $vars =& $this->getVars();
         foreach (array_keys($vars) as $var) {
             $ret[$var] = $this->getVar($var);

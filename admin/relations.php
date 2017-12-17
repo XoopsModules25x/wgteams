@@ -153,7 +153,7 @@ switch ($op) {
                 $GLOBALS['xoopsTpl']->assign('error', $relationsObj->getHtmlErrors());
             }
         } else {
-            xoops_confirm(array('ok' => 1, 'rel_id' => $relId, 'op' => 'delete'), $_SERVER['REQUEST_URI'], sprintf(_AM_WGTEAMS_FORM_SURE_DELETE, $relationsObj->getVar('rel_team_id')));
+            xoops_confirm(['ok' => 1, 'rel_id' => $relId, 'op' => 'delete'], $_SERVER['REQUEST_URI'], sprintf(_AM_WGTEAMS_FORM_SURE_DELETE, $relationsObj->getVar('rel_team_id')));
         }
         break;
                 
