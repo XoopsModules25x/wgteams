@@ -328,7 +328,7 @@ class WgteamsTeamsHandler extends XoopsPersistableObjectHandler
      * @param int    $limit
      * @param string $sort
      * @param string $order
-     * @return
+     * @return array
      */
     public function getAllTeams($start = 0, $limit = 0, $sort = 'team_weight ASC, team_id', $order = 'ASC')
     {

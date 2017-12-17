@@ -284,7 +284,7 @@ class WgteamsRelationsHandler extends XoopsPersistableObjectHandler
     /**
      * Constructor
      *
-     * @param string $db
+     * @param \XoopsDatabase $db
      */
     public function __construct(XoopsDatabase $db)
     {
@@ -396,7 +396,7 @@ class WgteamsRelationsHandler extends XoopsPersistableObjectHandler
      * @param int    $limit
      * @param string $sort
      * @param string $order
-     * @return
+     * @return array
      */
     public function getAllRelations($start = 0, $limit = 0, $sort = 'rel_team_id ASC, rel_weight ASC, rel_id', $order = 'ASC')
     {

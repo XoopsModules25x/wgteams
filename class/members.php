@@ -202,7 +202,7 @@ class WgteamsMembersHandler extends XoopsPersistableObjectHandler
     /**
      * Constructor
      *
-     * @param string $db
+     * @param \XoopsDatabase $db
      */
     public function __construct(XoopsDatabase $db)
     {
@@ -301,7 +301,7 @@ class WgteamsMembersHandler extends XoopsPersistableObjectHandler
      * @param int    $limit
      * @param string $sort
      * @param string $order
-     * @return
+     * @return array
      */
     public function getAllMembers($start = 0, $limit = 0, $sort = 'member_id ASC, member_firstname', $order = 'ASC')
     {

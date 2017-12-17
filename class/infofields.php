@@ -145,7 +145,7 @@ class WgteamsInfofieldsHandler extends XoopsPersistableObjectHandler
     /**
      * Constructor
      *
-     * @param string $db
+     * @param \XoopsDatabase $db
      */
     public function __construct(XoopsDatabase $db)
     {
@@ -244,7 +244,7 @@ class WgteamsInfofieldsHandler extends XoopsPersistableObjectHandler
      * @param int    $limit
      * @param string $sort
      * @param string $order
-     * @return
+     * @return array
      */
     public function getAllInfofields($start = 0, $limit = 0, $sort = 'infofield_id ASC, infofield_name', $order = 'ASC')
     {
