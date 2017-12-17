@@ -5,7 +5,7 @@ This module was originally developed by Goffy (www.wedega.com).
 
 Contributors: 
 -------------
-- Mamba (http://www.xoops.org)
+- Mamba (https://xoops.org)
 
 
 Special thanks to TDM Team.
