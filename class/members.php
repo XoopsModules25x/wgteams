@@ -11,7 +11,7 @@
 /**
  * wgTeams module for xoops
  *
- * @copyright       The XOOPS Project (http://xoops.org)
+ * @copyright       The XOOPS Project (https://xoops.org)
  * @license         GPL 2.0 or later
  * @package         wgteams
  * @since           1.0
@@ -75,7 +75,7 @@ class WgteamsMembers extends XoopsObject
     {
         global $xoopsUser;
 
-        if ($action === false) {
+        if (false === $action) {
             $action = $_SERVER['REQUEST_URI'];
         }
         // Title
@@ -93,7 +93,7 @@ class WgteamsMembers extends XoopsObject
         // Form Text memberTitle
         $form->addElement(new XoopsFormText(_AM_WGTEAMS_MEMBER_TITLE, 'member_title', 50, 255, $this->getVar('member_title')));
         // Form Text Area member_address
-        $editor_configs           = array();
+        $editor_configs           = [];
         $editor_configs['name']   = 'member_address';
         $editor_configs['value']  = $this->getVar('member_address', 'e');
         $editor_configs['rows']   = 5;
@@ -103,7 +103,7 @@ class WgteamsMembers extends XoopsObject
         $editor_configs['editor'] = $this->wgteams->getConfig('wgteams_editor');
         $form->addElement(new XoopsFormEditor(_AM_WGTEAMS_MEMBER_ADDRESS, 'member_address', $editor_configs));
         // Form Text Area member_phone
-        $editor_configs           = array();
+        $editor_configs           = [];
         $editor_configs['name']   = 'member_phone';
         $editor_configs['value']  = $this->getVar('member_phone', 'e');
         $editor_configs['rows']   = 5;
@@ -125,7 +125,7 @@ class WgteamsMembers extends XoopsObject
         foreach ($imageArray as $image) {
             $imageSelect->addOption("{$image}", $image);
         }
-        $imageSelect->setExtra("onchange='showImgSelected(\"image2\", \"member_image\", \"" . $imageDirectory . "\", \"\", \"" . XOOPS_URL . "\")'");
+        $imageSelect->setExtra("onchange='showImgSelected(\"image2\", \"member_image\", \"" . $imageDirectory . '", "", "' . XOOPS_URL . "\")'");
         $imageTray->addElement($imageSelect, false);
         $imageTray->addElement(new XoopsFormLabel('', "<br><img src='" . XOOPS_URL . '/' . $imageDirectory . '/' . $memberImage . "' name='image2' id='image2' alt='' style='max-width:100px;' />"));
         // Form File
@@ -178,7 +178,7 @@ class WgteamsMembers extends XoopsObject
      **/
     public function toArray()
     {
-        $ret  = array();
+        $ret  = [];
         $vars =& $this->getVars();
         foreach (array_keys($vars) as $var) {
             $ret[$var] = $this->getVar($var);
@@ -202,9 +202,9 @@ class WgteamsMembersHandler extends XoopsPersistableObjectHandler
     /**
      * Constructor
      *
-     * @param string $db
+     * @param \XoopsDatabase $db
      */
-    public function __construct(&$db)
+    public function __construct(XoopsDatabase $db)
     {
         parent::__construct($db, 'wgteams_members', 'wgteamsmembers', 'member_id', 'member_firstname');
         $this->wgteams = WgteamsHelper::getInstance();
@@ -301,7 +301,7 @@ class WgteamsMembersHandler extends XoopsPersistableObjectHandler
      * @param int    $limit
      * @param string $sort
      * @param string $order
-     * @return
+     * @return array
      */
     public function getAllMembers($start = 0, $limit = 0, $sort = 'member_id ASC, member_firstname', $order = 'ASC')
     {

@@ -11,7 +11,7 @@
 /**
  * wgTeams module for xoops
  *
- * @copyright       The XOOPS Project (http://xoops.org)
+ * @copyright       The XOOPS Project (https://xoops.org)
  * @license         GPL 2.0 or later
  * @package         wgteams
  * @since           1.0
@@ -62,7 +62,7 @@ switch ($op) {
         if (isset($teamId)) {
             $teamsObj = $teamsHandler->get($teamId);
             // get Var team_online
-            $team_online = ($teamsObj->getVar('team_online') == 1) ? '0' : '1';
+            $team_online = (1 == $teamsObj->getVar('team_online')) ? '0' : '1';
             // Set Var team_online
             $teamsObj->setVar('team_online', $team_online);
             if ($teamsHandler->insert($teamsObj, true)) {
@@ -165,7 +165,7 @@ switch ($op) {
             $team_id  = $teamsObj->getVar('team_id');
             if ($teamsHandler->delete($teamsObj)) {
                 //delete team image
-                if (!$team_img === '') {
+                if ('' === !$team_img) {
                     unlink(WGTEAMS_UPLOAD_PATH . '/teams/images/' . $team_img);
                 }
                 //delete relations
@@ -184,13 +184,13 @@ switch ($op) {
                 $GLOBALS['xoopsTpl']->assign('error', $teamsObj->getHtmlErrors());
             }
         } else {
-            xoops_confirm(array('ok' => 1, 'team_id' => $teamId, 'op' => 'delete'), $_SERVER['REQUEST_URI'], sprintf(_AM_WGTEAMS_FORM_SURE_DELETE, $teamsObj->getVar('team_name')));
+            xoops_confirm(['ok' => 1, 'team_id' => $teamId, 'op' => 'delete'], $_SERVER['REQUEST_URI'], sprintf(_AM_WGTEAMS_FORM_SURE_DELETE, $teamsObj->getVar('team_name')));
         }
         break;
                 
     case 'order':
         $torder = $_POST['torder'];
-        for ($i = 0; $i < count($torder); $i++){
+        for ($i = 0, $iMax = count($torder); $i < $iMax; $i++){
             $teamsObj = $teamsHandler->get($torder[$i]);
             $teamsObj->setVar('team_weight',$i+1);
             $teamsHandler->insert($teamsObj);

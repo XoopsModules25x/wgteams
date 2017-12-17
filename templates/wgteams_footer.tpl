@@ -1,9 +1,9 @@
 <{if $bookmarks != 0}>
-<{include file="db:system_bookmarks.html"}>
+<{include file="db:system_bookmarks.tpl"}>
 <{/if}>
 
 <{if $fbcomments != 0}>
-<{include file="db:system_fbcomments.html"}>
+<{include file="db:system_fbcomments.tpl"}>
 <{/if}>
 <div class="pull-right"><{$copyright}></div>
 <{if $pagenav != ''}>

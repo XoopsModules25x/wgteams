@@ -11,7 +11,7 @@
 /**
  * wgTeams module for xoops
  *
- * @copyright       The XOOPS Project (http://xoops.org)
+ * @copyright       The XOOPS Project (https://xoops.org)
  * @license         GPL 2.0 or later
  * @package         wgteams
  * @since           1.0
@@ -49,7 +49,7 @@ class WgteamsHelper
     /**
      * @var array
      */
-    private $debugArray = array();
+    private $debugArray = [];
 
     /**
     *  @protected function constructor class
@@ -84,7 +84,7 @@ class WgteamsHelper
      */
     public function &getModule()
     {
-        if ($this->module === null) {
+        if (null === $this->module) {
             $this->initModule();
         }
 
@@ -99,7 +99,7 @@ class WgteamsHelper
      */
     public function getConfig($name = null, $index = -1)
     {
-        if ($this->config === null) {
+        if (null === $this->config) {
             $this->initConfig();
         }
         if (!$name) {
@@ -138,7 +138,7 @@ class WgteamsHelper
      */
     public function setConfig($name = null, $value = null)
     {
-        if ($this->config === null) {
+        if (null === $this->config) {
             $this->initConfig();
         }
         $this->config[$name] = $value;
@@ -235,7 +235,7 @@ class WgteamsHelper
 			// splits all html-tags to scanable lines
 			preg_match_all('/(<.+?' . '>)?([^<>]*)/s', $text, $lines, PREG_SET_ORDER);
 			$total_length = strlen($ending);
-			$open_tags    = array();
+			$open_tags    = [];
 			$truncate     = '';
 			foreach ($lines as $line_matchings) {
 				// if there is any html-tag in this line, handle it and add it (uncounted) to the output
@@ -247,7 +247,7 @@ class WgteamsHelper
 					} elseif (preg_match('/^<\s*\/([^\s]+?)\s*>$/s', $line_matchings[1], $tag_matchings)) {
 						// delete tag from $open_tags list
 						$pos = array_search($tag_matchings[1], $open_tags);
-						if ($pos !== false) {
+						if (false !== $pos) {
 							unset($open_tags[$pos]);
 						}
 						// if tag is an opening tag

@@ -11,7 +11,7 @@
 /**
  * wgTeams module for xoops
  *
- * @copyright       The XOOPS Project (http://xoops.org)
+ * @copyright       The XOOPS Project (https://xoops.org)
  * @license         GPL 2.0 or later
  * @package         wgteams
  * @since           1.0
@@ -23,7 +23,7 @@ defined('XOOPS_ROOT_PATH') || exit('Restricted access');
 //
 //$dirname = basename(__DIR__);
 // ------------------- Informations ------------------- //
-$modversion = array(
+$modversion = [
     'name'                => _MI_WGTEAMS_NAME,
     'version'             => '1.08',
     'description'         => _MI_WGTEAMS_DESC,
@@ -45,7 +45,7 @@ $modversion = array(
     'min_php'             => '5.5',
     'min_xoops'           => '2.5.7',
     'min_admin'           => '1.1',
-    'min_db'              => array('mysql' => '5.0.7', 'mysqli' => '5.0.7'),
+    'min_db'              => ['mysql' => '5.0.7', 'mysqli' => '5.0.7'],
     'image'               => 'assets/images/wgteams_logo.png',
     'dirname'             => 'wgteams',
     // Frameworks
@@ -74,30 +74,31 @@ $modversion = array(
     'hasMain'             => 1,
     // Install/Update
     'onInstall'           => 'include/install.php',
-    'onUpdate'            => 'include/update.php');
+    'onUpdate'            => 'include/update.php'
+];
 // ------------------- Templates ------------------- //
 // Admin
-$modversion['templates'][] = array('file' => 'wgteams_admin_about.tpl', 'description' => '', 'type' => 'admin');
-$modversion['templates'][] = array('file' => 'wgteams_admin_header.tpl', 'description' => '', 'type' => 'admin');
-$modversion['templates'][] = array('file' => 'wgteams_admin_index.tpl', 'description' => '', 'type' => 'admin');
-$modversion['templates'][] = array('file' => 'wgteams_admin_teams.tpl', 'description' => '', 'type' => 'admin');
-$modversion['templates'][] = array('file' => 'wgteams_admin_members.tpl', 'description' => '', 'type' => 'admin');
-$modversion['templates'][] = array('file' => 'wgteams_admin_relations.tpl', 'description' => '', 'type' => 'admin');
-$modversion['templates'][] = array('file' => 'wgteams_admin_infofields.tpl', 'description' => '', 'type' => 'admin');
-$modversion['templates'][] = array('file' => 'wgteams_admin_labels.tpl', 'description' => '', 'type' => 'admin');
-$modversion['templates'][] = array('file' => 'wgteams_admin_footer.tpl', 'description' => '', 'type' => 'admin');
+$modversion['templates'][] = ['file' => 'wgteams_admin_about.tpl', 'description' => '', 'type' => 'admin'];
+$modversion['templates'][] = ['file' => 'wgteams_admin_header.tpl', 'description' => '', 'type' => 'admin'];
+$modversion['templates'][] = ['file' => 'wgteams_admin_index.tpl', 'description' => '', 'type' => 'admin'];
+$modversion['templates'][] = ['file' => 'wgteams_admin_teams.tpl', 'description' => '', 'type' => 'admin'];
+$modversion['templates'][] = ['file' => 'wgteams_admin_members.tpl', 'description' => '', 'type' => 'admin'];
+$modversion['templates'][] = ['file' => 'wgteams_admin_relations.tpl', 'description' => '', 'type' => 'admin'];
+$modversion['templates'][] = ['file' => 'wgteams_admin_infofields.tpl', 'description' => '', 'type' => 'admin'];
+$modversion['templates'][] = ['file' => 'wgteams_admin_labels.tpl', 'description' => '', 'type' => 'admin'];
+$modversion['templates'][] = ['file' => 'wgteams_admin_footer.tpl', 'description' => '', 'type' => 'admin'];
 // User
-$modversion['templates'][] = array('file' => 'wgteams_header.tpl', 'description' => '');
-$modversion['templates'][] = array('file' => 'wgteams_teams.tpl', 'description' => '');
-$modversion['templates'][] = array('file' => 'wgteams_teams_list.tpl', 'description' => '');
-$modversion['templates'][] = array('file' => 'wgteams_members_list.tpl', 'description' => '');
-$modversion['templates'][] = array('file' => 'wgteams_member_default.tpl', 'description' => '');
-$modversion['templates'][] = array('file' => 'wgteams_member_left.tpl', 'description' => '');
-$modversion['templates'][] = array('file' => 'wgteams_member_right.tpl', 'description' => '');
-$modversion['templates'][] = array('file' => 'wgteams_breadcrumbs.tpl', 'description' => '');
-$modversion['templates'][] = array('file' => 'wgteams_footer.tpl', 'description' => '');
+$modversion['templates'][] = ['file' => 'wgteams_header.tpl', 'description' => ''];
+$modversion['templates'][] = ['file' => 'wgteams_teams.tpl', 'description' => ''];
+$modversion['templates'][] = ['file' => 'wgteams_teams_list.tpl', 'description' => ''];
+$modversion['templates'][] = ['file' => 'wgteams_members_list.tpl', 'description' => ''];
+$modversion['templates'][] = ['file' => 'wgteams_member_default.tpl', 'description' => ''];
+$modversion['templates'][] = ['file' => 'wgteams_member_left.tpl', 'description' => ''];
+$modversion['templates'][] = ['file' => 'wgteams_member_right.tpl', 'description' => ''];
+$modversion['templates'][] = ['file' => 'wgteams_breadcrumbs.tpl', 'description' => ''];
+$modversion['templates'][] = ['file' => 'wgteams_footer.tpl', 'description' => ''];
 
-$modversion['templates'][] = array('file' => 'wgteams_block_teamsmembers.tpl', 'description' => '', 'type' => 'block');
+$modversion['templates'][] = ['file' => 'wgteams_block_teamsmembers.tpl', 'description' => '', 'type' => 'block'];
 
 // ------------------- Mysql ------------------- //
 $modversion['sqlfile']['mysql'] = 'sql/mysql.sql';
@@ -134,63 +135,69 @@ if (is_object($xoopsModule) && $xoopsModule->getVar('dirname') == $modversion['d
     }
 }
 // ------------------- Blocks ------------------- //
-$modversion['blocks'][] = array(
+$modversion['blocks'][] = [
     'file'        => 'b_teamsmembers.php',
     'name'        => _MI_WGTEAMS_TEAMSMEMBERS_BLOCK,
     'description' => _MI_WGTEAMS_TEAMSMEMBERS_BLOCK_DESC,
     'show_func'   => 'b_wgteams_teamsmembers_show',
     'edit_func'   => 'b_wgteams_teamsmembers_edit',
     'options'     => 'showsingleteam|0',
-    'template'    => 'wgteams_block_teamsmembers.tpl');
+    'template'    => 'wgteams_block_teamsmembers.tpl'
+];
 
-$modversion['blocks'][] = array(
+$modversion['blocks'][] = [
     'file'        => 'b_teams.php',
     'name'        => _MI_WGTEAMS_TEAMS_BLOCK,
     'description' => _MI_WGTEAMS_TEAMS_BLOCK_DESC,
     'show_func'   => 'b_wgteams_teams_show',
     'edit_func'   => '',
     'options'     => 'showlistofteams|0',
-    'template'    => 'wgteams_block_teams.tpl');
+    'template'    => 'wgteams_block_teams.tpl'
+];
 
 // ------------------- Config ------------------- //
-$modversion['config'][] = array(
+$modversion['config'][] = [
     'name'        => 'keywords',
     'title'       => '_MI_WGTEAMS_KEYWORDS',
     'description' => '_MI_WGTEAMS_KEYWORDS_DESC',
     'formtype'    => 'textbox',
     'valuetype'   => 'text',
-    'default'     => 'wgteams, teams, members, relations, infofields');
+    'default'     => 'wgteams, teams, members, relations, infofields'
+];
 
-$modversion['config'][] = array(
+$modversion['config'][] = [
     'name'        => 'adminpager',
     'title'       => '_MI_WGTEAMS_ADMIN_PAGER',
     'description' => '_MI_WGTEAMS_ADMIN_PAGER_DESC',
     'formtype'    => 'textbox',
     'valuetype'   => 'int',
-    'default'     => 10);
+    'default'     => 10
+];
 
-$modversion['config'][] = array(
+$modversion['config'][] = [
     'name'        => 'userpager',
     'title'       => '_MI_WGTEAMS_USER_PAGER',
     'description' => '_MI_WGTEAMS_USER_PAGER_DESC',
     'formtype'    => 'textbox',
     'valuetype'   => 'int',
-    'default'     => 10);
+    'default'     => 10
+];
 
 // start page for module
-$modversion['config'][] = array(
+$modversion['config'][] = [
     'name'        => 'startpage',
     'title'       => '_MI_WGTEAMS_STARTPAGE',
     'description' => '_MI_WGTEAMS_STARTPAGE_DESC',
     'formtype'    => 'select',
     'valuetype'   => 'array',
     'default'     => 1,
-    'options'     => array(_MI_WGTEAMS_STARTPAGE_LIST => 1, _MI_WGTEAMS_STARTPAGE_ALL => 2, _MI_WGTEAMS_STARTPAGE_FIRST => 3));
+    'options'     => [_MI_WGTEAMS_STARTPAGE_LIST => 1, _MI_WGTEAMS_STARTPAGE_ALL => 2, _MI_WGTEAMS_STARTPAGE_FIRST => 3]
+];
 
 // Editor
 xoops_load('xoopseditorhandler');
 $editorHandler          = XoopsEditorHandler::getInstance();
-$modversion['config'][] = array(
+$modversion['config'][] = [
     'name'        => 'wgteams_editor',
     'title'       => '_MI_WGTEAMS_EDITOR',
     'description' => '_MI_WGTEAMS_EDITOR_DESC',
@@ -198,26 +205,27 @@ $modversion['config'][] = array(
     'valuetype'   => 'text',
     'options'     => array_flip($editorHandler->getList()),
     'default'     => 'dhtmltextarea'
-);
+];
 
 //Uploads : max size for image upload 
-$modversion['config'][] = array(
+$modversion['config'][] = [
     'name'        => 'wgteams_img_maxsize',
     'title'       => '_MI_WGTEAMS_IMG_MAXSIZE',
     'description' => '_MI_WGTEAMS_IMG_MAXSIZE_DESC',
     'formtype'    => 'textbox',
     'valuetype'   => 'int',
-    'default'     => 10485760); // 1 MB
+    'default'     => 10485760
+]; // 1 MB
 
 //Uploads : mimetypes of images
-$modversion['config'][] = array(
+$modversion['config'][] = [
     'name'        => 'wgteams_img_mimetypes',
     'title'       => '_MI_WGTEAMS_IMG_MIMETYPES',
     'description' => '_MI_WGTEAMS_IMG_MIMETYPES_DESC',
     'formtype'    => 'select_multi',
     'valuetype'   => 'array',
-    'default'     => array('image/gif', 'image/jpeg', 'image/png', 'image/jpg'),
-    'options'     => array(
+    'default'     => ['image/gif', 'image/jpeg', 'image/png', 'image/jpg'],
+    'options'     => [
         'bmp'   => 'image/bmp',
         'gif'   => 'image/gif',
         'pjpeg' => 'image/pjpeg',
@@ -225,20 +233,23 @@ $modversion['config'][] = array(
         'jpg'   => 'image/jpg',
         'jpe'   => 'image/jpe',
         'png'   => 'image/png'
-    ));
+    ]
+];
 
-$modversion['config'][] = array(
+$modversion['config'][] = [
     'name'        => 'wgteams_labels',
     'title'       => '_MI_WGTEAMS_LABELS',
     'description' => '_MI_WGTEAMS_LABELS_DESC',
     'formtype'    => 'yesno',
     'valuetype'   => 'int',
-    'default'     => 1);
+    'default'     => 1
+];
 
-$modversion['config'][] = array(
+$modversion['config'][] = [
     'name'        => 'wgteams_showbreadcrumbs',
     'title'       => '_MI_WGTEAMS_SHOWBREADCRUMBS',
     'description' => '_MI_WGTEAMS_SHOWBREADCRUMBS_DESC',
     'formtype'    => 'yesno',
     'valuetype'   => 'int',
-    'default'     => 1);
+    'default'     => 1
+];

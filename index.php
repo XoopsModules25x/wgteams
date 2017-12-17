@@ -11,7 +11,7 @@
 /**
  * wgTeams module for xoops
  *
- * @copyright       The XOOPS Project (http://xoops.org)
+ * @copyright       The XOOPS Project (https://xoops.org)
  * @license         GPL 2.0 or later
  * @package         wgteams
  * @since           1.0
@@ -32,7 +32,7 @@ $limit   = XoopsRequest::getInt('limit', $wgteams->getConfig('userpager'));
 // Define Stylesheet
 $xoTheme->addStylesheet($style);
 
-$keywords = array();
+$keywords = [];
 
 $crit_teams = new CriteriaCompo();
 $crit_teams->add(new Criteria('team_online', '1'));
@@ -41,17 +41,17 @@ if ($team_id > 0) {
 }
 $crit_teams->setSort('team_weight');
 $crit_teams->setOrder('ASC');
-if ($startpage == 3) {
+if (3 == $startpage) {
     $crit_teams->setLimit('1');
 }
 $teamsCount = $teamsHandler->getCount($crit_teams);
 $teamsAll   = $teamsHandler->getAll($crit_teams);
-$teams_list = array();
+$teams_list = [];
 
 if ($teamsCount > 0) {
     // Get All Teams
     $teams_list = wgteamsGetTeamMemberDetails($teamsAll);
-    if ($team_id == 0 && $startpage[0] == 1) {
+    if (0 == $team_id && 1 == $startpage[0]) {
         $teams_list = wgteamsGetTeamDetails($teamsAll);
     }
 } else {
@@ -79,10 +79,10 @@ if ($teamsCount > $limit) {
     $GLOBALS['xoopsTpl']->assign('pagenav', $nav->renderNav(4));
 }
 // Breadcrumbs
-if ($wgteams->getConfig('wgteams_showbreadcrumbs') == 1) {
-    $xoBreadcrumbs[] = array('title' => _MA_WGTEAMS_TEAMS, 'link' => WGTEAMS_URL . '/index.php');
-    if ($team_id > 0 && !$team_name === '') {
-        $xoBreadcrumbs[] = array('title' => $team_name);
+if (1 == $wgteams->getConfig('wgteams_showbreadcrumbs')) {
+    $xoBreadcrumbs[] = ['title' => _MA_WGTEAMS_TEAMS, 'link' => WGTEAMS_URL . '/index.php'];
+    if ($team_id > 0 && '' === !$team_name) {
+        $xoBreadcrumbs[] = ['title' => $team_name];
     }
     $GLOBALS['xoopsTpl']->assign('showbreadcrumbs', '1');
 }

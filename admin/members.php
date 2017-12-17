@@ -11,7 +11,7 @@
 /**
  * wgTeams module for xoops
  *
- * @copyright       The XOOPS Project (http://xoops.org)
+ * @copyright       The XOOPS Project (https://xoops.org)
  * @license         GPL 2.0 or later
  * @package         wgteams
  * @since           1.0
@@ -142,7 +142,7 @@ switch ($op) {
             $member_id  = $membersObj->getVar('member_id');
             if ($membersHandler->delete($membersObj)) {
                 // delete image of this member
-                if (!$member_img === '') {
+                if ('' === !$member_img) {
                     unlink(WGTEAMS_UPLOAD_PATH . '/members/images/' . $member_img);
                 }
                 //delete relations
@@ -161,7 +161,7 @@ switch ($op) {
                 $GLOBALS['xoopsTpl']->assign('error', $membersObj->getHtmlErrors());
             }
         } else {
-            xoops_confirm(array('ok' => 1, 'member_id' => $memberId, 'op' => 'delete'), $_SERVER['REQUEST_URI'], sprintf(_AM_WGTEAMS_FORM_SURE_DELETE, $membersObj->getVar('member_firstname')));
+            xoops_confirm(['ok' => 1, 'member_id' => $memberId, 'op' => 'delete'], $_SERVER['REQUEST_URI'], sprintf(_AM_WGTEAMS_FORM_SURE_DELETE, $membersObj->getVar('member_firstname')));
         }
         break;
 }

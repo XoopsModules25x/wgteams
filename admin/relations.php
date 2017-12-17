@@ -11,7 +11,7 @@
 /**
  * wgTeams module for xoops
  *
- * @copyright       The XOOPS Project (http://xoops.org)
+ * @copyright       The XOOPS Project (https://xoops.org)
  * @license         GPL 2.0 or later
  * @package         wgteams
  * @since           1.0
@@ -153,13 +153,13 @@ switch ($op) {
                 $GLOBALS['xoopsTpl']->assign('error', $relationsObj->getHtmlErrors());
             }
         } else {
-            xoops_confirm(array('ok' => 1, 'rel_id' => $relId, 'op' => 'delete'), $_SERVER['REQUEST_URI'], sprintf(_AM_WGTEAMS_FORM_SURE_DELETE, $relationsObj->getVar('rel_team_id')));
+            xoops_confirm(['ok' => 1, 'rel_id' => $relId, 'op' => 'delete'], $_SERVER['REQUEST_URI'], sprintf(_AM_WGTEAMS_FORM_SURE_DELETE, $relationsObj->getVar('rel_team_id')));
         }
         break;
                 
     case 'order':
         $rorder = $_POST['rorder'];
-        for ($i = 0; $i < count($rorder); $i++){
+        for ($i = 0, $iMax = count($rorder); $i < $iMax; $i++){
             $relationsObj = $relationsHandler->get($rorder[$i]);
             $relationsObj->setVar('rel_weight',$i+1);
             $relationsHandler->insert($relationsObj);

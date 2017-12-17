@@ -11,7 +11,7 @@
 /**
  * wgTeams module for xoops
  *
- * @copyright       The XOOPS Project (http://xoops.org)
+ * @copyright       The XOOPS Project (https://xoops.org)
  * @license         GPL 2.0 or later
  * @package         wgteams
  * @since           1.0
@@ -30,7 +30,7 @@ function wgteams_search($queryarray, $andor, $limit, $offset, $userid)
 {
     global $xoopsDB;
     $sql = "SELECT 'infofield_id', 'infofield_name' FROM " . $xoopsDB->prefix('wgteams_infofields') . ' WHERE infofield_id != 0';
-    if ($userid != 0) {
+    if (0 != $userid) {
         $sql .= ' AND infofield_submitter=' . (int)$userid;
     }
     if (is_array($queryarray) && $count = count($queryarray)) {
@@ -43,7 +43,7 @@ function wgteams_search($queryarray, $andor, $limit, $offset, $userid)
     }
     $sql .= " ORDER BY 'infofield_id' DESC";
     $result = $xoopsDB->query($sql, $limit, $offset);
-    $ret    = array();
+    $ret    = [];
     $i      = 0;
     while (false !== ($myrow = $xoopsDB->fetchArray($result))) {
         $ret[$i]['image'] = 'assets/icons/32/blank.gif';

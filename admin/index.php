@@ -11,7 +11,7 @@
 /**
  * wgTeams module for xoops
  *
- * @copyright       The XOOPS Project (http://xoops.org)
+ * @copyright       The XOOPS Project (https://xoops.org)
  * @license         GPL 2.0 or later
  * @package         wgteams
  * @since           1.0
@@ -35,13 +35,14 @@ $adminMenu->addInfoBoxLine(_AM_WGTEAMS_STATISTICS, '<label>' . _AM_WGTEAMS_THERE
 $adminMenu->addInfoBoxLine(_AM_WGTEAMS_STATISTICS, '<label>' . _AM_WGTEAMS_THEREARE_INFOFIELDS . '</label>', $countInfofields);
 $adminMenu->addInfoBoxLine(_AM_WGTEAMS_STATISTICS, '<label>' . _AM_WGTEAMS_THEREARE_RELATIONS . '</label>', $countRelations);
 // Upload Folders
-$folder = array(
+$folder = [
     WGTEAMS_UPLOAD_PATH . '/teams/',
-    WGTEAMS_UPLOAD_PATH . '/members/');
+    WGTEAMS_UPLOAD_PATH . '/members/'
+];
 // Uploads Folders Created
 foreach (array_keys($folder) as $i) {
     $adminMenu->addConfigBoxLine($folder[$i], 'folder');
-    $adminMenu->addConfigBoxLine(array($folder[$i], '777'), 'chmod');
+    $adminMenu->addConfigBoxLine([$folder[$i], '777'], 'chmod');
 }
 // Render Index
 echo $adminMenu->addNavigation('index.php');

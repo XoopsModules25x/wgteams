@@ -11,7 +11,7 @@
 /**
  * wgTeams module for xoops
  *
- * @copyright       The XOOPS Project (http://xoops.org)
+ * @copyright       The XOOPS Project (https://xoops.org)
  * @license         GPL 2.0 or later
  * @package         wgteams
  * @since           1.0
@@ -44,7 +44,7 @@ function b_wgteams_teams_show($options)
     $teamsCount = $teamsHandler->getCount($crit_teams);
     $teamsAll   = $teamsHandler->getAll($crit_teams);
 
-    $block = array();
+    $block = [];
     if ($teamsCount > 0) {
         $block = wgteamsGetTeamDetails($teamsAll, false);
     }

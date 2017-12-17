@@ -11,7 +11,7 @@
 /**
  * wgTeams module for xoops
  *
- * @copyright       The XOOPS Project (http://xoops.org)
+ * @copyright       The XOOPS Project (https://xoops.org)
  * @license         GPL 2.0 or later
  * @package         wgteams
  * @since           1.0
@@ -53,7 +53,7 @@ function update_wgteams_v10(&$module)
         .
         ' t2 WHERE t1.tpl_refid = t2.tpl_refid AND t1.tpl_module = t2.tpl_module AND t1.tpl_tplset=t2.tpl_tplset AND t1.tpl_file = t2.tpl_file AND t1.tpl_type = t2.tpl_type AND t1.tpl_id > t2.tpl_id'
     );
-    $tplids = array();
+    $tplids = [];
     while (false !== (list($tplid) = $xoopsDB->fetchRow($result))) {
         $tplids[] = $tplid;
     }
@@ -75,7 +75,7 @@ function update_wgteams_v10(&$module)
 
         return false;
     }
-    $ret = array();
+    $ret = [];
     while (false !== ($myrow = $xoopsDB->fetchArray($result))) {
         $ret[] = $myrow;
     }

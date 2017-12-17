@@ -11,7 +11,7 @@
 /**
  * wgTeams module for xoops
  *
- * @copyright       The XOOPS Project (http://xoops.org)
+ * @copyright       The XOOPS Project (https://xoops.org)
  * @license         GPL 2.0 or later
  * @package         wgteams
  * @since           1.0
@@ -82,7 +82,7 @@ class WgteamsRelations extends XoopsObject
     public function getFormRelations($action = false)
     {
         global $xoopsUser;
-        if ($action === false) {
+        if (false === $action) {
             $action = $_SERVER['REQUEST_URI'];
         }
 
@@ -90,13 +90,13 @@ class WgteamsRelations extends XoopsObject
         $teamsHandler      = $this->wgteams->getHandler('teams');
         $membersHandler    = $this->wgteams->getHandler('members');
 
-        if ($infofieldsHandler->getCountInfofields() == 0) {
+        if (0 == $infofieldsHandler->getCountInfofields()) {
             redirect_header('infofields.php', 3, _AM_WGTEAMS_THEREARENT_INFOFIELDS);
         }
-        if ($teamsHandler->getCountTeams() == 0) {
+        if (0 == $teamsHandler->getCountTeams()) {
             redirect_header('teams.php', 3, _AM_WGTEAMS_THEREARENT_TEAMS);
         }
-        if ($membersHandler->getCountMembers() == 0) {
+        if (0 == $membersHandler->getCountMembers()) {
             redirect_header('members.php', 3, _AM_WGTEAMS_THEREARENT_MEMBERS);
         }
 
@@ -126,7 +126,7 @@ class WgteamsRelations extends XoopsObject
         $relInfo_1_fieldSelect->addOptionArray($infofieldsHandler->getList());
         $form->addElement($relInfo_1_fieldSelect);
         // Form infofield
-        $editor_configs           = array();
+        $editor_configs           = [];
         $editor_configs['name']   = 'rel_info_1';
         $editor_configs['value']  = $this->getVar('rel_info_1', 'e');
         $editor_configs['rows']   = 5;
@@ -143,7 +143,7 @@ class WgteamsRelations extends XoopsObject
         $relInfo_2_fieldSelect->addOptionArray($infofieldsHandler->getList());
         $form->addElement($relInfo_2_fieldSelect);
         // Form infofield 2
-        $editor_configs           = array();
+        $editor_configs           = [];
         $editor_configs['name']   = 'rel_info_2';
         $editor_configs['value']  = $this->getVar('rel_info_2', 'e');
         $editor_configs['rows']   = 5;
@@ -160,7 +160,7 @@ class WgteamsRelations extends XoopsObject
         $relInfo_3_fieldSelect->addOptionArray($infofieldsHandler->getList());
         $form->addElement($relInfo_3_fieldSelect);
         // Form infofield 3
-        $editor_configs           = array();
+        $editor_configs           = [];
         $editor_configs['name']   = 'rel_info_3';
         $editor_configs['value']  = $this->getVar('rel_info_3', 'e');
         $editor_configs['rows']   = 5;
@@ -177,7 +177,7 @@ class WgteamsRelations extends XoopsObject
         $relinfo_4_fieldSelect->addOptionArray($infofieldsHandler->getList());
         $form->addElement($relinfo_4_fieldSelect);
         // Form infofield 4
-        $editor_configs           = array();
+        $editor_configs           = [];
         $editor_configs['name']   = 'rel_info_4';
         $editor_configs['value']  = $this->getVar('rel_info_4', 'e');
         $editor_configs['rows']   = 5;
@@ -194,7 +194,7 @@ class WgteamsRelations extends XoopsObject
         $relinfo_5_fieldSelect->addOptionArray($infofieldsHandler->getList());
         $form->addElement($relinfo_5_fieldSelect);
         // Form infofield 5
-        $editor_configs           = array();
+        $editor_configs           = [];
         $editor_configs['name']   = 'rel_info_5';
         $editor_configs['value']  = $this->getVar('rel_info_5', 'e');
         $editor_configs['rows']   = 5;
@@ -260,7 +260,7 @@ class WgteamsRelations extends XoopsObject
      **/
     public function toArray()
     {
-        $ret  = array();
+        $ret  = [];
         $vars =& $this->getVars();
         foreach (array_keys($vars) as $var) {
             $ret[$var] = $this->getVar($var);
@@ -284,9 +284,9 @@ class WgteamsRelationsHandler extends XoopsPersistableObjectHandler
     /**
      * Constructor
      *
-     * @param string $db
+     * @param \XoopsDatabase $db
      */
-    public function __construct(&$db)
+    public function __construct(XoopsDatabase $db)
     {
         parent::__construct($db, 'wgteams_relations', 'wgteamsrelations', 'rel_id', 'rel_team_id');
         $this->wgteams = WgteamsHelper::getInstance();
@@ -396,7 +396,7 @@ class WgteamsRelationsHandler extends XoopsPersistableObjectHandler
      * @param int    $limit
      * @param string $sort
      * @param string $order
-     * @return
+     * @return array
      */
     public function getAllRelations($start = 0, $limit = 0, $sort = 'rel_team_id ASC, rel_weight ASC, rel_id', $order = 'ASC')
     {

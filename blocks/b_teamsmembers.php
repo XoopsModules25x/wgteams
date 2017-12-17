@@ -11,7 +11,7 @@
 /**
  * wgTeams module for xoops
  *
- * @copyright       The XOOPS Project (http://xoops.org)
+ * @copyright       The XOOPS Project (https://xoops.org)
  * @license         GPL 2.0 or later
  * @package         wgteams
  * @since           1.0
@@ -49,7 +49,7 @@ function b_wgteams_teamsmembers_show($options)
     $teamsCount = $teamsHandler->getCount($crit_teams);
     $teamsAll   = $teamsHandler->getAll($crit_teams);
 
-    $block = array();
+    $block = [];
     if ($teamsCount > 0) {
         $block = wgteamsGetTeamMemberDetails($teamsAll);
     }
@@ -81,7 +81,7 @@ function b_wgteams_teamsmembers_edit($options)
     $form .= "<select name='options[]' size='5'>";
     foreach (array_keys($teamsAll) as $i) {
         $team_id = $teamsAll[$i]->getVar('team_id');
-        $form .= "<option value='" . $team_id . "' " . (array_search($team_id, $options) === false ? '' : "selected='selected'") . '>' . $teamsAll[$i]->getVar('team_name') . '</option>';
+        $form    .= "<option value='" . $team_id . "' " . (false === array_search($team_id, $options) ? '' : 'selected') . '>' . $teamsAll[$i]->getVar('team_name') . '</option>';
     }
     $form .= '</select>';
 

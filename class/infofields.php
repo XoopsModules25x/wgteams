@@ -11,7 +11,7 @@
 /**
  * wgTeams module for xoops
  *
- * @copyright       The XOOPS Project (http://xoops.org)
+ * @copyright       The XOOPS Project (https://xoops.org)
  * @license         GPL 2.0 or later
  * @package         wgteams
  * @since           1.0
@@ -71,7 +71,7 @@ class WgteamsInfofields extends XoopsObject
     {
         global $xoopsUser;
 
-        if ($action === false) {
+        if (false === $action) {
             $action = $_SERVER['REQUEST_URI'];
         }
 
@@ -122,7 +122,7 @@ class WgteamsInfofields extends XoopsObject
      **/
     public function toArray()
     {
-        $ret  = array();
+        $ret  = [];
         $vars =& $this->getVars();
         foreach (array_keys($vars) as $var) {
             $ret[$var] = $this->getVar($var);
@@ -145,9 +145,9 @@ class WgteamsInfofieldsHandler extends XoopsPersistableObjectHandler
     /**
      * Constructor
      *
-     * @param string $db
+     * @param \XoopsDatabase $db
      */
-    public function __construct($db)
+    public function __construct(XoopsDatabase $db)
     {
         parent::__construct($db, 'wgteams_infofields', 'wgteamsinfofields', 'infofield_id', 'infofield_name');
         $this->wgteams = WgteamsHelper::getInstance();
@@ -244,7 +244,7 @@ class WgteamsInfofieldsHandler extends XoopsPersistableObjectHandler
      * @param int    $limit
      * @param string $sort
      * @param string $order
-     * @return
+     * @return array
      */
     public function getAllInfofields($start = 0, $limit = 0, $sort = 'infofield_id ASC, infofield_name', $order = 'ASC')
     {

@@ -11,7 +11,7 @@
 /**
  * wgTeams module for xoops
  *
- * @copyright       The XOOPS Project (http://xoops.org)
+ * @copyright       The XOOPS Project (https://xoops.org)
  * @license         GPL 2.0 or later
  * @package         wgteams
  * @since           1.0
@@ -79,7 +79,7 @@ class WgteamsTeams extends XoopsObject
     {
         global $xoopsUser;
         
-        if ($action === false) {
+        if (false === $action) {
             $action = $_SERVER['REQUEST_URI'];
         }
         // Title
@@ -93,7 +93,7 @@ class WgteamsTeams extends XoopsObject
         // Form Text TeamName
         $form->addElement(new XoopsFormText(_AM_WGTEAMS_TEAM_NAME, 'team_name', 50, 255, $this->getVar('team_name')), true);
         // Form Text Area team_descr
-        $editor_configs = array();
+        $editor_configs = [];
         $editor_configs['name']   = 'team_descr';
         $editor_configs['value']  = $this->getVar('team_descr', 'e');
         $editor_configs['rows']   = 5;
@@ -113,7 +113,7 @@ class WgteamsTeams extends XoopsObject
         foreach ($imageArray as $image) {
             $imageSelect->addOption("{$image}", $image);
         }
-        $imageSelect->setExtra("onchange='showImgSelected(\"image2\", \"team_image\", \"".$imageDirectory."\", \"\", \"".XOOPS_URL."\")'");
+        $imageSelect->setExtra("onchange='showImgSelected(\"image2\", \"team_image\", \"".$imageDirectory . '", "", "' . XOOPS_URL . "\")'");
         $imageTray->addElement($imageSelect, false);
         $imageTray->addElement(new XoopsFormLabel('', "<br><img src='".XOOPS_URL . '/' . $imageDirectory . '/' . $teamImage . "' name='image2' id='image2' alt='' style='max-width:100px;' />"));
         // Form File
@@ -191,7 +191,7 @@ class WgteamsTeams extends XoopsObject
         $ret['imagestyle']    = $this->getVar('team_imagestyle');
         $ret['displaystyle']  = $this->getVar('team_displaystyle');
         $ret['weight']        = $this->getVar('team_weight');
-        $ret['online']        = $this->getVar('team_online') == 1 ? _YES : _NO;
+        $ret['online']        = 1 == $this->getVar('team_online') ? _YES : _NO;
         $ret['submitter']     = XoopsUser::getUnameFromId($this->getVar('team_submitter'));
         $ret['date_create']   = formatTimestamp($this->getVar('team_date_create'), 'M');
 
@@ -205,7 +205,7 @@ class WgteamsTeams extends XoopsObject
      **/
     public function toArray()
     {
-        $ret = array();
+        $ret = [];
         $vars =& $this->getVars();
         foreach (array_keys($vars) as $var) {
             $ret[$var] = $this->getVar($var);
@@ -328,7 +328,7 @@ class WgteamsTeamsHandler extends XoopsPersistableObjectHandler
      * @param int    $limit
      * @param string $sort
      * @param string $order
-     * @return
+     * @return array
      */
     public function getAllTeams($start = 0, $limit = 0, $sort = 'team_weight ASC, team_id', $order = 'ASC')
     {
