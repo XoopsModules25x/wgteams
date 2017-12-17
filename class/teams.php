@@ -79,7 +79,7 @@ class WgteamsTeams extends XoopsObject
     {
         global $xoopsUser;
         
-        if ($action === false) {
+        if (false === $action) {
             $action = $_SERVER['REQUEST_URI'];
         }
         // Title
@@ -191,7 +191,7 @@ class WgteamsTeams extends XoopsObject
         $ret['imagestyle']    = $this->getVar('team_imagestyle');
         $ret['displaystyle']  = $this->getVar('team_displaystyle');
         $ret['weight']        = $this->getVar('team_weight');
-        $ret['online']        = $this->getVar('team_online') == 1 ? _YES : _NO;
+        $ret['online']        = 1 == $this->getVar('team_online') ? _YES : _NO;
         $ret['submitter']     = XoopsUser::getUnameFromId($this->getVar('team_submitter'));
         $ret['date_create']   = formatTimestamp($this->getVar('team_date_create'), 'M');
 

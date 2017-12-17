@@ -81,7 +81,7 @@ function b_wgteams_teamsmembers_edit($options)
     $form .= "<select name='options[]' size='5'>";
     foreach (array_keys($teamsAll) as $i) {
         $team_id = $teamsAll[$i]->getVar('team_id');
-        $form    .= "<option value='" . $team_id . "' " . (array_search($team_id, $options) === false ? '' : 'selected') . '>' . $teamsAll[$i]->getVar('team_name') . '</option>';
+        $form    .= "<option value='" . $team_id . "' " . (false === array_search($team_id, $options) ? '' : 'selected') . '>' . $teamsAll[$i]->getVar('team_name') . '</option>';
     }
     $form .= '</select>';
 

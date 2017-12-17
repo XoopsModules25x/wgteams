@@ -36,7 +36,7 @@ function wgteams_CleanVars(&$global, $key, $default = '', $type = 'int')
             $ret = isset($global[$key]) ? filter_var($global[$key], FILTER_SANITIZE_NUMBER_INT) : $default;
             break;
     }
-    if ($ret === false) {
+    if (false === $ret) {
         return $default;
     }
 
@@ -97,13 +97,13 @@ function wgteamsGetTeamDetails(&$teamsAll, $show_descr = true)
         if ($show_descr) {
             $team_descr = $teamsAll[$i]->getVar('team_descr', 'n');
         }
-        if ($teamsAll[$i]->getVar('team_image') === 'blank.gif') {
+        if ('blank.gif' === $teamsAll[$i]->getVar('team_image')) {
             $team_image = '';
         } else {
             $team_image = $teamsAll[$i]->getVar('team_image');
         }
-        $team_tablestyle = ($teamsAll[$i]->getVar('team_tablestyle') === 'default') ? '' : $teamsAll[$i]->getVar('team_tablestyle');
-        $team_imagestyle = ($teamsAll[$i]->getVar('team_imagestyle') === 'default') ? '' : $teamsAll[$i]->getVar('team_imagestyle');
+        $team_tablestyle = ('default' === $teamsAll[$i]->getVar('team_tablestyle')) ? '' : $teamsAll[$i]->getVar('team_tablestyle');
+        $team_imagestyle = ('default' === $teamsAll[$i]->getVar('team_imagestyle')) ? '' : $teamsAll[$i]->getVar('team_imagestyle');
 
         $teams_list[] = [
             'team_id'         => $team_id,
@@ -144,16 +144,16 @@ function wgteamsGetTeamMemberDetails(&$teamsAll)
         $team_id    = $teamsAll[$i]->getVar('team_id');
         $team_name  = $teamsAll[$i]->getVar('team_name');
         $team_descr = $teamsAll[$i]->getVar('team_descr', 'n');
-        if ($teamsAll[$i]->getVar('team_image') === 'blank.gif') {
+        if ('blank.gif' === $teamsAll[$i]->getVar('team_image')) {
             $team_image = '';
         } else {
             $team_image = $teamsAll[$i]->getVar('team_image');
         }
         $team_nb_cols      = $teamsAll[$i]->getVar('team_nb_cols');
-        $team_tablestyle   = ($teamsAll[$i]->getVar('team_tablestyle') === 'default') ? '' : $teamsAll[$i]->getVar('team_tablestyle');
-        $team_imagestyle   = ($teamsAll[$i]->getVar('team_imagestyle') === 'default') ? '' : $teamsAll[$i]->getVar('team_imagestyle');
+        $team_tablestyle   = ('default' === $teamsAll[$i]->getVar('team_tablestyle')) ? '' : $teamsAll[$i]->getVar('team_tablestyle');
+        $team_imagestyle   = ('default' === $teamsAll[$i]->getVar('team_imagestyle')) ? '' : $teamsAll[$i]->getVar('team_imagestyle');
         $team_displaystyle = $teamsAll[$i]->getVar('team_displaystyle');
-        $member_labels = $wgteams->getConfig('wgteams_labels')== 1 ? true : false;
+        $member_labels = 1 == $wgteams->getConfig('wgteams_labels') ? true : false;
 
         $crit_rels = new CriteriaCompo();
         $crit_rels->add(new Criteria('rel_team_id', $team_id));
@@ -169,7 +169,7 @@ function wgteamsGetTeamMemberDetails(&$teamsAll)
             $member_id    = $relsAll[$r]->getVar('rel_member_id');
             $member_obj   = $membersHandler->get($member_id);
             $member_title = $member_obj->getVar('member_title');
-            if (!$member_title === '') {
+            if ('' === !$member_title) {
                 $nb_infos++;
             }
             $member_firstname = $member_obj->getVar('member_firstname');
@@ -177,19 +177,19 @@ function wgteamsGetTeamMemberDetails(&$teamsAll)
             $member_name      = $member_firstname;
             $member_name .= ' ' . $member_lastname;
             $member_name = trim($member_name);
-            if (!$member_name === '') {
+            if ('' === !$member_name) {
                 $nb_infos++;
             }
             $member_address = $member_obj->getVar('member_address', 'n');
-            if (!$member_address === '') {
+            if ('' === !$member_address) {
                 $nb_infos++;
             }
             $member_phone = $member_obj->getVar('member_phone', 'n');
-            if (!$member_phone === '') {
+            if ('' === !$member_phone) {
                 $nb_infos++;
             }
             $member_email   = $member_obj->getVar('member_email', 'n');
-            if (!$member_email === '') {
+            if ('' === !$member_email) {
                 $nb_infos++;
             }
             $member_image = $member_obj->getVar('member_image');

@@ -84,7 +84,7 @@ class WgteamsHelper
      */
     public function &getModule()
     {
-        if ($this->module === null) {
+        if (null === $this->module) {
             $this->initModule();
         }
 
@@ -99,7 +99,7 @@ class WgteamsHelper
      */
     public function getConfig($name = null, $index = -1)
     {
-        if ($this->config === null) {
+        if (null === $this->config) {
             $this->initConfig();
         }
         if (!$name) {
@@ -138,7 +138,7 @@ class WgteamsHelper
      */
     public function setConfig($name = null, $value = null)
     {
-        if ($this->config === null) {
+        if (null === $this->config) {
             $this->initConfig();
         }
         $this->config[$name] = $value;
@@ -247,7 +247,7 @@ class WgteamsHelper
 					} elseif (preg_match('/^<\s*\/([^\s]+?)\s*>$/s', $line_matchings[1], $tag_matchings)) {
 						// delete tag from $open_tags list
 						$pos = array_search($tag_matchings[1], $open_tags);
-						if ($pos !== false) {
+						if (false !== $pos) {
 							unset($open_tags[$pos]);
 						}
 						// if tag is an opening tag

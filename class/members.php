@@ -75,7 +75,7 @@ class WgteamsMembers extends XoopsObject
     {
         global $xoopsUser;
 
-        if ($action === false) {
+        if (false === $action) {
             $action = $_SERVER['REQUEST_URI'];
         }
         // Title

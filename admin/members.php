@@ -142,7 +142,7 @@ switch ($op) {
             $member_id  = $membersObj->getVar('member_id');
             if ($membersHandler->delete($membersObj)) {
                 // delete image of this member
-                if (!$member_img === '') {
+                if ('' === !$member_img) {
                     unlink(WGTEAMS_UPLOAD_PATH . '/members/images/' . $member_img);
                 }
                 //delete relations

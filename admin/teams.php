@@ -62,7 +62,7 @@ switch ($op) {
         if (isset($teamId)) {
             $teamsObj = $teamsHandler->get($teamId);
             // get Var team_online
-            $team_online = ($teamsObj->getVar('team_online') == 1) ? '0' : '1';
+            $team_online = (1 == $teamsObj->getVar('team_online')) ? '0' : '1';
             // Set Var team_online
             $teamsObj->setVar('team_online', $team_online);
             if ($teamsHandler->insert($teamsObj, true)) {
@@ -165,7 +165,7 @@ switch ($op) {
             $team_id  = $teamsObj->getVar('team_id');
             if ($teamsHandler->delete($teamsObj)) {
                 //delete team image
-                if (!$team_img === '') {
+                if ('' === !$team_img) {
                     unlink(WGTEAMS_UPLOAD_PATH . '/teams/images/' . $team_img);
                 }
                 //delete relations

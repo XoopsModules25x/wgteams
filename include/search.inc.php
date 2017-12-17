@@ -30,7 +30,7 @@ function wgteams_search($queryarray, $andor, $limit, $offset, $userid)
 {
     global $xoopsDB;
     $sql = "SELECT 'infofield_id', 'infofield_name' FROM " . $xoopsDB->prefix('wgteams_infofields') . ' WHERE infofield_id != 0';
-    if ($userid != 0) {
+    if (0 != $userid) {
         $sql .= ' AND infofield_submitter=' . (int)$userid;
     }
     if (is_array($queryarray) && $count = count($queryarray)) {

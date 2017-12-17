@@ -82,7 +82,7 @@ class WgteamsRelations extends XoopsObject
     public function getFormRelations($action = false)
     {
         global $xoopsUser;
-        if ($action === false) {
+        if (false === $action) {
             $action = $_SERVER['REQUEST_URI'];
         }
 
@@ -90,13 +90,13 @@ class WgteamsRelations extends XoopsObject
         $teamsHandler      = $this->wgteams->getHandler('teams');
         $membersHandler    = $this->wgteams->getHandler('members');
 
-        if ($infofieldsHandler->getCountInfofields() == 0) {
+        if (0 == $infofieldsHandler->getCountInfofields()) {
             redirect_header('infofields.php', 3, _AM_WGTEAMS_THEREARENT_INFOFIELDS);
         }
-        if ($teamsHandler->getCountTeams() == 0) {
+        if (0 == $teamsHandler->getCountTeams()) {
             redirect_header('teams.php', 3, _AM_WGTEAMS_THEREARENT_TEAMS);
         }
-        if ($membersHandler->getCountMembers() == 0) {
+        if (0 == $membersHandler->getCountMembers()) {
             redirect_header('members.php', 3, _AM_WGTEAMS_THEREARENT_MEMBERS);
         }
 
