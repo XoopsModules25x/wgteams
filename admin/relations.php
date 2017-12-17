@@ -159,7 +159,7 @@ switch ($op) {
                 
     case 'order':
         $rorder = $_POST['rorder'];
-        for ($i = 0; $i < count($rorder); $i++){
+        for ($i = 0, $iMax = count($rorder); $i < $iMax; $i++){
             $relationsObj = $relationsHandler->get($rorder[$i]);
             $relationsObj->setVar('rel_weight',$i+1);
             $relationsHandler->insert($relationsObj);

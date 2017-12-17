@@ -190,7 +190,7 @@ switch ($op) {
                 
     case 'order':
         $torder = $_POST['torder'];
-        for ($i = 0; $i < count($torder); $i++){
+        for ($i = 0, $iMax = count($torder); $i < $iMax; $i++){
             $teamsObj = $teamsHandler->get($torder[$i]);
             $teamsObj->setVar('team_weight',$i+1);
             $teamsHandler->insert($teamsObj);
