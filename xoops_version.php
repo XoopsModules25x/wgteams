@@ -56,14 +56,14 @@ $modversion = [
     'modicons16'          => 'assets/icons/16',
     'modicons32'          => 'assets/icons/32',
     //About
-    'demo_site_url'       => 'http://xoops.wedega.com',
+    'demo_site_url'       => 'https://xoops.wedega.com',
     'demo_site_name'      => 'XOOPS on Wedega',
-    'support_url'         => '',
+    'support_url'         => 'https://myxoops.org',
     'support_name'        => '',
     'module_website_url'  => '',
     'module_website_name' => '',
-    'release'             => '2016/08/19',
-    'module_status'       => 'RC 5',
+    'release'             => '2018/06/14',
+    'module_status'       => 'Final',
     // Admin system menu
     'system_menu'         => 1,
     // Admin things
