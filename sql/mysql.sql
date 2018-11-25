@@ -40,6 +40,7 @@ CREATE TABLE `wgteams_members` (
   `member_phone` TEXT NULL ,
   `member_email` VARCHAR(200) NULL DEFAULT '',
   `member_image` VARCHAR(200) NULL DEFAULT '',
+  `member_uid` INT(10) NOT NULL DEFAULT '0',
   `member_submitter` INT(10) NOT NULL DEFAULT '0',
   `member_date_create` INT(10) NOT NULL DEFAULT '0',
   PRIMARY KEY (`member_id`)

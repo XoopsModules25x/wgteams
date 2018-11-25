@@ -12,6 +12,7 @@
 				<th class="center"><{$smarty.const._AM_WGTEAMS_MEMBER_PHONE}></th>
 				<th class="center"><{$smarty.const._AM_WGTEAMS_MEMBER_EMAIL}></th>
 				<th class="center"><{$smarty.const._AM_WGTEAMS_MEMBER_IMAGE}></th>
+				<th class="center"><{$smarty.const._AM_WGTEAMS_MEMBER_UID}></th>
 				<th class="center"><{$smarty.const._AM_WGTEAMS_SUBMITTER}></th>
 				<th class="center"><{$smarty.const._AM_WGTEAMS_DATE_CREATE}></th>
 				<th class="center width5"><{$smarty.const._AM_WGTEAMS_FORM_ACTION}></th>
@@ -29,6 +30,7 @@
 					<td class="center"><{$member.phone}></td>
 					<td class="center"><{$member.email}></td>
 					<td class="center"><img src="<{$wgteams_upload_url}>/members/images/<{$member.image}>" alt="members" style='max-width:50px;' /></td>
+					<td class="center"><{$member.uid}></td>
 					<td class="center"><{$member.submitter}></td>
 					<td class="center"><{$member.date_create}></td>
 					<td class="center  width5">

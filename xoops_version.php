@@ -25,7 +25,7 @@ defined('XOOPS_ROOT_PATH') || exit('Restricted access');
 // ------------------- Informations ------------------- //
 $modversion = [
     'name'                => _MI_WGTEAMS_NAME,
-    'version'             => '1.08',
+    'version'             => '1.09',
     'description'         => _MI_WGTEAMS_DESC,
     'author'              => 'Goffy - Wedega.com',
     'author_mail'         => 'webmaster@wedega.com',
@@ -63,7 +63,7 @@ $modversion = [
     'module_website_url'  => '',
     'module_website_name' => '',
     'release'             => '2018/06/14',
-    'module_status'       => 'Final',
+    'module_status'       => 'RC1',
     // Admin system menu
     'system_menu'         => 1,
     // Admin things

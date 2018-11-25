@@ -84,6 +84,7 @@ define('_AM_WGTEAMS_MEMBER_ADDRESS', 'Adresse');
 define('_AM_WGTEAMS_MEMBER_PHONE', 'Telefon');
 define('_AM_WGTEAMS_MEMBER_EMAIL', 'E-Mail');
 define('_AM_WGTEAMS_MEMBER_IMAGE', 'Bild');
+define('_AM_WGTEAMS_MEMBER_UID', 'Xoops User Id');
 // Relation add/edit
 define('_AM_WGTEAMS_RELATION_ADD', 'Neue Beziehung erstellen');
 define('_AM_WGTEAMS_RELATION_EDIT', 'Beziehung bearbeiten');

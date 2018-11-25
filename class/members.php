@@ -47,7 +47,8 @@ class WgteamsMembers extends XoopsObject
         $this->initVar('member_phone', XOBJ_DTYPE_TXTAREA);
         $this->initVar('member_email', XOBJ_DTYPE_TXTBOX);
         $this->initVar('member_image', XOBJ_DTYPE_TXTBOX);
-        $this->initVar('member_submitter', XOBJ_DTYPE_INT);
+        $this->initVar('member_uid', XOBJ_DTYPE_INT);
+		$this->initVar('member_submitter', XOBJ_DTYPE_INT);
         $this->initVar('member_date_create', XOBJ_DTYPE_INT);
     }
 
@@ -134,6 +135,17 @@ class WgteamsMembers extends XoopsObject
         $fileSelectTray->addElement(new XoopsFormLabel(_AM_WGTEAMS_MAX_FILESIZE .  $this->wgteams->getConfig('wgteams_img_maxsize')));
         $imageTray->addElement($fileSelectTray);
         $form->addElement($imageTray);
+		// Form Select User
+        $memberUid = $this->isNew() ? 0 : $this->getVar('member_uid');
+		$uidSelect = new XoopsFormSelect(_AM_WGTEAMS_MEMBER_UID, 'member_uid', $memberUid, 1);
+		$uidSelect->addOption(0, ' ');
+		$member_handler = xoops_getHandler('member');
+		$listUsers = array();
+		$listUsers = $member_handler->getUserList();	
+		foreach ( $listUsers as $key => $value ) {
+			$uidSelect->addOption($key, $value);
+		}
+        $form->addElement($uidSelect);
         // Form Select User
         $submitter = $this->isNew() ? $xoopsUser->getVar('uid') : $this->getVar('member_submitter');
         $form->addElement(new XoopsFormSelectUser(_AM_WGTEAMS_SUBMITTER, 'member_submitter', false, $submitter, 1, false));
@@ -165,7 +177,14 @@ class WgteamsMembers extends XoopsObject
         $ret['phone']       = strip_tags($this->getVar('member_phone'));
         $ret['email']       = $this->getVar('member_email');
         $ret['image']       = $this->getVar('member_image');
-        $ret['submitter']   = XoopsUser::getUnameFromId($this->getVar('member_submitter'));
+		$ret['uid']         = 0;
+		$ret['uid_text']    = '';
+		echo " uid:".$this->getVar('member_uid') ;
+		if ( 0 < $this->getVar('member_uid') ) {
+			$ret['uid']      = $this->getVar('member_uid');
+			$ret['uid_text'] = XoopsUser::getUnameFromId($this->getVar('member_uid'));
+		}
+		$ret['submitter']   = XoopsUser::getUnameFromId($this->getVar('member_submitter'));
         $ret['date_create'] = formatTimestamp($this->getVar('member_date_create'));
 
         return $ret;

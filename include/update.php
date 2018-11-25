@@ -36,12 +36,38 @@ function xoops_module_update_wgteams(&$module, $prev_version = null)
     if (!empty($errors)) {
         print_r($errors);
     }
+	if ($prev_version < 109) {
+        $ret = update_wgteams_v109($module);
+    }
+    $errors = $module->getErrors();
+    if (!empty($errors)) {
+        print_r($errors);
+    }
     
     // maintenance of tables
     $ret = maintaintables($module);
     
     return $ret;
     
+}
+
+
+/**
+ * @param $module
+ *
+ * @return bool
+ */
+function update_wgteams_v109(&$module)
+{
+    // create new field
+    $sql = 'ALTER TABLE `' . $GLOBALS['xoopsDB']->prefix('wgteams_members') . "` ADD `member_uid` int(10) NOT NULL DEFAULT '0' AFTER `member_image`;";
+    if (!$result = $GLOBALS['xoopsDB']->queryF($sql)) {
+        xoops_error($GLOBALS['xoopsDB']->error() . '<br>' . $sql);
+        $module->setErrors('error when adding new field member_uid to table wgteams_members');
+        return false;
+    }
+
+    return true;
 }
 
 // irmtfan bug fix: solve templates duplicate issue
@@ -104,8 +130,8 @@ function update_wgteams_v10(&$module)
 
     return true;
 }
-// irmtfan bug fix: solve templates duplicate issue
 
+// irmtfan bug fix: solve templates duplicate issue
 /**
  * repair errors in data (caused by former versions of wgteams)
  * @param: $module

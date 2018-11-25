@@ -193,6 +193,7 @@ function wgteamsGetTeamMemberDetails(&$teamsAll)
                 $nb_infos++;
             }
             $member_image = $member_obj->getVar('member_image');
+            $member_uid   = $member_obj->getVar('member_uid');
 
             // reset info field
             $infofield_id    = 0;
@@ -265,6 +266,7 @@ function wgteamsGetTeamMemberDetails(&$teamsAll)
                 'member_email'     => $member_email,
                 'member_image'     => $member_image,
                 'member_image_url' => $member_image_url,
+				'member_uid'       => $member_uid,
                 'info_1_name'      => $rel_info_1_name,
                 'info_1'           => $rel_info_1,
                 'info_2_name'      => $rel_info_2_name,

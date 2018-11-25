@@ -106,6 +106,8 @@ switch ($op) {
         } else {
             $membersObj->setVar('member_image', $_POST['member_image']);
         }
+		// Set Var member_uid
+        $membersObj->setVar('member_uid', $_POST['member_uid']);
         // Set Var member_submitter
         $membersObj->setVar('member_submitter', $_POST['member_submitter']);
         // Set Var member_date_create
