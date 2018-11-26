@@ -171,7 +171,6 @@ class WgteamsMembers extends XoopsObject
         $ret['image']       = $this->getVar('member_image');
 		$ret['uid']         = 0;
 		$ret['uid_text']    = '';
-		echo " uid:".$this->getVar('member_uid') ;
 		if ( 0 < $this->getVar('member_uid') ) {
 			$ret['uid']      = $this->getVar('member_uid');
 			$ret['uid_text'] = XoopsUser::getUnameFromId($this->getVar('member_uid'));
