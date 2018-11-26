@@ -85,6 +85,7 @@ define('_AM_WGTEAMS_MEMBER_PHONE', 'Telefon');
 define('_AM_WGTEAMS_MEMBER_EMAIL', 'E-Mail');
 define('_AM_WGTEAMS_MEMBER_IMAGE', 'Bild');
 define('_AM_WGTEAMS_MEMBER_UID', 'Xoops User Id');
+define('_AM_WGTEAMS_MEMBER_UID_DESC', "<br><span style='font-size:90%'>Sie können das Mitglied direkt mit einem Xoops-User-Konto verknüpfen und ein entsprechender Link zum Öffnen des Profils wird angezeigt.<br>Wenn Sie 'Gast' auswählen dann erscheint keine Button.</span>");
 // Relation add/edit
 define('_AM_WGTEAMS_RELATION_ADD', 'Neue Beziehung erstellen');
 define('_AM_WGTEAMS_RELATION_EDIT', 'Beziehung bearbeiten');

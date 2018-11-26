@@ -137,15 +137,7 @@ class WgteamsMembers extends XoopsObject
         $form->addElement($imageTray);
 		// Form Select User
         $memberUid = $this->isNew() ? 0 : $this->getVar('member_uid');
-		$uidSelect = new XoopsFormSelect(_AM_WGTEAMS_MEMBER_UID, 'member_uid', $memberUid, 1);
-		$uidSelect->addOption(0, ' ');
-		$member_handler = xoops_getHandler('member');
-		$listUsers = array();
-		$listUsers = $member_handler->getUserList();	
-		foreach ( $listUsers as $key => $value ) {
-			$uidSelect->addOption($key, $value);
-		}
-        $form->addElement($uidSelect);
+		$form->addElement( new XoopsFormSelectUser(_AM_WGTEAMS_MEMBER_UID . _AM_WGTEAMS_MEMBER_UID_DESC, 'member_uid', true, $memberUid, 1, false) );
         // Form Select User
         $submitter = $this->isNew() ? $xoopsUser->getVar('uid') : $this->getVar('member_submitter');
         $form->addElement(new XoopsFormSelectUser(_AM_WGTEAMS_SUBMITTER, 'member_submitter', false, $submitter, 1, false));
