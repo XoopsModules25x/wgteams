@@ -20,6 +20,9 @@
  * @version         $Id: 1.0 header.php 1 Sun 2015/12/27 23:18:01Z Goffy - Wedega $
  */
 
+use XoopsModules\Wgteams;
+use XoopsModules\Wgteams\Helper;
+
 include dirname(dirname(dirname(__DIR__))) . '/include/cp_header.php';
 $thisPath = dirname(__DIR__);
 include_once $thisPath . '/include/common.php';
@@ -30,11 +33,11 @@ $pathModuleAdmin = $GLOBALS['xoopsModule']->getInfo('dirmoduleadmin');
 $modPathIcon16 = $GLOBALS['xoopsModule']->getInfo('modicons16');
 $modPathIcon32 = $GLOBALS['xoopsModule']->getInfo('modicons32');
 // Get instance of module
-$wgteams           = WgteamsHelper::getInstance();
-$teamsHandler      = $wgteams->getHandler('teams');
-$membersHandler    = $wgteams->getHandler('members');
-$relationsHandler  = $wgteams->getHandler('relations');
-$infofieldsHandler = $wgteams->getHandler('infofields');
+$helper           = Helper::getInstance();
+$teamsHandler      = $helper->getHandler('teams');
+$membersHandler    = $helper->getHandler('members');
+$relationsHandler  = $helper->getHandler('relations');
+$infofieldsHandler = $helper->getHandler('infofields');
 
 //
 $myts = MyTextSanitizer::getInstance();

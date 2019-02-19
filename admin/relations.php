@@ -30,7 +30,7 @@ switch ($op) {
     default:
         $GLOBALS['xoTheme']->addScript(WGTEAMS_URL . '/assets/js/sortable-relations.js');
         $start        = XoopsRequest::getInt('start', 0);
-        $limit        = XoopsRequest::getInt('limit', $wgteams->getConfig('adminpager'));
+        $limit        = XoopsRequest::getInt('limit', $helper->getConfig('adminpager'));
         $templateMain = 'wgteams_admin_relations.tpl';
         $GLOBALS['xoopsTpl']->assign('navigation', $adminMenu->addNavigation('relations.php'));
         $adminMenu->addItemButton(_AM_WGTEAMS_RELATION_ADD, 'relations.php?op=new', 'add');

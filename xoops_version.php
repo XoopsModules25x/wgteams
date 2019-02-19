@@ -20,12 +20,15 @@
  * @version         $Id: 1.0 xoops_version.php 1 Sun 2015/12/27 23:18:02Z Goffy - Wedega $
  */
 defined('XOOPS_ROOT_PATH') || exit('Restricted access');
+
+use XoopsModules\Wgteams;
+use XoopsModules\Wgteams\Helper;
 //
 //$dirname = basename(__DIR__);
 // ------------------- Informations ------------------- //
 $modversion = [
     'name'                => _MI_WGTEAMS_NAME,
-    'version'             => '1.09',
+    'version'             => '1.10',
     'description'         => _MI_WGTEAMS_DESC,
     'author'              => 'Goffy - Wedega.com',
     'author_mail'         => 'webmaster@wedega.com',
@@ -42,8 +45,8 @@ $modversion = [
     //
     'manual'              => 'link to manual file',
     'manual_file'         => XOOPS_URL . '/modules/wgteams/docs/install.txt',
-    'min_php'             => '5.5',
-    'min_xoops'           => '2.5.7',
+    'min_php'             => '5.6',
+    'min_xoops'           => '2.5.9',
     'min_admin'           => '1.1',
     'min_db'              => ['mysql' => '5.0.7', 'mysqli' => '5.0.7'],
     'image'               => 'assets/images/wgteams_logo.png',
@@ -120,8 +123,7 @@ if (is_object($xoopsModule) && $xoopsModule->getVar('dirname') == $modversion['d
 
     $s = 0;
 
-    $wgteams      = WgteamsHelper::getInstance();
-    $teamsHandler = $wgteams->getHandler('teams');
+    $teamsHandler = $helper->getHandler('teams');
 
     $crit_teams = new CriteriaCompo();
     $crit_teams->add(new Criteria('team_online', '1'));
@@ -212,10 +214,32 @@ $modversion['config'][] = [
     'name'        => 'wgteams_img_maxsize',
     'title'       => '_MI_WGTEAMS_IMG_MAXSIZE',
     'description' => '_MI_WGTEAMS_IMG_MAXSIZE_DESC',
-    'formtype'    => 'textbox',
-    'valuetype'   => 'int',
-    'default'     => 10485760
-]; // 1 MB
+    'formtype'    => 'select',
+    'valuetype'   => 'text',
+    'default'     => 3145728,
+    'options'     => [
+        '0.5 MB' => 524288,
+        '1 MB'   => 1048576,
+        '1.5 MB' => 1572864,
+        '2 MB'   => 2097152,
+        '2.5 MB' => 2621440,
+        '3 MB'   => 3145728,
+        '3.5 MB' => 3670016,
+        '4 MB'   => 4194304,
+        '4.5 MB' => 4718592,
+        '5 MB'   => 5242880,
+        '5.5 MB' => 5767168,
+        '6 MB'   => 6291456,
+        '6.5 MB' => 6815744,
+        '7 MB'   => 7340032,
+        '7.5 MB' => 7864320,
+        '8 MB'   => 8388608,
+        '8.5 MB' => 8912896,
+        '9 MB'   => 9437184,
+        '9.5 MB' => 9961472,
+        '10 MB'  => 10485760,
+    ],
+];
 
 //Uploads : mimetypes of images
 $modversion['config'][] = [

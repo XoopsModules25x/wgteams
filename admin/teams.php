@@ -30,7 +30,7 @@ switch ($op) {
     default:
         $GLOBALS['xoTheme']->addScript(WGTEAMS_URL . '/assets/js/sortable-teams.js');
         $start        = XoopsRequest::getInt('start', 0);
-        $limit        = XoopsRequest::getInt('limit', $wgteams->getConfig('adminpager'));
+        $limit        = XoopsRequest::getInt('limit', $helper->getConfig('adminpager'));
         $templateMain = 'wgteams_admin_teams.tpl';
         $GLOBALS['xoopsTpl']->assign('navigation', $adminMenu->addNavigation('teams.php'));
         $adminMenu->addItemButton(_AM_WGTEAMS_TEAM_ADD, 'teams.php?op=new', 'add');
@@ -101,8 +101,8 @@ switch ($op) {
         // Set Var team_image
         include_once XOOPS_ROOT_PATH . '/class/uploader.php';
         $uploader = new XoopsMediaUploader(WGTEAMS_UPLOAD_PATH.'/teams/images',
-                                                        $wgteams->getConfig('wgteams_img_mimetypes'),
-                                                        $wgteams->getConfig('wgteams_img_maxsize'), null, null);
+                                                        $helper->getConfig('wgteams_img_mimetypes'),
+                                                        $helper->getConfig('wgteams_img_maxsize'), null, null);
         if ($uploader->fetchMedia($_POST['xoops_upload_file'][0])) {
             $extension = preg_replace('/^.+\.([^.]+)$/sU', '', $_FILES['attachedfile']['name']);
             $imgName   = str_replace(' ', '', $_POST['team_name']) . '.' . $extension;

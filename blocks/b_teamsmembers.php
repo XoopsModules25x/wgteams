@@ -38,8 +38,7 @@ function b_wgteams_teamsmembers_show($options)
     array_shift($options);
     array_shift($options);
 
-    $wgteams      = WgteamsHelper::getInstance();
-    $teamsHandler = $wgteams->getHandler('teams');
+    $teamsHandler = \XoopsModules\Wgteams\Helper::getInstance()->getHandler('teams');
 
     $crit_teams = new CriteriaCompo();
     $crit_teams->add(new Criteria('team_id', $team_id));
@@ -65,8 +64,7 @@ function b_wgteams_teamsmembers_show($options)
 function b_wgteams_teamsmembers_edit($options)
 {
     include_once XOOPS_ROOT_PATH . '/modules/wgteams/class/teams.php';
-    $wgteams      = WgteamsHelper::getInstance();
-    $teamsHandler = $wgteams->getHandler('teams');
+    $teamsHandler = $helper->getHandler('teams');
     $GLOBALS['xoopsTpl']->assign('wgteams_upload_url', WGTEAMS_UPLOAD_URL);
     $form = _MB_WGTEAMS_TEAM_TO_DISPLAY;
     $form .= "<input type='hidden' name='options[0]' value='" . $options[0] . "' />";

@@ -1,4 +1,7 @@
 <?php
+
+namespace XoopsModules\Wgteams;
+
 /*
  You may not change or alter any portion of this comment or credits
  of supporting developers from this source code or any supporting source code
@@ -21,11 +24,10 @@
  */
 defined('XOOPS_ROOT_PATH') || exit('Restricted access');
 
-
 /**
  * Class WgteamsInfofields
  */
-class WgteamsInfofields extends XoopsObject
+class Infofields extends \XoopsObject
 {
     /**
     * @var mixed
@@ -39,7 +41,6 @@ class WgteamsInfofields extends XoopsObject
      */
     public function __construct()
     {
-        $this->wgteams = WgteamsHelper::getInstance();
         $this->initVar('infofield_id', XOBJ_DTYPE_INT);
         $this->initVar('infofield_name', XOBJ_DTYPE_TXTBOX);
         $this->initVar('infofield_submitter', XOBJ_DTYPE_INT);
@@ -82,7 +83,7 @@ class WgteamsInfofields extends XoopsObject
         $form = new XoopsThemeForm($title, 'form', $action, 'post', true);
         $form->setExtra('enctype="multipart/form-data"');
         // Infofields handler
-        //$infofieldsHandler = $this->wgteams->getHandler('infofields');
+        //$infofieldsHandler = $helper->getHandler('infofields');
         // Form Text AddField_name
         $form->addElement(new XoopsFormText(_AM_WGTEAMS_INFOFIELD_NAME, 'infofield_name', 50, 255, $this->getVar('infofield_name')), true);
         // Form Select User
@@ -129,131 +130,5 @@ class WgteamsInfofields extends XoopsObject
         }
 
         return $ret;
-    }
-}
-
-/**
- * Class WgteamsInfofieldsHandler
- */
-class WgteamsInfofieldsHandler extends XoopsPersistableObjectHandler
-{
-    /**
-    * @var mixed
-    */
-    private $wgteams = null;
-
-    /**
-     * Constructor
-     *
-     * @param \XoopsDatabase $db
-     */
-    public function __construct(XoopsDatabase $db)
-    {
-        parent::__construct($db, 'wgteams_infofields', 'wgteamsinfofields', 'infofield_id', 'infofield_name');
-        $this->wgteams = WgteamsHelper::getInstance();
-    }
-
-    /**
-     * @param bool $isNew
-     *
-     * @return XoopsObject
-     */
-    public function create($isNew = true)
-    {
-        $temp = parent::create($isNew);
-        return $temp;
-    }
-
-    /**
-     * retrieve a field
-     *
-     * @param  int $i field id
-     * @param null $fields
-     * @return mixed reference to the <a href='psi_element://TDMCreateFields'>TDMCreateFields</a> object
-     *                object
-     */
-    public function get($i = null, $fields = null)
-    {
-        $temp = parent::get($i, $fields);
-        return $temp;
-    }
-
-    /**
-     * get inserted id
-     *
-     * @param null
-     * @return integer reference to the {@link TDMCreateFields} object
-     */
-    public function getInsertId()
-    {
-        $temp = $this->db->getInsertId();
-        return $temp;
-    }
-
-    /**
-     * get IDs of objects matching a condition
-     *
-     * @param  CriteriaElement $criteria {@link CriteriaElement} to match
-     * @return array  of object IDs
-     */
-    public function &getIds(CriteriaElement $criteria = null)
-    {
-        $temp =&  parent::getIds($criteria);
-        return $temp;
-    }
-
-    /**
-     * insert a new field in the database
-     *
-     * @param XoopsObject $field reference to the {@link TDMCreateFields} object
-     * @param bool   $force
-     *
-     * @return bool FALSE if failed, TRUE if already present and unchanged or successful
-     */
-    public function insert(XoopsObject $field, $force = false)
-    {
-        if (!parent::insert($field, $force)) {
-            return false;
-        }
-
-        return true;
-    }
-
-    /**
-     * Get Count Infofields
-     * @param int    $start
-     * @param int    $limit
-     * @param string $sort
-     * @param string $order
-     * @return int
-     */
-    public function getCountInfofields($start = 0, $limit = 0, $sort = 'infofield_id ASC, infofield_name', $order = 'ASC')
-    {
-        $criteria = new CriteriaCompo();
-        $criteria->setSort($sort);
-        $criteria->setOrder($order);
-        $criteria->setStart($start);
-        $criteria->setLimit($limit);
-
-        return $this->getCount($criteria);
-    }
-
-    /**
-     * Get All Infofields
-     * @param int    $start
-     * @param int    $limit
-     * @param string $sort
-     * @param string $order
-     * @return array
-     */
-    public function getAllInfofields($start = 0, $limit = 0, $sort = 'infofield_id ASC, infofield_name', $order = 'ASC')
-    {
-        $criteria = new CriteriaCompo();
-        $criteria->setSort($sort);
-        $criteria->setOrder($order);
-        $criteria->setStart($start);
-        $criteria->setLimit($limit);
-
-        return $this->getAll($criteria);
     }
 }

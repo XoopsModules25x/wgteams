@@ -34,8 +34,8 @@ function b_wgteams_teams_show($options)
 
     $GLOBALS['xoopsTpl']->assign('wgteams_teams_upload_url', WGTEAMS_UPLOAD_URL . '/teams/images/');
 
-    $wgteams      = WgteamsHelper::getInstance();
-    $teamsHandler = $wgteams->getHandler('teams');
+    $helper      = WgteamsHelper::getInstance();
+    $teamsHandler = $helper->getHandler('teams');
 
     $crit_teams = new CriteriaCompo();
     $crit_teams->add(new Criteria('team_online', '1'));

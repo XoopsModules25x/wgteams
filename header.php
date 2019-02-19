@@ -19,6 +19,9 @@
  * @author          Goffy - Wedega.com - Email:<webmaster@wedega.com> - Website:<https://wedega.com>
  * @version         $Id: 1.0 header.php 1 Sun 2015/12/27 23:18:01Z Goffy - Wedega $
  */
+ 
+use XoopsModules\Wgteams\Helper;
+
 include dirname(dirname(__DIR__)) . '/mainfile.php';
 include __DIR__ . '/include/common.php';
 $dirname = basename(__DIR__);
@@ -26,11 +29,11 @@ $dirname = basename(__DIR__);
 $xoBreadcrumbs   = [];
 $xoBreadcrumbs[] = ['title' => $GLOBALS['xoopsModule']->getVar('name'), 'link' => WGTEAMS_URL . '/'];
 // Get instance of module
-$wgteams           = WgteamsHelper::getInstance();
-$teamsHandler      = $wgteams->getHandler('teams');
-$membersHandler    = $wgteams->getHandler('members');
-$relationsHandler  = $wgteams->getHandler('relations');
-$infofieldsHandler = $wgteams->getHandler('infofields');
+$helper 		   = Helper::getInstance();
+$teamsHandler      = $helper->getHandler('teams');
+$membersHandler    = $helper->getHandler('members');
+$relationsHandler  = $helper->getHandler('relations');
+$infofieldsHandler = $helper->getHandler('infofields');
 // Permission
 include_once XOOPS_ROOT_PATH . '/class/xoopsform/grouppermform.php';
 $gperm_handler = xoops_getHandler('groupperm');
