@@ -22,6 +22,9 @@ namespace XoopsModules\Wgteams;
  * @author          Goffy - Wedega.com - Email:<webmaster@wedega.com> - Website:<https://wedega.com>
  * @version         $Id: 1.0 teams.php 1 Sun 2015/12/27 23:18:00Z Goffy - Wedega $
  */
+ 
+ use XoopsModules\Wgteams;
+ 
 defined('XOOPS_ROOT_PATH') || exit('Restricted access');
 
 /**
@@ -42,7 +45,7 @@ class Teams extends \XoopsObject
      */
     public function __construct()
     {
-        $helper = WgteamsHelper::getInstance();
+        $helper = Wgteams\Helper::getInstance();
         $this->initVar('team_id', XOBJ_DTYPE_INT);
         $this->initVar('team_name', XOBJ_DTYPE_TXTBOX);
         $this->initVar('team_descr', XOBJ_DTYPE_TXTAREA);

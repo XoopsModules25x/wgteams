@@ -23,6 +23,9 @@ namespace XoopsModules\Wgteams;
  * @author          Goffy - Wedega.com - Email:<webmaster@wedega.com> - Website:<https://wedega.com>
  * @version         $Id: 1.0 relations.php 1 Sun 2015/12/27 23:18:00Z Goffy - Wedega $
  */
+ 
+use XoopsModules\Wgteams;
+
 defined('XOOPS_ROOT_PATH') || exit('Restricted access');
 
 /**
@@ -39,7 +42,7 @@ class RelationsHandler extends \XoopsPersistableObjectHandler
     public function __construct(\XoopsDatabase $db)
     {
         parent::__construct($db, 'wgteams_relations', Relations::class, 'rel_id', 'rel_team_id');
-        $helper = WgteamsHelper::getInstance();
+        $helper = Wgteams\Helper::getInstance();
     }
 
     /**
