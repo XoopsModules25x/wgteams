@@ -45,7 +45,7 @@ class Teams extends \XoopsObject
      */
     public function __construct()
     {
-        $helper = Wgteams\Helper::getInstance();
+        $this->helper = Wgteams\Helper::getInstance();
         $this->initVar('team_id', XOBJ_DTYPE_INT);
         $this->initVar('team_name', XOBJ_DTYPE_TXTBOX);
         $this->initVar('team_descr', XOBJ_DTYPE_TXTAREA);
@@ -106,7 +106,7 @@ class Teams extends \XoopsObject
         $editor_configs['cols']   = 40;
         $editor_configs['width']  = '100%';
         $editor_configs['height'] = '400px';
-        $editor_configs['editor'] = $helper->getConfig('wgteams_editor');
+        $editor_configs['editor'] = $this->helper->getConfig('wgteams_editor');
         $form->addElement(new \XoopsFormEditor(_AM_WGTEAMS_TEAM_DESCR, 'team_descr', $editor_configs));
         // Form Upload Image
         $getTeamImage   = $this->getVar('team_image');
@@ -124,8 +124,8 @@ class Teams extends \XoopsObject
         $imageTray->addElement(new \XoopsFormLabel('', "<br><img src='".XOOPS_URL . '/' . $imageDirectory . '/' . $teamImage . "' name='image2' id='image2' alt='' style='max-width:100px;' />"));
         // Form File
         $fileSelectTray = new \XoopsFormElementTray('', '<br>');
-        $fileSelectTray->addElement(new \XoopsFormFile(_AM_WGTEAMS_FORM_UPLOAD_IMG, 'attachedfile', $helper->getConfig('wgteams_img_maxsize')));
-        $fileSelectTray->addElement(new \XoopsFormLabel(_AM_WGTEAMS_MAX_FILESIZE .  $helper->getConfig('wgteams_img_maxsize')));
+        $fileSelectTray->addElement(new \XoopsFormFile(_AM_WGTEAMS_FORM_UPLOAD_IMG, 'attachedfile', $this->helper->getConfig('wgteams_img_maxsize')));
+        $fileSelectTray->addElement(new \XoopsFormLabel(_AM_WGTEAMS_MAX_FILESIZE .  $this->helper->getConfig('wgteams_img_maxsize')));
         $imageTray->addElement($fileSelectTray);
         $form->addElement($imageTray);
         // Form Text TeamNb_cols
@@ -189,7 +189,7 @@ class Teams extends \XoopsObject
 		$ret                  = $this->getValues($keys, $format, $maxDepth);
         $ret['id']            = $this->getVar('team_id');
         $ret['name']          = strip_tags($this->getVar('team_name'));
-        $ret['descr']         = $helper->truncateHtml($this->getVar('team_descr', 'n'));
+        $ret['descr']         = $this->helper->truncateHtml($this->getVar('team_descr', 'n'));
         $ret['image']         = $this->getVar('team_image');
         $ret['nb_cols']       = $this->getVar('team_nb_cols');
         $ret['tablestyle']    = $this->getVar('team_tablestyle');

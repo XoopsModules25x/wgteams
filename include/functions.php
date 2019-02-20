@@ -83,6 +83,7 @@ function wgteamsGetTeamDetails(&$teamsAll, $show_descr = true)
     // Get All Teams
     global $xoopsTpl, $xoTheme;
 
+    $helper = \XoopsModules\Wgteams\Helper::getInstance();
     $teamsHandler = $helper->getHandler('teams');
 
     xoops_loadLanguage('main', WGTEAMS_DIRNAME);
@@ -128,6 +129,7 @@ function wgteamsGetTeamMemberDetails(&$teamsAll)
     // Get All Teams
     global $xoopsTpl, $xoTheme;
 
+    $helper = \XoopsModules\Wgteams\Helper::getInstance();
     $teamsHandler      = $helper->getHandler('teams');
     $membersHandler    = $helper->getHandler('members');
     $relationsHandler  = $helper->getHandler('relations');

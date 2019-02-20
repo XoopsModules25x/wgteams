@@ -64,6 +64,7 @@ function b_wgteams_teamsmembers_show($options)
 function b_wgteams_teamsmembers_edit($options)
 {
     include_once XOOPS_ROOT_PATH . '/modules/wgteams/class/teams.php';
+    $helper = \XoopsModules\Wgteams\Helper::getInstance();
     $teamsHandler = $helper->getHandler('teams');
     $GLOBALS['xoopsTpl']->assign('wgteams_upload_url', WGTEAMS_UPLOAD_URL);
     $form = _MB_WGTEAMS_TEAM_TO_DISPLAY;

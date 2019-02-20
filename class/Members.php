@@ -22,6 +22,9 @@ namespace XoopsModules\Wgteams;
  * @author          Goffy - Wedega.com - Email:<webmaster@wedega.com> - Website:<https://wedega.com>
  * @version         $Id: 1.0 members.php 1 Sun 2015/12/27 23:18:00Z Goffy - Wedega $
  */
+
+use XoopsModules\Wgteams;
+
 defined('XOOPS_ROOT_PATH') || exit('Restricted access');
 
 /**
@@ -37,6 +40,7 @@ class Members extends \XoopsObject
      */
     public function __construct()
     {
+        $this->helper = Wgteams\Helper::getInstance();
         $this->initVar('member_id', XOBJ_DTYPE_INT);
         $this->initVar('member_firstname', XOBJ_DTYPE_TXTBOX);
         $this->initVar('member_lastname', XOBJ_DTYPE_TXTBOX);
@@ -129,8 +133,8 @@ class Members extends \XoopsObject
         $imageTray->addElement(new \XoopsFormLabel('', "<br><img src='" . XOOPS_URL . '/' . $imageDirectory . '/' . $memberImage . "' name='image2' id='image2' alt='' style='max-width:100px;' />"));
         // Form File
         $fileSelectTray = new \XoopsFormElementTray('', '<br>');
-        $fileSelectTray->addElement(new \XoopsFormFile(_AM_WGTEAMS_FORM_UPLOAD_IMG, 'attachedfile', $helper->getConfig('wgteams_img_maxsize')));
-        $fileSelectTray->addElement(new \XoopsFormLabel(_AM_WGTEAMS_MAX_FILESIZE .  $helper->getConfig('wgteams_img_maxsize')));
+        $fileSelectTray->addElement(new \XoopsFormFile(_AM_WGTEAMS_FORM_UPLOAD_IMG, 'attachedfile', $this->helper->getConfig('wgteams_img_maxsize')));
+        $fileSelectTray->addElement(new \XoopsFormLabel(_AM_WGTEAMS_MAX_FILESIZE .  $this->helper->getConfig('wgteams_img_maxsize')));
         $imageTray->addElement($fileSelectTray);
         $form->addElement($imageTray);
 		// Form Select User
@@ -162,7 +166,7 @@ class Members extends \XoopsObject
         $ret['firstname']   = $this->getVar('member_firstname');
         $ret['lastname']    = $this->getVar('member_lastname');
         $ret['title']       = $this->getVar('member_title');
-        $ret['address']     = $helper->truncateHtml($this->getVar('member_address', 'n'));
+        $ret['address']     = $this->helper->truncateHtml($this->getVar('member_address', 'n'));
         $ret['phone']       = strip_tags($this->getVar('member_phone'));
         $ret['email']       = $this->getVar('member_email');
         $ret['image']       = $this->getVar('member_image');
