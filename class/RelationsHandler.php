@@ -38,7 +38,7 @@ class RelationsHandler extends \XoopsPersistableObjectHandler
      */
     public function __construct(XoopsDatabase $db)
     {
-        parent::__construct($db, 'wgteams_relations', 'wgteamsrelations', 'rel_id', 'rel_team_id');
+        parent::__construct($db, 'wgteams_relations', Relations::class, 'rel_id', 'rel_team_id');
         $helper = WgteamsHelper::getInstance();
     }
 

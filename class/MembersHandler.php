@@ -37,7 +37,7 @@ class MembersHandler extends \XoopsPersistableObjectHandler
      */
     public function __construct(XoopsDatabase $db)
     {
-        parent::__construct($db, 'wgteams_members', 'wgteamsmembers', 'member_id', 'member_firstname');
+        parent::__construct($db, 'wgteams_members', Members::class, 'member_id', 'member_firstname');
     }
 
     /**

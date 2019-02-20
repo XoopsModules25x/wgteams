@@ -37,7 +37,7 @@ class TeamsHandler extends \XoopsPersistableObjectHandler
      */
     public function __construct(&$db)
     {
-        parent::__construct($db, 'wgteams_teams', 'wgteamsteams', 'team_id', 'team_name');
+        parent::__construct($db, 'wgteams_teams', Teams::class, 'team_id', 'team_name');
         $helper = Helper::getInstance();
     }
 
