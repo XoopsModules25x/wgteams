@@ -37,8 +37,8 @@ function b_wgteams_teams_show($options)
     $helper      = WgteamsHelper::getInstance();
     $teamsHandler = $helper->getHandler('teams');
 
-    $crit_teams = new CriteriaCompo();
-    $crit_teams->add(new Criteria('team_online', '1'));
+    $crit_teams = new \CriteriaCompo();
+    $crit_teams->add(new \Criteria('team_online', '1'));
     $crit_teams->setSort('team_weight');
     $crit_teams->setOrder('ASC');
     $teamsCount = $teamsHandler->getCount($crit_teams);

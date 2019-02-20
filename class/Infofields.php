@@ -66,7 +66,7 @@ class Infofields extends \XoopsObject
      * Get form
      *
      * @param bool|mixed $action
-     * @return XoopsThemeForm
+     * @return \XoopsThemeForm
      */
     public function getFormInfofields($action = false)
     {
@@ -80,20 +80,20 @@ class Infofields extends \XoopsObject
         $title = $this->isNew() ? sprintf(_AM_WGTEAMS_INFOFIELD_ADD) : sprintf(_AM_WGTEAMS_INFOFIELD_EDIT);
         // Get Theme Form
         xoops_load('XoopsFormLoader');
-        $form = new XoopsThemeForm($title, 'form', $action, 'post', true);
+        $form = new \XoopsThemeForm($title, 'form', $action, 'post', true);
         $form->setExtra('enctype="multipart/form-data"');
         // Infofields handler
         //$infofieldsHandler = $helper->getHandler('infofields');
         // Form Text AddField_name
-        $form->addElement(new XoopsFormText(_AM_WGTEAMS_INFOFIELD_NAME, 'infofield_name', 50, 255, $this->getVar('infofield_name')), true);
+        $form->addElement(new \XoopsFormText(_AM_WGTEAMS_INFOFIELD_NAME, 'infofield_name', 50, 255, $this->getVar('infofield_name')), true);
         // Form Select User
         $submitter = $this->isNew() ? $xoopsUser->getVar('uid') : $this->getVar('infofield_submitter');
-        $form->addElement(new XoopsFormSelectUser(_AM_WGTEAMS_SUBMITTER, 'infofield_submitter', false, $submitter, 1, false));
+        $form->addElement(new \XoopsFormSelectUser(_AM_WGTEAMS_SUBMITTER, 'infofield_submitter', false, $submitter, 1, false));
         // Form Text Date Select
-        $form->addElement(new XoopsFormTextDateSelect(_AM_WGTEAMS_DATE_CREATE, 'infofield_date_created', '', $this->getVar('infofield_date_created')));
+        $form->addElement(new \XoopsFormTextDateSelect(_AM_WGTEAMS_DATE_CREATE, 'infofield_date_created', '', $this->getVar('infofield_date_created')));
         // Send
-        $form->addElement(new XoopsFormHidden('op', 'save'));
-        $form->addElement(new XoopsFormButtonTray('', _SUBMIT, 'submit', '', false));
+        $form->addElement(new \XoopsFormHidden('op', 'save'));
+        $form->addElement(new \XoopsFormButtonTray('', _SUBMIT, 'submit', '', false));
 
         return $form;
     }
@@ -110,7 +110,7 @@ class Infofields extends \XoopsObject
         $ret                       = $this->getValues($keys, $format, $maxDepth);
         $ret['field_id']           = $this->getVar('infofield_id');
         $ret['field_name']         = $this->getVar('infofield_name');
-        $ret['field_submitter']    = XoopsUser::getUnameFromId($this->getVar('infofield_submitter'));
+        $ret['field_submitter']    = \XoopsUser::getUnameFromId($this->getVar('infofield_submitter'));
         $ret['field_date_created'] = formatTimestamp($this->getVar('infofield_date_created'));
 
         return $ret;

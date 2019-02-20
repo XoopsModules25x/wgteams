@@ -91,7 +91,7 @@ function update_wgteams_v10(&$module)
     if (count($tplids) > 0) {
         $tplfile_handler = xoops_getHandler('tplfile');
         $duplicate_files = $tplfile_handler->getObjects(
-            new Criteria('tpl_id', '(' . implode(',', $tplids) . ')', 'IN')
+            new \Criteria('tpl_id', '(' . implode(',', $tplids) . ')', 'IN')
         );
 
         if (count($duplicate_files) > 0) {

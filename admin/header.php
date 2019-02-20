@@ -43,7 +43,7 @@ $infofieldsHandler = $helper->getHandler('infofields');
 $myts = MyTextSanitizer::getInstance();
 if (!isset($xoopsTpl) || !is_object($xoopsTpl)) {
     include_once XOOPS_ROOT_PATH . '/class/template.php';
-    $xoopsTpl = new XoopsTpl();
+    $xoopsTpl = new \XoopsTpl();
 }
 // System icons path
 $xoopsTpl->assign('sysPathIcon16', $sysPathIcon16);

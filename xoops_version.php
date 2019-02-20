@@ -125,8 +125,8 @@ if (is_object($xoopsModule) && $xoopsModule->getVar('dirname') == $modversion['d
     $helper = \XoopsModules\Wgteams\Helper::getInstance();
     $teamsHandler = $helper->getHandler('teams');
 
-    $crit_teams = new CriteriaCompo();
-    $crit_teams->add(new Criteria('team_online', '1'));
+    $crit_teams = new \CriteriaCompo();
+    $crit_teams->add(new \Criteria('team_online', '1'));
     $crit_teams->setSort('team_weight');
     $crit_teams->setOrder('ASC');
     $teamsAll = $teamsHandler->getAll($crit_teams);
@@ -198,7 +198,7 @@ $modversion['config'][] = [
 
 // Editor
 xoops_load('xoopseditorhandler');
-$editorHandler          = XoopsEditorHandler::getInstance();
+$editorHandler          = \XoopsEditorHandler::getInstance();
 $modversion['config'][] = [
     'name'        => 'wgteams_editor',
     'title'       => '_MI_WGTEAMS_EDITOR',

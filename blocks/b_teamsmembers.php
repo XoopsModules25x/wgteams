@@ -40,9 +40,9 @@ function b_wgteams_teamsmembers_show($options)
 
     $teamsHandler = \XoopsModules\Wgteams\Helper::getInstance()->getHandler('teams');
 
-    $crit_teams = new CriteriaCompo();
-    $crit_teams->add(new Criteria('team_id', $team_id));
-    $crit_teams->add(new Criteria('team_online', '1'));
+    $crit_teams = new \CriteriaCompo();
+    $crit_teams->add(new \Criteria('team_id', $team_id));
+    $crit_teams->add(new \Criteria('team_online', '1'));
     $crit_teams->setSort('team_weight');
     $crit_teams->setOrder('ASC');
     $teamsCount = $teamsHandler->getCount($crit_teams);
@@ -69,9 +69,9 @@ function b_wgteams_teamsmembers_edit($options)
     $form = _MB_WGTEAMS_TEAM_TO_DISPLAY;
     $form .= "<input type='hidden' name='options[0]' value='" . $options[0] . "' />";
     array_shift($options);
-    $criteria = new CriteriaCompo();
-    $criteria->add(new Criteria('team_id', 0, '!='));
-    $criteria->add(new Criteria('team_online', 1));
+    $criteria = new \CriteriaCompo();
+    $criteria->add(new \Criteria('team_id', 0, '!='));
+    $criteria->add(new \Criteria('team_online', 1));
     $criteria->setSort('team_weight');
     $criteria->setOrder('ASC');
     $teamsAll = $teamsHandler->getAll($criteria);

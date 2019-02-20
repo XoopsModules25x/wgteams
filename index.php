@@ -37,10 +37,10 @@ $xoTheme->addStylesheet($style);
 
 $keywords = [];
 
-$crit_teams = new CriteriaCompo();
-$crit_teams->add(new Criteria('team_online', '1'));
+$crit_teams = new \CriteriaCompo();
+$crit_teams->add(new \Criteria('team_online', '1'));
 if ($team_id > 0) {
-    $crit_teams->add(new Criteria('team_id', $team_id));
+    $crit_teams->add(new \Criteria('team_id', $team_id));
 }
 $crit_teams->setSort('team_weight');
 $crit_teams->setOrder('ASC');
@@ -78,7 +78,7 @@ $GLOBALS['xoopsTpl']->assign('wgteams_teams_upload_url', WGTEAMS_UPLOAD_URL . '/
 // Display Navigation
 if ($teamsCount > $limit) {
     include_once XOOPS_ROOT_PATH . '/class/pagenav.php';
-    $nav = new XoopsPageNav($teamsCount, $limit, $start, 'start');
+    $nav = new \XoopsPageNav($teamsCount, $limit, $start, 'start');
     $GLOBALS['xoopsTpl']->assign('pagenav', $nav->renderNav(4));
 }
 // Breadcrumbs

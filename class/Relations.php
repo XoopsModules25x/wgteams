@@ -74,7 +74,7 @@ class Relations extends \XoopsObject
      * Get form
      *
      * @param mixed $action
-     * @return XoopsThemeForm
+     * @return \XoopsThemeForm
      */
     public function getFormRelations($action = false)
     {
@@ -101,16 +101,16 @@ class Relations extends \XoopsObject
         $title = $this->isNew() ? sprintf(_AM_WGTEAMS_RELATION_ADD) : sprintf(_AM_WGTEAMS_RELATION_EDIT);
         // Get Theme Form
         xoops_load('XoopsFormLoader');
-        $form = new XoopsThemeForm($title, 'form', $action, 'post', true);
+        $form = new \XoopsThemeForm($title, 'form', $action, 'post', true);
         $form->setExtra('enctype="multipart/form-data"');
         // Relations handler
         //$relationsHandler = $helper->getHandler('relations');
         // Form select team
-        $relTeam_idSelect = new XoopsFormSelect(_AM_WGTEAMS_RELATION_TEAM_ID, 'rel_team_id', $this->getVar('rel_team_id'));
+        $relTeam_idSelect = new \XoopsFormSelect(_AM_WGTEAMS_RELATION_TEAM_ID, 'rel_team_id', $this->getVar('rel_team_id'));
         $relTeam_idSelect->addOptionArray($teamsHandler->getList());
         $form->addElement($relTeam_idSelect, true);
         // Form select members
-        $relmember_idSelect = new XoopsFormSelect(_AM_WGTEAMS_RELATION_MEMBER_ID, 'rel_member_id', $this->getVar('rel_member_id'));
+        $relmember_idSelect = new \XoopsFormSelect(_AM_WGTEAMS_RELATION_MEMBER_ID, 'rel_member_id', $this->getVar('rel_member_id'));
         $membersAll         = $membersHandler->getAllMembers();
         foreach (array_keys($membersAll) as $i) {
             $relmember_idSelect->addOption($membersAll[$i]->getVar('member_id'), $membersAll[$i]->getVar('member_firstname') . ' ' . $membersAll[$i]->getVar('member_lastname'));
@@ -118,7 +118,7 @@ class Relations extends \XoopsObject
         $form->addElement($relmember_idSelect, true);
         // Form infofield type 1
         $rel_info_1_field      = $this->isNew() ? 0 : $this->getVar('rel_info_1_field');
-        $relInfo_1_fieldSelect = new XoopsFormSelect(_AM_WGTEAMS_RELATION_INFO_1_FIELD, 'rel_info_1_field', $rel_info_1_field);
+        $relInfo_1_fieldSelect = new \XoopsFormSelect(_AM_WGTEAMS_RELATION_INFO_1_FIELD, 'rel_info_1_field', $rel_info_1_field);
         $relInfo_1_fieldSelect->addOption(0, '-');
         $relInfo_1_fieldSelect->addOptionArray($infofieldsHandler->getList());
         $form->addElement($relInfo_1_fieldSelect);
@@ -131,11 +131,11 @@ class Relations extends \XoopsObject
         $editor_configs['width']  = '100%';
         $editor_configs['height'] = '400px';
         $editor_configs['editor'] = $helper->getConfig('wgteams_editor');
-        $form->addElement(new XoopsFormEditor(_AM_WGTEAMS_RELATION_INFO_1, 'rel_info_1', $editor_configs));
+        $form->addElement(new \XoopsFormEditor(_AM_WGTEAMS_RELATION_INFO_1, 'rel_info_1', $editor_configs));
 
         // Form infofield type 2
         $rel_info_2_field      = $this->isNew() ? 0 : $this->getVar('rel_info_2_field');
-        $relInfo_2_fieldSelect = new XoopsFormSelect(_AM_WGTEAMS_RELATION_INFO_2_FIELD, 'rel_info_2_field', $rel_info_2_field);
+        $relInfo_2_fieldSelect = new \XoopsFormSelect(_AM_WGTEAMS_RELATION_INFO_2_FIELD, 'rel_info_2_field', $rel_info_2_field);
         $relInfo_2_fieldSelect->addOption(0, '-');
         $relInfo_2_fieldSelect->addOptionArray($infofieldsHandler->getList());
         $form->addElement($relInfo_2_fieldSelect);
@@ -148,11 +148,11 @@ class Relations extends \XoopsObject
         $editor_configs['width']  = '100%';
         $editor_configs['height'] = '400px';
         $editor_configs['editor'] = $helper->getConfig('wgteams_editor');
-        $form->addElement(new XoopsFormEditor(_AM_WGTEAMS_RELATION_INFO_2, 'rel_info_2', $editor_configs));
+        $form->addElement(new \XoopsFormEditor(_AM_WGTEAMS_RELATION_INFO_2, 'rel_info_2', $editor_configs));
 
         // Form infofield type 3
         $rel_info_3_field      = $this->isNew() ? 0 : $this->getVar('rel_info_3_field');
-        $relInfo_3_fieldSelect = new XoopsFormSelect(_AM_WGTEAMS_RELATION_INFO_3_FIELD, 'rel_info_3_field', $rel_info_3_field);
+        $relInfo_3_fieldSelect = new \XoopsFormSelect(_AM_WGTEAMS_RELATION_INFO_3_FIELD, 'rel_info_3_field', $rel_info_3_field);
         $relInfo_3_fieldSelect->addOption(0, '-');
         $relInfo_3_fieldSelect->addOptionArray($infofieldsHandler->getList());
         $form->addElement($relInfo_3_fieldSelect);
@@ -165,11 +165,11 @@ class Relations extends \XoopsObject
         $editor_configs['width']  = '100%';
         $editor_configs['height'] = '400px';
         $editor_configs['editor'] = $helper->getConfig('wgteams_editor');
-        $form->addElement(new XoopsFormEditor(_AM_WGTEAMS_RELATION_INFO_3, 'rel_info_3', $editor_configs));
+        $form->addElement(new \XoopsFormEditor(_AM_WGTEAMS_RELATION_INFO_3, 'rel_info_3', $editor_configs));
 
         // Form infofield type 4
         $rel_info_4_field      = $this->isNew() ? 0 : $this->getVar('rel_info_4_field');
-        $relinfo_4_fieldSelect = new XoopsFormSelect(_AM_WGTEAMS_RELATION_INFO_4_FIELD, 'rel_info_4_field', $rel_info_4_field);
+        $relinfo_4_fieldSelect = new \XoopsFormSelect(_AM_WGTEAMS_RELATION_INFO_4_FIELD, 'rel_info_4_field', $rel_info_4_field);
         $relinfo_4_fieldSelect->addOption(0, '-');
         $relinfo_4_fieldSelect->addOptionArray($infofieldsHandler->getList());
         $form->addElement($relinfo_4_fieldSelect);
@@ -182,11 +182,11 @@ class Relations extends \XoopsObject
         $editor_configs['width']  = '100%';
         $editor_configs['height'] = '400px';
         $editor_configs['editor'] = $helper->getConfig('wgteams_editor');
-        $form->addElement(new XoopsFormEditor(_AM_WGTEAMS_RELATION_INFO_4, 'rel_info_4', $editor_configs));
+        $form->addElement(new \XoopsFormEditor(_AM_WGTEAMS_RELATION_INFO_4, 'rel_info_4', $editor_configs));
 
         // Form infofield type 5
         $rel_info_5_field      = $this->isNew() ? 0 : $this->getVar('rel_info_5_field');
-        $relinfo_5_fieldSelect = new XoopsFormSelect(_AM_WGTEAMS_RELATION_INFO_5_FIELD, 'rel_info_5_field', $rel_info_5_field);
+        $relinfo_5_fieldSelect = new \XoopsFormSelect(_AM_WGTEAMS_RELATION_INFO_5_FIELD, 'rel_info_5_field', $rel_info_5_field);
         $relinfo_5_fieldSelect->addOption(0, '-');
         $relinfo_5_fieldSelect->addOptionArray($infofieldsHandler->getList());
         $form->addElement($relinfo_5_fieldSelect);
@@ -199,19 +199,19 @@ class Relations extends \XoopsObject
         $editor_configs['width']  = '100%';
         $editor_configs['height'] = '400px';
         $editor_configs['editor'] = $helper->getConfig('wgteams_editor');
-        $form->addElement(new XoopsFormEditor(_AM_WGTEAMS_RELATION_INFO_5, 'rel_info_5', $editor_configs));
+        $form->addElement(new \XoopsFormEditor(_AM_WGTEAMS_RELATION_INFO_5, 'rel_info_5', $editor_configs));
 
         // Form Text RelWeight
         $relWeight = $this->isNew() ? '0' : $this->getVar('rel_weight');
-        $form->addElement(new XoopsFormHidden('rel_weight', $relWeight));
+        $form->addElement(new \XoopsFormHidden('rel_weight', $relWeight));
         // Form Select User
         $submitter = $this->isNew() ? $xoopsUser->getVar('uid') : $this->getVar('rel_submitter');
-        $form->addElement(new XoopsFormSelectUser(_AM_WGTEAMS_SUBMITTER, 'rel_submitter', false, $submitter, 1, false));
+        $form->addElement(new \XoopsFormSelectUser(_AM_WGTEAMS_SUBMITTER, 'rel_submitter', false, $submitter, 1, false));
         // Form Text Date Select
-        $form->addElement(new XoopsFormTextDateSelect(_AM_WGTEAMS_DATE_CREATE, 'rel_date_create', '', $this->getVar('rel_date_create')));
+        $form->addElement(new \XoopsFormTextDateSelect(_AM_WGTEAMS_DATE_CREATE, 'rel_date_create', '', $this->getVar('rel_date_create')));
         // Send
-        $form->addElement(new XoopsFormHidden('op', 'save'));
-        $form->addElement(new XoopsFormButtonTray('', _SUBMIT, 'submit', '', false));
+        $form->addElement(new \XoopsFormHidden('op', 'save'));
+        $form->addElement(new \XoopsFormButtonTray('', _SUBMIT, 'submit', '', false));
 
         return $form;
     }
@@ -243,7 +243,7 @@ class Relations extends \XoopsObject
         $ret['info_5_field'] = $helper->getHandler('infofields')->get($this->getVar('rel_info_5_field'))->getVar('infofield_name');
         $ret['info_5']       = $helper->truncateHtml($this->getVar('rel_info_5', 'n'));
         $ret['weight']       = $this->getVar('rel_weight');
-        $ret['submitter']    = XoopsUser::getUnameFromId($this->getVar('rel_submitter'));
+        $ret['submitter']    = \XoopsUser::getUnameFromId($this->getVar('rel_submitter'));
         $ret['date_create']  = formatTimestamp($this->getVar('rel_date_create'));
 
         return $ret;

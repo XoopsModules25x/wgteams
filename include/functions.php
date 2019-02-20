@@ -153,8 +153,8 @@ function wgteamsGetTeamMemberDetails(&$teamsAll)
         $team_displaystyle = $teamsAll[$i]->getVar('team_displaystyle');
         $member_labels = 1 == $helper->getConfig('wgteams_labels') ? true : false;
 
-        $crit_rels = new CriteriaCompo();
-        $crit_rels->add(new Criteria('rel_team_id', $team_id));
+        $crit_rels = new \CriteriaCompo();
+        $crit_rels->add(new \Criteria('rel_team_id', $team_id));
         $crit_rels->setSort('rel_weight');
         $crit_rels->setOrder('ASC');
         $relsCount = $relationsHandler->getCount($crit_rels);
