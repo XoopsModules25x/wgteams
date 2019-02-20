@@ -122,7 +122,7 @@ if (is_object($xoopsModule) && $xoopsModule->getVar('dirname') == $modversion['d
     global $xoopsModuleConfig, $xoopsUser;
 
     $s = 0;
-
+    $helper = \XoopsModules\Wgteams\Helper::getInstance();
     $teamsHandler = $helper->getHandler('teams');
 
     $crit_teams = new CriteriaCompo();
