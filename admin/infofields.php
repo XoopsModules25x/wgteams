@@ -23,15 +23,15 @@
  
 include __DIR__ . '/header.php';
 // It recovered the value of argument op in URL$ 
-$op = XoopsRequest::getString('op', 'list');
+$op = \XoopsRequest::getString('op', 'list');
 // Request infofield_id
-$addField_id = XoopsRequest::getInt('infofield_id', 0);
+$addField_id = \XoopsRequest::getInt('infofield_id', 0);
 // Switch options
 switch ($op) {
     case 'list':
     default:
-        $start        = XoopsRequest::getInt('start', 0);
-        $limit        = XoopsRequest::getInt('limit', $helper->getConfig('adminpager'));
+        $start        = \XoopsRequest::getInt('start', 0);
+        $limit        = \XoopsRequest::getInt('limit', $helper->getConfig('adminpager'));
         $templateMain = 'wgteams_admin_infofields.tpl';
         $GLOBALS['xoopsTpl']->assign('navigation', $adminMenu->addNavigation('infofields.php'));
         $adminMenu->addItemButton(_AM_WGTEAMS_INFOFIELD_ADD, 'infofields.php?op=new', 'add');
@@ -50,7 +50,7 @@ switch ($op) {
             }
             if ($infofieldsCount > $limit) {
                 include_once XOOPS_ROOT_PATH . '/class/pagenav.php';
-                $pagenav = new XoopsPageNav($infofieldsCount, $limit, $start, 'start', 'op=list&limit=' . $limit);
+                $pagenav = new \XoopsPageNav($infofieldsCount, $limit, $start, 'start', 'op=list&limit=' . $limit);
                 $GLOBALS['xoopsTpl']->assign('pagenav', $pagenav->renderNav(4));
             }
         } else {

@@ -21,7 +21,7 @@
  */
 $dirname                = basename(dirname(__DIR__));
 $moduleHandler          = xoops_getHandler('module');
-$xoopsModule            = XoopsModule::getByDirname($dirname);
+$xoopsModule            = \XoopsModule::getByDirname($dirname);
 $moduleInfo             = $moduleHandler->get($xoopsModule->getVar('mid'));
 $sysPathIcon32          = $moduleInfo->getInfo('sysicons32');
 $i                      = 1;

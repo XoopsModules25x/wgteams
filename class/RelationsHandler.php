@@ -23,6 +23,9 @@ namespace XoopsModules\Wgteams;
  * @author          Goffy - Wedega.com - Email:<webmaster@wedega.com> - Website:<https://wedega.com>
  * @version         $Id: 1.0 relations.php 1 Sun 2015/12/27 23:18:00Z Goffy - Wedega $
  */
+ 
+use XoopsModules\Wgteams;
+
 defined('XOOPS_ROOT_PATH') || exit('Restricted access');
 
 /**
@@ -36,16 +39,16 @@ class RelationsHandler extends \XoopsPersistableObjectHandler
      *
      * @param \XoopsDatabase $db
      */
-    public function __construct(XoopsDatabase $db)
+    public function __construct(\XoopsDatabase $db)
     {
-        parent::__construct($db, 'wgteams_relations', 'wgteamsrelations', 'rel_id', 'rel_team_id');
-        $helper = WgteamsHelper::getInstance();
+        parent::__construct($db, 'wgteams_relations', Relations::class, 'rel_id', 'rel_team_id');
+        $helper = Wgteams\Helper::getInstance();
     }
 
     /**
      * @param bool $isNew
      *
-     * @return XoopsObject
+     * @return \XoopsObject
      */
     public function create($isNew = true)
     {
@@ -82,10 +85,10 @@ class RelationsHandler extends \XoopsPersistableObjectHandler
     /**
      * get IDs of objects matching a condition
      *
-     * @param  CriteriaElement $criteria {@link CriteriaElement} to match
+     * @param  \CriteriaElement $criteria {@link \CriteriaElement} to match
      * @return array  of object IDs
      */
-    public function &getIds(CriteriaElement $criteria = null)
+    public function &getIds(\CriteriaElement $criteria = null)
     {
         $temp =&  parent::getIds($criteria);
         return $temp;
@@ -94,12 +97,12 @@ class RelationsHandler extends \XoopsPersistableObjectHandler
     /**
      * insert a new field in the database
      *
-     * @param XoopsObject $field reference to the {@link TDMCreateFields} object
+     * @param \XoopsObject $field reference to the {@link TDMCreateFields} object
      * @param bool   $force
      *
      * @return bool FALSE if failed, TRUE if already present and unchanged or successful
      */
-    public function insert(XoopsObject $field, $force = false)
+    public function insert(\XoopsObject $field, $force = false)
     {
         if (!parent::insert($field, $force)) {
             return false;
@@ -118,7 +121,7 @@ class RelationsHandler extends \XoopsPersistableObjectHandler
      */
     public function getCountRelations($start = 0, $limit = 0, $sort = 'rel_id', $order = 'ASC')
     {
-        $criteria = new CriteriaCompo();
+        $criteria = new \CriteriaCompo();
         $criteria->setSort($sort);
         $criteria->setOrder($order);
         $criteria->setStart($start);
@@ -134,8 +137,8 @@ class RelationsHandler extends \XoopsPersistableObjectHandler
      */
     public function getCountRelationsTeam($team_id = 0)
     {
-        $criteria = new CriteriaCompo();
-        $criteria->add(new Criteria('rel_team_id', $team_id));
+        $criteria = new \CriteriaCompo();
+        $criteria->add(new \Criteria('rel_team_id', $team_id));
 
         return $this->getCount($criteria);
     }
@@ -150,7 +153,7 @@ class RelationsHandler extends \XoopsPersistableObjectHandler
      */
     public function getAllRelations($start = 0, $limit = 0, $sort = 'rel_team_id ASC, rel_weight ASC, rel_id', $order = 'ASC')
     {
-        $criteria = new CriteriaCompo();
+        $criteria = new \CriteriaCompo();
         $criteria->setSort($sort);
         $criteria->setOrder($order);
         $criteria->setStart($start);

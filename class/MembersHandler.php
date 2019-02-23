@@ -35,15 +35,15 @@ class MembersHandler extends \XoopsPersistableObjectHandler
      *
      * @param \XoopsDatabase $db
      */
-    public function __construct(XoopsDatabase $db)
+    public function __construct(\XoopsDatabase $db)
     {
-        parent::__construct($db, 'wgteams_members', 'wgteamsmembers', 'member_id', 'member_firstname');
+        parent::__construct($db, 'wgteams_members', Members::class, 'member_id', 'member_firstname');
     }
 
     /**
      * @param bool $isNew
      *
-     * @return XoopsObject
+     * @return \XoopsObject
      */
     public function create($isNew = true)
     {
@@ -80,10 +80,10 @@ class MembersHandler extends \XoopsPersistableObjectHandler
     /**
      * get IDs of objects matching a condition
      *
-     * @param  CriteriaElement $criteria {@link CriteriaElement} to match
+     * @param  \CriteriaElement $criteria {@link \CriteriaElement} to match
      * @return array  of object IDs
      */
-    public function &getIds(CriteriaElement $criteria = null)
+    public function &getIds(\CriteriaElement $criteria = null)
     {
         $temp =& parent::getIds($criteria);
         return $temp;
@@ -92,12 +92,12 @@ class MembersHandler extends \XoopsPersistableObjectHandler
     /**
      * insert a new field in the database
      *
-     * @param XoopsObject $field reference to the {@link TDMCreateFields} object
+     * @param \XoopsObject $field reference to the {@link TDMCreateFields} object
      * @param bool   $force
      *
      * @return bool FALSE if failed, TRUE if already present and unchanged or successful
      */
-    public function insert(XoopsObject $field, $force = false)
+    public function insert(\XoopsObject $field, $force = false)
     {
         if (!parent::insert($field, $force)) {
             return false;
@@ -116,7 +116,7 @@ class MembersHandler extends \XoopsPersistableObjectHandler
      */
     public function getCountMembers($start = 0, $limit = 0, $sort = 'member_id ASC, member_firstname', $order = 'ASC')
     {
-        $criteria = new CriteriaCompo();
+        $criteria = new \CriteriaCompo();
         $criteria->setSort($sort);
         $criteria->setOrder($order);
         $criteria->setStart($start);
@@ -135,7 +135,7 @@ class MembersHandler extends \XoopsPersistableObjectHandler
      */
     public function getAllMembers($start = 0, $limit = 0, $sort = 'member_id ASC, member_firstname', $order = 'ASC')
     {
-        $criteria = new CriteriaCompo();
+        $criteria = new \CriteriaCompo();
         $criteria->setSort($sort);
         $criteria->setOrder($order);
         $criteria->setStart($start);

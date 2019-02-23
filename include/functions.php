@@ -83,6 +83,7 @@ function wgteamsGetTeamDetails(&$teamsAll, $show_descr = true)
     // Get All Teams
     global $xoopsTpl, $xoTheme;
 
+    $helper = \XoopsModules\Wgteams\Helper::getInstance();
     $teamsHandler = $helper->getHandler('teams');
 
     xoops_loadLanguage('main', WGTEAMS_DIRNAME);
@@ -128,6 +129,7 @@ function wgteamsGetTeamMemberDetails(&$teamsAll)
     // Get All Teams
     global $xoopsTpl, $xoTheme;
 
+    $helper = \XoopsModules\Wgteams\Helper::getInstance();
     $teamsHandler      = $helper->getHandler('teams');
     $membersHandler    = $helper->getHandler('members');
     $relationsHandler  = $helper->getHandler('relations');
@@ -153,8 +155,8 @@ function wgteamsGetTeamMemberDetails(&$teamsAll)
         $team_displaystyle = $teamsAll[$i]->getVar('team_displaystyle');
         $member_labels = 1 == $helper->getConfig('wgteams_labels') ? true : false;
 
-        $crit_rels = new CriteriaCompo();
-        $crit_rels->add(new Criteria('rel_team_id', $team_id));
+        $crit_rels = new \CriteriaCompo();
+        $crit_rels->add(new \Criteria('rel_team_id', $team_id));
         $crit_rels->setSort('rel_weight');
         $crit_rels->setOrder('ASC');
         $relsCount = $relationsHandler->getCount($crit_rels);

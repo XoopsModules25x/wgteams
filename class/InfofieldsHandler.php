@@ -34,15 +34,15 @@ class InfofieldsHandler extends \XoopsPersistableObjectHandler
      *
      * @param \XoopsDatabase $db
      */
-    public function __construct(XoopsDatabase $db)
+    public function __construct(\XoopsDatabase $db)
     {
-        parent::__construct($db, 'wgteams_infofields', 'wgteamsinfofields', 'infofield_id', 'infofield_name');
+        parent::__construct($db, 'wgteams_infofields', Infofields::class, 'infofield_id', 'infofield_name');
     }
 
     /**
      * @param bool $isNew
      *
-     * @return XoopsObject
+     * @return \XoopsObject
      */
     public function create($isNew = true)
     {
@@ -79,10 +79,10 @@ class InfofieldsHandler extends \XoopsPersistableObjectHandler
     /**
      * get IDs of objects matching a condition
      *
-     * @param  CriteriaElement $criteria {@link CriteriaElement} to match
+     * @param  \CriteriaElement $criteria {@link \CriteriaElement} to match
      * @return array  of object IDs
      */
-    public function &getIds(CriteriaElement $criteria = null)
+    public function &getIds(\CriteriaElement $criteria = null)
     {
         $temp =&  parent::getIds($criteria);
         return $temp;
@@ -91,12 +91,12 @@ class InfofieldsHandler extends \XoopsPersistableObjectHandler
     /**
      * insert a new field in the database
      *
-     * @param XoopsObject $field reference to the {@link TDMCreateFields} object
+     * @param \XoopsObject $field reference to the {@link TDMCreateFields} object
      * @param bool   $force
      *
      * @return bool FALSE if failed, TRUE if already present and unchanged or successful
      */
-    public function insert(XoopsObject $field, $force = false)
+    public function insert(\XoopsObject $field, $force = false)
     {
         if (!parent::insert($field, $force)) {
             return false;
@@ -115,7 +115,7 @@ class InfofieldsHandler extends \XoopsPersistableObjectHandler
      */
     public function getCountInfofields($start = 0, $limit = 0, $sort = 'infofield_id ASC, infofield_name', $order = 'ASC')
     {
-        $criteria = new CriteriaCompo();
+        $criteria = new \CriteriaCompo();
         $criteria->setSort($sort);
         $criteria->setOrder($order);
         $criteria->setStart($start);
@@ -134,7 +134,7 @@ class InfofieldsHandler extends \XoopsPersistableObjectHandler
      */
     public function getAllInfofields($start = 0, $limit = 0, $sort = 'infofield_id ASC, infofield_name', $order = 'ASC')
     {
-        $criteria = new CriteriaCompo();
+        $criteria = new \CriteriaCompo();
         $criteria->setSort($sort);
         $criteria->setOrder($order);
         $criteria->setStart($start);
