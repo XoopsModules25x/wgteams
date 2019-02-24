@@ -83,8 +83,8 @@ function wgteamsGetTeamDetails(&$teamsAll, $show_descr = true)
     // Get All Teams
     global $xoopsTpl, $xoTheme;
 
-    $wgteams      = WgteamsHelper::getInstance();
-    $teamsHandler = $wgteams->getHandler('teams');
+    $helper = \XoopsModules\Wgteams\Helper::getInstance();
+    $teamsHandler = $helper->getHandler('teams');
 
     xoops_loadLanguage('main', WGTEAMS_DIRNAME);
 
@@ -129,11 +129,11 @@ function wgteamsGetTeamMemberDetails(&$teamsAll)
     // Get All Teams
     global $xoopsTpl, $xoTheme;
 
-    $wgteams           = WgteamsHelper::getInstance();
-    $teamsHandler      = $wgteams->getHandler('teams');
-    $membersHandler    = $wgteams->getHandler('members');
-    $relationsHandler  = $wgteams->getHandler('relations');
-    $infofieldsHandler = $wgteams->getHandler('infofields');
+    $helper = \XoopsModules\Wgteams\Helper::getInstance();
+    $teamsHandler      = $helper->getHandler('teams');
+    $membersHandler    = $helper->getHandler('members');
+    $relationsHandler  = $helper->getHandler('relations');
+    $infofieldsHandler = $helper->getHandler('infofields');
 
     xoops_loadLanguage('main', WGTEAMS_DIRNAME);
 
@@ -153,10 +153,10 @@ function wgteamsGetTeamMemberDetails(&$teamsAll)
         $team_tablestyle   = ('default' === $teamsAll[$i]->getVar('team_tablestyle')) ? '' : $teamsAll[$i]->getVar('team_tablestyle');
         $team_imagestyle   = ('default' === $teamsAll[$i]->getVar('team_imagestyle')) ? '' : $teamsAll[$i]->getVar('team_imagestyle');
         $team_displaystyle = $teamsAll[$i]->getVar('team_displaystyle');
-        $member_labels = 1 == $wgteams->getConfig('wgteams_labels') ? true : false;
+        $member_labels = 1 == $helper->getConfig('wgteams_labels') ? true : false;
 
-        $crit_rels = new CriteriaCompo();
-        $crit_rels->add(new Criteria('rel_team_id', $team_id));
+        $crit_rels = new \CriteriaCompo();
+        $crit_rels->add(new \Criteria('rel_team_id', $team_id));
         $crit_rels->setSort('rel_weight');
         $crit_rels->setOrder('ASC');
         $relsCount = $relationsHandler->getCount($crit_rels);

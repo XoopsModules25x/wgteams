@@ -21,16 +21,16 @@
  */
 include __DIR__ . '/header.php';
 // It recovered the value of argument op in URL$ 
-$op = XoopsRequest::getString('op', 'list');
+$op = \XoopsRequest::getString('op', 'list');
 // Request team_id
-$teamId = XoopsRequest::getInt('team_id', 0);
+$teamId = \XoopsRequest::getInt('team_id', 0);
 // Switch options
 switch ($op) {
     case 'list':
     default:
         $GLOBALS['xoTheme']->addScript(WGTEAMS_URL . '/assets/js/sortable-teams.js');
-        $start        = XoopsRequest::getInt('start', 0);
-        $limit        = XoopsRequest::getInt('limit', $wgteams->getConfig('adminpager'));
+        $start        = \XoopsRequest::getInt('start', 0);
+        $limit        = \XoopsRequest::getInt('limit', $helper->getConfig('adminpager'));
         $templateMain = 'wgteams_admin_teams.tpl';
         $GLOBALS['xoopsTpl']->assign('navigation', $adminMenu->addNavigation('teams.php'));
         $adminMenu->addItemButton(_AM_WGTEAMS_TEAM_ADD, 'teams.php?op=new', 'add');
@@ -50,7 +50,7 @@ switch ($op) {
             }
             if ($teamsCount > $limit) {
                 include_once XOOPS_ROOT_PATH . '/class/pagenav.php';
-                $pagenav = new XoopsPageNav($teamsCount, $limit, $start, 'start', 'op=list&limit=' . $limit);
+                $pagenav = new \XoopsPageNav($teamsCount, $limit, $start, 'start', 'op=list&limit=' . $limit);
                 $GLOBALS['xoopsTpl']->assign('pagenav', $pagenav->renderNav(4));
             }
         } else {
@@ -100,9 +100,9 @@ switch ($op) {
         $teamsObj->setVar('team_descr', $_POST['team_descr']);
         // Set Var team_image
         include_once XOOPS_ROOT_PATH . '/class/uploader.php';
-        $uploader = new XoopsMediaUploader(WGTEAMS_UPLOAD_PATH.'/teams/images',
-                                                        $wgteams->getConfig('wgteams_img_mimetypes'),
-                                                        $wgteams->getConfig('wgteams_img_maxsize'), null, null);
+        $uploader = new \XoopsMediaUploader(WGTEAMS_UPLOAD_PATH.'/teams/images',
+                                                        $helper->getConfig('wgteams_img_mimetypes'),
+                                                        $helper->getConfig('wgteams_img_maxsize'), null, null);
         if ($uploader->fetchMedia($_POST['xoops_upload_file'][0])) {
             $extension = preg_replace('/^.+\.([^.]+)$/sU', '', $_FILES['attachedfile']['name']);
             $imgName   = str_replace(' ', '', $_POST['team_name']) . '.' . $extension;
@@ -169,8 +169,8 @@ switch ($op) {
                     unlink(WGTEAMS_UPLOAD_PATH . '/teams/images/' . $team_img);
                 }
                 //delete relations
-                $crit_rels = new CriteriaCompo();
-                $crit_rels->add(new Criteria('rel_team_id', $team_id));
+                $crit_rels = new \CriteriaCompo();
+                $crit_rels->add(new \Criteria('rel_team_id', $team_id));
                 $relsCount = $relationsHandler->getCount($crit_rels);
                 if ( $relsCount > 0 ) {
                     $relationsAll   = $relationsHandler->getAll($crit_rels);

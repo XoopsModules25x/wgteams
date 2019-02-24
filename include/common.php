@@ -40,5 +40,4 @@ $copyright = "<a href='https://wedega.com' title='XOOPS on Wedega' target='_blan
                      <img src='" . $local_logo . "' alt='XOOPS on Wedega' style='height:40px;'/></a>";
 
 include_once XOOPS_ROOT_PATH . '/class/xoopsrequest.php';
-include_once WGTEAMS_PATH . '/class/helper.php';
 include_once WGTEAMS_PATH . '/include/functions.php';

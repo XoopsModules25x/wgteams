@@ -19,25 +19,28 @@
  * @author          Goffy - Wedega.com - Email:<webmaster@wedega.com> - Website:<https://wedega.com>
  * @version         $Id: 1.0 teams.php 1 Sun 2015/12/27 23:18:00Z Goffy - Wedega $
  */
+
+use Xmf\Request;
+
 include __DIR__ . '/header.php';
 $GLOBALS['xoopsOption']['template_main'] = 'wgteams_teams.tpl';
 include_once XOOPS_ROOT_PATH . '/header.php';
 
-$startpage = $wgteams->getConfig('startpage', 0);
+$startpage = $helper->getConfig('startpage', 0);
 
-$team_id = XoopsRequest::getInt('team_id', 0);
-$start   = XoopsRequest::getInt('start', 0);
-$limit   = XoopsRequest::getInt('limit', $wgteams->getConfig('userpager'));
+$team_id = Request::getInt('team_id', 0);
+$start   = Request::getInt('start', 0);
+$limit   = Request::getInt('limit', $helper->getConfig('userpager'));
 
 // Define Stylesheet
 $xoTheme->addStylesheet($style);
 
 $keywords = [];
 
-$crit_teams = new CriteriaCompo();
-$crit_teams->add(new Criteria('team_online', '1'));
+$crit_teams = new \CriteriaCompo();
+$crit_teams->add(new \Criteria('team_online', '1'));
 if ($team_id > 0) {
-    $crit_teams->add(new Criteria('team_id', $team_id));
+    $crit_teams->add(new \Criteria('team_id', $team_id));
 }
 $crit_teams->setSort('team_weight');
 $crit_teams->setOrder('ASC');
@@ -75,11 +78,11 @@ $GLOBALS['xoopsTpl']->assign('wgteams_teams_upload_url', WGTEAMS_UPLOAD_URL . '/
 // Display Navigation
 if ($teamsCount > $limit) {
     include_once XOOPS_ROOT_PATH . '/class/pagenav.php';
-    $nav = new XoopsPageNav($teamsCount, $limit, $start, 'start');
+    $nav = new \XoopsPageNav($teamsCount, $limit, $start, 'start');
     $GLOBALS['xoopsTpl']->assign('pagenav', $nav->renderNav(4));
 }
 // Breadcrumbs
-if (1 == $wgteams->getConfig('wgteams_showbreadcrumbs')) {
+if (1 == $helper->getConfig('wgteams_showbreadcrumbs')) {
     $xoBreadcrumbs[] = ['title' => _MA_WGTEAMS_TEAMS, 'link' => WGTEAMS_URL . '/index.php'];
     if ($team_id > 0 && '' === !$team_name) {
         $xoBreadcrumbs[] = ['title' => $team_name];
@@ -87,7 +90,7 @@ if (1 == $wgteams->getConfig('wgteams_showbreadcrumbs')) {
     $GLOBALS['xoopsTpl']->assign('showbreadcrumbs', '1');
 }
 // keywords
-wgteamsMetaKeywords($wgteams->getConfig('keywords') . ', ' . implode(', ', $keywords));
+wgteamsMetaKeywords($helper->getConfig('keywords') . ', ' . implode(', ', $keywords));
 unset($keywords);
 // description
 wgteamsMetaDescription(_MA_WGTEAMS_TEAM_DESC);

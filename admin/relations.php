@@ -21,16 +21,16 @@
  */
 include __DIR__ . '/header.php';
 // It recovered the value of argument op in URL$ 
-$op = XoopsRequest::getString('op', 'list');
+$op = \XoopsRequest::getString('op', 'list');
 // Request rel_id
-$relId = XoopsRequest::getInt('rel_id', 0);
+$relId = \XoopsRequest::getInt('rel_id', 0);
 // Switch options
 switch ($op) {
     case 'list':
     default:
         $GLOBALS['xoTheme']->addScript(WGTEAMS_URL . '/assets/js/sortable-relations.js');
-        $start        = XoopsRequest::getInt('start', 0);
-        $limit        = XoopsRequest::getInt('limit', $wgteams->getConfig('adminpager'));
+        $start        = \XoopsRequest::getInt('start', 0);
+        $limit        = \XoopsRequest::getInt('limit', $helper->getConfig('adminpager'));
         $templateMain = 'wgteams_admin_relations.tpl';
         $GLOBALS['xoopsTpl']->assign('navigation', $adminMenu->addNavigation('relations.php'));
         $adminMenu->addItemButton(_AM_WGTEAMS_RELATION_ADD, 'relations.php?op=new', 'add');
@@ -60,7 +60,7 @@ switch ($op) {
             }
             if ($relationsCount > $limit) {
                 include_once XOOPS_ROOT_PATH . '/class/pagenav.php';
-                $pagenav = new XoopsPageNav($relationsCount, $limit, $start, 'start', 'op=list&limit=' . $limit);
+                $pagenav = new \XoopsPageNav($relationsCount, $limit, $start, 'start', 'op=list&limit=' . $limit);
                 $GLOBALS['xoopsTpl']->assign('pagenav', $pagenav->renderNav(4));
             }
         } else {
