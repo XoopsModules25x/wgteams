@@ -10,11 +10,11 @@
 */
 
 /**
- * wgTeams module for xoops
+ * wgGallery module for xoops
  *
  * @copyright module for xoops
  * @license   GPL 2.0 or later
- * @package   wgTeams
+ * @package   wggallery
  * @since     1.0
  * @min_xoops 2.5.7
  * @author    Wedega - Email:<webmaster@wedega.com> - Website:<https://wedega.com>

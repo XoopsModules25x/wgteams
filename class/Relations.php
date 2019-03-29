@@ -24,7 +24,6 @@ namespace XoopsModules\Wgteams;
  */
 
 use XoopsModules\Wgteams;
-use XoopsModules\Wgteams\Helper;
 
 defined('XOOPS_ROOT_PATH') || exit('Restricted access');
 
@@ -45,7 +44,7 @@ class Relations extends \XoopsObject
      */
     public function __construct()
     {
-        $this->helper = Wgteams\Helper::getInstance();
+        $this->helper = Helper::getInstance();
         $this->initVar('rel_id', XOBJ_DTYPE_INT);
         $this->initVar('rel_team_id', XOBJ_DTYPE_INT);
         $this->initVar('rel_member_id', XOBJ_DTYPE_INT);
@@ -243,7 +242,7 @@ class Relations extends \XoopsObject
         $ret                 = $this->getValues($keys, $format, $maxDepth);
         $ret['id']           = $this->getVar('rel_id');
         $ret['team_id']      = $this->getVar('rel_team_id');
-        $ret['team_name']    = $this->helper->getHandler('Teams')->get($this->getVar('rel_team_id'))->getVar('team_name');
+        $ret['team_name']    = $this->helper->getHandler('teams')->get($this->getVar('rel_team_id'))->getVar('team_name');
         $ret['member_id']    = $this->getVar('rel_member_id');
         $ret['member_name']  = trim($this->helper->getHandler('members')->get($this->getVar('rel_member_id'))->getVar('member_firstname') . ' ' . $this->helper->getHandler('members')->get($this->getVar('rel_member_id'))->getVar('member_lastname'));
         $ret['info_1_field'] = $this->helper->getHandler('infofields')->get($this->getVar('rel_info_1_field'))->getVar('infofield_name');

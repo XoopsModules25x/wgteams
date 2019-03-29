@@ -198,6 +198,9 @@ function wgteamsGetTeamMemberDetails(&$teamsAll)
                 $nb_infos++;
             }
             $member_image = $member_obj->getVar('member_image');
+			if ('blank.gif' === $member_image) {
+				$member_image = '';
+			}
 
             // reset info field
             $infofield_id    = 0;

@@ -45,10 +45,14 @@ function getConfig()
         ],
 
         'copyTestFolders' => [
-            //[
-            //    constant($moduleDirNameUpper . '_PATH') . '/testdata/images',
-            //    XOOPS_UPLOAD_PATH . '/' . $moduleDirName . '/images',
-            //]
+            [
+               XOOPS_ROOT_PATH . '/modules/' . $moduleDirName . '/testdata/uploads/teams/images',
+               XOOPS_UPLOAD_PATH . '/' . $moduleDirName . '/teams/images',
+            ],
+			[
+               XOOPS_ROOT_PATH . '/modules/' . $moduleDirName . '/testdata/uploads/members/images',
+               XOOPS_UPLOAD_PATH . '/' . $moduleDirName . '/members/images',
+            ]
         ],
 
         'templateFolders' => [
@@ -74,7 +78,7 @@ function getConfig()
         ],
         'renameTables'    => [//         'XX_archive'     => 'ZZZZ_archive',
         ],
-        'modCopyright'    => "<a href='https://xoops.org' title='XOOPS Project' target='_blank'>
-                     <img src='" . constant($moduleDirNameUpper . '_AUTHOR_LOGOIMG') . '\' alt=\'XOOPS Project\' /></a>',
+        'modCopyright'    => "<a href='https://xoops.wedega.com' title='XOOPS on Wedega - Webdesign Gabor' target='_blank'>
+                     <img src='" . XOOPS_URL . '/modules/' . $moduleDirName . "/assets/images/wedega.png' alt='XOOPS on Wedega - Webdesign Gabor' /></a>",
     ];
 }
