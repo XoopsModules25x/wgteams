@@ -9,9 +9,14 @@
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 */
 /**
- * @copyright       XOOPS Project (https://xoops.org)
- * @license         GNU GPL 2 (http://www.gnu.org/licenses/old-licenses/gpl-2.0.html)
- * @author          XOOPS Project <www.xoops.org> <www.xoops.ir>
+ * wgTeams module for xoops
+ *
+ * @copyright       The XOOPS Project (http://xoops.org)
+ * @license         GPL 2.0 or later
+ * @package         wgteams
+ * @since           1.0
+ * @min_xoops       2.5.7
+ * @author          Goffy - Wedega.com - Email:<webmaster@wedega.com> - Website:<https://wedega.com>
  */
 defined('XOOPS_ROOT_PATH') || die('Restricted access');
 
@@ -28,5 +33,17 @@ class WgteamsCorePreload extends \XoopsPreloadItem
     public static function eventCoreIncludeCommonEnd($args)
     {
         require __DIR__ . '/autoloader.php';
+    }
+
+    // Here your functions method
+    // Example:
+
+    /**
+     * @param $args
+     */
+    public function eventCoreYourNameStart($args)
+    {
+        // Here your event
+        exit();
     }
 }

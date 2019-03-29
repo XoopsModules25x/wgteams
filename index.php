@@ -8,6 +8,7 @@
  but WITHOUT ANY WARRANTY; without even the implied warranty of
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 */
+
 /**
  * wgTeams module for xoops
  *
@@ -21,12 +22,14 @@
  */
 
 use Xmf\Request;
+use XoopsModules\Wgteams;
 
-include __DIR__ . '/header.php';
+require __DIR__ . '/header.php';
 $GLOBALS['xoopsOption']['template_main'] = 'wgteams_teams.tpl';
-include_once XOOPS_ROOT_PATH . '/header.php';
-
-$startpage = $helper->getConfig('startpage', 0);
+require_once XOOPS_ROOT_PATH . '/header.php';
+/** @var Wgteams\Helper $helper */
+$helper    = Wgteams\Helper::getInstance();
+$startpage = $helper->getConfig('startpage', 0)[0];
 
 $team_id = Request::getInt('team_id', 0);
 $start   = Request::getInt('start', 0);
@@ -77,7 +80,7 @@ $GLOBALS['xoopsTpl']->assign('wgteams_teams_upload_url', WGTEAMS_UPLOAD_URL . '/
 
 // Display Navigation
 if ($teamsCount > $limit) {
-    include_once XOOPS_ROOT_PATH . '/class/pagenav.php';
+    require_once XOOPS_ROOT_PATH . '/class/pagenav.php';
     $nav = new \XoopsPageNav($teamsCount, $limit, $start, 'start');
     $GLOBALS['xoopsTpl']->assign('pagenav', $nav->renderNav(4));
 }
@@ -97,4 +100,4 @@ wgteamsMetaDescription(_MA_WGTEAMS_TEAM_DESC);
 
 $GLOBALS['xoopsTpl']->assign('wgteams_url_index', WGTEAMS_URL . '/index.php');
 $GLOBALS['xoopsTpl']->assign('xoops_mpageurl', WGTEAMS_URL . '/index.php');
-include __DIR__ . '/footer.php';
+require __DIR__ . '/footer.php';

@@ -8,6 +8,7 @@
  but WITHOUT ANY WARRANTY; without even the implied warranty of
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 */
+
 /**
  * wgTeams module for xoops
  *
@@ -19,16 +20,22 @@
  * @author          Goffy - Wedega.com - Email:<webmaster@wedega.com> - Website:<https://wedega.com>
  * @version         $Id: 1.0 xoops_version.php 1 Sun 2015/12/27 23:18:02Z Goffy - Wedega $
  */
-defined('XOOPS_ROOT_PATH') || exit('Restricted access');
 
 use XoopsModules\Wgteams;
-use XoopsModules\Wgteams\Helper;
-//
-//$dirname = basename(__DIR__);
+
+defined('XOOPS_ROOT_PATH') || die('Restricted access');
+
+require_once __DIR__ . '/preloads/autoloader.php';
+
+$moduleDirName      = basename(__DIR__);
+$moduleDirNameUpper = mb_strtoupper($moduleDirName);
+
 // ------------------- Informations ------------------- //
 $modversion = [
+    'version'             => '1.09',
+    'module_status'       => 'Beta 2',
+    'release'             => '2019/03/29',
     'name'                => _MI_WGTEAMS_NAME,
-    'version'             => '1.10',
     'description'         => _MI_WGTEAMS_DESC,
     'author'              => 'Goffy - Wedega.com',
     'author_mail'         => 'webmaster@wedega.com',
@@ -38,23 +45,21 @@ $modversion = [
     'license'             => 'GPL 2.0 or later',
     'license_url'         => 'www.gnu.org/licenses/gpl-2.0.html/',
     'help'                => 'page=help',
-    //
-    'release_info'        => 'release_info',
+    'release_info' 		  => 'release_info',
     'release_file'        => XOOPS_URL . '/modules/wgteams/docs/release_info file',
-    'release_date'        => '2016/08/19',
-    //
+    'release_date'        => '2019/03/29',
     'manual'              => 'link to manual file',
     'manual_file'         => XOOPS_URL . '/modules/wgteams/docs/install.txt',
-    'min_php'             => '5.6',
-    'min_xoops'           => '2.5.9',
+    'min_php'             => '7.0',
+    'min_xoops'           => '2.5.10',
     'min_admin'           => '1.1',
     'min_db'              => ['mysql' => '5.0.7', 'mysqli' => '5.0.7'],
     'image'               => 'assets/images/wgteams_logo.png',
-    'dirname'             => 'wgteams',
+    'dirname'             => $moduleDirName,
     // Frameworks
-    'dirmoduleadmin'      => 'Frameworks/moduleclasses/moduleadmin',
-    'sysicons16'          => '../../Frameworks/moduleclasses/icons/16',
-    'sysicons32'          => '../../Frameworks/moduleclasses/icons/32',
+    //    'dirmoduleadmin'      => 'Frameworks/moduleclasses/moduleadmin',
+    //    'sysicons16'          => '../../Frameworks/moduleclasses/icons/16',
+    //    'sysicons32'          => '../../Frameworks/moduleclasses/icons/32',
     // Local path icons
     'modicons16'          => 'assets/icons/16',
     'modicons32'          => 'assets/icons/32',
@@ -65,8 +70,6 @@ $modversion = [
     'support_name'        => '',
     'module_website_url'  => '',
     'module_website_name' => '',
-    'release'             => '2018/06/14',
-    'module_status'       => 'RC1',
     // Admin system menu
     'system_menu'         => 1,
     // Admin things
@@ -77,7 +80,7 @@ $modversion = [
     'hasMain'             => 1,
     // Install/Update
     'onInstall'           => 'include/install.php',
-    'onUpdate'            => 'include/update.php'
+    'onUpdate'            => 'include/update.php',
 ];
 // ------------------- Templates ------------------- //
 // Admin
@@ -118,22 +121,27 @@ $modversion['search']['func'] = 'wgteams_search';
 
 // ------------------- Submenu ------------------- //
 global $xoopsModule;
-if (is_object($xoopsModule) && $xoopsModule->getVar('dirname') == $modversion['dirname']) {
+if (is_object($xoopsModule) && $xoopsModule->getVar('dirname') == $moduleDirName) {
     global $xoopsModuleConfig, $xoopsUser;
 
     $s = 0;
-    $helper = \XoopsModules\Wgteams\Helper::getInstance();
-    $teamsHandler = $helper->getHandler('teams');
+
+    /** @var Wgteams\Helper $helper */
+    $helper = Wgteams\Helper::getInstance();
+    //    $teamsHandler =  $helper->getHandler('TeamsHandler');
+    $db           = \XoopsDatabaseFactory::getDatabaseConnection();
+    $teamsHandler = new Wgteams\TeamsHandler($db);
 
     $crit_teams = new \CriteriaCompo();
     $crit_teams->add(new \Criteria('team_online', '1'));
     $crit_teams->setSort('team_weight');
     $crit_teams->setOrder('ASC');
+
     $teamsAll = $teamsHandler->getAll($crit_teams);
     foreach (array_keys($teamsAll) as $i) {
         $s++;
         $modversion['sub'][$s]['name'] = $teamsAll[$i]->getVar('team_name');
-        $modversion['sub'][$s]['url']  = 'index.php?team_id=' . $teamsAll[$i]->getVar('team_id');        
+        $modversion['sub'][$s]['url']  = 'index.php?team_id=' . $teamsAll[$i]->getVar('team_id');
     }
 }
 // ------------------- Blocks ------------------- //
@@ -144,7 +152,7 @@ $modversion['blocks'][] = [
     'show_func'   => 'b_wgteams_teamsmembers_show',
     'edit_func'   => 'b_wgteams_teamsmembers_edit',
     'options'     => 'showsingleteam|0',
-    'template'    => 'wgteams_block_teamsmembers.tpl'
+    'template'    => 'wgteams_block_teamsmembers.tpl',
 ];
 
 $modversion['blocks'][] = [
@@ -154,7 +162,7 @@ $modversion['blocks'][] = [
     'show_func'   => 'b_wgteams_teams_show',
     'edit_func'   => '',
     'options'     => 'showlistofteams|0',
-    'template'    => 'wgteams_block_teams.tpl'
+    'template'    => 'wgteams_block_teams.tpl',
 ];
 
 // ------------------- Config ------------------- //
@@ -164,7 +172,7 @@ $modversion['config'][] = [
     'description' => '_MI_WGTEAMS_KEYWORDS_DESC',
     'formtype'    => 'textbox',
     'valuetype'   => 'text',
-    'default'     => 'wgteams, teams, members, relations, infofields'
+    'default'     => 'wgteams, teams, members, relations, infofields',
 ];
 
 $modversion['config'][] = [
@@ -173,7 +181,7 @@ $modversion['config'][] = [
     'description' => '_MI_WGTEAMS_ADMIN_PAGER_DESC',
     'formtype'    => 'textbox',
     'valuetype'   => 'int',
-    'default'     => 10
+    'default'     => 10,
 ];
 
 $modversion['config'][] = [
@@ -182,7 +190,7 @@ $modversion['config'][] = [
     'description' => '_MI_WGTEAMS_USER_PAGER_DESC',
     'formtype'    => 'textbox',
     'valuetype'   => 'int',
-    'default'     => 10
+    'default'     => 10,
 ];
 
 // start page for module
@@ -193,7 +201,7 @@ $modversion['config'][] = [
     'formtype'    => 'select',
     'valuetype'   => 'array',
     'default'     => 1,
-    'options'     => [_MI_WGTEAMS_STARTPAGE_LIST => 1, _MI_WGTEAMS_STARTPAGE_ALL => 2, _MI_WGTEAMS_STARTPAGE_FIRST => 3]
+    'options'     => [_MI_WGTEAMS_STARTPAGE_LIST => 1, _MI_WGTEAMS_STARTPAGE_ALL => 2, _MI_WGTEAMS_STARTPAGE_FIRST => 3],
 ];
 
 // Editor
@@ -206,40 +214,18 @@ $modversion['config'][] = [
     'formtype'    => 'select',
     'valuetype'   => 'text',
     'options'     => array_flip($editorHandler->getList()),
-    'default'     => 'dhtmltextarea'
+    'default'     => 'dhtmltextarea',
 ];
 
-//Uploads : max size for image upload 
+//Uploads : max size for image upload
 $modversion['config'][] = [
     'name'        => 'wgteams_img_maxsize',
     'title'       => '_MI_WGTEAMS_IMG_MAXSIZE',
     'description' => '_MI_WGTEAMS_IMG_MAXSIZE_DESC',
-    'formtype'    => 'select',
-    'valuetype'   => 'text',
-    'default'     => 3145728,
-    'options'     => [
-        '0.5 MB' => 524288,
-        '1 MB'   => 1048576,
-        '1.5 MB' => 1572864,
-        '2 MB'   => 2097152,
-        '2.5 MB' => 2621440,
-        '3 MB'   => 3145728,
-        '3.5 MB' => 3670016,
-        '4 MB'   => 4194304,
-        '4.5 MB' => 4718592,
-        '5 MB'   => 5242880,
-        '5.5 MB' => 5767168,
-        '6 MB'   => 6291456,
-        '6.5 MB' => 6815744,
-        '7 MB'   => 7340032,
-        '7.5 MB' => 7864320,
-        '8 MB'   => 8388608,
-        '8.5 MB' => 8912896,
-        '9 MB'   => 9437184,
-        '9.5 MB' => 9961472,
-        '10 MB'  => 10485760,
-    ],
-];
+    'formtype'    => 'textbox',
+    'valuetype'   => 'int',
+    'default'     => 10485760,
+]; // 1 MB
 
 //Uploads : mimetypes of images
 $modversion['config'][] = [
@@ -256,8 +242,8 @@ $modversion['config'][] = [
         'jpeg'  => 'image/jpeg',
         'jpg'   => 'image/jpg',
         'jpe'   => 'image/jpe',
-        'png'   => 'image/png'
-    ]
+        'png'   => 'image/png',
+    ],
 ];
 
 $modversion['config'][] = [
@@ -266,7 +252,7 @@ $modversion['config'][] = [
     'description' => '_MI_WGTEAMS_LABELS_DESC',
     'formtype'    => 'yesno',
     'valuetype'   => 'int',
-    'default'     => 1
+    'default'     => 1,
 ];
 
 $modversion['config'][] = [
@@ -275,5 +261,29 @@ $modversion['config'][] = [
     'description' => '_MI_WGTEAMS_SHOWBREADCRUMBS_DESC',
     'formtype'    => 'yesno',
     'valuetype'   => 'int',
-    'default'     => 1
+    'default'     => 1,
 ];
+/**
+ * Make Sample button visible?
+ */
+$modversion['config'][] = [
+    'name'        => 'displaySampleButton',
+    'title'       => 'CO_' . $moduleDirNameUpper . '_' . 'SHOW_SAMPLE_BUTTON',
+    'description' => 'CO_' . $moduleDirNameUpper . '_' . 'SHOW_SAMPLE_BUTTON_DESC',
+    'formtype'    => 'yesno',
+    'valuetype'   => 'int',
+    'default'     => 1,
+];
+
+/**
+ * Show Developer Tools?
+ */
+/* $modversion['config'][] = [
+    'name'        => 'displayDeveloperTools',
+    'title'       => 'CO_' . $moduleDirNameUpper . '_' . 'SHOW_DEV_TOOLS',
+    'description' => 'CO_' . $moduleDirNameUpper . '_' . 'SHOW_DEV_TOOLS_DESC',
+    'formtype'    => 'yesno',
+    'valuetype'   => 'int',
+    'default'     => 0,
+];
+ */

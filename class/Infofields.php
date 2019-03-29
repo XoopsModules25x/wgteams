@@ -25,14 +25,14 @@ namespace XoopsModules\Wgteams;
 defined('XOOPS_ROOT_PATH') || exit('Restricted access');
 
 /**
- * Class WgteamsInfofields
+ * Class Infofields
  */
 class Infofields extends \XoopsObject
 {
     /**
-    * @var mixed
-    */
-    private $wgteams = null;
+     * @var mixed
+     */
+    private $helper = null;
 
     /**
      * Constructor
@@ -41,6 +41,7 @@ class Infofields extends \XoopsObject
      */
     public function __construct()
     {
+        $this->helper = Helper::getInstance();
         $this->initVar('infofield_id', XOBJ_DTYPE_INT);
         $this->initVar('infofield_name', XOBJ_DTYPE_TXTBOX);
         $this->initVar('infofield_submitter', XOBJ_DTYPE_INT);
@@ -66,7 +67,7 @@ class Infofields extends \XoopsObject
      * Get form
      *
      * @param bool|mixed $action
-     * @return \XoopsThemeForm
+     * @return XoopsThemeForm
      */
     public function getFormInfofields($action = false)
     {
@@ -82,8 +83,6 @@ class Infofields extends \XoopsObject
         xoops_load('XoopsFormLoader');
         $form = new \XoopsThemeForm($title, 'form', $action, 'post', true);
         $form->setExtra('enctype="multipart/form-data"');
-        // Infofields handler
-        //$infofieldsHandler = $helper->getHandler('infofields');
         // Form Text AddField_name
         $form->addElement(new \XoopsFormText(_AM_WGTEAMS_INFOFIELD_NAME, 'infofield_name', 50, 255, $this->getVar('infofield_name')), true);
         // Form Select User
@@ -124,7 +123,7 @@ class Infofields extends \XoopsObject
     public function toArray()
     {
         $ret  = [];
-        $vars =& $this->getVars();
+        $vars = &$this->getVars();
         foreach (array_keys($vars) as $var) {
             $ret[$var] = $this->getVar($var);
         }

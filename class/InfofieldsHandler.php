@@ -11,6 +11,7 @@ namespace XoopsModules\Wgteams;
  but WITHOUT ANY WARRANTY; without even the implied warranty of
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 */
+
 /**
  * wgTeams module for xoops
  *
@@ -22,13 +23,21 @@ namespace XoopsModules\Wgteams;
  * @author          Goffy - Wedega.com - Email:<webmaster@wedega.com> - Website:<https://wedega.com>
  * @version         $Id: 1.0 infofields.php 1 Sun 2015/12/27 23:18:00Z Goffy - Wedega $
  */
-defined('XOOPS_ROOT_PATH') || exit('Restricted access');
+
+use XoopsModules\Wgteams;
+
+defined('XOOPS_ROOT_PATH') || die('Restricted access');
 
 /**
- * Class WgteamsInfofieldsHandler
+ * Class InfofieldsHandler
  */
 class InfofieldsHandler extends \XoopsPersistableObjectHandler
 {
+    /**
+     * @var mixed
+     */
+    private $helper = null;
+
     /**
      * Constructor
      *
@@ -37,6 +46,8 @@ class InfofieldsHandler extends \XoopsPersistableObjectHandler
     public function __construct(\XoopsDatabase $db)
     {
         parent::__construct($db, 'wgteams_infofields', Infofields::class, 'infofield_id', 'infofield_name');
+        /** @var Wgteams\Helper $this ->helper */
+        $this->helper = Wgteams\Helper::getInstance();
     }
 
     /**
@@ -47,6 +58,7 @@ class InfofieldsHandler extends \XoopsPersistableObjectHandler
     public function create($isNew = true)
     {
         $temp = parent::create($isNew);
+
         return $temp;
     }
 
@@ -61,6 +73,7 @@ class InfofieldsHandler extends \XoopsPersistableObjectHandler
     public function get($i = null, $fields = null)
     {
         $temp = parent::get($i, $fields);
+
         return $temp;
     }
 
@@ -68,31 +81,35 @@ class InfofieldsHandler extends \XoopsPersistableObjectHandler
      * get inserted id
      *
      * @param null
-     * @return integer reference to the {@link TDMCreateFields} object
+     * @return int reference to the {@link TDMCreateFields} object
      */
     public function getInsertId()
     {
         $temp = $this->db->getInsertId();
+
         return $temp;
     }
 
     /**
      * get IDs of objects matching a condition
      *
-     * @param  \CriteriaElement $criteria {@link \CriteriaElement} to match
+     * @param \CriteriaElement $criteria {@link CriteriaElement}
+     *                                   to match
      * @return array  of object IDs
      */
     public function &getIds(\CriteriaElement $criteria = null)
     {
-        $temp =&  parent::getIds($criteria);
+        $temp = &parent::getIds($criteria);
+
         return $temp;
     }
 
     /**
      * insert a new field in the database
      *
-     * @param \XoopsObject $field reference to the {@link TDMCreateFields} object
-     * @param bool   $force
+     * @param \XoopsObject $field reference to the {@link TDMCreateFields}
+     *                            object
+     * @param bool         $force
      *
      * @return bool FALSE if failed, TRUE if already present and unchanged or successful
      */

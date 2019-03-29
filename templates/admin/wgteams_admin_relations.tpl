@@ -24,17 +24,17 @@
     </thead>
 <{if $relations_count}>
     <{foreach item=relation from=$relations_list}>
-    <{if $relation.new_team > 0}> 
+    <{if $relation.new_team > 0}>
     <tbody>
         <tr class="odd">
         <td class="left" colspan="16"><{$relation.team_name}></td>
         </tr>
     <{/if}>
         <tr class="even" id="rorder_<{$relation.id}>">
-            
+
             <td class="center">
             <{if $relation.nb_rels_team > 1}>
-                <img src="<{$wgteams_icons_url}>/16/up_down.png" alt="drag&drop" class="icon-sortable"/>
+                <img src="<{$wgteams_icons_url}>/16/up_down.png" alt="drag&drop" class="icon-sortable">
             <{else}>
                 &nbsp;
             <{/if}>
@@ -54,8 +54,8 @@
             <td class="center"><{$relation.submitter}></td>
             <td class="center"><{$relation.date_create}></td>
             <td class="center  width5">
-            <a href="relations.php?op=edit&amp;rel_id=<{$relation.id}>" title="<{$smarty.const._EDIT}>"><img src="<{xoModuleIcons16 edit.png}>" alt="relations" /></a>
-            <a href="relations.php?op=delete&amp;rel_id=<{$relation.id}>" title="<{$smarty.const._DELETE}>"><img src="<{xoModuleIcons16 delete.png}>" alt="relations" /></a>
+            <a href="relations.php?op=edit&amp;rel_id=<{$relation.id}>" title="<{$smarty.const._EDIT}>"><img src="<{xoModuleIcons16 edit.png}>" alt="relations"></a>
+            <a href="relations.php?op=delete&amp;rel_id=<{$relation.id}>" title="<{$smarty.const._DELETE}>"><img src="<{xoModuleIcons16 delete.png}>" alt="relations"></a>
             </td>
         </tr>
         <{/foreach}>
@@ -69,19 +69,19 @@
 
 <div class="clear">&nbsp;</div>
 <{if $pagenav}>
-	<div class="xo-pagenav floatright"><{$pagenav}></div><div class="clear spacer"></div>
+    <div class="xo-pagenav floatright"><{$pagenav}></div><div class="clear spacer"></div>
 
 <{/if}>
 
 <{/if}>
 <{if $form}>
-	<{$form}>
+    <{$form}>
 <{/if}>
 <{if $error}>
-	<div class="errorMsg"><strong><{$error}></strong>
+    <div class="errorMsg"><strong><{$error}></strong>
 </div>
 
 <{/if}>
-<br />
+<br>
 <!-- Footer -->
 <{include file='db:wgteams_admin_footer.tpl'}>

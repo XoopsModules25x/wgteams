@@ -19,6 +19,9 @@
  * @author          Goffy - Wedega.com - Email:<webmaster@wedega.com> - Website:<https://wedega.com>
  * @version         $Id: 1.0 admin.php 1 Sun 2015/12/27 23:18:01Z Goffy - Wedega $
  */
+ 
+require_once __DIR__ . '/common.php';
+
 // ---------------- Admin Index ----------------
 define('_AM_WGTEAMS_STATISTICS', 'Statistics');
 // There are

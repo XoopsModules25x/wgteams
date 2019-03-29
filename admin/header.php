@@ -8,6 +8,7 @@
  but WITHOUT ANY WARRANTY; without even the implied warranty of
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 */
+
 /**
  * wgTeams module for xoops
  *
@@ -21,48 +22,44 @@
  */
 
 use XoopsModules\Wgteams;
-use XoopsModules\Wgteams\Helper;
 
-include dirname(dirname(dirname(__DIR__))) . '/include/cp_header.php';
+require dirname(dirname(dirname(__DIR__))) . '/include/cp_header.php';
 $thisPath = dirname(__DIR__);
-include_once $thisPath . '/include/common.php';
-$sysPathIcon16   = '../' . $GLOBALS['xoopsModule']->getInfo('sysicons16');
-$sysPathIcon32   = '../' . $GLOBALS['xoopsModule']->getInfo('sysicons32');
+require_once $thisPath . '/include/common.php';
+$pathIcon16      = '../' . $GLOBALS['xoopsModule']->getInfo('sysicons16');
+$pathIcon32      = '../' . $GLOBALS['xoopsModule']->getInfo('sysicons32');
 $pathModuleAdmin = $GLOBALS['xoopsModule']->getInfo('dirmoduleadmin');
-//
-$modPathIcon16 = $GLOBALS['xoopsModule']->getInfo('modicons16');
-$modPathIcon32 = $GLOBALS['xoopsModule']->getInfo('modicons32');
+$pathModIcon16   = $GLOBALS['xoopsModule']->getInfo('modicons16');
+$pathModIcon32   = $GLOBALS['xoopsModule']->getInfo('modicons32');
 // Get instance of module
-$helper           = Helper::getInstance();
-$teamsHandler      = $helper->getHandler('teams');
-$membersHandler    = $helper->getHandler('members');
-$relationsHandler  = $helper->getHandler('relations');
-$infofieldsHandler = $helper->getHandler('infofields');
+/** @var Wgteams\Helper $helper */
+$helper            = Wgteams\Helper::getInstance();
+$db                = \XoopsDatabaseFactory::getDatabaseConnection();
+$teamsHandler      = new Wgteams\TeamsHandler($db); //$helper->getHandler('Teams');
+$membersHandler    = new Wgteams\MembersHandler($db); //$helper->getHandler('Members');
+$relationsHandler  = new Wgteams\RelationsHandler($db); //$helper->getHandler('Relations');
+$infofieldsHandler = new Wgteams\InfofieldsHandler($db); //$helper->getHandler('Infofields');
 
-//
-$myts = MyTextSanitizer::getInstance();
+$myts = \MyTextSanitizer::getInstance();
 if (!isset($xoopsTpl) || !is_object($xoopsTpl)) {
-    include_once XOOPS_ROOT_PATH . '/class/template.php';
+    require_once XOOPS_ROOT_PATH . '/class/template.php';
     $xoopsTpl = new \XoopsTpl();
 }
 // System icons path
-$xoopsTpl->assign('sysPathIcon16', $sysPathIcon16);
-$xoopsTpl->assign('sysPathIcon32', $sysPathIcon32);
+$xoopsTpl->assign('pathIcon16', $pathIcon16);
+$xoopsTpl->assign('pathIcon32', $pathIcon32);
 // Local icons path
-$xoopsTpl->assign('modPathIcon16', $modPathIcon16);
-$xoopsTpl->assign('modPathIcon32', $modPathIcon32);
+$xoopsTpl->assign('pathModIcon16', $pathModIcon16);
+$xoopsTpl->assign('pathModIcon32', $pathModIcon32);
 
 //Load languages
-xoops_loadLanguage('admin');
-xoops_loadLanguage('modinfo');
-// Local admin menu class
-if (file_exists($GLOBALS['xoops']->path($pathModuleAdmin . '/moduleadmin.php'))) {
-    include_once $GLOBALS['xoops']->path($pathModuleAdmin . '/moduleadmin.php');
-} else {
-    redirect_header('../../../admin.php', 5, _AM_MODULEADMIN_MISSING, false);
-}
+$helper->loadLanguage('admin');
+$helper->loadLanguage('modinfo');
+
+/** @var Xmf\Module\Admin $adminObject */
+$adminObject = \Xmf\Module\Admin::getInstance();
+
 xoops_cp_header();
-$adminMenu = new ModuleAdmin();
 
 //load stylesheets and jquery for sortable
 $GLOBALS['xoTheme']->addStylesheet(WGTEAMS_URL . '/assets/css/admin/style.css');

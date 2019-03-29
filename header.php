@@ -8,6 +8,7 @@
  but WITHOUT ANY WARRANTY; without even the implied warranty of
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 */
+
 /**
  * wgTeams module for xoops
  *
@@ -19,41 +20,42 @@
  * @author          Goffy - Wedega.com - Email:<webmaster@wedega.com> - Website:<https://wedega.com>
  * @version         $Id: 1.0 header.php 1 Sun 2015/12/27 23:18:01Z Goffy - Wedega $
  */
- 
-use XoopsModules\Wgteams\Helper;
 
-include dirname(dirname(__DIR__)) . '/mainfile.php';
-include __DIR__ . '/include/common.php';
+use XoopsModules\Wgteams;
+
+require dirname(dirname(__DIR__)) . '/mainfile.php';
+require __DIR__ . '/include/common.php';
 $dirname = basename(__DIR__);
 // Breadcrumbs
 $xoBreadcrumbs   = [];
 $xoBreadcrumbs[] = ['title' => $GLOBALS['xoopsModule']->getVar('name'), 'link' => WGTEAMS_URL . '/'];
 // Get instance of module
-$helper 		   = Helper::getInstance();
-$teamsHandler      = $helper->getHandler('teams');
-$membersHandler    = $helper->getHandler('members');
-$relationsHandler  = $helper->getHandler('relations');
-$infofieldsHandler = $helper->getHandler('infofields');
+$db                = \XoopsDatabaseFactory::getDatabaseConnection();
+$teamsHandler      = new Wgteams\TeamsHandler($db);
+$membersHandler    = new Wgteams\MembersHandler($db);
+$relationsHandler  = new Wgteams\RelationsHandler($db);
+$infofieldsHandler = new Wgteams\InfofieldsHandler($db);
+
 // Permission
-include_once XOOPS_ROOT_PATH . '/class/xoopsform/grouppermform.php';
-$gperm_handler = xoops_getHandler('groupperm');
+require_once XOOPS_ROOT_PATH . '/class/xoopsform/grouppermform.php';
+$grouppermHandler = xoops_getHandler('groupperm');
 if (is_object($xoopsUser)) {
     $groups = $xoopsUser->getGroups();
 } else {
     $groups = XOOPS_GROUP_ANONYMOUS;
 }
-//
-$myts = MyTextSanitizer::getInstance();
+
+$myts = \MyTextSanitizer::getInstance();
 if (!file_exists($style = WGTEAMS_URL . '/assets/css/style.css')) {
     return false;
 }
-//
-$sysPathIcon16   = $GLOBALS['xoopsModule']->getInfo('sysicons16');
-$sysPathIcon32   = $GLOBALS['xoopsModule']->getInfo('sysicons32');
+
+$pathIcon16      = $GLOBALS['xoopsModule']->getInfo('sysicons16');
+$pathIcon32      = $GLOBALS['xoopsModule']->getInfo('sysicons32');
 $pathModuleAdmin = $GLOBALS['xoopsModule']->getInfo('dirmoduleadmin');
-//
-$modPathIcon16 = $xoopsModule->getInfo('modicons16');
-$modPathIcon32 = $xoopsModule->getInfo('modicons32');
-//
+
+$pathModIcon16 = $xoopsModule->getInfo('modicons16');
+$pathModIcon32 = $xoopsModule->getInfo('modicons32');
+
 xoops_loadLanguage('modinfo', $dirname);
 xoops_loadLanguage('main', $dirname);

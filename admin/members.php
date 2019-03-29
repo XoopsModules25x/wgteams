@@ -8,6 +8,7 @@
  but WITHOUT ANY WARRANTY; without even the implied warranty of
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 */
+
 /**
  * wgTeams module for xoops
  *
@@ -19,21 +20,25 @@
  * @author          Goffy - Wedega.com - Email:<webmaster@wedega.com> - Website:<https://wedega.com>
  * @version         $Id: 1.0 members.php 1 Sun 2015/12/27 23:18:00Z Goffy - Wedega $
  */
-include __DIR__ . '/header.php';
-// It recovered the value of argument op in URL$ 
-$op = \XoopsRequest::getString('op', 'list');
+
+use Xmf\Request;
+use XoopsModules\Wgteams;
+
+require __DIR__ . '/header.php';
+// It recovered the value of argument op in URL$
+$op = Request::getString('op', 'list');
 // Request member_id
-$memberId = \XoopsRequest::getInt('member_id', 0);
+$memberId = Request::getInt('member_id', 0);
 // Switch options
 switch ($op) {
     case 'list':
     default:
-        $start        = \XoopsRequest::getInt('start', 0);
-        $limit        = \XoopsRequest::getInt('limit', $helper->getConfig('adminpager'));
+        $start        = Request::getInt('start', 0);
+        $limit        = Request::getInt('limit', $helper->getConfig('adminpager'));
         $templateMain = 'wgteams_admin_members.tpl';
-        $GLOBALS['xoopsTpl']->assign('navigation', $adminMenu->addNavigation('members.php'));
-        $adminMenu->addItemButton(_AM_WGTEAMS_MEMBER_ADD, 'members.php?op=new', 'add');
-        $GLOBALS['xoopsTpl']->assign('buttons', $adminMenu->renderButton());
+        $GLOBALS['xoopsTpl']->assign('navigation', $adminObject->displayNavigation('members.php'));
+        $adminObject->addItemButton(_AM_WGTEAMS_MEMBER_ADD, 'members.php?op=new', 'add');
+        $GLOBALS['xoopsTpl']->assign('buttons', $adminObject->displayButton('left', ''));
         $membersCount = $membersHandler->getCountMembers();
         $membersAll   = $membersHandler->getAllMembers($start, $limit);
         $GLOBALS['xoopsTpl']->assign('members_count', $membersCount);
@@ -47,7 +52,7 @@ switch ($op) {
                 unset($member);
             }
             if ($membersCount > $limit) {
-                include_once XOOPS_ROOT_PATH . '/class/pagenav.php';
+                require_once XOOPS_ROOT_PATH . '/class/pagenav.php';
                 $pagenav = new \XoopsPageNav($membersCount, $limit, $start, 'start', 'op=list&limit=' . $limit);
                 $GLOBALS['xoopsTpl']->assign('pagenav', $pagenav->renderNav(4));
             }
@@ -55,18 +60,16 @@ switch ($op) {
             $GLOBALS['xoopsTpl']->assign('error', _AM_WGTEAMS_THEREARENT_MEMBERS);
         }
         break;
-
     case 'new':
         $templateMain = 'wgteams_admin_members.tpl';
-        $adminMenu->addItemButton(_AM_WGTEAMS_MEMBERS_LIST, 'members.php', 'list');
-        $GLOBALS['xoopsTpl']->assign('navigation', $adminMenu->addNavigation('members.php'));
-        $GLOBALS['xoopsTpl']->assign('buttons', $adminMenu->renderButton());
+        $adminObject->addItemButton(_AM_WGTEAMS_MEMBERS_LIST, 'members.php', 'list');
+        $GLOBALS['xoopsTpl']->assign('navigation', $adminObject->displayNavigation('members.php'));
+        $GLOBALS['xoopsTpl']->assign('buttons', $adminObject->displayButton('left', ''));
         // Get Form
         $membersObj = $membersHandler->create();
         $form       = $membersObj->getFormMembers();
         $GLOBALS['xoopsTpl']->assign('form', $form->render());
         break;
-
     case 'save':
         if (!$GLOBALS['xoopsSecurity']->check()) {
             redirect_header('members.php', 3, implode(',', $GLOBALS['xoopsSecurity']->getErrors()));
@@ -90,11 +93,11 @@ switch ($op) {
         // Set Var member_email
         $membersObj->setVar('member_email', $_POST['member_email']);
         // Set Var member_image
-        include_once XOOPS_ROOT_PATH . '/class/uploader.php';
+        require_once XOOPS_ROOT_PATH . '/class/uploader.php';
         $uploader = new \XoopsMediaUploader(WGTEAMS_UPLOAD_PATH . '/members/images', $helper->getConfig('wgteams_img_mimetypes'), $helper->getConfig('wgteams_img_maxsize'), null, null);
         if ($uploader->fetchMedia($_POST['xoops_upload_file'][0])) {
             $extension = preg_replace('/^.+\.([^.]+)$/sU', '', $_FILES['attachedfile']['name']);
-            $imgName   = substr(str_replace(' ', '', $_POST['member_lastname'] . $_POST['member_firstname']), 0, 20) . '_' . $extension;
+            $imgName   = mb_substr(str_replace(' ', '', $_POST['member_lastname'] . $_POST['member_firstname']), 0, 20) . '_' . $extension;
             $uploader->setPrefix($imgName);
             $uploader->fetchMedia($_POST['xoops_upload_file'][0]);
             if (!$uploader->upload()) {
@@ -106,8 +109,6 @@ switch ($op) {
         } else {
             $membersObj->setVar('member_image', $_POST['member_image']);
         }
-		// Set Var member_uid
-        $membersObj->setVar('member_uid', $_POST['member_uid']);
         // Set Var member_submitter
         $membersObj->setVar('member_submitter', $_POST['member_submitter']);
         // Set Var member_date_create
@@ -121,22 +122,20 @@ switch ($op) {
         $form = $membersObj->getFormMembers();
         $GLOBALS['xoopsTpl']->assign('form', $form->render());
         break;
-
     case 'edit':
         $templateMain = 'wgteams_admin_members.tpl';
-        $adminMenu->addItemButton(_AM_WGTEAMS_MEMBER_ADD, 'members.php?op=new', 'add');
-        $adminMenu->addItemButton(_AM_WGTEAMS_MEMBERS_LIST, 'members.php', 'list');
-        $GLOBALS['xoopsTpl']->assign('navigation', $adminMenu->addNavigation('members.php'));
-        $GLOBALS['xoopsTpl']->assign('buttons', $adminMenu->renderButton());
+        $adminObject->addItemButton(_AM_WGTEAMS_MEMBER_ADD, 'members.php?op=new', 'add');
+        $adminObject->addItemButton(_AM_WGTEAMS_MEMBERS_LIST, 'members.php', 'list');
+        $GLOBALS['xoopsTpl']->assign('navigation', $adminObject->displayNavigation('members.php'));
+        $GLOBALS['xoopsTpl']->assign('buttons', $adminObject->displayButton('left', ''));
         // Get Form
         $membersObj = $membersHandler->get($memberId);
         $form       = $membersObj->getFormMembers();
         $GLOBALS['xoopsTpl']->assign('form', $form->render());
         break;
-
     case 'delete':
         $membersObj = $membersHandler->get($memberId);
-        if (isset($_REQUEST['ok']) && 1 == $_REQUEST['ok']) {
+        if (\Xmf\Request::hasVar('ok') && 1 == $_REQUEST['ok']) {
             if (!$GLOBALS['xoopsSecurity']->check()) {
                 redirect_header('members.php', 3, implode(', ', $GLOBALS['xoopsSecurity']->getErrors()));
             }
@@ -151,8 +150,8 @@ switch ($op) {
                 $crit_rels = new \CriteriaCompo();
                 $crit_rels->add(new \Criteria('rel_member_id', $member_id));
                 $relsCount = $relationsHandler->getCount($crit_rels);
-                if ( $relsCount > 0 ) {
-                    $relationsAll   = $relationsHandler->getAll($crit_rels);
+                if ($relsCount > 0) {
+                    $relationsAll = $relationsHandler->getAll($crit_rels);
                     foreach (array_keys($relationsAll) as $i) {
                         $relationsObj = $relationsHandler->get($relationsAll[$i]->getVar('rel_id'));
                         $relationsHandler->delete($relationsObj);
@@ -168,4 +167,4 @@ switch ($op) {
         break;
 }
 
-include __DIR__ . '/footer.php';
+require __DIR__ . '/footer.php';

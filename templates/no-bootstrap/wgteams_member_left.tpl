@@ -2,11 +2,11 @@
     <table class="member-table <{$member.rel_tablestyle}>">
         <tr>
             <{if $member.member_image}>
-            <td class="member-img center" rowspan="<{$member.rel_nb_infos}>"><img class="center <{$member.rel_imagestyle}>" src="<{$member.member_image_url}><{$member.member_image}>" alt="<{$member.member_name}>" title="<{$member.member_name}>" /></td>
+            <td class="member-img center" rowspan="<{$member.rel_nb_infos}>"><img class="center <{$member.rel_imagestyle}>" src="<{$member.member_image_url}><{$member.member_image}>" alt="<{$member.member_name}>" title="<{$member.member_name}>"></td>
             <{/if}>
             <td class="member-label"><{$smarty.const._MA_WGTEAMS_MEMBER_NAME}></td>
             <td class="member-text member-name"><{$member.member_name}></td>
-        </tr>   
+        </tr>
         <{if $member.member_address}>
             <tr>
                 <td class="member-label"><{$smarty.const._MA_WGTEAMS_MEMBER_ADDRESS}></td>
@@ -54,6 +54,6 @@
                 <td class="member-label"><{$member.info_5_name}></td>
                 <td class="member-text member-info"><{$member.info_5}></td>
             </tr>
-        <{/if}>                           
+        <{/if}>
     </table>
 </div>

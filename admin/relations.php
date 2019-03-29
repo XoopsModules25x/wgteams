@@ -8,6 +8,7 @@
  but WITHOUT ANY WARRANTY; without even the implied warranty of
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 */
+
 /**
  * wgTeams module for xoops
  *
@@ -19,22 +20,25 @@
  * @author          Goffy - Wedega.com - Email:<webmaster@wedega.com> - Website:<https://wedega.com>
  * @version         $Id: 1.0 relations.php 1 Sun 2015/12/27 23:18:00Z Goffy - Wedega $
  */
-include __DIR__ . '/header.php';
-// It recovered the value of argument op in URL$ 
-$op = \XoopsRequest::getString('op', 'list');
+
+use Xmf\Request;
+
+require __DIR__ . '/header.php';
+// It recovered the value of argument op in URL$
+$op = Request::getString('op', 'list');
 // Request rel_id
-$relId = \XoopsRequest::getInt('rel_id', 0);
+$relId = Request::getInt('rel_id', 0);
 // Switch options
 switch ($op) {
     case 'list':
     default:
         $GLOBALS['xoTheme']->addScript(WGTEAMS_URL . '/assets/js/sortable-relations.js');
-        $start        = \XoopsRequest::getInt('start', 0);
-        $limit        = \XoopsRequest::getInt('limit', $helper->getConfig('adminpager'));
+        $start        = Request::getInt('start', 0);
+        $limit        = Request::getInt('limit', $helper->getConfig('adminpager'));
         $templateMain = 'wgteams_admin_relations.tpl';
-        $GLOBALS['xoopsTpl']->assign('navigation', $adminMenu->addNavigation('relations.php'));
-        $adminMenu->addItemButton(_AM_WGTEAMS_RELATION_ADD, 'relations.php?op=new', 'add');
-        $GLOBALS['xoopsTpl']->assign('buttons', $adminMenu->renderButton());
+        $GLOBALS['xoopsTpl']->assign('navigation', $adminObject->displayNavigation('relations.php'));
+        $adminObject->addItemButton(_AM_WGTEAMS_RELATION_ADD, 'relations.php?op=new', 'add');
+        $GLOBALS['xoopsTpl']->assign('buttons', $adminObject->displayButton('left', ''));
         $relationsCount = $relationsHandler->getCountRelations();
         $relationsAll   = $relationsHandler->getAllRelations($start, $limit);
         $GLOBALS['xoopsTpl']->assign('relations_count', $relationsCount);
@@ -47,19 +51,19 @@ switch ($op) {
             foreach (array_keys($relationsAll) as $i) {
                 $relation = $relationsAll[$i]->getValuesRelations();
                 if ($team_id_prev == $relation['team_id']) {
-                    $relation['new_team'] = 0;
+                    $relation['new_team']     = 0;
                     $relation['nb_rels_team'] = $nb_rels_team;
                 } else {
-                    $relation['new_team'] = 1;
-                    $nb_rels_team = $relationsHandler->getCountRelationsTeam($relation['team_id']);
+                    $relation['new_team']     = 1;
+                    $nb_rels_team             = $relationsHandler->getCountRelationsTeam($relation['team_id']);
                     $relation['nb_rels_team'] = $nb_rels_team;
-                    $team_id_prev = $relation['team_id'];
+                    $team_id_prev             = $relation['team_id'];
                 }
                 $GLOBALS['xoopsTpl']->append('relations_list', $relation);
                 unset($relation);
             }
             if ($relationsCount > $limit) {
-                include_once XOOPS_ROOT_PATH . '/class/pagenav.php';
+                require_once XOOPS_ROOT_PATH . '/class/pagenav.php';
                 $pagenav = new \XoopsPageNav($relationsCount, $limit, $start, 'start', 'op=list&limit=' . $limit);
                 $GLOBALS['xoopsTpl']->assign('pagenav', $pagenav->renderNav(4));
             }
@@ -67,18 +71,16 @@ switch ($op) {
             $GLOBALS['xoopsTpl']->assign('error', _AM_WGTEAMS_THEREARENT_RELATIONS);
         }
         break;
-
     case 'new':
         $templateMain = 'wgteams_admin_relations.tpl';
-        $adminMenu->addItemButton(_AM_WGTEAMS_RELATIONS_LIST, 'relations.php', 'list');
-        $GLOBALS['xoopsTpl']->assign('navigation', $adminMenu->addNavigation('relations.php'));
-        $GLOBALS['xoopsTpl']->assign('buttons', $adminMenu->renderButton());
+        $adminObject->addItemButton(_AM_WGTEAMS_RELATIONS_LIST, 'relations.php', 'list');
+        $GLOBALS['xoopsTpl']->assign('navigation', $adminObject->displayNavigation('relations.php'));
+        $GLOBALS['xoopsTpl']->assign('buttons', $adminObject->displayButton('left', ''));
         // Get Form
         $relationsObj = $relationsHandler->create();
         $form         = $relationsObj->getFormRelations();
         $GLOBALS['xoopsTpl']->assign('form', $form->render());
         break;
-
     case 'save':
         if (!$GLOBALS['xoopsSecurity']->check()) {
             redirect_header('relations.php', 3, implode(',', $GLOBALS['xoopsSecurity']->getErrors()));
@@ -128,22 +130,20 @@ switch ($op) {
         $form = $relationsObj->getFormRelations();
         $GLOBALS['xoopsTpl']->assign('form', $form->render());
         break;
-
     case 'edit':
         $templateMain = 'wgteams_admin_relations.tpl';
-        $adminMenu->addItemButton(_AM_WGTEAMS_RELATION_ADD, 'relations.php?op=new', 'add');
-        $adminMenu->addItemButton(_AM_WGTEAMS_RELATIONS_LIST, 'relations.php', 'list');
-        $GLOBALS['xoopsTpl']->assign('navigation', $adminMenu->addNavigation('relations.php'));
-        $GLOBALS['xoopsTpl']->assign('buttons', $adminMenu->renderButton());
+        $adminObject->addItemButton(_AM_WGTEAMS_RELATION_ADD, 'relations.php?op=new', 'add');
+        $adminObject->addItemButton(_AM_WGTEAMS_RELATIONS_LIST, 'relations.php', 'list');
+        $GLOBALS['xoopsTpl']->assign('navigation', $adminObject->displayNavigation('relations.php'));
+        $GLOBALS['xoopsTpl']->assign('buttons', $adminObject->displayButton('left', ''));
         // Get Form
         $relationsObj = $relationsHandler->get($relId);
         $form         = $relationsObj->getFormRelations();
         $GLOBALS['xoopsTpl']->assign('form', $form->render());
         break;
-
     case 'delete':
         $relationsObj = $relationsHandler->get($relId);
-        if (isset($_REQUEST['ok']) && 1 == $_REQUEST['ok']) {
+        if (\Xmf\Request::hasVar('ok') && 1 == $_REQUEST['ok']) {
             if (!$GLOBALS['xoopsSecurity']->check()) {
                 redirect_header('relations.php', 3, implode(', ', $GLOBALS['xoopsSecurity']->getErrors()));
             }
@@ -156,16 +156,14 @@ switch ($op) {
             xoops_confirm(['ok' => 1, 'rel_id' => $relId, 'op' => 'delete'], $_SERVER['REQUEST_URI'], sprintf(_AM_WGTEAMS_FORM_SURE_DELETE, $relationsObj->getVar('rel_team_id')));
         }
         break;
-                
     case 'order':
         $rorder = $_POST['rorder'];
-        for ($i = 0, $iMax = count($rorder); $i < $iMax; $i++){
+        for ($i = 0, $iMax = count($rorder); $i < $iMax; $i++) {
             $relationsObj = $relationsHandler->get($rorder[$i]);
-            $relationsObj->setVar('rel_weight',$i+1);
+            $relationsObj->setVar('rel_weight', $i + 1);
             $relationsHandler->insert($relationsObj);
         }
         break;
-        
 }
 
-include __DIR__ . '/footer.php';
+require __DIR__ . '/footer.php';

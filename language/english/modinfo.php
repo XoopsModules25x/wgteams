@@ -19,6 +19,9 @@
  * @author          Goffy - Wedega.com - Email:<webmaster@wedega.com> - Website:<https://wedega.com>
  * @version         $Id: 1.0 modinfo.php 1 Sun 2015/12/27 23:18:01Z Goffy - Wedega $
  */
+ 
+require_once __DIR__ . '/common.php';
+
 // ---------------- Admin Main ----------------
 define('_MI_WGTEAMS_NAME', 'wgTeams');
 define('_MI_WGTEAMS_DESC', 'This module shows your team(s) and team members');
@@ -28,6 +31,7 @@ define('_MI_WGTEAMS_ADMENU3', 'Teams');
 define('_MI_WGTEAMS_ADMENU4', 'Members');
 define('_MI_WGTEAMS_ADMENU2', 'Infofields');
 define('_MI_WGTEAMS_ADMENU5', 'Relations');
+define('_MI_WGTEAMS_ADMENU6', 'Feedback');
 define('_MI_WGTEAMS_ABOUT', 'About');
 // ---------------- Admin Nav ----------------
 define('_MI_WGTEAMS_ADMIN_PAGER', 'Admin pager');
