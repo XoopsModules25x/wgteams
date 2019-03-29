@@ -156,12 +156,16 @@ class Helper extends \Xmf\Module\Helper
      */
     public function getHandler($name)
     {
-        $ret = false;
+        $ret   = false;
         $class = '\\XoopsModules\\' . ucfirst(mb_strtolower(basename(dirname(__DIR__)))) . '\\' . $name . 'Handler';
+
         if (!class_exists($class)) {
-            $db = \XoopsDatabaseFactory::getDatabaseConnection();
-            $ret = new $class($db);
+            throw new \RuntimeException("Class '$class' not found");
         }
+
+        $db  = \XoopsDatabaseFactory::getDatabaseConnection();
+        $ret = new $class($db);
+
         $this->addLog("Getting handler '{$name}'");
         return $ret;
     }

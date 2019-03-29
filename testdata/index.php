@@ -13,8 +13,8 @@
  * @since           2.5.9
  * @author          Michael Beck (aka Mamba)
  */
-use XoopsModules\Wggallery;
-use XoopsModules\Wggallery\Common;
+use XoopsModules\Wgteams;
+use XoopsModules\Wgteams\Common;
 
 require dirname(dirname(dirname(__DIR__))) . '/mainfile.php';
 include dirname(__DIR__) . '/preloads/autoloader.php';
@@ -35,9 +35,9 @@ function loadSampleData()
 {
     $moduleDirName = basename(dirname(__DIR__));
     $moduleDirNameUpper = mb_strtoupper($moduleDirName);
-    $helper = Wggallery\Helper::getInstance();
-    $utility = new Wggallery\Utility();
-    $configurator = new Common\Configurator();
+    $helper = Wgteams\Helper::getInstance();
+    $utility = new Wgteams\Utility();
+    $configurator = new Wgteams\Common\Configurator();
     // Load language files
     $helper->loadLanguage('admin');
     $helper->loadLanguage('modinfo');
