@@ -93,16 +93,11 @@ class Relations extends \XoopsObject
             $action = $_SERVER['REQUEST_URI'];
         }
 
+
         $infofieldsHandler = $this->helper->getHandler('Infofields');
         $teamsHandler      = $this->helper->getHandler('Teams');
         $membersHandler    = $this->helper->getHandler('Members');
 		
-		
-		 xoops_load('XoopsFormLoader');
-        $form = new \XoopsThemeForm($title, 'form', $action, 'post', true);
-        $form->setExtra('enctype="multipart/form-data"');
-		return $form;
-		echo "wgteams_editor:" . $this->helper->getConfig('wgteams_editor');die;
 		// $db           = \XoopsDatabaseFactory::getDatabaseConnection();
 		// $infofieldsHandler = new Wgteams\InfofieldsHandler($db);
 		// $teamsHandler = new Wgteams\TeamsHandler($db);
