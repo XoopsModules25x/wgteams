@@ -35,9 +35,9 @@ function loadSampleData()
 {
     $moduleDirName = basename(dirname(__DIR__));
     $moduleDirNameUpper = mb_strtoupper($moduleDirName);
-    $helper = \XoopsModules\Wgteams\Helper::getInstance();
+    $helper = Wgteams\Helper::getInstance();
     $utility = new Wgteams\Utility();
-    $configurator = new \XoopsModules\Wgteams\Common\Configurator();
+    $configurator = new Wgteams\Common\Configurator();
     // Load language files
     $helper->loadLanguage('admin');
     $helper->loadLanguage('modinfo');
