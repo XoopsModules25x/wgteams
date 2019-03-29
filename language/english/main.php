@@ -19,6 +19,9 @@
  * @author          Goffy - Wedega.com - Email:<webmaster@wedega.com> - Website:<https://wedega.com>
  * @version         $Id: 1.0 main.php 1 Sun 2015/12/27 23:18:02Z Goffy - Wedega $
  */
+ 
+require_once __DIR__ . '/common.php';
+ 
 // ---------------- Main ----------------
 define('_MA_WGTEAMS_INDEX', 'Home');
 define('_MA_WGTEAMS_TITLE', 'wgTeams');

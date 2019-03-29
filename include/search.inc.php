@@ -41,7 +41,7 @@ function wgteams_search($queryarray, $andor, $limit, $offset, $userid)
         }
         $sql .= ')';
     }
-    $sql .= " ORDER BY 'infofield_id' DESC";
+    $sql    .= " ORDER BY 'infofield_id' DESC";
     $result = $xoopsDB->query($sql, $limit, $offset);
     $ret    = [];
     $i      = 0;

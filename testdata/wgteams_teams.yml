@@ -1,0 +1,13 @@
+-
+    team_id: '1'
+    team_name: testteam
+    team_descr: testdescr
+    team_image: UnserTeam.56852c2eb3106.png
+    team_nb_cols: '2'
+    team_tablestyle: default
+    team_imagestyle: default
+    team_displaystyle: default
+    team_weight: '0'
+    team_online: '1'
+    team_submitter: '1'
+    team_date_create: '1553806056'

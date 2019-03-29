@@ -3,7 +3,7 @@
 <tbody>
     <{if $member.member_image}>
         <tr>
-            <td class="member-img center" colspan="2"><img class="center <{$member.rel_imagestyle}>" src="<{$member.member_image_url}><{$member.member_image}>" alt="<{$member.member_name}>" title="<{$member.member_name}>" /></td>
+            <td class="member-img center" colspan="2"><img class="center <{$member.rel_imagestyle}>" src="<{$member.member_image_url}><{$member.member_image}>" alt="<{$member.member_name}>" title="<{$member.member_name}>"></td>
         </tr>
     <{/if}>
     <tr>
@@ -57,7 +57,7 @@
             <td class="member-label"><{$member.info_5_name}></td>
             <td class="member-text member-info"><{$member.info_5}></td>
         </tr>
-    <{/if}>                           
- </tbody>   
+    <{/if}>
+ </tbody>
 </table>
 </div>

@@ -1,7 +1,11 @@
 ==============================================================
-1.09 RC1              2018/11/26
+1.09 Beta                NOT RELEASED
 ==============================================================
-- added member field for xoops user id (alfred/goffy)
+- added namespaces (mamba)
+- added test data option (goffy)
+- fix Helper's getHandler() (mamba)
+- fix problem with missing member image (goffy)
+
 
 ==============================================================
 1.08 final              2018/06/14
@@ -23,19 +27,19 @@
 ==============================================================
 1.08 RC4              2016/11/25
 ==============================================================
-- added class truncateHTML (Mamba, Lucio/goffy) 
+- added class truncateHTML (Mamba, Lucio/goffy)
 
 ==============================================================
 1.08 RC3              2016/10/09
 ==============================================================
-- fixed bug: drag&drop ordering of teams (goffy) 
+- fixed bug: drag&drop ordering of teams (goffy)
 
 ==============================================================
 1.08 RC1              2016/08/19
 ==============================================================
 - added drag&drop ordering of teams/relations (goffy)
-- fixed bug: deleting relations when deleting team (goffy) 
-- fixed bug: deleting relations when deleting member (goffy) 
+- fixed bug: deleting relations when deleting team (goffy)
+- fixed bug: deleting relations when deleting member (goffy)
 
 ==============================================================
 1.07 RC3               2016/08/09

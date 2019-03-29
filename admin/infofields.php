@@ -8,6 +8,7 @@
  but WITHOUT ANY WARRANTY; without even the implied warranty of
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 */
+
 /**
  * wgTeams module for xoops
  *
@@ -19,23 +20,24 @@
  * @author          Goffy - Wedega.com - Email:<webmaster@wedega.com> - Website:<https://wedega.com>
  * @version         $Id: 1.0 infofields.php 1 Sun 2015/12/27 23:18:00Z Goffy - Wedega $
  */
- 
- 
-include __DIR__ . '/header.php';
-// It recovered the value of argument op in URL$ 
-$op = \XoopsRequest::getString('op', 'list');
+
+use Xmf\Request;
+
+require __DIR__ . '/header.php';
+// It recovered the value of argument op in URL$
+$op = Request::getString('op', 'list');
 // Request infofield_id
-$addField_id = \XoopsRequest::getInt('infofield_id', 0);
+$addField_id = Request::getInt('infofield_id', 0);
 // Switch options
 switch ($op) {
     case 'list':
     default:
-        $start        = \XoopsRequest::getInt('start', 0);
-        $limit        = \XoopsRequest::getInt('limit', $helper->getConfig('adminpager'));
+        $start        = Request::getInt('start', 0);
+        $limit        = Request::getInt('limit', $helper->getConfig('adminpager'));
         $templateMain = 'wgteams_admin_infofields.tpl';
-        $GLOBALS['xoopsTpl']->assign('navigation', $adminMenu->addNavigation('infofields.php'));
-        $adminMenu->addItemButton(_AM_WGTEAMS_INFOFIELD_ADD, 'infofields.php?op=new', 'add');
-        $GLOBALS['xoopsTpl']->assign('buttons', $adminMenu->renderButton());
+        $GLOBALS['xoopsTpl']->assign('navigation', $adminObject->displayNavigation('infofields.php'));
+        $adminObject->addItemButton(_AM_WGTEAMS_INFOFIELD_ADD, 'infofields.php?op=new', 'add');
+        $GLOBALS['xoopsTpl']->assign('buttons', $adminObject->displayButton('left', ''));
         $infofieldsCount = $infofieldsHandler->getCountInfofields();
         $infofieldsAll   = $infofieldsHandler->getAllInfofields($start, $limit);
         $GLOBALS['xoopsTpl']->assign('infofields_count', $infofieldsCount);
@@ -49,7 +51,7 @@ switch ($op) {
                 unset($infofield);
             }
             if ($infofieldsCount > $limit) {
-                include_once XOOPS_ROOT_PATH . '/class/pagenav.php';
+                require_once XOOPS_ROOT_PATH . '/class/pagenav.php';
                 $pagenav = new \XoopsPageNav($infofieldsCount, $limit, $start, 'start', 'op=list&limit=' . $limit);
                 $GLOBALS['xoopsTpl']->assign('pagenav', $pagenav->renderNav(4));
             }
@@ -57,18 +59,16 @@ switch ($op) {
             $GLOBALS['xoopsTpl']->assign('error', _AM_WGTEAMS_THEREARENT_INFOFIELDS);
         }
         break;
-
     case 'new':
         $templateMain = 'wgteams_admin_infofields.tpl';
-        $adminMenu->addItemButton(_AM_WGTEAMS_INFOFIELDS_LIST, 'infofields.php', 'list');
-        $GLOBALS['xoopsTpl']->assign('navigation', $adminMenu->addNavigation('infofields.php'));
-        $GLOBALS['xoopsTpl']->assign('buttons', $adminMenu->renderButton());
+        $adminObject->addItemButton(_AM_WGTEAMS_INFOFIELDS_LIST, 'infofields.php', 'list');
+        $GLOBALS['xoopsTpl']->assign('navigation', $adminObject->displayNavigation('infofields.php'));
+        $GLOBALS['xoopsTpl']->assign('buttons', $adminObject->displayButton('left', ''));
         // Get Form
         $infofieldsObj = $infofieldsHandler->create();
         $form          = $infofieldsObj->getFormInfofields();
         $GLOBALS['xoopsTpl']->assign('form', $form->render());
         break;
-
     case 'save':
         if (!$GLOBALS['xoopsSecurity']->check()) {
             redirect_header('infofields.php', 3, implode(',', $GLOBALS['xoopsSecurity']->getErrors()));
@@ -94,22 +94,20 @@ switch ($op) {
         $form = $infofieldsObj->getFormInfofields();
         $GLOBALS['xoopsTpl']->assign('form', $form->render());
         break;
-
     case 'edit':
         $templateMain = 'wgteams_admin_infofields.tpl';
-        $adminMenu->addItemButton(_AM_WGTEAMS_INFOFIELD_ADD, 'infofields.php?op=new', 'add');
-        $adminMenu->addItemButton(_AM_WGTEAMS_INFOFIELDS_LIST, 'infofields.php', 'list');
-        $GLOBALS['xoopsTpl']->assign('navigation', $adminMenu->addNavigation('infofields.php'));
-        $GLOBALS['xoopsTpl']->assign('buttons', $adminMenu->renderButton());
+        $adminObject->addItemButton(_AM_WGTEAMS_INFOFIELD_ADD, 'infofields.php?op=new', 'add');
+        $adminObject->addItemButton(_AM_WGTEAMS_INFOFIELDS_LIST, 'infofields.php', 'list');
+        $GLOBALS['xoopsTpl']->assign('navigation', $adminObject->displayNavigation('infofields.php'));
+        $GLOBALS['xoopsTpl']->assign('buttons', $adminObject->displayButton('left', ''));
         // Get Form
         $infofieldsObj = $infofieldsHandler->get($addField_id);
         $form          = $infofieldsObj->getFormInfofields();
         $GLOBALS['xoopsTpl']->assign('form', $form->render());
         break;
-
     case 'delete':
         $infofieldsObj = $infofieldsHandler->get($addField_id);
-        if (isset($_REQUEST['ok']) && 1 == $_REQUEST['ok']) {
+        if (\Xmf\Request::hasVar('ok') && 1 == $_REQUEST['ok']) {
             if (!$GLOBALS['xoopsSecurity']->check()) {
                 redirect_header('infofields.php', 3, implode(', ', $GLOBALS['xoopsSecurity']->getErrors()));
             }
@@ -124,4 +122,4 @@ switch ($op) {
         break;
 }
 
-include __DIR__ . '/footer.php';
+require __DIR__ . '/footer.php';

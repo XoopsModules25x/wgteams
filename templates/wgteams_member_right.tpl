@@ -101,17 +101,10 @@
                 <{$member.info_5}></div>
             </div>
         <{/if}>
-		<{if $member.member_uid}>
-			<div class='<{if $member.rel_tablestyle == 'wgteams-striped'}><{cycle values="wgteams-odd, wgteams-even"}><{else}><{$member.rel_tablestyle}><{/if}>'>
-				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 center">						
-					<a class="btn btn-primary" href="<{$xoops_url}>/userinfo.php?uid=<{$member.member_uid}>" title="<{$smarty.const._MA_WGTEAMS_MEMBER_UID}>"><{$smarty.const._MA_WGTEAMS_MEMBER_UID}></a>
-				</div>
-			</div>
-		<{/if}>
     </div>
     <{if $member.member_image}>
         <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-            <img class="img-responsive center member-img <{$member.rel_imagestyle}>" src="<{$member.member_image_url}><{$member.member_image}>" alt="<{$member.member_name}>" title="<{$member.member_name}>" />
+            <img class="img-responsive center member-img <{$member.rel_imagestyle}>" src="<{$member.member_image_url}><{$member.member_image}>" alt="<{$member.member_name}>" title="<{$member.member_name}>">
         </div>
     <{/if}>
 </div>

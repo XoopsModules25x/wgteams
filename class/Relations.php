@@ -28,11 +28,15 @@ use XoopsModules\Wgteams;
 defined('XOOPS_ROOT_PATH') || exit('Restricted access');
 
 /**
- * Class Object WgteamsRelations
+ * Class Object Relations
  */
-
 class Relations extends \XoopsObject
 {
+    /**
+     * @var mixed
+     */
+    private $helper = null;
+
     /**
      * Constructor
      *
@@ -40,7 +44,7 @@ class Relations extends \XoopsObject
      */
     public function __construct()
     {
-        $this->helper = Wgteams\Helper::getInstance();
+        $this->helper = Helper::getInstance();
         $this->initVar('rel_id', XOBJ_DTYPE_INT);
         $this->initVar('rel_team_id', XOBJ_DTYPE_INT);
         $this->initVar('rel_member_id', XOBJ_DTYPE_INT);
@@ -78,18 +82,25 @@ class Relations extends \XoopsObject
      * Get form
      *
      * @param mixed $action
-     * @return \XoopsThemeForm
+     * @return XoopsThemeForm
      */
     public function getFormRelations($action = false)
     {
         global $xoopsUser;
+		
         if (false === $action) {
             $action = $_SERVER['REQUEST_URI'];
         }
 
-        $infofieldsHandler = $this->helper->getHandler('infofields');
-        $teamsHandler      = $this->helper->getHandler('teams');
-        $membersHandler    = $this->helper->getHandler('members');
+
+        $infofieldsHandler = $this->helper->getHandler('Infofields');
+        $teamsHandler      = $this->helper->getHandler('Teams');
+        $membersHandler    = $this->helper->getHandler('Members');
+		
+		// $db           = \XoopsDatabaseFactory::getDatabaseConnection();
+		// $infofieldsHandler = new Wgteams\InfofieldsHandler($db);
+		// $teamsHandler = new Wgteams\TeamsHandler($db);
+		// $membersHandler    = new Wgteams\MembersHandler($db);
 
         if (0 == $infofieldsHandler->getCountInfofields()) {
             redirect_header('infofields.php', 3, _AM_WGTEAMS_THEREARENT_INFOFIELDS);
@@ -107,8 +118,6 @@ class Relations extends \XoopsObject
         xoops_load('XoopsFormLoader');
         $form = new \XoopsThemeForm($title, 'form', $action, 'post', true);
         $form->setExtra('enctype="multipart/form-data"');
-        // Relations handler
-        //$relationsHandler = $helper->getHandler('relations');
         // Form select team
         $relTeam_idSelect = new \XoopsFormSelect(_AM_WGTEAMS_RELATION_TEAM_ID, 'rel_team_id', $this->getVar('rel_team_id'));
         $relTeam_idSelect->addOptionArray($teamsHandler->getList());
@@ -229,23 +238,23 @@ class Relations extends \XoopsObject
      */
     public function getValuesRelations($keys = null, $format = null, $maxDepth = null)
     {
-		$ret                 = $this->getValues($keys, $format, $maxDepth);
+        $helper              = Helper::getInstance();
+        $ret                 = $this->getValues($keys, $format, $maxDepth);
         $ret['id']           = $this->getVar('rel_id');
         $ret['team_id']      = $this->getVar('rel_team_id');
         $ret['team_name']    = $this->helper->getHandler('teams')->get($this->getVar('rel_team_id'))->getVar('team_name');
         $ret['member_id']    = $this->getVar('rel_member_id');
-        $ret['member_name']  = trim($this->helper->getHandler('members')->get($this->getVar('rel_member_id'))->getVar('member_firstname') .
-                                    ' ' . $this->helper->getHandler('members')->get($this->getVar('rel_member_id'))->getVar('member_lastname'));
+        $ret['member_name']  = trim($this->helper->getHandler('members')->get($this->getVar('rel_member_id'))->getVar('member_firstname') . ' ' . $this->helper->getHandler('members')->get($this->getVar('rel_member_id'))->getVar('member_lastname'));
         $ret['info_1_field'] = $this->helper->getHandler('infofields')->get($this->getVar('rel_info_1_field'))->getVar('infofield_name');
-        $ret['info_1']       = $this->helper->truncateHtml($this->getVar('rel_info_1', 'n'));
+        $ret['info_1']       = $helper->truncateHtml($this->getVar('rel_info_1', 'n'));
         $ret['info_2_field'] = $this->helper->getHandler('infofields')->get($this->getVar('rel_info_2_field'))->getVar('infofield_name');
-        $ret['info_2']       = $this->helper->truncateHtml($this->getVar('rel_info_2', 'n'));
+        $ret['info_2']       = $helper->truncateHtml($this->getVar('rel_info_2', 'n'));
         $ret['info_3_field'] = $this->helper->getHandler('infofields')->get($this->getVar('rel_info_3_field'))->getVar('infofield_name');
-        $ret['info_3']       = $this->helper->truncateHtml($this->getVar('rel_info_3', 'n'));
+        $ret['info_3']       = $helper->truncateHtml($this->getVar('rel_info_3', 'n'));
         $ret['info_4_field'] = $this->helper->getHandler('infofields')->get($this->getVar('rel_info_4_field'))->getVar('infofield_name');
-        $ret['info_4']       = $this->helper->truncateHtml($this->getVar('rel_info_4', 'n'));
+        $ret['info_4']       = $helper->truncateHtml($this->getVar('rel_info_4', 'n'));
         $ret['info_5_field'] = $this->helper->getHandler('infofields')->get($this->getVar('rel_info_5_field'))->getVar('infofield_name');
-        $ret['info_5']       = $this->helper->truncateHtml($this->getVar('rel_info_5', 'n'));
+        $ret['info_5']       = $helper->truncateHtml($this->getVar('rel_info_5', 'n'));
         $ret['weight']       = $this->getVar('rel_weight');
         $ret['submitter']    = \XoopsUser::getUnameFromId($this->getVar('rel_submitter'));
         $ret['date_create']  = formatTimestamp($this->getVar('rel_date_create'));
@@ -261,7 +270,7 @@ class Relations extends \XoopsObject
     public function toArray()
     {
         $ret  = [];
-        $vars =& $this->getVars();
+        $vars = &$this->getVars();
         foreach (array_keys($vars) as $var) {
             $ret[$var] = $this->getVar($var);
         }

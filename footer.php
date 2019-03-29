@@ -22,16 +22,16 @@
 if (count($xoBreadcrumbs) > 1) {
     $GLOBALS['xoopsTpl']->assign('xoBreadcrumbs', $xoBreadcrumbs);
 }
-$sysPathIcon16 = $GLOBALS['xoopsModule']->getInfo('sysicons16');
-$sysPathIcon32 = $GLOBALS['xoopsModule']->getInfo('sysicons32');
-$GLOBALS['xoopsTpl']->assign('sysPathIcon32', $sysPathIcon32);
+$pathIcon16 = $GLOBALS['xoopsModule']->getInfo('sysicons16');
+$pathIcon32 = $GLOBALS['xoopsModule']->getInfo('sysicons32');
+$GLOBALS['xoopsTpl']->assign('pathIcon32', $pathIcon32);
 $GLOBALS['xoopsTpl']->assign('wgteams_url', WGTEAMS_URL);
 $GLOBALS['xoopsTpl']->assign('adv', xoops_getModuleOption('advertise', $dirname));
-//
+
 $GLOBALS['xoopsTpl']->assign('bookmarks', xoops_getModuleOption('bookmarks', $dirname));
 $GLOBALS['xoopsTpl']->assign('fbcomments', xoops_getModuleOption('fbcomments', $dirname));
-//
+
 $GLOBALS['xoopsTpl']->assign('admin', WGTEAMS_ADMIN);
 $GLOBALS['xoopsTpl']->assign('copyright', $copyright);
 // User footer
-include_once XOOPS_ROOT_PATH . '/footer.php';
+require_once XOOPS_ROOT_PATH . '/footer.php';

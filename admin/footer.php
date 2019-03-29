@@ -19,7 +19,7 @@
  * @author          Goffy - Wedega.com - Email:<webmaster@wedega.com> - Website:<https://wedega.com>
  * @version         $Id: 1.0 footer.php 1 Sun 2015/12/27 23:18:01Z Goffy - Wedega $
  */
-if ( isset($templateMain)  ) {
+if (isset($templateMain)) {
     $GLOBALS['xoopsTpl']->display("db:{$templateMain}");
 }
 xoops_cp_footer();

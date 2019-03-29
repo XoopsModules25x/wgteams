@@ -22,25 +22,26 @@ namespace XoopsModules\Wgteams;
  * @author          Goffy - Wedega.com - Email:<webmaster@wedega.com> - Website:<https://wedega.com>
  * @version         $Id: 1.0 members.php 1 Sun 2015/12/27 23:18:00Z Goffy - Wedega $
  */
-
-use XoopsModules\Wgteams;
-
 defined('XOOPS_ROOT_PATH') || exit('Restricted access');
 
 /**
- * Class WgteamsMembers
+ * Class Members
  */
 class Members extends \XoopsObject
 {
+    /**
+     * @var mixed
+     */
+    private $helper = null;
 
     /**
      * Constructor
      *
-     * WgteamsMembers constructor.
+     * Members constructor.
      */
     public function __construct()
     {
-        $this->helper = Wgteams\Helper::getInstance();
+        $this->helper = Helper::getInstance();
         $this->initVar('member_id', XOBJ_DTYPE_INT);
         $this->initVar('member_firstname', XOBJ_DTYPE_TXTBOX);
         $this->initVar('member_lastname', XOBJ_DTYPE_TXTBOX);
@@ -49,13 +50,12 @@ class Members extends \XoopsObject
         $this->initVar('member_phone', XOBJ_DTYPE_TXTAREA);
         $this->initVar('member_email', XOBJ_DTYPE_TXTBOX);
         $this->initVar('member_image', XOBJ_DTYPE_TXTBOX);
-        $this->initVar('member_uid', XOBJ_DTYPE_INT);
-		$this->initVar('member_submitter', XOBJ_DTYPE_INT);
+        $this->initVar('member_submitter', XOBJ_DTYPE_INT);
         $this->initVar('member_date_create', XOBJ_DTYPE_INT);
     }
 
     /**
-    *  @static function getInstance
+     * @static function getInstance
      * @return static
      */
     public static function getInstance()
@@ -72,7 +72,7 @@ class Members extends \XoopsObject
      * Get form
      *
      * @param mixed $action
-     * @return \XoopsThemeForm
+     * @return XoopsThemeForm
      */
     public function getFormMembers($action = false)
     {
@@ -88,7 +88,7 @@ class Members extends \XoopsObject
         $form = new \XoopsThemeForm($title, 'form', $action, 'post', true);
         $form->setExtra('enctype="multipart/form-data"');
         // member handler
-        //$membersHandler = $helper->getHandler('members');
+        //$membersHandler = $this->wgteams->getHandler('members');
         // Form Text memberFirstname
         $form->addElement(new \XoopsFormText(_AM_WGTEAMS_MEMBER_FIRSTNAME, 'member_firstname', 50, 255, $this->getVar('member_firstname')), true);
         // Form Text memberLastname
@@ -134,12 +134,9 @@ class Members extends \XoopsObject
         // Form File
         $fileSelectTray = new \XoopsFormElementTray('', '<br>');
         $fileSelectTray->addElement(new \XoopsFormFile(_AM_WGTEAMS_FORM_UPLOAD_IMG, 'attachedfile', $this->helper->getConfig('wgteams_img_maxsize')));
-        $fileSelectTray->addElement(new \XoopsFormLabel(_AM_WGTEAMS_MAX_FILESIZE .  $this->helper->getConfig('wgteams_img_maxsize')));
+        $fileSelectTray->addElement(new \XoopsFormLabel(_AM_WGTEAMS_MAX_FILESIZE . $this->helper->getConfig('wgteams_img_maxsize')));
         $imageTray->addElement($fileSelectTray);
         $form->addElement($imageTray);
-		// Form Select User
-        $memberUid = $this->isNew() ? 0 : $this->getVar('member_uid');
-		$form->addElement( new \XoopsFormSelectUser(_AM_WGTEAMS_MEMBER_UID . _AM_WGTEAMS_MEMBER_UID_DESC, 'member_uid', true, $memberUid, 1, false) );
         // Form Select User
         $submitter = $this->isNew() ? $xoopsUser->getVar('uid') : $this->getVar('member_submitter');
         $form->addElement(new \XoopsFormSelectUser(_AM_WGTEAMS_SUBMITTER, 'member_submitter', false, $submitter, 1, false));
@@ -161,22 +158,17 @@ class Members extends \XoopsObject
      */
     public function getValuesMember($keys = null, $format = null, $maxDepth = null)
     {
-		$ret                = $this->getValues($keys, $format, $maxDepth);
+        $helper             = Helper::getInstance();
+        $ret                = $this->getValues($keys, $format, $maxDepth);
         $ret['id']          = $this->getVar('member_id');
         $ret['firstname']   = $this->getVar('member_firstname');
         $ret['lastname']    = $this->getVar('member_lastname');
         $ret['title']       = $this->getVar('member_title');
-        $ret['address']     = $this->helper->truncateHtml($this->getVar('member_address', 'n'));
+        $ret['address']     = $helper->truncateHtml($this->getVar('member_address', 'n'));
         $ret['phone']       = strip_tags($this->getVar('member_phone'));
         $ret['email']       = $this->getVar('member_email');
         $ret['image']       = $this->getVar('member_image');
-		$ret['uid']         = 0;
-		$ret['uid_text']    = '';
-		if ( 0 < $this->getVar('member_uid') ) {
-			$ret['uid']      = $this->getVar('member_uid');
-			$ret['uid_text'] = \XoopsUser::getUnameFromId($this->getVar('member_uid'));
-		}
-		$ret['submitter']   = \XoopsUser::getUnameFromId($this->getVar('member_submitter'));
+        $ret['submitter']   = \XoopsUser::getUnameFromId($this->getVar('member_submitter'));
         $ret['date_create'] = formatTimestamp($this->getVar('member_date_create'));
 
         return $ret;
@@ -190,7 +182,7 @@ class Members extends \XoopsObject
     public function toArray()
     {
         $ret  = [];
-        $vars =& $this->getVars();
+        $vars = &$this->getVars();
         foreach (array_keys($vars) as $var) {
             $ret[$var] = $this->getVar($var);
         }
