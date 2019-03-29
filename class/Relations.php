@@ -243,7 +243,7 @@ class Relations extends \XoopsObject
         $ret                 = $this->getValues($keys, $format, $maxDepth);
         $ret['id']           = $this->getVar('rel_id');
         $ret['team_id']      = $this->getVar('rel_team_id');
-        $ret['team_name']    = $this->helper->getHandler('teams')->get($this->getVar('rel_team_id'))->getVar('team_name');
+        $ret['team_name']    = $this->helper->getHandler('Teams')->get($this->getVar('rel_team_id'))->getVar('team_name');
         $ret['member_id']    = $this->getVar('rel_member_id');
         $ret['member_name']  = trim($this->helper->getHandler('members')->get($this->getVar('rel_member_id'))->getVar('member_firstname') . ' ' . $this->helper->getHandler('members')->get($this->getVar('rel_member_id'))->getVar('member_lastname'));
         $ret['info_1_field'] = $this->helper->getHandler('infofields')->get($this->getVar('rel_info_1_field'))->getVar('infofield_name');
@@ -257,7 +257,7 @@ class Relations extends \XoopsObject
         $ret['info_5_field'] = $this->helper->getHandler('infofields')->get($this->getVar('rel_info_5_field'))->getVar('infofield_name');
         $ret['info_5']       = $helper->truncateHtml($this->getVar('rel_info_5', 'n'));
         $ret['weight']       = $this->getVar('rel_weight');
-        $ret['submitter']    = XoopsUser::getUnameFromId($this->getVar('rel_submitter'));
+        $ret['submitter']    = \XoopsUser::getUnameFromId($this->getVar('rel_submitter'));
         $ret['date_create']  = formatTimestamp($this->getVar('rel_date_create'));
 
         return $ret;
