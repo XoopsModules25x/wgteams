@@ -10,11 +10,11 @@
 */
 
 /**
- * wgGallery module for xoops
+ * wgTeams module for xoops
  *
  * @copyright module for xoops
  * @license   GPL 2.0 or later
- * @package   wggallery
+ * @package   wgTeams
  * @since     1.0
  * @min_xoops 2.5.7
  * @author    Wedega - Email:<webmaster@wedega.com> - Website:<https://wedega.com>
@@ -23,7 +23,7 @@
 
 $moduleDirName = basename(dirname(dirname(__DIR__)));
 $moduleDirNameUpper = mb_strtoupper($moduleDirName);
-echo 'CO_' . $moduleDirNameUpper . '_' . 'SHOW_SAMPLE_BUTTON';
+
 //Sample Data
 define('CO_' . $moduleDirNameUpper . '_' . 'ADD_SAMPLEDATA', 'Importe Beispieldaten (ALLE vorhandenen Daten werden gelöscht)');
 define('CO_' . $moduleDirNameUpper . '_' . 'SAMPLEDATA_SUCCESS', 'Beispieldaten erfolgreich geladen');

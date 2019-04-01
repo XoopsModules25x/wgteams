@@ -1,13 +1,39 @@
 -
     team_id: '1'
-    team_name: testteam
-    team_descr: testdescr
-    team_image: UnserTeam.56852c2eb3106.png
-    team_nb_cols: '2'
+    team_name: Dogs
+    team_descr: 'Lets have a look on our dogs'
+    team_image: dogs-984015_640.jpg
+    team_nb_cols: '4'
     team_tablestyle: default
-    team_imagestyle: default
+    team_imagestyle: img-circle
     team_displaystyle: default
     team_weight: '0'
     team_online: '1'
     team_submitter: '1'
-    team_date_create: '1553806056'
+    team_date_create: '1553961664'
+-
+    team_id: '2'
+    team_name: Cats
+    team_descr: 'Our cats are so nice'
+    team_image: cat-1209067_640.jpg
+    team_nb_cols: '2'
+    team_tablestyle: default
+    team_imagestyle: img-rounded
+    team_displaystyle: default
+    team_weight: '0'
+    team_online: '1'
+    team_submitter: '1'
+    team_date_create: '1553961262'
+-
+    team_id: '3'
+    team_name: 'Animal babys'
+    team_descr: 'They are so nice when they are small'
+    team_image: blank.gif
+    team_nb_cols: '4'
+    team_tablestyle: default
+    team_imagestyle: img-thumbnail
+    team_displaystyle: default
+    team_weight: '0'
+    team_online: '1'
+    team_submitter: '1'
+    team_date_create: '1553961885'

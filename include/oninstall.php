@@ -28,7 +28,7 @@ use XoopsModules\Wgteams;
 function xoops_module_pre_install_wgteams(\XoopsModule $module)
 {
     require dirname(__DIR__) . '/preloads/autoloader.php';
-    /** @var Wgteams\Utility $utility */
+    // /** @var Wgteams\Utility $utility */
     $utility      = new \XoopsModules\Wgteams\Utility();
     $xoopsSuccess = $utility::checkVerXoops($module);
     $phpSuccess   = $utility::checkVerPhp($module);
@@ -41,6 +41,7 @@ function xoops_module_pre_install_wgteams(\XoopsModule $module)
     }
 
     return $xoopsSuccess && $phpSuccess;
+	return true;
 }
 
 /**
@@ -63,7 +64,8 @@ function xoops_module_install_wgteams(\XoopsModule $module)
     $helper->loadLanguage('admin');
     $helper->loadLanguage('modinfo');
 
-    // default Permission Settings ----------------------
+    /* 
+	// default Permission Settings ----------------------
     global $xoopsModule;
     $moduleId         = $xoopsModule->getVar('mid');
     // $moduleId2        = $helper->getModule()->mid();
@@ -73,7 +75,8 @@ function xoops_module_install_wgteams(\XoopsModule $module)
     $grouppermHandler->addRight($moduleDirName . '_submit', 1, XOOPS_GROUP_ADMIN, $moduleId);
     $grouppermHandler->addRight($moduleDirName . '_view', 1, XOOPS_GROUP_ADMIN, $moduleId);
     $grouppermHandler->addRight($moduleDirName . '_view', 1, XOOPS_GROUP_USERS, $moduleId);
-    $grouppermHandler->addRight($moduleDirName . '_view', 1, XOOPS_GROUP_ANONYMOUS, $moduleId);
+    $grouppermHandler->addRight($moduleDirName . '_view', 1, XOOPS_GROUP_ANONYMOUS, $moduleId); 
+	*/
 
     //  ---  CREATE FOLDERS ---------------
     if (count($configurator->uploadFolders) > 0) {

@@ -79,8 +79,9 @@ $modversion = [
     // Main things
     'hasMain'             => 1,
     // Install/Update
-    'onInstall'           => 'include/install.php',
-    'onUpdate'            => 'include/update.php',
+    'onInstall'           => 'include/oninstall.php',
+    'onUpdate'            => 'include/onupdate.php',
+	'onUninstall'         => 'include/onuninstall.php',
 ];
 // ------------------- Templates ------------------- //
 // Admin
@@ -217,15 +218,53 @@ $modversion['config'][] = [
     'default'     => 'dhtmltextarea',
 ];
 
-//Uploads : max size for image upload
+// Uploads : maxsize of image
+include_once 'include/xoops_version.inc.php';
+$iniPostMaxSize = wgteamsReturnBytes(ini_get('post_max_size'));
+$iniUploadMaxFileSize = wgteamsReturnBytes(ini_get('upload_max_filesize'));
+$maxSize = min($iniPostMaxSize, $iniUploadMaxFileSize);
+if ($maxSize > 10000 * 1048576) {
+    $increment = 500;
+}
+if ($maxSize <= 10000 * 1048576){
+    $increment = 200;
+}
+if ($maxSize <= 5000 * 1048576){
+    $increment = 100;
+}
+if ($maxSize <= 2500 * 1048576){
+    $increment = 50;
+}
+if ($maxSize <= 1000 * 1048576){
+    $increment = 20;
+}
+if ($maxSize <= 500 * 1048576){
+    $increment = 10;
+}
+if ($maxSize <= 100 * 1048576){
+    $increment = 2;
+}
+if ($maxSize <= 50 * 1048576){
+    $increment = 1;
+}
+if ($maxSize <= 25 * 1048576){
+    $increment = 0.5;
+}
+$optionMaxsize = [];
+$i = $increment;
+while ($i* 1048576 <= $maxSize) {
+    $optionMaxsize[$i . ' ' . _MI_WGTEAMS_SIZE_MB] = $i * 1048576;
+    $i += $increment;
+}
 $modversion['config'][] = [
-    'name'        => 'wgteams_img_maxsize',
-    'title'       => '_MI_WGTEAMS_IMG_MAXSIZE',
+    'name' => 'wgteams_img_maxsize',
+    'title' => '_MI_WGTEAMS_IMG_MAXSIZE',
     'description' => '_MI_WGTEAMS_IMG_MAXSIZE_DESC',
-    'formtype'    => 'textbox',
-    'valuetype'   => 'int',
-    'default'     => 10485760,
-]; // 1 MB
+    'formtype' => 'select',
+    'valuetype' => 'int',
+    'default' => 3145728,
+    'options' => $optionMaxsize,
+];
 
 //Uploads : mimetypes of images
 $modversion['config'][] = [
@@ -244,6 +283,26 @@ $modversion['config'][] = [
         'jpe'   => 'image/jpe',
         'png'   => 'image/png',
     ],
+];
+
+// Uploads : max width of images for upload
+$modversion['config'][] = [
+    'name'        => 'maxwidth',
+    'title'       => '_MI_WGTEAMS_MAXWIDTH',
+    'description' => '_MI_WGTEAMS_MAXWIDTH_DESC',
+    'formtype'    => 'textbox',
+    'valuetype'   => 'int',
+    'default'     => 400,
+];
+
+// Uploads : max height of images for upload
+$modversion['config'][] = [
+    'name'        => 'maxheight',
+    'title'       => '_MI_WGTEAMS_MAXHEIGHT',
+    'description' => '_MI_WGTEAMS_MAXHEIGHT_DESC',
+    'formtype'    => 'textbox',
+    'valuetype'   => 'int',
+    'default'     => 400,
 ];
 
 $modversion['config'][] = [

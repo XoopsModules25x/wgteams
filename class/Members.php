@@ -87,8 +87,6 @@ class Members extends \XoopsObject
         xoops_load('XoopsFormLoader');
         $form = new \XoopsThemeForm($title, 'form', $action, 'post', true);
         $form->setExtra('enctype="multipart/form-data"');
-        // member handler
-        //$membersHandler = $this->wgteams->getHandler('members');
         // Form Text memberFirstname
         $form->addElement(new \XoopsFormText(_AM_WGTEAMS_MEMBER_FIRSTNAME, 'member_firstname', 50, 255, $this->getVar('member_firstname')), true);
         // Form Text memberLastname

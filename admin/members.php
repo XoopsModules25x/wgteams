@@ -94,21 +94,39 @@ switch ($op) {
         $membersObj->setVar('member_email', $_POST['member_email']);
         // Set Var member_image
         require_once XOOPS_ROOT_PATH . '/class/uploader.php';
-        $uploader = new \XoopsMediaUploader(WGTEAMS_UPLOAD_PATH . '/members/images', $helper->getConfig('wgteams_img_mimetypes'), $helper->getConfig('wgteams_img_maxsize'), null, null);
-        if ($uploader->fetchMedia($_POST['xoops_upload_file'][0])) {
-            $extension = preg_replace('/^.+\.([^.]+)$/sU', '', $_FILES['attachedfile']['name']);
-            $imgName   = mb_substr(str_replace(' ', '', $_POST['member_lastname'] . $_POST['member_firstname']), 0, 20) . '_' . $extension;
+		$fileName       = $_FILES['attachedfile']['name'];
+        $imageMimetype  = $_FILES['attachedfile']['type'];
+        $uploaderErrors = '';
+        $uploader = new \XoopsMediaUploader(WGTEAMS_UPLOAD_PATH . '/members/images', $helper->getConfig('wgteams_img_mimetypes'), $helper->getConfig('wgteams_img_maxsize'), null, null);	
+		if ($uploader->fetchMedia($_POST['xoops_upload_file'][0])) {
+            $extension = preg_replace('/^.+\.([^.]+)$/sU', '', $fileName);
+			$imgName   = mb_substr(str_replace(' ', '', $_POST['member_lastname'] . $_POST['member_firstname']), 0, 20) . '_' . $extension;
             $uploader->setPrefix($imgName);
             $uploader->fetchMedia($_POST['xoops_upload_file'][0]);
             if (!$uploader->upload()) {
-                $errors = $uploader->getErrors();
-                redirect_header('javascript:history.go(-1)', 3, $errors);
+                $uploaderErrors = $uploader->getErrors();
             } else {
-                $membersObj->setVar('member_image', $uploader->getSavedFileName());
+                $savedFilename = $uploader->getSavedFileName();
+                $membersObj->setVar('member_image', $savedFilename);
+                // resize image
+                $maxwidth  = (int)$helper->getConfig('maxwidth');
+                $maxheight = (int)$helper->getConfig('maxheight');
+                $imgHandler                = new Wgteams\Resizer();
+                $imgHandler->sourceFile    = WGTEAMS_UPLOAD_PATH . '/members/images/' . $savedFilename;
+                $imgHandler->endFile       = WGTEAMS_UPLOAD_PATH . '/members/images/' . $savedFilename;
+                $imgHandler->imageMimetype = $imageMimetype;
+                $imgHandler->maxWidth      = $maxwidth;
+                $imgHandler->maxHeight     = $maxheight;
+                $result                    = $imgHandler->resizeImage();
+                $membersObj->setVar('member_image', $savedFilename);
             }
         } else {
-            $membersObj->setVar('member_image', $_POST['member_image']);
+            if ($fileName > '') {
+                $uploaderErrors = $uploader->getErrors();
+            }
+            $membersObj->setVar('member_image', Request::getString('member_image'));
         }
+		
         // Set Var member_submitter
         $membersObj->setVar('member_submitter', $_POST['member_submitter']);
         // Set Var member_date_create
