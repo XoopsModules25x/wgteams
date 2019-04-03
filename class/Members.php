@@ -162,7 +162,7 @@ class Members extends \XoopsObject
         $ret['firstname']   = $this->getVar('member_firstname');
         $ret['lastname']    = $this->getVar('member_lastname');
         $ret['title']       = $this->getVar('member_title');
-        $ret['address']     = $helper->truncateHtml($this->getVar('member_address', 'n'));
+        $ret['address']     = $helper::truncateHtml($this->getVar('member_address', 'n'));
         $ret['phone']       = strip_tags($this->getVar('member_phone'));
         $ret['email']       = $this->getVar('member_email');
         $ret['image']       = $this->getVar('member_image');
