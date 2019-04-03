@@ -53,9 +53,9 @@ function xoops_module_pre_install_wgteams(\XoopsModule $module)
 function xoops_module_install_wgteams(\XoopsModule $module)
 {
     require_once dirname(dirname(dirname(__DIR__))) . '/mainfile.php';
-    require_once dirname(__DIR__) . '/include/config.php';
 
     $moduleDirName = basename(dirname(__DIR__));
+
     /** @var Wgteams\Helper $helper */
     $helper       = Wgteams\Helper::getInstance();
     $utility      = new Wgteams\Utility();
@@ -95,7 +95,7 @@ function xoops_module_install_wgteams(\XoopsModule $module)
         }
     }
     //delete .html entries from the tpl table
-    $sql = 'DELETE FROM ' . $GLOBALS['xoopsDB']->prefix('tplfile') . " WHERE `tpl_module` = '" . $xoopsModule->getVar('dirname', 'n') . "' AND `tpl_file` LIKE '%.html%'";
+    $sql = 'DELETE FROM ' . $GLOBALS['xoopsDB']->prefix('tplfile') . " WHERE `tpl_module` = '" . $module->getVar('dirname', 'n') . "' AND `tpl_file` LIKE '%.html%'";
     $GLOBALS['xoopsDB']->queryF($sql);
 
     return true;
