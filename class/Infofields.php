@@ -67,7 +67,7 @@ class Infofields extends \XoopsObject
      * Get form
      *
      * @param bool|mixed $action
-     * @return XoopsThemeForm
+     * @return \XoopsThemeForm
      */
     public function getFormInfofields($action = false)
     {

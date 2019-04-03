@@ -82,7 +82,7 @@ class Relations extends \XoopsObject
      * Get form
      *
      * @param mixed $action
-     * @return XoopsThemeForm
+     * @return \XoopsThemeForm
      */
     public function getFormRelations($action = false)
     {

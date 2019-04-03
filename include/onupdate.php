@@ -127,8 +127,6 @@ function xoops_module_update_wgteams(\XoopsModule $module, $previousVersion = nu
 
 /**
  * repair errors in data (caused by former versions of wgteams)
- * @param: $module
- *
  * @param mixed $module
  * @return bool
  */

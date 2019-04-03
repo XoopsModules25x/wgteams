@@ -75,7 +75,7 @@ class Teams extends \XoopsObject
      * Get form
      *
      * @param mixed $action
-     * @return XoopsThemeForm
+     * @return \XoopsThemeForm
      */
     public function getFormTeams($action = false)
     {
