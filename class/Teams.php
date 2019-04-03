@@ -75,7 +75,7 @@ class Teams extends \XoopsObject
      * Get form
      *
      * @param mixed $action
-     * @return XoopsThemeForm
+     * @return \XoopsThemeForm
      */
     public function getFormTeams($action = false)
     {
@@ -113,7 +113,7 @@ class Teams extends \XoopsObject
         $imageSelect = new \XoopsFormSelect(_AM_WGTEAMS_FORM_IMAGE_EXIST, 'team_image', $teamImage, 5);
         $imageArray  = \XoopsLists::getImgListAsArray(XOOPS_ROOT_PATH . $imageDirectory);
         foreach ($imageArray as $image) {
-            $imageSelect->addOption("{$image}", $image);
+            $imageSelect->addOption((string)($image), $image);
         }
         $imageSelect->setExtra("onchange='showImgSelected(\"image2\", \"team_image\", \"" . $imageDirectory . '", "", "' . XOOPS_URL . "\")'");
         $imageTray->addElement($imageSelect, false);
@@ -186,7 +186,7 @@ class Teams extends \XoopsObject
         $ret                 = $this->getValues($keys, $format, $maxDepth);
         $ret['id']           = $this->getVar('team_id');
         $ret['name']         = strip_tags($this->getVar('team_name'));
-        $ret['descr']        = $helper->truncateHtml($this->getVar('team_descr', 'n'));
+        $ret['descr']        = $helper::truncateHtml($this->getVar('team_descr', 'n'));
         $ret['image']        = $this->getVar('team_image');
         $ret['nb_cols']      = $this->getVar('team_nb_cols');
         $ret['tablestyle']   = $this->getVar('team_tablestyle');

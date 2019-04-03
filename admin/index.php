@@ -28,7 +28,7 @@ $utility      = new \XoopsModules\Wgteams\Utility();
 $moduleHandler           = xoops_getHandler('module');
 $module                  = $moduleHandler->getByDirname('wgteams');
 
-echo "  - checkVerXoops:".$utility::checkVerXoops($module);
+echo '  - checkVerXoops:' . $utility::checkVerXoops($module);
 
 
 

@@ -92,7 +92,7 @@ function xoops_module_update_wgteams(\XoopsModule $module, $previousVersion = nu
 		//    foreach (array_keys($GLOBALS['uploadFolders']) as $i) {
 		foreach (array_keys($configurator->oldFolders) as $i) {
 			$tempFolder = $GLOBALS['xoops']->path('modules/' . $moduleDirName . $configurator->oldFolders[$i]);
-			/* @var $folderHandler XoopsObjectHandler */
+			/* @var XoopsObjectHandler $folderHandler */
 			$folderHandler = \XoopsFile::getHandler('folder', $tempFolder);
 			$folderHandler->delete($tempFolder);
 		}
@@ -127,8 +127,6 @@ function xoops_module_update_wgteams(\XoopsModule $module, $previousVersion = nu
 
 /**
  * repair errors in data (caused by former versions of wgteams)
- * @param: $module
- *
  * @param mixed $module
  * @return bool
  */

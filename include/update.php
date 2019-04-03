@@ -103,8 +103,6 @@ function update_wgteams_v10(&$module)
 
 /**
  * repair errors in data (caused by former versions of wgteams)
- * @param: $module
- *
  * @param mixed $module
  * @return bool
  */
