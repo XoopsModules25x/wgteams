@@ -26,7 +26,9 @@ $blankFile = XOOPS_UPLOAD_PATH . '/blank.gif';
 // Making of "uploads/wgteams" folder
 $wgteams = XOOPS_UPLOAD_PATH . '/wgteams';
 if (!is_dir($wgteams)) {
-    mkdir($wgteams, 0777);
+    if (!mkdir($wgteams, 0777) && !is_dir($wgteams)) {
+        throw new \RuntimeException(sprintf('Directory "%s" was not created', $wgteams));
+    }
 }
 chmod($wgteams, 0777);
 copy($indexFile, $wgteams . '/index.html');
@@ -34,13 +36,17 @@ copy($indexFile, $wgteams . '/index.html');
 // Making of teams uploads folder
 $folder = $wgteams . '/teams';
 if (!is_dir($folder)) {
-    mkdir($folder, 0777);
+    if (!mkdir($folder, 0777) && !is_dir($folder)) {
+        throw new \RuntimeException(sprintf('Directory "%s" was not created', $folder));
+    }
 }
 chmod($folder, 0777);
 copy($indexFile, $folder . '/index.html');
 $folder_img = $folder . '/images';
 if (!is_dir($folder_img)) {
-    mkdir($folder_img, 0777);
+    if (!mkdir($folder_img, 0777) && !is_dir($folder_img)) {
+        throw new \RuntimeException(sprintf('Directory "%s" was not created', $folder_img));
+    }
 }
 chmod($folder_img, 0777);
 copy($indexFile, $folder_img . '/index.html');
@@ -49,13 +55,17 @@ copy($blankFile, $folder_img . '/blank.gif');
 // Making of members uploads folder
 $folder = $wgteams . '/members';
 if (!is_dir($folder)) {
-    mkdir($folder, 0777);
+    if (!mkdir($folder, 0777) && !is_dir($folder)) {
+        throw new \RuntimeException(sprintf('Directory "%s" was not created', $folder));
+    }
 }
 chmod($folder, 0777);
 copy($indexFile, $folder . '/index.html');
 $folder_img = $folder . '/images';
 if (!is_dir($folder_img)) {
-    mkdir($folder_img, 0777);
+    if (!mkdir($folder_img, 0777) && !is_dir($folder_img)) {
+        throw new \RuntimeException(sprintf('Directory "%s" was not created', $folder_img));
+    }
 }
 chmod($folder_img, 0777);
 copy($indexFile, $folder_img . '/index.html');
