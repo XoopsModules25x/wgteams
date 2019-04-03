@@ -43,3 +43,4 @@ define('CO_' . $moduleDirNameUpper . '_' . 'SHOW_DEV_TOOLS_DESC', 'If yes, the "
 
 //Latest Version Check
 define('CO_' . $moduleDirNameUpper . '_' . 'NEW_VERSION', 'New Version: ');
+define('CO_' . $moduleDirNameUpper . '_' . 'ERROR_BAD_XOOPS', 'Minimum XOOPS required: %s (your version is %s)');

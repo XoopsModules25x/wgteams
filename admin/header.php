@@ -45,12 +45,6 @@ if (!isset($xoopsTpl) || !is_object($xoopsTpl)) {
     require_once XOOPS_ROOT_PATH . '/class/template.php';
     $xoopsTpl = new \XoopsTpl();
 }
-// System icons path
-$xoopsTpl->assign('pathIcon16', $pathIcon16);
-$xoopsTpl->assign('pathIcon32', $pathIcon32);
-// Local icons path
-$xoopsTpl->assign('pathModIcon16', $pathModIcon16);
-$xoopsTpl->assign('pathModIcon32', $pathModIcon32);
 
 //Load languages
 $helper->loadLanguage('admin');
@@ -60,6 +54,14 @@ $helper->loadLanguage('modinfo');
 $adminObject = \Xmf\Module\Admin::getInstance();
 
 xoops_cp_header();
+
+// System icons path
+$xoopsTpl->assign('pathIcon16', $pathIcon16);
+$xoopsTpl->assign('pathIcon32', $pathIcon32);
+// Local icons path
+
+$xoopsTpl->assign('pathModIcon16', XOOPS_URL . '/modules/' . $moduleDirName . '/' . $pathModIcon16);
+$xoopsTpl->assign('pathModIcon32', XOOPS_URL . '/modules/' . $moduleDirName . '/' . $pathModIcon32);
 
 //load stylesheets and jquery for sortable
 $GLOBALS['xoTheme']->addStylesheet(WGTEAMS_URL . '/assets/css/admin/style.css');
