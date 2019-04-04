@@ -33,14 +33,19 @@ function getConfig()
         ],
         'uploadFolders'  => [
             XOOPS_UPLOAD_PATH . '/' . $moduleDirName,
-            XOOPS_UPLOAD_PATH . '/' . $moduleDirName . '/category',
-            XOOPS_UPLOAD_PATH . '/' . $moduleDirName . '/screenshots',
+            XOOPS_UPLOAD_PATH . '/' . $moduleDirName . '/teams',
+            XOOPS_UPLOAD_PATH . '/' . $moduleDirName . '/members',
+			XOOPS_UPLOAD_PATH . '/' . $moduleDirName . '/temp',
+			XOOPS_UPLOAD_PATH . '/' . $moduleDirName . '/teams/images',
+            XOOPS_UPLOAD_PATH . '/' . $moduleDirName . '/members/images',
+			XOOPS_UPLOAD_PATH . '/' . $moduleDirName . '/temp/images',
             //XOOPS_UPLOAD_PATH . '/flags'
         ],
         'copyBlankFiles' => [
             XOOPS_UPLOAD_PATH . '/' . $moduleDirName,
-            XOOPS_UPLOAD_PATH . '/' . $moduleDirName . '/category',
-            XOOPS_UPLOAD_PATH . '/' . $moduleDirName . '/screenshots',
+            XOOPS_UPLOAD_PATH . '/' . $moduleDirName . '/teams/images',
+            XOOPS_UPLOAD_PATH . '/' . $moduleDirName . '/members/images',
+			XOOPS_UPLOAD_PATH . '/' . $moduleDirName . '/temp/images',
             //XOOPS_UPLOAD_PATH . '/flags'
         ],
 
@@ -66,7 +71,6 @@ function getConfig()
             '/class/utilities.php',
             '/class/util.php',
             '/include/constants.php',
-            '/include/functions.php',
             '/ajaxrating.txt',
         ],
         'oldFolders'      => [

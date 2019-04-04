@@ -52,9 +52,14 @@ define('_MI_WGTEAMS_EDITOR_DESC', 'Bitte Editor für die Eingabefelder wählen')
 define('_MI_WGTEAMS_KEYWORDS', 'Schlüsselwörter');
 define('_MI_WGTEAMS_KEYWORDS_DESC', 'Bitte hier die gewünschten Schlüsselwörter eingeben (getrennt durch einen Beistrich)');
 define('_MI_WGTEAMS_IMG_MAXSIZE', 'Maximale Größe');
-define('_MI_WGTEAMS_IMG_MAXSIZE_DESC', 'Definieren Sie bitte die maximale Größe für einen Dateiupload in byte');
+define('_MI_WGTEAMS_IMG_MAXSIZE_DESC', 'Definieren Sie bitte die maximale Größe für einen Dateiupload');
+define('_MI_WGTEAMS_SIZE_MB', 'MB');
 define('_MI_WGTEAMS_IMG_MIMETYPES', 'Mime-Types');
 define('_MI_WGTEAMS_IMG_MIMETYPES_DESC', 'Definieren Sie bitte die zulässigen Dateitypen');
+define('_MI_WGTEAMS_MAXWIDTH', 'Maximale Breite Upload');
+define('_MI_WGTEAMS_MAXWIDTH_DESC', 'Bitte die für den Upload von Dateien maximal zulässige Bildbreite definieren (in pixel)');
+define('_MI_WGTEAMS_MAXHEIGHT', 'Maximale Höhe Upload');
+define('_MI_WGTEAMS_MAXHEIGHT_DESC', 'Bitte die für den Upload von Dateien maximal zulässige Bildhöhe definieren (in pixel)');
 define('_MI_WGTEAMS_STARTPAGE', 'Startseite');
 define('_MI_WGTEAMS_STARTPAGE_DESC', 'Definieren Sie bitte, welche Informationen beim Modulaufruf (index.php) angezeigt werden sollen');
 define('_MI_WGTEAMS_STARTPAGE_LIST', 'Eine Übersichtsliste mit allen Teams (ohne Teammitglieder)');

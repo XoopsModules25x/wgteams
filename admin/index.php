@@ -24,6 +24,14 @@ require __DIR__ . '/header.php';
 $moduleDirName = basename(dirname(__DIR__));
 $moduleDirNameUpper = mb_strtoupper($moduleDirName);
 
+$utility      = new \XoopsModules\Wgteams\Utility();
+$moduleHandler           = xoops_getHandler('module');
+$module                  = $moduleHandler->getByDirname('wgteams');
+
+echo '  - checkVerXoops:' . $utility::checkVerXoops($module);
+
+
+
 // Count elements
 $countTeams      = $teamsHandler->getCountTeams();
 $countMembers    = $membersHandler->getCountMembers();

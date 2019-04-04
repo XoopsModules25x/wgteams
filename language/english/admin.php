@@ -125,7 +125,5 @@ define('_AM_WGTEAMS_SUBMITTER', 'Submitter');
 define('_AM_WGTEAMS_DATE_CREATE', 'Date create');
 // ---------------- Admin Others ----------------
 define('_AM_WGTEAMS_MAINTAINEDBY', " is maintained by <a href='https://wedega.com'>https://wedega.com</a> und <a href='https://xoops.wedega.com'>https://xoops.wedega.com</a>");
-// ---------------- End ----------------
-
 define('_AM_WGTEAMS_MAX_FILESIZE', 'Max File Size');
-
+define('_AM_WGTEAMS_IMAGE_EDITOR', 'Image editor');

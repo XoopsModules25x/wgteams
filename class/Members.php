@@ -72,7 +72,7 @@ class Members extends \XoopsObject
      * Get form
      *
      * @param mixed $action
-     * @return XoopsThemeForm
+     * @return \XoopsThemeForm
      */
     public function getFormMembers($action = false)
     {
@@ -87,8 +87,6 @@ class Members extends \XoopsObject
         xoops_load('XoopsFormLoader');
         $form = new \XoopsThemeForm($title, 'form', $action, 'post', true);
         $form->setExtra('enctype="multipart/form-data"');
-        // member handler
-        //$membersHandler = $this->wgteams->getHandler('members');
         // Form Text memberFirstname
         $form->addElement(new \XoopsFormText(_AM_WGTEAMS_MEMBER_FIRSTNAME, 'member_firstname', 50, 255, $this->getVar('member_firstname')), true);
         // Form Text memberLastname
@@ -126,7 +124,7 @@ class Members extends \XoopsObject
         $imageSelect = new \XoopsFormSelect(_AM_WGTEAMS_FORM_IMAGE_EXIST, 'member_image', $memberImage, 5);
         $imageArray  = \XoopsLists::getImgListAsArray(XOOPS_ROOT_PATH . $imageDirectory);
         foreach ($imageArray as $image) {
-            $imageSelect->addOption("{$image}", $image);
+            $imageSelect->addOption((string)($image), $image);
         }
         $imageSelect->setExtra("onchange='showImgSelected(\"image2\", \"member_image\", \"" . $imageDirectory . '", "", "' . XOOPS_URL . "\")'");
         $imageTray->addElement($imageSelect, false);
@@ -164,7 +162,7 @@ class Members extends \XoopsObject
         $ret['firstname']   = $this->getVar('member_firstname');
         $ret['lastname']    = $this->getVar('member_lastname');
         $ret['title']       = $this->getVar('member_title');
-        $ret['address']     = $helper->truncateHtml($this->getVar('member_address', 'n'));
+        $ret['address']     = $helper::truncateHtml($this->getVar('member_address', 'n'));
         $ret['phone']       = strip_tags($this->getVar('member_phone'));
         $ret['email']       = $this->getVar('member_email');
         $ret['image']       = $this->getVar('member_image');

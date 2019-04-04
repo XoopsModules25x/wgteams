@@ -16,13 +16,31 @@
 use XoopsModules\Wgteams;
 use XoopsModules\Wgteams\Common;
 
-require dirname(dirname(dirname(__DIR__))) . '/mainfile.php';
+require dirname(dirname(dirname(__DIR__))) . '/include/cp_header.php';
 include dirname(__DIR__) . '/preloads/autoloader.php';
 $op = \Xmf\Request::getCmd('op', '');
 
+$moduleDirName = basename(dirname(__DIR__));
+$moduleDirNameUpper = mb_strtoupper($moduleDirName);
+
+$helper = Wgteams\Helper::getInstance();
+// Load language files
+$helper->loadLanguage('admin');
+$helper->loadLanguage('modinfo');
+$helper->loadLanguage('common');
+
 switch ($op) {
     case 'load':
-        loadSampleData();
+        if (\Xmf\Request::hasVar('ok', 'REQUEST') && 1 == $_REQUEST['ok']) {
+            if (!$GLOBALS['xoopsSecurity']->check()) {
+                redirect_header('../admin/index.php', 3, implode(',', $GLOBALS['xoopsSecurity']->getErrors()));
+            }
+            loadSampleData();
+        } else {
+            xoops_cp_header();
+            xoops_confirm(['ok' => 1, 'op' => 'load'], 'index.php', sprintf(constant('CO_' . $moduleDirNameUpper . '_' . 'ADD_SAMPLEDATA_OK')), 'Confirm');
+            xoops_cp_footer();
+        }
         break;
     case 'save':
         saveSampleData();
@@ -42,10 +60,6 @@ function loadSampleData()
     $helper->loadLanguage('admin');
     $helper->loadLanguage('modinfo');
     $helper->loadLanguage('common');
-
-    //    $items = \Xmf\Yaml::readWrapped('quotes_data.yml');
-    //    \Xmf\Database\TableLoad::truncateTable($moduleDirName . '_quotes');
-    //    \Xmf\Database\TableLoad::loadTableFromArray($moduleDirName . '_quotes', $items);
 
     $tables = \Xmf\Module\Helper::getHelper($moduleDirName)->getModule()->getInfo('tables');
 
