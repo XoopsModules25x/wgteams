@@ -24,6 +24,8 @@
 $moduleDirName = basename(dirname(dirname(__DIR__)));
 $moduleDirNameUpper = mb_strtoupper($moduleDirName);
 
+// General
+define('CO_' . $moduleDirNameUpper . '_' . 'CONFIRM', 'Bestätigen');
 //Sample Data
 define('CO_' . $moduleDirNameUpper . '_' . 'ADD_SAMPLEDATA', 'Importe Beispieldaten (ALLE vorhandenen Daten werden gelöscht)');
 define('CO_' . $moduleDirNameUpper . '_' . 'SAMPLEDATA_SUCCESS', 'Beispieldaten erfolgreich geladen');
