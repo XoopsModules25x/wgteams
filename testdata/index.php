@@ -25,8 +25,6 @@ $moduleDirNameUpper = mb_strtoupper($moduleDirName);
 
 $helper = Wgteams\Helper::getInstance();
 // Load language files
-$helper->loadLanguage('admin');
-$helper->loadLanguage('modinfo');
 $helper->loadLanguage('common');
 
 switch ($op) {
@@ -38,7 +36,7 @@ switch ($op) {
             loadSampleData();
         } else {
             xoops_cp_header();
-            xoops_confirm(['ok' => 1, 'op' => 'load'], 'index.php', sprintf(constant('CO_' . $moduleDirNameUpper . '_' . 'ADD_SAMPLEDATA_OK')), 'Confirm');
+            xoops_confirm(['ok' => 1, 'op' => 'load'], 'index.php', sprintf(constant('CO_' . $moduleDirNameUpper . '_' . 'ADD_SAMPLEDATA_OK')), constant('CO_' . $moduleDirNameUpper . '_' . 'CONFIRM'), true);
             xoops_cp_footer();
         }
         break;
@@ -53,13 +51,9 @@ function loadSampleData()
 {
     $moduleDirName = basename(dirname(__DIR__));
     $moduleDirNameUpper = mb_strtoupper($moduleDirName);
-    $helper = Wgteams\Helper::getInstance();
+
     $utility = new Wgteams\Utility();
     $configurator = new Wgteams\Common\Configurator();
-    // Load language files
-    $helper->loadLanguage('admin');
-    $helper->loadLanguage('modinfo');
-    $helper->loadLanguage('common');
 
     $tables = \Xmf\Module\Helper::getHelper($moduleDirName)->getModule()->getInfo('tables');
 
