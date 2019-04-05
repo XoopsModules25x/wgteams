@@ -37,7 +37,11 @@ if (!defined('WGTEAMS_PATH')) {
     define('WGTEAMS_UPLOAD_PATH', XOOPS_UPLOAD_PATH . '/' . WGTEAMS_DIRNAME);
     define('WGTEAMS_UPLOAD_URL', XOOPS_UPLOAD_URL . '/' . WGTEAMS_DIRNAME);
     define('WGTEAMS_ADMIN', WGTEAMS_URL . '/admin/index.php');
+    define('WGTEAMS_UPLOAD_IMAGE_PATH', XOOPS_UPLOAD_PATH . '/' . WGTEAMS_DIRNAME . '/images'  );
     $local_logo = WGTEAMS_IMAGE_URL . '/wedega.png';
+
+
+
 }
 // module information
 $copyright = "<a href='https://wedega.com' title='XOOPS on Wedega' target='_blank'>

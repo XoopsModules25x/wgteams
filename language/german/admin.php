@@ -158,3 +158,5 @@ define('_AM_WGTEAMS_IMG_EDITOR_CROP_FLIP_HORIZONTAL', 'Horizontal spiegeln');
 define('_AM_WGTEAMS_IMG_EDITOR_CROP_FLIP_VERTICAL', 'Vertikal spiegeln');
 define('_AM_WGTEAMS_IMG_EDITOR_CROP_ASPECTRATIO', 'Seitenverhältnis');
 define('_AM_WGTEAMS_IMG_EDITOR_CROP_ASPECTRATIO_FREE', 'Frei');
+
+define('_AM_WGTEAMS_FORM_ERROR_INVALID_ID', 'Invalid ID');

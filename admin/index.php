@@ -77,12 +77,19 @@ if ($helper->getConfig('displaySampleButton')) {
 //------------- End Test Data ----------------------------
 $adminObject->displayIndex();
 
+/**
+ * @param $yamlFile
+ * @return array|bool
+ */
 function loadAdminConfig($yamlFile)
 {
     $config = Yaml::loadWrapped($yamlFile); // work with phpmyadmin YAML dumps
     return $config;
 }
 
+/**
+ * @param $yamlFile
+ */
 function hideButtons($yamlFile)
 {
     $app['displaySampleButton'] = 0;
@@ -90,6 +97,9 @@ function hideButtons($yamlFile)
     redirect_header('index.php', 0, '');
 }
 
+/**
+ * @param $yamlFile
+ */
 function showButtons($yamlFile)
 {
     $app['displaySampleButton'] = 1;
