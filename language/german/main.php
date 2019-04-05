@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 /*
  You may not change or alter any portion of this comment or credits
  of supporting developers from this source code or any supporting source code
@@ -23,7 +23,7 @@
 require_once __DIR__ . '/common.php';
  
 // ---------------- Main ----------------
-define('_MA_WGTEAMS_INDEX', 'Home');
+define('_MA_WGTEAMS_INDEX', 'Startseite');
 define('_MA_WGTEAMS_TITLE', 'wgTeams');
 define('_MA_WGTEAMS_DESC', 'Dieses Modul dient zur Präsentation Ihrer Teams');
 define('_MA_WGTEAMS_INDEX_DESC', 'Willkommen auf der Startseite Ihres neuen Moduls wgTeams!');

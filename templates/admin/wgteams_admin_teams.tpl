@@ -51,6 +51,7 @@
             <td class="center"><{$team.date_create}></td>
             <td class="center  width5">
             <a href="teams.php?op=edit&amp;team_id=<{$team.id}>" title="<{$smarty.const._EDIT}>"><img src="<{xoModuleIcons16 edit.png}>" alt="teams"></a>
+            <a href="image_editor.php?op=edit_team&amp;team_id=<{$team.id}>" title="<{$smarty.const._AM_WGTEAMS_IMG_EDITOR}>"><img src="<{$pathModIcon16}>/image_editor.png" alt="<{$smarty.const._AM_WGTEAMS_IMG_EDITOR}>"></a>
             <a href="teams.php?op=delete&amp;team_id=<{$team.id}>" title="<{$smarty.const._DELETE}>"><img src="<{xoModuleIcons16 delete.png}>" alt="teams"></a>
             </td>
         </tr>
