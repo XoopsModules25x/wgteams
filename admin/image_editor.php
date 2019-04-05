@@ -374,6 +374,8 @@ include __DIR__ . '/footer.php';
 /**
  * @public function getFormUploadAlbumimage:
  * provide form for uploading a new album image
+ * @param $imageOrigin
+ * @param $imageId
  * @return \XoopsThemeForm
  */
 function getFormUploadImage($imageOrigin, $imageId)

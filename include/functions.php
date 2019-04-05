@@ -28,6 +28,13 @@
 
 use XoopsModules\Wgteams;
 
+/**
+ * @param        $global
+ * @param        $key
+ * @param string $default
+ * @param string $type
+ * @return mixed|string
+ */
 function wgteams_CleanVars(&$global, $key, $default = '', $type = 'int')
 {
     switch ($type) {
