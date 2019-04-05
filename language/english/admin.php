@@ -158,3 +158,6 @@ define('_AM_WGTEAMS_IMG_EDITOR_CROP_FLIP_HORIZONTAL', 'Flip horizontal');
 define('_AM_WGTEAMS_IMG_EDITOR_CROP_FLIP_VERTICAL', 'Flip vertical');
 define('_AM_WGTEAMS_IMG_EDITOR_CROP_ASPECTRATIO', 'Aspect ratio');
 define('_AM_WGTEAMS_IMG_EDITOR_CROP_ASPECTRATIO_FREE', 'Free');
+
+// Admin link
+define('_MA_WGTEAMS_ADMIN', 'Admin');
