@@ -38,14 +38,14 @@ function getConfig()
 			XOOPS_UPLOAD_PATH . '/' . $moduleDirName . '/temp',
 			XOOPS_UPLOAD_PATH . '/' . $moduleDirName . '/teams/images',
             XOOPS_UPLOAD_PATH . '/' . $moduleDirName . '/members/images',
-			XOOPS_UPLOAD_PATH . '/' . $moduleDirName . '/temp/images',
+			XOOPS_UPLOAD_PATH . '/' . $moduleDirName . '/temp',
             //XOOPS_UPLOAD_PATH . '/flags'
         ],
         'copyBlankFiles' => [
             XOOPS_UPLOAD_PATH . '/' . $moduleDirName,
             XOOPS_UPLOAD_PATH . '/' . $moduleDirName . '/teams/images',
             XOOPS_UPLOAD_PATH . '/' . $moduleDirName . '/members/images',
-			XOOPS_UPLOAD_PATH . '/' . $moduleDirName . '/temp/images',
+			XOOPS_UPLOAD_PATH . '/' . $moduleDirName . '/temp',
             //XOOPS_UPLOAD_PATH . '/flags'
         ],
 
@@ -74,7 +74,6 @@ function getConfig()
             '/ajaxrating.txt',
         ],
         'oldFolders'      => [
-            '/images',
             '/css',
             '/js',
             '/tcpdf',

@@ -88,9 +88,9 @@ function xoops_module_install_wgteams(\XoopsModule $module)
 
     //  ---  COPY blank.png FILES ---------------
     if (count($configurator->copyBlankFiles) > 0) {
-        $file = dirname(__DIR__) . '/assets/images/blank.png';
+        $file = dirname(__DIR__) . '/assets/images/blank.gif';
         foreach (array_keys($configurator->copyBlankFiles) as $i) {
-            $dest = $configurator->copyBlankFiles[$i] . '/blank.png';
+            $dest = $configurator->copyBlankFiles[$i] . '/blank.gif';
             $utility::copyFile($file, $dest);
         }
     }

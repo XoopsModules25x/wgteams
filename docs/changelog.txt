@@ -5,7 +5,7 @@
 - added test data option (goffy)
 - fix Helper's getHandler() (mamba)
 - fix problem with missing member image (goffy)
-
+- add image editor for grid creation/cropping images (goffy)
 
 ==============================================================
 1.08 final              2018/06/14
