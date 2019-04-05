@@ -63,7 +63,7 @@ if ( 0 < $memberId ) {
 		$imageClass   = Constants::IMAGECLASS_TEAM;
         $imageOrigin  = 'team_id';
 	} else {
-		redirect_header('index.php', 3, _AM_WGTEAMS_FORM_ERROR_INVALIDID);
+		redirect_header('index.php', 3, _AM_WGTEAMS_FORM_ERROR_INVALID_ID);
 	}
 }
 
