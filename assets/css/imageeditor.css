@@ -24,7 +24,7 @@
     padding:2px;
     border:1px solid #cccccc;
 }
-.imageeditor-modal-selected, .imageeditor-selected {
+.imageeditor-modal-selected {
     border:1px solid #ff0000;
     padding:2px;
 }

@@ -6,6 +6,7 @@
 - fix Helper's getHandler() (mamba)
 - fix problem with missing member image (goffy)
 - add image editor for grid creation/cropping images (goffy)
+- code cleaning (mamba)
 
 ==============================================================
 1.08 final              2018/06/14
