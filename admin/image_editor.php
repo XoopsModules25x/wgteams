@@ -30,7 +30,6 @@ $GLOBALS['xoopsOption']['template_main'] = 'wgteams_admin_image_editor.tpl';
 
 require_once XOOPS_ROOT_PATH . '/header.php';
 
-
 /** @var \XoopsModules\Wgteams\Utility $utility */
 $utility = new \XoopsModules\Wgteams\Utility();
 
@@ -142,7 +141,7 @@ $GLOBALS['xoopsTpl']->assign('imageOrigin', $imageOrigin);
 $GLOBALS['xoopsTpl']->assign('show_breadcrumbs', $helper->getConfig('show_breadcrumbs'));
 $xoBreadcrumbs[] = ['title' => _AM_WGTEAMS_IMG_EDITOR];
 
-
+// get config for images
 $maxwidth  = $helper->getConfig('maxwidth');
 $maxheight = $helper->getConfig('maxheight');
 
@@ -261,7 +260,6 @@ switch ($op) {
 			redirect_header($redir, 2, _AM_WGTEAMS_FORM_OK);
         }
         $GLOBALS['xoopsTpl']->assign('error', $imageObj->getHtmlErrors());
-
         break;
         
     case 'saveGrid':

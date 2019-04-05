@@ -32,7 +32,7 @@ if (is_object($helper->getModule())) {
 $adminmenu[] = [
     'title' => _MI_WGTEAMS_ADMENU1,
     'link'  => 'admin/index.php',
-    'icon'  => $pathIcon32 . '/dashboard.png'
+    'icon'  => 'assets/icons/32/dashboard.png'
 ];
 $adminmenu[] = [
     'title' => _MI_WGTEAMS_ADMENU2,
@@ -62,5 +62,5 @@ $adminmenu[] = [
 $adminmenu[] = [
     'title' => _MI_WGTEAMS_ABOUT,
     'link'  => 'admin/about.php',
-    'icon'  => $pathIcon32 . '/about.png'
+    'icon'  => 'assets/icons/32/about.png'
 ];
