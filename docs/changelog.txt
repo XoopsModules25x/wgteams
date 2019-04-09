@@ -1,8 +1,8 @@
-<h5>1.09 RC1</h5> [NOT RELEASED
+<h5>1.09 RC1</h5> [2019/04/09]
 <hr>
 - moved to RC1 (goffy)
 
-<h5>1.09 Beta</h5> [NOT RELEASED
+<h5>1.09 Beta</h5> [NOT RELEASED]
 <hr>
 - added namespaces (mamba)
 - added test data option (goffy)
@@ -11,7 +11,7 @@
 - add image editor for grid creation/cropping images (goffy)
 - code cleaning (mamba)
 
-<h5>1.08 final</h5> [2018/06/14
+<h5>1.08 final</h5> [2018/06/14]
 <hr>
 - final (goffy)
 

@@ -16,7 +16,7 @@
  * @license         GPL 2.0 or later
  * @package         wgteams
  * @since           1.0
- * @min_xoops       2.5.7
+ * @min_xoops       2.5.10
  * @author          Goffy - Wedega.com - Email:<webmaster@wedega.com> - Website:<https://wedega.com>
  * @version         $Id: 1.0 xoops_version.php 1 Sun 2015/12/27 23:18:02Z Goffy - Wedega $
  */
@@ -33,8 +33,8 @@ $moduleDirNameUpper = mb_strtoupper($moduleDirName);
 // ------------------- Informations ------------------- //
 $modversion = [
     'version'             => '1.09',
-    'module_status'       => 'Beta 2',
-    'release'             => '2019/03/29',
+    'module_status'       => 'RC1',
+    'release'             => '2019/04/09',
     'name'                => _MI_WGTEAMS_NAME,
     'description'         => _MI_WGTEAMS_DESC,
     'author'              => 'Goffy - Wedega.com',
@@ -47,7 +47,7 @@ $modversion = [
     'help'                => 'page=help',
     'release_info' 		  => 'release_info',
     'release_file'        => XOOPS_URL . '/modules/wgteams/docs/release_info file',
-    'release_date'        => '2019/03/29',
+    'release_date'        => '2019/04/09',
     'manual'              => 'link to manual file',
     'manual_file'         => XOOPS_URL . '/modules/wgteams/docs/install.txt',
     'min_php'             => '7.0',
