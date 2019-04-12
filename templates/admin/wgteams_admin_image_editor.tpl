@@ -19,12 +19,15 @@
             <!-- *************** Tab for select image of albums ***************-->
 			<div class='tab-pane' id='2'>
                 <div class='col-xs-12 col-sm-6'>
-                    <{foreach item=image from=$images}>
+                    <{foreach item=image from=$images name=fe_image}>
                         <{if $image.group}><h4 class='modal-title'><{$image.group}></h4><{/if}>
                         <div class='imageeditor-selimages col-xs-12 col-sm-4'>
                         <input id='<{$image.name}>' class='imgSelect1 img-responsive imageeditor-img <{if $image.selected}>imageeditor-modal-selected<{/if}>' type='image' src='<{$image.src}>' alt='<{$image.title}>' style='padding:3px;' value='<{$image.name}>'>
                         </div>
                     <{/foreach}>
+					<{if $smarty.foreach.fe_image.iteration % 3 == 0}>
+							<div class='clear'></div>
+						<{/if}>
                 </div>
                 <div class='col-xs-12 col-sm-6'>
                     <h5>&nbsp;</h5>
@@ -36,6 +39,7 @@
                         <input type='hidden' name='image_id' id='image_id' value='<{$imgCurrent.img_name}>'>
 						<input type='hidden' name='op' id='op' value='saveImageSelected'>
 						<input type="submit" class="btn <{$btn_style}> disabled" name="btnApplySelected" id="btnApplySelected" value="<{$smarty.const._AM_WGTEAMS_IMG_EDITOR_APPLY}>">
+						<input type='button' class='btn <{$btn_style}>' value='<{$smarty.const._CANCEL}>' onclick='history.go(-1);return true;'>
 					</form>
                 </div>
 			</div>
@@ -76,6 +80,7 @@
                         <input type='hidden' name='gridImgFinal' id='gridImgFinal' value=''>
 						<input type='hidden' name='<{$imageOrigin}>' value='<{$imageId}>'>
 						<input type="submit" class="btn <{$btn_style}> disabled" name="btnApplyGrid" id="btnApplyGrid" value="<{$smarty.const._AM_WGTEAMS_IMG_EDITOR_APPLY}>">
+						<input type='button' class='btn <{$btn_style}>' value='<{$smarty.const._CANCEL}>' onclick='history.go(-1);return true;'>
 					</form>
 				</div>
 			</div>
@@ -191,7 +196,8 @@
                                 <span class="docs-tooltip" data-toggle="tooltip" title="cropper.getCroppedCanvas({ maxWidth: 4096, maxHeight: 4096 })"><{$smarty.const._AM_WGTEAMS_IMG_EDITOR_CREATE}></span>
                             </button>
                             <a class="btn <{$btn_style}> disabled" id="btnCropApply" href="<{$wgteams_url}>/admin/image_editor.php?op=saveCrop&<{$imageOrigin}>=<{$imageId}>&target=<{$croptarget}>"> <{$smarty.const._AM_WGTEAMS_IMG_EDITOR_APPLY}></a>
-                        </div>
+							<button type="button" class="btn btn-crop <{$btn_style}>"onclick='history.go(-1);return true;'><{$smarty.const._CANCEL}></button>
+						</div>
 
                         <!-- Show the cropped image in modal -->
                         <div class="modal fade docs-cropped" id="getCroppedCanvasModal" role="dialog" aria-hidden="true" aria-labelledby="getCroppedCanvasTitle" tabindex="-1">
