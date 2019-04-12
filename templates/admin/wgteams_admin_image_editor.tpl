@@ -26,8 +26,8 @@
                         </div>
                     <{/foreach}>
 					<{if $smarty.foreach.fe_image.iteration % 3 == 0}>
-							<div class='clear'></div>
-						<{/if}>
+						<div class='clear'></div>
+					<{/if}>
                 </div>
                 <div class='col-xs-12 col-sm-6'>
                     <h5>&nbsp;</h5>
