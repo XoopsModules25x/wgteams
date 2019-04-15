@@ -22,7 +22,7 @@
                     <{foreach item=image from=$images name=fe_image}>
                         <{if $image.group}><h4 class='modal-title'><{$image.group}></h4><{/if}>
                         <div class='imageeditor-selimages col-xs-12 col-sm-4'>
-                        <input id='<{$image.name}>' class='imgSelect1 img-responsive imageeditor-img <{if $image.selected}>imageeditor-modal-selected<{/if}>' type='image' src='<{$image.src}>' alt='<{$image.title}>' style='padding:3px;' value='<{$image.name}>'>
+                        <input id='<{$image.name}>_image' class='imgSelect1 img-responsive imageeditor-img <{if $image.selected}>imageeditor-modal-selected<{/if}>' type='image' src='<{$image.src}>' alt='<{$image.title}>' style='padding:3px;' value='<{$image.name}>'>
                         </div>
                     <{/foreach}>
 					<{if $smarty.foreach.fe_image.iteration % 3 == 0}>
