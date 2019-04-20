@@ -305,7 +305,7 @@ switch ($op) {
         $uploader       = new \XoopsMediaUploader($imgPath, $mimetypes, $maxsize, null, null);
         if ($uploader->fetchMedia($_POST['xoops_upload_file'][0])) {
             $extension = preg_replace('/^.+\.([^.]+)$/sU', '', $fileName);
-            $imgName   = 'album' . $albId . '.' . $extension;
+            $imgName   = 'image_' . $memberId . '.' . $extension;
             $uploader->setPrefix($imgName);
             $uploader->fetchMedia($_POST['xoops_upload_file'][0]);
             if (!$uploader->upload()) {
@@ -315,8 +315,8 @@ switch ($op) {
                 $imageObj->setVar($fieldObj, $savedFilename);
                 // resize image
                 $imgHandler                = new Wgteams\Resizer();
-                $imgHandler->sourceFile    = WGTEAMS_UPLOAD_IMAGE_PATH . '/albums/' . $savedFilename;
-                $imgHandler->endFile       = WGTEAMS_UPLOAD_IMAGE_PATH . '/albums/' . $savedFilename;
+                $imgHandler->sourceFile    = $imgPath . $savedFilename;
+                $imgHandler->endFile       = $imgPath . $savedFilename;
                 $imgHandler->imageMimetype = $imageMimetype;
                 $imgHandler->maxWidth      = $maxwidth;
                 $imgHandler->maxHeight     = $maxheight;
