@@ -56,10 +56,10 @@ define('_MI_WGTEAMS_IMG_MAXSIZE_DESC', 'Definieren Sie bitte die maximale Größ
 define('_MI_WGTEAMS_SIZE_MB', 'MB');
 define('_MI_WGTEAMS_IMG_MIMETYPES', 'Mime-Types');
 define('_MI_WGTEAMS_IMG_MIMETYPES_DESC', 'Definieren Sie bitte die zulässigen Dateitypen');
-define('_MI_WGTEAMS_MAXWIDTH', 'Maximale Breite Upload');
-define('_MI_WGTEAMS_MAXWIDTH_DESC', 'Bitte die für den Upload von Dateien maximal zulässige Bildbreite definieren (in pixel)');
-define('_MI_WGTEAMS_MAXHEIGHT', 'Maximale Höhe Upload');
-define('_MI_WGTEAMS_MAXHEIGHT_DESC', 'Bitte die für den Upload von Dateien maximal zulässige Bildhöhe definieren (in pixel)');
+define('_MI_WGTEAMS_MAXWIDTH', 'Maximale Breite für Bilder');
+define('_MI_WGTEAMS_MAXWIDTH_DESC', 'Definieren Sie die maximale Breite, auf die die hochgeladenen Bilder automatisch verkleinert werden sollen (in pixel)<br>0 bedeutet, dass Bilder die Originalgröße behalten. <br>Sofern das Originalbild kleiner sein sollte, so wird dieses nicht vergrößert.');
+define('_MI_WGTEAMS_MAXHEIGHT', 'Maximale Höhe für Bilder');
+define('_MI_WGTEAMS_MAXHEIGHT_DESC', 'Definieren Sie die maximale Höhe, auf die die hochgeladenen Bilder automatisch verkleinert werden sollen (in pixel)<br>0 bedeutet, dass Bilder die Originalgröße behalten. <br>Sofern das Originalbild kleiner sein sollte, so wird dieses nicht vergrößert.');
 define('_MI_WGTEAMS_STARTPAGE', 'Startseite');
 define('_MI_WGTEAMS_STARTPAGE_DESC', 'Definieren Sie bitte, welche Informationen beim Modulaufruf (index.php) angezeigt werden sollen');
 define('_MI_WGTEAMS_STARTPAGE_LIST', 'Eine Übersichtsliste mit allen Teams (ohne Teammitglieder)');
