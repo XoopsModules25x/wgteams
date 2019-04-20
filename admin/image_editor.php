@@ -144,6 +144,9 @@ $xoBreadcrumbs[] = ['title' => _AM_WGTEAMS_IMG_EDITOR];
 // get config for images
 $maxwidth  = $helper->getConfig('maxwidth');
 $maxheight = $helper->getConfig('maxheight');
+$maxsize   = $helper->getConfig('wgteams_img_maxsize');
+$mimetypes = $helper->getConfig('wgteams_img_mimetypes');
+
 
 switch ($op) {
 
@@ -299,7 +302,7 @@ switch ($op) {
         $fileName       = $_FILES['attachedfile']['name'];
         $imageMimetype  = $_FILES['attachedfile']['type'];
         $uploaderErrors = '';
-        $uploader       = new \XoopsMediaUploader($imgPath, $helper->getConfig('mimetypes'), $helper->getConfig('maxsize'), null, null);
+        $uploader       = new \XoopsMediaUploader($imgPath, $mimetypes, $maxsize, null, null);
         if ($uploader->fetchMedia($_POST['xoops_upload_file'][0])) {
             $extension = preg_replace('/^.+\.([^.]+)$/sU', '', $fileName);
             $imgName   = 'album' . $albId . '.' . $extension;
@@ -311,9 +314,6 @@ switch ($op) {
                 $savedFilename = $uploader->getSavedFileName();
                 $imageObj->setVar($fieldObj, $savedFilename);
                 // resize image
-                $maxwidth = $helper->getConfig('maxwidth');
-                $maxheight = $helper->getConfig('maxheight');
-
                 $imgHandler                = new Wgteams\Resizer();
                 $imgHandler->sourceFile    = WGTEAMS_UPLOAD_IMAGE_PATH . '/albums/' . $savedFilename;
                 $imgHandler->endFile       = WGTEAMS_UPLOAD_IMAGE_PATH . '/albums/' . $savedFilename;
