@@ -133,7 +133,11 @@ switch ($op) {
         $membersObj->setVar('member_date_create', time());
         // Insert Data
         if ($membersHandler->insert($membersObj)) {
-            redirect_header('members.php?op=list', 2, _AM_WGTEAMS_FORM_OK);
+            if ('' !== $uploaderErrors) {
+				redirect_header('members.php?op=edit&member_id=' . $memberId, 4, $uploaderErrors);
+			} else {
+				redirect_header('members.php?op=list', 2, _AM_WGTEAMS_FORM_OK);
+			}
         }
         // Get Form
         $GLOBALS['xoopsTpl']->assign('error', $membersObj->getHtmlErrors());
