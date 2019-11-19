@@ -2,11 +2,11 @@
     <{foreach item=member from=$members name=fe_members}>
 
         <{if $member.rel_nb_cols == 2}>
-            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 member-panel">
         <{elseif $member.rel_nb_cols == 3}>
-            <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+            <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 member-panel">
         <{elseif $member.rel_nb_cols == 4}>
-            <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
+            <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3 member-panel">
         <{else}>
             <div>
         <{/if}>

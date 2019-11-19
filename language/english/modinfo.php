@@ -57,17 +57,28 @@ define('_MI_WGTEAMS_SIZE_MB', 'MB');
 define('_MI_WGTEAMS_IMG_MIMETYPES', 'Mime Types');
 define('_MI_WGTEAMS_IMG_MIMETYPES_DESC', 'Set the mime types selected');
 define('_MI_WGTEAMS_MAXWIDTH', 'Maximum width upload');
-define('_MI_WGTEAMS_MAXWIDTH_DESC', 'Set the max width to which uploaded images will be scaled autmatically (in pixel)<br>If original image is smaller then image will be not enlarged');
+define('_MI_WGTEAMS_MAXWIDTH_DESC', 'Set the max width which is allowed for uploading images (in pixel)<br>0 means that images keep original size<br>If original image is smaller the image will be not enlarged');
 define('_MI_WGTEAMS_MAXHEIGHT', 'Maximum height upload');
-define('_MI_WGTEAMS_MAXHEIGHT_DESC', 'Set the max height to which uploaded images will be scaled autmatically (in pixel)<br>If original image is smaller then image will be not enlarged');
+define('_MI_WGTEAMS_MAXHEIGHT_DESC', 'Set the max height which is allowed for uploading images (in pixel)<br>0 means that images keep original size<br>If original image is smaller the image will be not enlarged');
+define('_MI_WGTEAMS_MAXWIDTH_IMGEDITOR', 'Maximum width upload');
+define('_MI_WGTEAMS_MAXWIDTH_IMGEDITOR_DESC', 'Set the max width which is allowed for uploading images (in pixel)<br>0 means that images keep original size<br>If original image is smaller the image will be not enlarged');
+define('_MI_WGTEAMS_MAXHEIGHT_IMGEDITOR', 'Maximum height upload');
+define('_MI_WGTEAMS_MAXHEIGHT_IMGEDITOR_DESC', 'Set the max height which is allowed for uploading images (in pixel)<br>0 means that images keep original size<br>If original image is smaller the image will be not enlarged');
 define('_MI_WGTEAMS_STARTPAGE', 'Start page');
 define('_MI_WGTEAMS_STARTPAGE_DESC', 'Define, what should be shown when calling the module (index.php)');
 define('_MI_WGTEAMS_STARTPAGE_LIST', 'An overview with all teams (but without members)');
 define('_MI_WGTEAMS_STARTPAGE_ALL', 'All teams with all members');
 define('_MI_WGTEAMS_STARTPAGE_FIRST', 'The first team');
-define('_MI_WGTEAMS_LABELS', 'Show labels');
-define('_MI_WGTEAMS_LABELS_DESC', "Please decide, whether there should be a label before the information, e.g. before the name the label 'first and last name' will be shown. If you select 'No', only the name himself, the phone number himself an so one will be shown");
+define('_MI_WGTEAMS_SHOW_TEAMNAME', 'Show team name');
+define('_MI_WGTEAMS_SHOW_TEAMNAME_DESC', "Please decide, whether the team name should be shown or not");
+define('_MI_WGTEAMS_LABELS_MEMBER', 'Show labels for member information');
+define('_MI_WGTEAMS_LABELS_MEMBER_DESC', "Please decide, whether there should be a label before the member information, e.g. before the name the label 'first and last name' will be shown. If you select 'No', only the name himself, the phone number himself an so one will be shown");
+define('_MI_WGTEAMS_LABELS_INFOFIELD', 'Show labels for infofields');
+define('_MI_WGTEAMS_LABELS_INFOFIELD_DESC', "Please decide, whether there should be a label before the information from additional infofields. If you select 'No', only the information itself will be shown");
 define('_MI_WGTEAMS_SHOWBREADCRUMBS', 'Show breadcrumbs-navigation');
 define('_MI_WGTEAMS_SHOWBREADCRUMBS_DESC', 'Please decide, whether a breadcrumbs-navigation should be shown.');
+define('_MI_WGTEAMS_SHOWCOPYRIGHT', 'Show copyright');
+define('_MI_WGTEAMS_SHOWCOPYRIGHT_DESC', 'You can remove the copyright from the wgteams pages, but a backlinks to www.wedega.com is expected, anywhere on your site');
+
 // ---------------- End ----------------
 

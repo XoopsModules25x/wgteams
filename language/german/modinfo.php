@@ -60,14 +60,24 @@ define('_MI_WGTEAMS_MAXWIDTH', 'Maximale Breite für Bilder');
 define('_MI_WGTEAMS_MAXWIDTH_DESC', 'Definieren Sie die maximale Breite, auf die die hochgeladenen Bilder automatisch verkleinert werden sollen (in pixel)<br>0 bedeutet, dass Bilder die Originalgröße behalten. <br>Sofern das Originalbild kleiner sein sollte, so wird dieses nicht vergrößert.');
 define('_MI_WGTEAMS_MAXHEIGHT', 'Maximale Höhe für Bilder');
 define('_MI_WGTEAMS_MAXHEIGHT_DESC', 'Definieren Sie die maximale Höhe, auf die die hochgeladenen Bilder automatisch verkleinert werden sollen (in pixel)<br>0 bedeutet, dass Bilder die Originalgröße behalten. <br>Sofern das Originalbild kleiner sein sollte, so wird dieses nicht vergrößert.');
+define('_MI_WGTEAMS_MAXWIDTH_IMGEDITOR', 'Maximale Breite für bearbeitete Bilder');
+define('_MI_WGTEAMS_MAXWIDTH_IMGEDITOR_DESC', 'Definieren Sie die maximale Breite, auf die die im Bildeditor bearbeiteten Bilder automatisch verkleinert werden sollen (in pixel)<br>0 bedeutet, dass Bilder die Originalgröße behalten. <br>Sofern das Originalbild kleiner sein sollte, so wird dieses nicht vergrößert.');
+define('_MI_WGTEAMS_MAXHEIGHT_IMGEDITOR', 'Maximale Höhe für bearbeitete Bilder');
+define('_MI_WGTEAMS_MAXHEIGHT_IMGEDITOR_DESC', 'Definieren Sie die maximale Höhe, auf die die  im Bildeditor bearbeiteten Bilder automatisch verkleinert werden sollen (in pixel)<br>0 bedeutet, dass Bilder die Originalgröße behalten. <br>Sofern das Originalbild kleiner sein sollte, so wird dieses nicht vergrößert.');
 define('_MI_WGTEAMS_STARTPAGE', 'Startseite');
 define('_MI_WGTEAMS_STARTPAGE_DESC', 'Definieren Sie bitte, welche Informationen beim Modulaufruf (index.php) angezeigt werden sollen');
 define('_MI_WGTEAMS_STARTPAGE_LIST', 'Eine Übersichtsliste mit allen Teams (ohne Teammitglieder)');
 define('_MI_WGTEAMS_STARTPAGE_ALL', 'Alle Teams mit allen Mitgliedern');
 define('_MI_WGTEAMS_STARTPAGE_FIRST', 'Das erste Team');
-define('_MI_WGTEAMS_LABELS', 'Bezeichnungsfelder anzeigen');
-define('_MI_WGTEAMS_LABELS_DESC', "Definieren Sie bitte, ob vor den jeweiligen Informationen ein Bezeichnungsfeld angezeigt werden soll, z.B. vor dem Namen wie 'Vor- und Zuname' angezeigt. Wenn sie 'Nein' wählen, wird nur der Name selbst, die Telefonnummer selbst, usw. angezeigt");
+define('_MI_WGTEAMS_SHOW_TEAMNAME', 'Teamname anzeigen');
+define('_MI_WGTEAMS_SHOW_TEAMNAME_DESC', "Definieren Sie bitte, ob der Teamname angezeigt werden soll oder nicht");
+define('_MI_WGTEAMS_LABELS_MEMBER', 'Bezeichnungsfelder Mitgliederinfos anzeigen');
+define('_MI_WGTEAMS_LABELS_MEMBER_DESC', "Definieren Sie bitte, ob vor den jeweiligen Mitgliederinformationen ein Bezeichnungsfeld angezeigt werden soll, z.B. vor dem Namen wie 'Vor- und Zuname' angezeigt. Wenn sie 'Nein' wählen, wird nur der Name selbst, die Telefonnummer selbst, usw. angezeigt");
+define('_MI_WGTEAMS_LABELS_INFOFIELD', 'Bezeichnungsfelder Infofelder anzeigen');
+define('_MI_WGTEAMS_LABELS_INFOFIELD_DESC', "Definieren Sie bitte, ob vor den jeweiligen Informationen der zusätzlichen Infofelder ein Bezeichnungsfeld angezeigt werden soll. Wenn sie 'Nein' wählen, wird nur die jeweilige Information der zusätzlichen Infofelder angezeigt");
 define('_MI_WGTEAMS_SHOWBREADCRUMBS', 'Breadcrumb-Navigation anzeigen');
 define('_MI_WGTEAMS_SHOWBREADCRUMBS_DESC', 'Definieren Sie bitte, ob eine Breadcrumb-Navigation angezeigt werden soll.');
+define('_MI_WGTEAMS_SHOWCOPYRIGHT', 'Copyright anzeigen');
+define('_MI_WGTEAMS_SHOWCOPYRIGHT_DESC', 'Sie können das Copyright bei den wgTeams-Seiten entfernen, jedoch wird ersucht, an einer beliebigen Stelle einen Backlink auf www.wedega.com anzubringen');
 // ---------------- End ----------------
 

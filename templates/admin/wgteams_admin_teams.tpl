@@ -13,6 +13,7 @@
                 <th class="center"><{$smarty.const._AM_WGTEAMS_TEAM_TABLESTYLE}></th>
                 <th class="center"><{$smarty.const._AM_WGTEAMS_TEAM_IMAGESTYLE}></th>
                 <th class="center"><{$smarty.const._AM_WGTEAMS_TEAM_DISPLAYSTYLE}></th>
+                <th class="center"><{$smarty.const._AM_WGTEAMS_TEAM_RELSCOUNT}></th>
                 <th class="center"><{$smarty.const._AM_WGTEAMS_TEAM_ONLINE}></th>
                 <th class="center"><{$smarty.const._AM_WGTEAMS_SUBMITTER}></th>
                 <th class="center"><{$smarty.const._AM_WGTEAMS_DATE_CREATE}></th>
@@ -29,7 +30,7 @@
             <td class="center"><{$team.descr}></td>
             <td class="center">
                 <{if $team.image}>
-                    <img src="<{$wgteams_upload_url}>/teams/images/<{$team.image}>" alt="teams" style='max-width:50px;'>
+                    <img src="<{$wgteams_upload_url}>/teams/images/<{$team.image}>" alt="teams" style='max-width:50px;' class="<{$team.imagestyle}>" >
                 <{else}>
                     &nbsp;
                 <{/if}>
@@ -38,6 +39,7 @@
             <td class="center"><{$team.tablestyle}></td>
             <td class="center"><{$team.imagestyle}></td>
             <td class="center"><{$team.displaystyle}></td>
+            <td class="center"><{$team.relscount}></td>
             <td class="center">
                 <a href="teams.php?op=set_onoff&amp;team_id=<{$team.id}>" title="<{$team.online}>">
                     <{if $team.online == $smarty.const._YES}>

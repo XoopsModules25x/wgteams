@@ -49,6 +49,9 @@ switch ($op) {
         if ($teamsCount > 0) {
             foreach (array_keys($teamsAll) as $i) {
                 $team = $teamsAll[$i]->getValuesTeams();
+                $crit_rels = new \CriteriaCompo();
+                $crit_rels->add(new \Criteria('rel_team_id', $team['team_id']));
+                $team['relscount'] = $relationsHandler->getCount($crit_rels);
                 $GLOBALS['xoopsTpl']->append('teams_list', $team);
                 unset($team);
             }

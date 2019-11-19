@@ -39,9 +39,6 @@ define('CO_' . $moduleDirNameUpper . '_' . 'ADD_SAMPLEDATA_OK', 'Are you sure to
 define('CO_' . $moduleDirNameUpper . '_' . 'HIDE_SAMPLEDATA_BUTTONS', 'Hide the Import buttons)');
 define('CO_' . $moduleDirNameUpper . '_' . 'SHOW_SAMPLEDATA_BUTTONS', 'Show the Import buttons)');
 
-
-
-
 //Menu
 define('CO_' . $moduleDirNameUpper . '_' . 'ADMENU_MIGRATE', 'Migrate');
 define('CO_' . $moduleDirNameUpper . '_' . 'FOLDER_YES', 'Folder "%s" exist');
@@ -52,3 +49,6 @@ define('CO_' . $moduleDirNameUpper . '_' . 'SHOW_DEV_TOOLS_DESC', 'If yes, the "
 //Latest Version Check
 define('CO_' . $moduleDirNameUpper . '_' . 'NEW_VERSION', 'New Version: ');
 define('CO_' . $moduleDirNameUpper . '_' . 'ERROR_BAD_XOOPS', 'Minimum XOOPS required: %s (your version is %s)');
+
+// Admin link
+define('_CO_' . $moduleDirNameUpper . '_ADMIN', 'Admin');

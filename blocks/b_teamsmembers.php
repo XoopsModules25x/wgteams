@@ -36,6 +36,7 @@ function b_wgteams_teamsmembers_show($options)
 
     $GLOBALS['xoTheme']->addStylesheet(XOOPS_URL . '/modules/wgteams/assets/css/style.css');
     $GLOBALS['xoopsTpl']->assign('wgteams_teams_upload_url', WGTEAMS_UPLOAD_URL . '/teams/images/');
+    $GLOBALS['xoopsTpl']->assign('wgteams_url_index', WGTEAMS_URL . '/index.php');
 
     $typeBlock = $options[0];
     $team_id   = $options[1];

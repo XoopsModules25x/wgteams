@@ -142,11 +142,10 @@ $GLOBALS['xoopsTpl']->assign('show_breadcrumbs', $helper->getConfig('show_breadc
 $xoBreadcrumbs[] = ['title' => _AM_WGTEAMS_IMG_EDITOR];
 
 // get config for images
-$maxwidth  = $helper->getConfig('maxwidth');
-$maxheight = $helper->getConfig('maxheight');
+$maxwidth  = $helper->getConfig('maxwidth_imgeditor');
+$maxheight = $helper->getConfig('maxheight_imgeditor');
 $maxsize   = $helper->getConfig('wgteams_img_maxsize');
 $mimetypes = $helper->getConfig('wgteams_img_mimetypes');
-
 
 switch ($op) {
 
@@ -256,6 +255,8 @@ switch ($op) {
         // save image selected from list of available images in upload folder
         // Set Vars
         $image_id = Request::getString('image_id');
+        // remove '_image' from id
+        $image_id = substr($image_id, 0, -6);
         $imageObj->setVar($fieldObj, $image_id);
 		$imageObj->setVar($submObj, $uid);
         // Insert Data
@@ -314,6 +315,8 @@ switch ($op) {
                 $savedFilename = $uploader->getSavedFileName();
                 $imageObj->setVar($fieldObj, $savedFilename);
                 // resize image
+                $maxwidth  = $helper->getConfig('maxwidth');
+                $maxheight = $helper->getConfig('maxheight');
                 $imgHandler                = new Wgteams\Resizer();
                 $imgHandler->sourceFile    = $imgPath . $savedFilename;
                 $imgHandler->endFile       = $imgPath . $savedFilename;
@@ -356,6 +359,13 @@ switch ($op) {
         if ('' == $currImage) {
             $currImage = 'blank.gif';
         }
+        $image_path = WGTEAMS_UPLOAD_URL . '/members/images/' . $currImage;
+        // get size of current album image
+        list($width, $height, $type, $attr) = getimagesize($image_path);
+        $GLOBALS['xoopsTpl']->assign('image_path', $image_path);
+        $GLOBALS['xoopsTpl']->assign('albimage_width', $width);
+        $GLOBALS['xoopsTpl']->assign('albimage_height', $height);
+        
         $form = getFormUploadImage($imageOrigin, $imageId);
         $GLOBALS['xoopsTpl']->assign('form_uploadimage', $form->render());
 

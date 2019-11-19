@@ -48,6 +48,7 @@ switch ($op) {
         // Table view
         if ($relationsCount > 0) {
             $team_id_prev = 0;
+            $nb_rels_team = 0;
             foreach (array_keys($relationsAll) as $i) {
                 $relation = $relationsAll[$i]->getValuesRelations();
                 if ($team_id_prev == $relation['team_id']) {
@@ -143,6 +144,8 @@ switch ($op) {
         break;
     case 'delete':
         $relationsObj = $relationsHandler->get($relId);
+        $teamObj = $teamsHandler->get($relationsObj->getVar('rel_team_id'));
+        $memberObj = $membersHandler->get($relationsObj->getVar('rel_member_id'));
         if (\Xmf\Request::hasVar('ok') && 1 == $_REQUEST['ok']) {
             if (!$GLOBALS['xoopsSecurity']->check()) {
                 redirect_header('relations.php', 3, implode(', ', $GLOBALS['xoopsSecurity']->getErrors()));
@@ -153,7 +156,9 @@ switch ($op) {
                 $GLOBALS['xoopsTpl']->assign('error', $relationsObj->getHtmlErrors());
             }
         } else {
-            xoops_confirm(['ok' => 1, 'rel_id' => $relId, 'op' => 'delete'], $_SERVER['REQUEST_URI'], sprintf(_AM_WGTEAMS_FORM_SURE_DELETE, $relationsObj->getVar('rel_team_id')));
+            $confirm = str_replace('%n', $memberObj->getVar('member_firstname') . ' ' . $memberObj->getVar('member_lastname'), _AM_WGTEAMS_RELATION_DELETE);
+            $confirm = str_replace('%t', $teamObj->getVar('team_name'), $confirm);
+            xoops_confirm(['ok' => 1, 'rel_id' => $relId, 'op' => 'delete'], $_SERVER['REQUEST_URI'], $confirm);
         }
         break;
     case 'order':

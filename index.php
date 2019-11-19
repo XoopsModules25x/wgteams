@@ -64,6 +64,7 @@ if ($teamsCount > 0) {
     echo _MA_WGTEAMS_TEAMS_NODATA;
 }
 
+$team_name = '';
 if (count($teams_list) > 0) {
     foreach (array_keys($teams_list) as $i) {
         $team_name  = $teams_list[$i]['team_name'];
@@ -86,9 +87,11 @@ if ($teamsCount > $limit) {
 }
 // Breadcrumbs
 if (1 == $helper->getConfig('wgteams_showbreadcrumbs')) {
-    $xoBreadcrumbs[] = ['title' => _MA_WGTEAMS_TEAMS, 'link' => WGTEAMS_URL . '/index.php'];
-    if ($team_id > 0 && '' === !$team_name) {
+    if ($team_id > 0 && '' !== $team_name) {
+        $xoBreadcrumbs[] = ['title' => $GLOBALS['xoopsModule']->getVar('name'), 'link' => WGTEAMS_URL . '/'];
         $xoBreadcrumbs[] = ['title' => $team_name];
+    } else {
+        $xoBreadcrumbs[] = ['title' => $GLOBALS['xoopsModule']->getVar('name')];
     }
     $GLOBALS['xoopsTpl']->assign('showbreadcrumbs', '1');
 }

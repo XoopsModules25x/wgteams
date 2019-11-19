@@ -47,6 +47,9 @@ class Resizer
                 break;
             case'image/jpeg':
                 $img = imagecreatefromjpeg($this->sourceFile);
+                if (!$img) {
+                    $img = imagecreatefromstring(file_get_contents($this->sourceFile));
+                }
                 break;
             case'image/gif':
                 $img = imagecreatefromgif($this->sourceFile);
@@ -54,11 +57,13 @@ class Resizer
             default:
                 return 'Unsupported format';
         }
-
+        
         $width  = imagesx($img);
         $height = imagesy($img);
 
         if ($width > $this->maxWidth || $height > $this->maxHeight) {
+            $new_width  = 0;
+            $new_height = 0;
             // recalc image size based on this->maxWidth/this->maxHeight
             if ($width > $height) {
                 if ($width < $this->maxWidth) {

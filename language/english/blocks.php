@@ -20,6 +20,16 @@
  * @version         $Id: 1.0 blocks.php 1 Sun 2015/12/27 23:18:01Z Goffy - Wedega $
  */
 // Admin Edit
-define('_MB_WGTEAMS_TEAM_TO_DISPLAY', 'Team to Display: ');
 
+define('_MB_WGTEAMS_NAME_SHOW', 'Show team title');
+define('_MB_WGTEAMS_NAME_LENGTH', 'Title length (0 means full length)');
+define('_MB_WGTEAMS_DESC_SHOW', 'Show team description');
+define('_MB_WGTEAMS_DESC_LENGTH', 'Description length (0 means full length)');
+define('_MB_WGTEAMS_NUMB_TEAMS', 'Number of teams in each row');
+define('_MB_WGTEAMS_TEMPLATE', 'Template');
+define('_MB_WGTEAMS_TEMPLATE_DEFAULT', 'default');
+define('_MB_WGTEAMS_TEMPLATE_BCARDS', 'Bootstrap cards');
+define('_MB_WGTEAMS_TEAMS_TO_DISPLAY', 'Teams to Display (Teams to show must be "online" additionally)');
+define('_MB_WGTEAMS_ALL_TEAMS', 'All teams');
+define('_MB_WGTEAMS_SHOWTEAM', 'Show team');
 // ---------------- End ----------------

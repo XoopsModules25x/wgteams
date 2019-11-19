@@ -75,7 +75,7 @@ define('_AM_WGTEAMS_TEAM_IMAGESTYLE_THUMBNAIL', 'Thumbnail (zeigt das Bild als V
 define('_AM_WGTEAMS_TEAM_DISPLAYSTYLE_LEFT', 'Links (auf der linken Seite des Textes)');
 define('_AM_WGTEAMS_TEAM_DISPLAYSTYLE_DEF', 'Standard (oberhalb des Textes)');
 define('_AM_WGTEAMS_TEAM_DISPLAYSTYLE_RIGHT', 'Rechts (auf der rechten Seite)');
-
+define('_AM_WGTEAMS_TEAM_RELSCOUNT', 'Anzahl Mitglieder');
 // member add/edit
 define('_AM_WGTEAMS_MEMBER_ADD', 'Neues Mitglied hinzufügen');
 define('_AM_WGTEAMS_MEMBER_EDIT', 'Mitglied bearbeiten');
@@ -109,6 +109,8 @@ define('_AM_WGTEAMS_RELATION_INFO_4', 'Info 4');
 define('_AM_WGTEAMS_RELATION_INFO_5_FIELD', 'Name Info 5');
 define('_AM_WGTEAMS_RELATION_INFO_5', 'Info 5');
 define('_AM_WGTEAMS_RELATION_WEIGHT', 'Reihung');
+define('_AM_WGTEAMS_RELATION_DELETE', "Wollen Sie '%n' aus '%t' wirklich entfernen");
+
 // Infofield add/edit
 define('_AM_WGTEAMS_INFOFIELD_ADD', 'Neues Infofeld erstellen');
 define('_AM_WGTEAMS_INFOFIELD_EDIT', 'Infofeld bearbeiten');

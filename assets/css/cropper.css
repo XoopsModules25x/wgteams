@@ -62,9 +62,8 @@
 .cropper-view-box {
   display: block;
   height: 100%;
-  outline-color: rgba(51, 153, 255, 0.75);
-  outline: 1px solid #39f;
-  overflow: hidden;
+    outline: #39f solid 1px;
+    overflow: hidden;
   width: 100%;
 }
 

@@ -28,7 +28,6 @@ require __DIR__ . '/include/common.php';
 $dirname = basename(__DIR__);
 // Breadcrumbs
 $xoBreadcrumbs   = [];
-$xoBreadcrumbs[] = ['title' => $GLOBALS['xoopsModule']->getVar('name'), 'link' => WGTEAMS_URL . '/'];
 // Get instance of module
 $db                = \XoopsDatabaseFactory::getDatabaseConnection();
 $teamsHandler      = new Wgteams\TeamsHandler($db);

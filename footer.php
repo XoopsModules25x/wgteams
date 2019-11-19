@@ -19,9 +19,8 @@
  * @author          Goffy - Wedega.com - Email:<webmaster@wedega.com> - Website:<https://wedega.com>
  * @version         $Id: 1.0 footer.php 1 Sun 2015/12/27 23:18:01Z Goffy - Wedega $
  */
-if (count($xoBreadcrumbs) > 1) {
-    $GLOBALS['xoopsTpl']->assign('xoBreadcrumbs', $xoBreadcrumbs);
-}
+$GLOBALS['xoopsTpl']->assign('xoBreadcrumbs', $xoBreadcrumbs);
+
 $pathIcon16 = $GLOBALS['xoopsModule']->getInfo('sysicons16');
 $pathIcon32 = $GLOBALS['xoopsModule']->getInfo('sysicons32');
 $GLOBALS['xoopsTpl']->assign('pathIcon32', $pathIcon32);
@@ -32,6 +31,8 @@ $GLOBALS['xoopsTpl']->assign('bookmarks', xoops_getModuleOption('bookmarks', $di
 $GLOBALS['xoopsTpl']->assign('fbcomments', xoops_getModuleOption('fbcomments', $dirname));
 
 $GLOBALS['xoopsTpl']->assign('admin', WGTEAMS_ADMIN);
-$GLOBALS['xoopsTpl']->assign('copyright', $copyright);
+if ($helper->getConfig('show_copyright')) {
+    $GLOBALS['xoopsTpl']->assign('copyright', $copyright);
+}
 // User footer
 require_once XOOPS_ROOT_PATH . '/footer.php';

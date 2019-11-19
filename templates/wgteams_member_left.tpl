@@ -1,4 +1,4 @@
-<div class="row member-table">
+<div id="member_<{$member.id}>" class="row member-table">
     <{if $member.member_image}>
         <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
             <img class="img-responsive center member-img <{$member.rel_imagestyle}>" src="<{$member.member_image_url}><{$member.member_image}>" alt="<{$member.member_name}>" title="<{$member.member_name}>">
@@ -14,7 +14,7 @@
             <{else}>
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 member-text member-name">
             <{/if}>
-            <{$member.member_name}></div>
+            <{if $member.member_title}><{$member.member_title}> <{/if}><{$member.member_name}></div>
         </div>
         <{if $member.member_address}>
             <div class='<{if $member.rel_tablestyle == 'wgteams-striped'}><{cycle values="wgteams-odd, wgteams-even"}><{else}><{$member.rel_tablestyle}><{/if}>'>
@@ -51,7 +51,7 @@
         <{/if}>
         <{if $member.info_1 || $member.info_1_name}>
             <div class='<{if $member.rel_tablestyle == 'wgteams-striped'}><{cycle values="wgteams-odd, wgteams-even"}><{else}><{$member.rel_tablestyle}><{/if}>'>
-                <{if $member.member_labels}>
+                <{if $member.infofield_labels}>
                     <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 member-label"><{$member.info_1_name}></div>
                     <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 member-label member-info">
                 <{else}>
@@ -62,7 +62,7 @@
         <{/if}>
         <{if $member.info_2 || $member.info_2_name}>
             <div class='<{if $member.rel_tablestyle == 'wgteams-striped'}><{cycle values="wgteams-odd, wgteams-even"}><{else}><{$member.rel_tablestyle}><{/if}>'>
-                <{if $member.member_labels}>
+                <{if $member.infofield_labels}>
                     <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 member-label"><{$member.info_2_name}></div>
                     <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 member-label member-info">
                 <{else}>
@@ -73,7 +73,7 @@
         <{/if}>
         <{if $member.info_3 || $member.info_3_name}>
             <div class='<{if $member.rel_tablestyle == 'wgteams-striped'}><{cycle values="wgteams-odd, wgteams-even"}><{else}><{$member.rel_tablestyle}><{/if}>'>
-                <{if $member.member_labels}>
+                <{if $member.infofield_labels}>
                     <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 member-label"><{$member.info_3_name}></div>
                     <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 member-label member-info">
                 <{else}>
@@ -84,7 +84,7 @@
         <{/if}>
         <{if $member.info_4 || $member.info_4_name}>
             <div class='<{if $member.rel_tablestyle == 'wgteams-striped'}><{cycle values="wgteams-odd, wgteams-even"}><{else}><{$member.rel_tablestyle}><{/if}>'>
-                <{if $member.member_labels}>
+                <{if $member.infofield_labels}>
                     <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 member-label"><{$member.info_4_name}></div>
                     <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 member-label member-info">
                 <{else}>
@@ -95,7 +95,7 @@
         <{/if}>
         <{if $member.info_5 || $member.info_5_name}>
             <div class='<{if $member.rel_tablestyle == 'wgteams-striped'}><{cycle values="wgteams-odd, wgteams-even"}><{else}><{$member.rel_tablestyle}><{/if}>'>
-                <{if $member.member_labels}>
+                <{if $member.infofield_labels}>
                     <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 member-label"><{$member.info_5_name}></div>
                     <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 member-label member-info">
                 <{else}>

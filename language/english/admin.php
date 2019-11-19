@@ -75,7 +75,7 @@ define('_AM_WGTEAMS_TEAM_IMAGESTYLE_THUMBNAIL', 'Thumbnail (Shapes the image to 
 define('_AM_WGTEAMS_TEAM_DISPLAYSTYLE_LEFT', 'Left (on the left side)');
 define('_AM_WGTEAMS_TEAM_DISPLAYSTYLE_DEF', 'Default (on the top)');
 define('_AM_WGTEAMS_TEAM_DISPLAYSTYLE_RIGHT', 'Right (on the right side)');
-
+define('_AM_WGTEAMS_TEAM_RELSCOUNT', 'Number of members');
 // member add/edit
 define('_AM_WGTEAMS_MEMBER_ADD', 'Add member');
 define('_AM_WGTEAMS_MEMBER_EDIT', 'Edit member');
@@ -109,6 +109,8 @@ define('_AM_WGTEAMS_RELATION_INFO_4', 'Info 4');
 define('_AM_WGTEAMS_RELATION_INFO_5_FIELD', 'Name Info 5');
 define('_AM_WGTEAMS_RELATION_INFO_5', 'Info 5');
 define('_AM_WGTEAMS_RELATION_WEIGHT', 'Weight');
+define('_AM_WGTEAMS_RELATION_DELETE', "Do you really want to delete '%n' from '%t'");
+
 // Infofield add/edit
 define('_AM_WGTEAMS_INFOFIELD_ADD', 'Add Infofield');
 define('_AM_WGTEAMS_INFOFIELD_EDIT', 'Edit Infofield');
@@ -158,8 +160,5 @@ define('_AM_WGTEAMS_IMG_EDITOR_CROP_FLIP_HORIZONTAL', 'Flip horizontal');
 define('_AM_WGTEAMS_IMG_EDITOR_CROP_FLIP_VERTICAL', 'Flip vertical');
 define('_AM_WGTEAMS_IMG_EDITOR_CROP_ASPECTRATIO', 'Aspect ratio');
 define('_AM_WGTEAMS_IMG_EDITOR_CROP_ASPECTRATIO_FREE', 'Free');
-
-// Admin link
-define('_MA_WGTEAMS_ADMIN', 'Admin');
 
 define('_AM_WGTEAMS_FORM_ERROR_INVALID_ID', 'Invalid ID');

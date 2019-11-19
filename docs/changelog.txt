@@ -1,8 +1,25 @@
+<h5>1.09 RC3</h5> [2019/09/17]
+<hr>
+ - fixed bug image editor (goffy) 
+ - new preference for default size image editor (goffy)
+ - new preference for show/hide copyright (goffy)
+ - fixed bug with upload very big jpg images (goffy) 
+ 
+<h5>1.09 RC2</h5> [2019/04/09]
+<hr>
+ - fixed bug in block templates (goffy)
+ - added few options to teams block (goffy)
+ - added bootstrap card style to teams block (goffy) 
+ 
 <h5>1.09 RC1</h5> [2019/04/09]
 <hr>
  - moved to RC1 (goffy)
  - cosmetics for image editor (goffy)
  - fixed bug with id in image editor (goffy)
+ - fixed bug with non show member title (goffy)
+ - new preference "wgteams_showteamname" (goffy)
+ - new preference "wgteams_labels_member" (replace "wgteams_labels") (goffy)
+ - new preference "wgteams_labels_infofields" (goffy)
 
 <h5>1.09 Beta</h5> [NOT RELEASED]
 <hr>

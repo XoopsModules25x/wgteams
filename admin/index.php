@@ -45,7 +45,10 @@ $adminObject->addInfoBoxLine(sprintf('<label>' . _AM_WGTEAMS_THEREARE_RELATIONS 
 // Upload Folders
 $folder = [
     WGTEAMS_UPLOAD_PATH . '/teams/',
+    WGTEAMS_UPLOAD_PATH . '/teams/images/',
     WGTEAMS_UPLOAD_PATH . '/members/',
+    WGTEAMS_UPLOAD_PATH . '/members/images/',
+    WGTEAMS_UPLOAD_PATH . '/temp/',
 ];
 // Uploads Folders Created
 foreach (array_keys($folder) as $i) {

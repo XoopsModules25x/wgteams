@@ -13,6 +13,8 @@
 			<!-- *************** Basic Tab ***************-->
             <div class='tab-pane active center' id='1'>
 				<img id='currentImg' class='img-responsive imageeditor-img center' src='<{$imgCurrent.src}>' alt='<{$imgCurrent.img_name}>'>
+                <p><{$smarty.const._CO_WGGALLERY_ALBUM_IMGCAT}>: <{$image_path}><br>
+                <{$smarty.const._CO_WGGALLERY_IMAGE_RES}>: <{$albimage_width}> / <{$albimage_height}></p>
                 <input type='button' class='btn <{$btn_style}>' value='<{$smarty.const._CANCEL}>' onclick='history.go(-1);return true;'>
 			</div>
             
@@ -24,10 +26,11 @@
                         <div class='imageeditor-selimages col-xs-12 col-sm-4'>
                         <input id='<{$image.name}>_image' class='imgSelect1 img-responsive imageeditor-img <{if $image.selected}>imageeditor-modal-selected<{/if}>' type='image' src='<{$image.src}>' alt='<{$image.title}>' style='padding:3px;' value='<{$image.name}>'>
                         </div>
+                        <{if $smarty.foreach.fe_image.iteration % 3 == 0}>
+                            <div class='clear'></div>
+                        <{/if}>
                     <{/foreach}>
-					<{if $smarty.foreach.fe_image.iteration % 3 == 0}>
-						<div class='clear'></div>
-					<{/if}>
+					
                 </div>
                 <div class='col-xs-12 col-sm-6'>
                     <h5>&nbsp;</h5>
@@ -75,7 +78,7 @@
 				<div class='col-xs-12 col-sm-12 center'>
 					<button id='btnCreateGrid4' type='button' class='btn <{$btn_style}>' style='display:inline;margin:5px'><{$smarty.const._AM_WGTEAMS_IMG_EDITOR_CREATE}></button>
 					<button id='btnCreateGrid6' type='button' class='btn <{$btn_style}> hidden' style='display:inline;margin:5px'><{$smarty.const._AM_WGTEAMS_IMG_EDITOR_CREATE}></button>
-					<form class='form-horizontal' name='form' id='form_imagegrid' action=''image_editor.php' method='post' enctype='multipart/form-data'>
+					<form class='form-horizontal' name='form' id='form_imagegrid' action='image_editor.php' method='post' enctype='multipart/form-data'>
 						<input type='hidden' name='op' value='saveGrid'>
                         <input type='hidden' name='gridImgFinal' id='gridImgFinal' value=''>
 						<input type='hidden' name='<{$imageOrigin}>' value='<{$imageId}>'>
@@ -101,11 +104,11 @@
 					<div class="col-md-12 docs-toggles">
 						<!-- <h3>Toggles:</h3> -->
                         <div class="btn-group d-flex flex-nowrap" data-toggle="buttons">
-                            <label class="btn imageeditor-btn-crop <{$btn_style}> active">
+                            <label class="btn imageeditor-btn-crop <{$btn_style}>">
                                 <input type="radio" class="sr-only" id="aspectRatio1" name="aspectRatio" value="1.7777777777777777">
                                 <span class="docs-tooltip" data-toggle="tooltip" title="<{$smarty.const._AM_WGTEAMS_IMG_EDITOR_CROP_ASPECTRATIO}>: 16 / 9">16:9</span>
                             </label>
-                            <label class="btn imageeditor-btn-crop <{$btn_style}>">
+                            <label class="btn imageeditor-btn-crop <{$btn_style}> active">
                                 <input type="radio" class="sr-only" id="aspectRatio2" name="aspectRatio" value="1.3333333333333333">
                                 <span class="docs-tooltip" data-toggle="tooltip" title="<{$smarty.const._AM_WGTEAMS_IMG_EDITOR_CROP_ASPECTRATIO}>: 4 / 3">4:3</span>
                             </label>
@@ -190,10 +193,10 @@
 
                         <div class="btn-group-horizontal btn-group-crop col-xs-12 col-sm-12">
                             <button type="button" class="btn imageeditor-btn-crop <{$btn_style}>" data-method="getCroppedCanvas" data-option="{ &quot;maxWidth&quot;: 4096, &quot;maxHeight&quot;: 4096, &quot;save&quot;: 0 }">
-                                <span class="docs-tooltip" data-toggle="tooltip" title="cropper.getCroppedCanvas({ maxWidth: 4096, maxHeight: 4096 })"><{$smarty.const._PREVIEW}></span>
+                                <span class="docs-tooltip" data-toggle="tooltip" title="<{$smarty.const._PREVIEW}>"><{$smarty.const._PREVIEW}></span>
                             </button>
                             <button id="btnCropCreate" type="button" class="btn imageeditor-btn-crop <{$btn_style}>" data-method="getCroppedCanvas" data-option="{ &quot;maxWidth&quot;: 4096, &quot;maxHeight&quot;: 4096, &quot;save&quot;: 1 }">
-                                <span class="docs-tooltip" data-toggle="tooltip" title="cropper.getCroppedCanvas({ maxWidth: 4096, maxHeight: 4096 })"><{$smarty.const._AM_WGTEAMS_IMG_EDITOR_CREATE}></span>
+                                <span class="docs-tooltip" data-toggle="tooltip" title="<{$smarty.const._AM_WGTEAMS_IMG_EDITOR_CREATE}>"><{$smarty.const._AM_WGTEAMS_IMG_EDITOR_CREATE}></span>
                             </button>
                             <a class="btn <{$btn_style}> disabled" id="btnCropApply" href="<{$wgteams_url}>/admin/image_editor.php?op=saveCrop&<{$imageOrigin}>=<{$imageId}>&target=<{$croptarget}>"> <{$smarty.const._AM_WGTEAMS_IMG_EDITOR_APPLY}></a>
 							<button type="button" class="btn btn-crop <{$btn_style}>"onclick='history.go(-1);return true;'><{$smarty.const._CANCEL}></button>

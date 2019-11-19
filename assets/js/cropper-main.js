@@ -51,7 +51,7 @@ window.onload = function () {
   var originalImageURL = image.src;
   var uploadedImageType = 'image/jpeg';
   var uploadedImageName = 'cropped.jpg';
-  var uploadedImageURL = 'http://localhost/wggallery/htdocs/uploads/wggallery/images/';
+  var uploadedImageURL = 'http://localhost/';
 
   // Tooltip
   $('[data-toggle="tooltip"]').tooltip();
@@ -223,9 +223,11 @@ window.onload = function () {
                         contentType: false,
                         success: function (data) {
                             console.log('create crop finished');
+                            console.log(data);
                         },
                         error: function (data) {
                             console.log(data);
+                            console.log('create crop failed');
                         }
                     });
             } else {

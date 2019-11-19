@@ -51,7 +51,5 @@ define('_MA_WGTEAMS_MEMBER_PHONE', 'Telefon');
 define('_MA_WGTEAMS_MEMBER_EMAIL', 'E-Mail');
 define('_MA_WGTEAMS_MEMBER_IMAGE', 'Bild');
 define('_MA_WGTEAMS_MEMBER_UID', 'Profil anzeigen');
-// Admin link
-define('_MA_WGTEAMS_ADMIN', 'Admin');
 // ---------------- End ----------------
 

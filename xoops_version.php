@@ -33,7 +33,7 @@ $moduleDirNameUpper = mb_strtoupper($moduleDirName);
 // ------------------- Informations ------------------- //
 $modversion = [
     'version'             => '1.09',
-    'module_status'       => 'RC1',
+    'module_status'       => 'RC3',
     'release'             => '2019/04/09',
     'name'                => _MI_WGTEAMS_NAME,
     'description'         => _MI_WGTEAMS_DESC,
@@ -106,6 +106,7 @@ $modversion['templates'][] = ['file' => 'wgteams_breadcrumbs.tpl', 'description'
 $modversion['templates'][] = ['file' => 'wgteams_footer.tpl', 'description' => ''];
 
 $modversion['templates'][] = ['file' => 'wgteams_block_teamsmembers.tpl', 'description' => '', 'type' => 'block'];
+$modversion['templates'][] = ['file' => 'wgteams_block_teams.tpl', 'description' => '', 'type' => 'block'];
 
 // ------------------- Mysql ------------------- //
 $modversion['sqlfile']['mysql'] = 'sql/mysql.sql';
@@ -161,8 +162,8 @@ $modversion['blocks'][] = [
     'name'        => _MI_WGTEAMS_TEAMS_BLOCK,
     'description' => _MI_WGTEAMS_TEAMS_BLOCK_DESC,
     'show_func'   => 'b_wgteams_teams_show',
-    'edit_func'   => '',
-    'options'     => 'showlistofteams|0',
+    'edit_func'   => 'b_wgteams_teams_edit',
+    'options'     => 'showlistofteams|1|0|1|0|2|default|0',
     'template'    => 'wgteams_block_teams.tpl',
 ];
 
@@ -292,7 +293,7 @@ $modversion['config'][] = [
     'description' => '_MI_WGTEAMS_MAXWIDTH_DESC',
     'formtype'    => 'textbox',
     'valuetype'   => 'int',
-    'default'     => 400,
+    'default'     => 1000,
 ];
 
 // Uploads : max height of images for upload
@@ -302,13 +303,50 @@ $modversion['config'][] = [
     'description' => '_MI_WGTEAMS_MAXHEIGHT_DESC',
     'formtype'    => 'textbox',
     'valuetype'   => 'int',
+    'default'     => 1000,
+];
+// Uploads : max width of images for upload
+$modversion['config'][] = [
+    'name'        => 'maxwidth_imgeditor',
+    'title'       => '_MI_WGTEAMS_MAXWIDTH_IMGEDITOR',
+    'description' => '_MI_WGTEAMS_MAXWIDTH_IMGEDITOR_DESC',
+    'formtype'    => 'textbox',
+    'valuetype'   => 'int',
+    'default'     => 400,
+];
+
+// Uploads : max height of images for upload
+$modversion['config'][] = [
+    'name'        => 'maxheight_imgeditor',
+    'title'       => '_MI_WGTEAMS_MAXHEIGHT_IMGEDITOR',
+    'description' => '_MI_WGTEAMS_MAXHEIGHT_IMGEDITOR_DESC',
+    'formtype'    => 'textbox',
+    'valuetype'   => 'int',
     'default'     => 400,
 ];
 
 $modversion['config'][] = [
-    'name'        => 'wgteams_labels',
-    'title'       => '_MI_WGTEAMS_LABELS',
-    'description' => '_MI_WGTEAMS_LABELS_DESC',
+    'name'        => 'wgteams_showteamname',
+    'title'       => '_MI_WGTEAMS_SHOW_TEAMNAME',
+    'description' => '_MI_WGTEAMS_SHOW_TEAMNAME_DESC',
+    'formtype'    => 'yesno',
+    'valuetype'   => 'int',
+    'default'     => 1,
+];
+
+$modversion['config'][] = [
+    'name'        => 'wgteams_labels_member',
+    'title'       => '_MI_WGTEAMS_LABELS_MEMBER',
+    'description' => '_MI_WGTEAMS_LABELS_MEMBER_DESC',
+    'formtype'    => 'yesno',
+    'valuetype'   => 'int',
+    'default'     => 1,
+];
+
+$modversion['config'][] = [
+    'name'        => 'wgteams_labels_infofields',
+    'title'       => '_MI_WGTEAMS_LABELS_INFOFIELD',
+    'description' => '_MI_WGTEAMS_LABELS_INFOFIELD_DESC',
     'formtype'    => 'yesno',
     'valuetype'   => 'int',
     'default'     => 1,
@@ -318,6 +356,15 @@ $modversion['config'][] = [
     'name'        => 'wgteams_showbreadcrumbs',
     'title'       => '_MI_WGTEAMS_SHOWBREADCRUMBS',
     'description' => '_MI_WGTEAMS_SHOWBREADCRUMBS_DESC',
+    'formtype'    => 'yesno',
+    'valuetype'   => 'int',
+    'default'     => 1,
+];
+// Show copyright
+$modversion['config'][] = [
+    'name'        => 'show_copyright',
+    'title'       => '_MI_WGTEAMS_SHOWCOPYRIGHT',
+    'description' => '_MI_WGTEAMS_SHOWCOPYRIGHT_DESC',
     'formtype'    => 'yesno',
     'valuetype'   => 'int',
     'default'     => 1,

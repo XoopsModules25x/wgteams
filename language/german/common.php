@@ -47,3 +47,6 @@ define('CO_' . $moduleDirNameUpper . '_' . 'SHOW_DEV_TOOLS_DESC', 'If yes, the "
 //Latest Version Check
 define('CO_' . $moduleDirNameUpper . '_' . 'NEW_VERSION', 'Neue Version: ');
 define('CO_' . $moduleDirNameUpper . '_' . 'ERROR_BAD_XOOPS', 'Sie benötigen mindestens Version %s (Ihre derzeitige Version ist %s)');
+
+// Admin link
+define('_CO_' . $moduleDirNameUpper . '_ADMIN', 'Admininistration');
