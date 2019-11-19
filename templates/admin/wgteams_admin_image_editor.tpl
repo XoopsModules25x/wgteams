@@ -13,8 +13,8 @@
 			<!-- *************** Basic Tab ***************-->
             <div class='tab-pane active center' id='1'>
 				<img id='currentImg' class='img-responsive imageeditor-img center' src='<{$imgCurrent.src}>' alt='<{$imgCurrent.img_name}>'>
-                <p><{$smarty.const._CO_WGGALLERY_ALBUM_IMGCAT}>: <{$image_path}><br>
-                <{$smarty.const._CO_WGGALLERY_IMAGE_RES}>: <{$albimage_width}> / <{$albimage_height}></p>
+                <p><{$smarty.const._AM_WGTEAMS_IMG_EDITOR_CURRENT2}>: <{$image_path}><br>
+                <{$smarty.const._AM_WGTEAMS_IMG_EDITOR_RESXY}>: <{$albimage_width}> / <{$albimage_height}></p>
                 <input type='button' class='btn <{$btn_style}>' value='<{$smarty.const._CANCEL}>' onclick='history.go(-1);return true;'>
 			</div>
             

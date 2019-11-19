@@ -160,5 +160,7 @@ define('_AM_WGTEAMS_IMG_EDITOR_CROP_FLIP_HORIZONTAL', 'Flip horizontal');
 define('_AM_WGTEAMS_IMG_EDITOR_CROP_FLIP_VERTICAL', 'Flip vertical');
 define('_AM_WGTEAMS_IMG_EDITOR_CROP_ASPECTRATIO', 'Aspect ratio');
 define('_AM_WGTEAMS_IMG_EDITOR_CROP_ASPECTRATIO_FREE', 'Free');
+define('_AM_WGTEAMS_IMG_EDITOR_CURRENT2', 'Source of current image');
+define('_AM_WGTEAMS_IMG_EDITOR_RESXY', 'Resolution');
 
 define('_AM_WGTEAMS_FORM_ERROR_INVALID_ID', 'Invalid ID');
