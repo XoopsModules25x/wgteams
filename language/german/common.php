@@ -50,5 +50,3 @@ define('CO_' . $moduleDirNameUpper . '_' . 'ERROR_BAD_XOOPS', 'Sie benötigen mi
 
 // Admin link
 define('_CO_' . $moduleDirNameUpper . '_ADMIN', 'Admininistration');
-// image editor
-define('_CO_' . $moduleDirNameUpper . '_ADMIN', 'Admininistration');
