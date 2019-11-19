@@ -315,8 +315,8 @@ switch ($op) {
                 $savedFilename = $uploader->getSavedFileName();
                 $imageObj->setVar($fieldObj, $savedFilename);
                 // resize image
-                $maxwidth  = $helper->getConfig('maxwidth');
-                $maxheight = $helper->getConfig('maxheight');
+                $maxwidth  = $helper->getConfig('maxwidth_imgeditor');
+                $maxheight = $helper->getConfig('maxheight_imgeditor');
                 $imgHandler                = new Wgteams\Resizer();
                 $imgHandler->sourceFile    = $imgPath . $savedFilename;
                 $imgHandler->endFile       = $imgPath . $savedFilename;
