@@ -130,64 +130,65 @@
                         <!-- <h3>Toolbar:</h3> -->
                         <div class="btn-group">
                             <button type="button" class="btn imageeditor-btn-crop <{$btn_style}>" data-method="setDragMode" data-option="move" title="<{$smarty.const._AM_WGTEAMS_IMG_EDITOR_CROP_MOVE}>">
-                                <span class="docs-tooltip" data-toggle="tooltip" title="cropper.setDragMode(&quot;move&quot;)"><span class="fa fa-arrows"></span></span>
+                                <span class="docs-tooltip" data-toggle="tooltip" title="<{$smarty.const._AM_WGTEAMS_IMG_EDITOR_CROP_MOVE}>"><span class="fa fa-arrows"></span></span>
                             </button>
-                            <button type="button" class="btn imageeditor-btn-crop <{$btn_style}>" data-method="setDragMode" data-option="crop" title="Crop">
-								<span class="docs-tooltip" data-toggle="tooltip" title="cropper.setDragMode(&quot;crop&quot;)"><span class="fa fa-crop"></span>
+                            <button type="button" class="btn imageeditor-btn-crop <{$btn_style}>" data-method="setDragMode" data-option="crop" title="<{$smarty.const._AM_WGTEAMS_IMG_EDITOR_CROP}>">
+								<span class="docs-tooltip" data-toggle="tooltip" title="<{$smarty.const._AM_WGTEAMS_IMG_EDITOR_CROP}>"><span class="fa fa-crop"></span>
 								</span>
 							</button>
                         </div>
 
                         <div class="btn-group">
                             <button type="button" class="btn imageeditor-btn-crop <{$btn_style}>" data-method="zoom" data-option="0.1" title="<{$smarty.const._AM_WGTEAMS_IMG_EDITOR_CROP_ZOOMIN}>">
-                                <span class="docs-tooltip" data-toggle="tooltip" title="cropper.zoom(0.1)"><span class="fa fa-search-plus"></span></span>
+                                <span class="docs-tooltip" data-toggle="tooltip" title="<{$smarty.const._AM_WGTEAMS_IMG_EDITOR_CROP_ZOOMIN}>"><span class="fa fa-search-plus"></span></span>
                             </button>
                             <button type="button" class="btn imageeditor-btn-crop <{$btn_style}>" data-method="zoom" data-option="-0.1" title="<{$smarty.const._AM_WGTEAMS_IMG_EDITOR_CROP_ZOOMOUT}>">
-                                <span class="docs-tooltip" data-toggle="tooltip" title="cropper.zoom(-0.1)"><span class="fa fa-search-minus"></span></span>
+                                <span class="docs-tooltip" data-toggle="tooltip" title="<{$smarty.const._AM_WGTEAMS_IMG_EDITOR_CROP_ZOOMOUT}>"><span class="fa fa-search-minus"></span></span>
                             </button>
                         </div>
 
                         <div class="btn-group">
                             <button type="button" class="btn imageeditor-btn-crop <{$btn_style}>" data-method="move" data-option="-10" data-second-option="0" title="<{$smarty.const._AM_WGTEAMS_IMG_EDITOR_CROP_MOVE_LEFT}>">
-                                <span class="docs-tooltip" data-toggle="tooltip" title="cropper.move(-10, 0)"><span class="fa fa-arrow-left"></span></span>
+                                <span class="docs-tooltip" data-toggle="tooltip" title="<{$smarty.const._AM_WGTEAMS_IMG_EDITOR_CROP_MOVE_LEFT}>"><span class="fa fa-arrow-left"></span></span>
                             </button>
                             <button type="button" class="btn imageeditor-btn-crop <{$btn_style}>" data-method="move" data-option="10" data-second-option="0" title="<{$smarty.const._AM_WGTEAMS_IMG_EDITOR_CROP_MOVE_RIGHT}>">
-                                <span class="docs-tooltip" data-toggle="tooltip" title="cropper.move(10, 0)"><span class="fa fa-arrow-right"></span></span>
+                                <span class="docs-tooltip" data-toggle="tooltip" title="<{$smarty.const._AM_WGTEAMS_IMG_EDITOR_CROP_MOVE_RIGHT}>"><span class="fa fa-arrow-right"></span></span>
                             </button>
-                            <button type="button" class="btn imageeditor-btn-crop <{$btn_style}>" data-method="move" data-option="0" data-second-option="-10" title="<{$smarty.const._AM_WGTEAMS_IMG_EDITOR_CROP_MOVE_UP}>"><span class="docs-tooltip" data-toggle="tooltip" title="cropper.move(0, -10)"><span class="fa fa-arrow-up"></span></span>
+                            <button type="button" class="btn imageeditor-btn-crop <{$btn_style}>" data-method="move" data-option="0" data-second-option="-10" title="<{$smarty.const._AM_WGTEAMS_IMG_EDITOR_CROP_MOVE_UP}>">
+                                <span class="docs-tooltip" data-toggle="tooltip" title="<{$smarty.const._AM_WGTEAMS_IMG_EDITOR_CROP_MOVE_UP}>"><span class="fa fa-arrow-up"></span></span>
                             </button>
                             <button type="button" class="btn imageeditor-btn-crop <{$btn_style}>" data-method="move" data-option="0" data-second-option="10" title="<{$smarty.const._AM_WGTEAMS_IMG_EDITOR_CROP_MOVE_DOWN}>">
-                                <span class="docs-tooltip" data-toggle="tooltip" title="cropper.move(0, 10)"><span class="fa fa-arrow-down"></span></span>
+                                <span class="docs-tooltip" data-toggle="tooltip" title="<{$smarty.const._AM_WGTEAMS_IMG_EDITOR_CROP_MOVE_DOWN}>"><span class="fa fa-arrow-down"></span></span>
                             </button>
                         </div>
 
                         <div class="btn-group">
                             <button type="button" class="btn imageeditor-btn-crop <{$btn_style}>" data-method="rotate" data-option="-45" title="<{$smarty.const._AM_WGTEAMS_IMG_EDITOR_CROP_ROTATE_LEFT}>">
-                                <span class="docs-tooltip" data-toggle="tooltip" title="cropper.rotate(-45)"><span class="fa fa-rotate-left"></span></span>
+                                <span class="docs-tooltip" data-toggle="tooltip" title="<{$smarty.const._AM_WGTEAMS_IMG_EDITOR_CROP_ROTATE_LEFT}>"><span class="fa fa-rotate-left"></span></span>
                             </button>
                             <button type="button" class="btn imageeditor-btn-crop <{$btn_style}>" data-method="rotate" data-option="45" title="<{$smarty.const._AM_WGTEAMS_IMG_EDITOR_CROP_ROTATE_RIGHT}>">
-                                <span class="docs-tooltip" data-toggle="tooltip" title="cropper.rotate(45)"><span class="fa fa-rotate-right"></span></span>
+                                <span class="docs-tooltip" data-toggle="tooltip" title="<{$smarty.const._AM_WGTEAMS_IMG_EDITOR_CROP_ROTATE_RIGHT}>"><span class="fa fa-rotate-right"></span></span>
                             </button>
                         </div>
 
                         <div class="btn-group">
                             <button type="button" class="btn imageeditor-btn-crop <{$btn_style}>" data-method="scaleX" data-option="-1" title="<{$smarty.const._AM_WGTEAMS_IMG_EDITOR_CROP_FLIP_HORIZONTAL}>">
-                                <span class="docs-tooltip" data-toggle="tooltip" title="cropper.scaleX(-1)"><span class="fa fa-arrows-h"></span></span>
+                                <span class="docs-tooltip" data-toggle="tooltip" title="<{$smarty.const._AM_WGTEAMS_IMG_EDITOR_CROP_FLIP_HORIZONTAL}>"><span class="fa fa-arrows-h"></span></span>
                             </button>
                             <button type="button" class="btn imageeditor-btn-crop <{$btn_style}>" data-method="scaleY" data-option="-1" title="<{$smarty.const._AM_WGTEAMS_IMG_EDITOR_CROP_FLIP_VERTICAL}>">
-                                <span class="docs-tooltip" data-toggle="tooltip" title="cropper.scaleY(-1)"><span class="fa fa-arrows-v"></span></span>
+                                <span class="docs-tooltip" data-toggle="tooltip" title="<{$smarty.const._AM_WGTEAMS_IMG_EDITOR_CROP_FLIP_VERTICAL}>"><span class="fa fa-arrows-v"></span></span>
                             </button>
                         </div>
 
                         <div class="btn-group">
                             <button type="button" class="btn imageeditor-btn-crop <{$btn_style}>" data-method="reset" title="<{$smarty.const._RESET}>">
-                                <span class="docs-tooltip" data-toggle="tooltip" title="cropper.reset()"><span class="fa fa-refresh"></span></span>
+                                <span class="docs-tooltip" data-toggle="tooltip" title="<{$smarty.const._RESET}>"><span class="fa fa-refresh"></span></span>
                             </button>
                         </div>
                         <div class="btn-group">
                             <label class="btn <{$btn_style}> btn-upload" for="inputImage" title="<{$smarty.const._UPLOAD}>">
                                 <input type="file" class="sr-only" id="inputImage" name="file" accept="image/*">
-                                <span class="docs-tooltip" data-toggle="tooltip" title="Import image with Blob URLs"><span class="fa fa-upload"></span></span>
+                                <span class="docs-tooltip" data-toggle="tooltip" title="<{$smarty.const._UPLOAD}>"><span class="fa fa-upload"></span></span>
                             </label>
                         </div>
 
@@ -198,7 +199,7 @@
                             <button id="btnCropCreate" type="button" class="btn imageeditor-btn-crop <{$btn_style}>" data-method="getCroppedCanvas" data-option="{ &quot;maxWidth&quot;: 4096, &quot;maxHeight&quot;: 4096, &quot;save&quot;: 1 }">
                                 <span class="docs-tooltip" data-toggle="tooltip" title="<{$smarty.const._AM_WGTEAMS_IMG_EDITOR_CREATE}>"><{$smarty.const._AM_WGTEAMS_IMG_EDITOR_CREATE}></span>
                             </button>
-                            <a class="btn <{$btn_style}> disabled" id="btnCropApply" href="<{$wgteams_url}>/admin/image_editor.php?op=saveCrop&<{$imageOrigin}>=<{$imageId}>&target=<{$croptarget}>"> <{$smarty.const._AM_WGTEAMS_IMG_EDITOR_APPLY}></a>
+                            <a class="btn <{$btn_style}> disabled" id="btnCropApply" href="<{$wgtimelines_url}>/admin/image_editor.php?op=saveCrop&<{$imageOrigin}>=<{$imageId}>&target=<{$croptarget}>&start=<{$start}>&limit=<{$limit}>"> <{$smarty.const._AM_WGTEAMS_IMG_EDITOR_APPLY}></a>
 							<button type="button" class="btn btn-crop <{$btn_style}>"onclick='history.go(-1);return true;'><{$smarty.const._CANCEL}></button>
 						</div>
 
