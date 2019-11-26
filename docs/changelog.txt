@@ -4,6 +4,7 @@
  - new preference for default size image editor (goffy)
  - new preference for show/hide copyright (goffy)
  - fixed bug with upload very big jpg images (goffy) 
+ - fixed display problem (alain/goffy)
  
 <h5>1.09 RC2</h5> [2019/04/09]
 <hr>

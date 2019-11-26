@@ -16,8 +16,7 @@
                     <div class='wgt-card'>
                         <{if $team.team_image}>
                             <a class='' href='<{$wgteams_url_index}>?op=list&amp;team_id=<{$team.team_id}>' title='<{$smarty.const._MB_WGTEAMS_SHOWTEAM}>'>
-                                <img class="wgt-card-img img-responsive center <{$team.team_imagestyle}>" src="<{$wgteams_teams_upload_url}><{$team.team_image}>" alt="<{$team.team_name}>" title="<{$team.team_name}>">
-                            </a>
+                                <img class="wgt-card-img img-responsive center <{$team.team_imagestyle}>" src="<{$wgteams_teams_upload_url}><{$team.team_image}>" alt="<{$team.team_name}>" title="<{$team.team_name}>"></a>
                         <{/if}>
                         <div class="wgt-car-body">
                             <{if $showName}><h5 class="team-name center"><{$team.team_name}></h5><{/if}>
