@@ -199,7 +199,7 @@
                             <button id="btnCropCreate" type="button" class="btn imageeditor-btn-crop <{$btn_style}>" data-method="getCroppedCanvas" data-option="{ &quot;maxWidth&quot;: 4096, &quot;maxHeight&quot;: 4096, &quot;save&quot;: 1 }">
                                 <span class="docs-tooltip" data-toggle="tooltip" title="<{$smarty.const._AM_WGTEAMS_IMG_EDITOR_CREATE}>"><{$smarty.const._AM_WGTEAMS_IMG_EDITOR_CREATE}></span>
                             </button>
-                            <a class="btn <{$btn_style}> disabled" id="btnCropApply" href="<{$wgtimelines_url}>/admin/image_editor.php?op=saveCrop&<{$imageOrigin}>=<{$imageId}>&target=<{$croptarget}>&start=<{$start}>&limit=<{$limit}>"> <{$smarty.const._AM_WGTEAMS_IMG_EDITOR_APPLY}></a>
+                            <a class="btn <{$btn_style}> disabled" id="btnCropApply" href="<{$wgteams_image_editor}>/image_editor.php?op=saveCrop&<{$imageOrigin}>=<{$imageId}>&target=<{$croptarget}>&start=<{$start}>&limit=<{$limit}>"> <{$smarty.const._AM_WGTEAMS_IMG_EDITOR_APPLY}></a>
 							<button type="button" class="btn btn-crop <{$btn_style}>"onclick='history.go(-1);return true;'><{$smarty.const._CANCEL}></button>
 						</div>
 

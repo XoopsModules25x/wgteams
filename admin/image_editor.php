@@ -131,6 +131,7 @@ $GLOBALS['xoopsTpl']->assign('wgteams_icon_url_16', WGTEAMS_ICONS_URL . '/16');
 $GLOBALS['xoopsTpl']->assign('wgteams_icon_url_32', WGTEAMS_ICONS_URL . '/32');
 $GLOBALS['xoopsTpl']->assign('wgteams_upload_url', WGTEAMS_UPLOAD_URL);
 $GLOBALS['xoopsTpl']->assign('wgteams_upload_path', WGTEAMS_UPLOAD_PATH);
+$GLOBALS['xoopsTpl']->assign('wgteams_image_editor', WGTEAMS_URL . '/admin');
 $GLOBALS['xoopsTpl']->assign('wgteams_upload_image_url', $imgUrl);
 $GLOBALS['xoopsTpl']->assign('gridtarget', $imgName);
 $GLOBALS['xoopsTpl']->assign('imgCurrent', $imgCurrent);
