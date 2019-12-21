@@ -48,6 +48,9 @@ switch ($op) {
         if ($membersCount > 0) {
             foreach (array_keys($membersAll) as $i) {
                 $member = $membersAll[$i]->getValuesMember();
+                $image = WGTEAMS_UPLOAD_PATH . '/members/images/' . $member['image'];
+                $size = getimagesize($image);
+                $member['image_resxy'] = $size[0] . ' x ' . $size[1];
                 $GLOBALS['xoopsTpl']->append('members_list', $member);
                 unset($member);
             }

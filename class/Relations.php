@@ -142,7 +142,7 @@ class Relations extends \XoopsObject
         $editor_configs['rows']   = 5;
         $editor_configs['cols']   = 40;
         $editor_configs['width']  = '100%';
-        $editor_configs['height'] = '400px';
+        $editor_configs['height'] = '200px';
         $editor_configs['editor'] = $this->helper->getConfig('wgteams_editor');
         $form->addElement(new \XoopsFormEditor(_AM_WGTEAMS_RELATION_INFO_1, 'rel_info_1', $editor_configs));
 
@@ -159,7 +159,7 @@ class Relations extends \XoopsObject
         $editor_configs['rows']   = 5;
         $editor_configs['cols']   = 40;
         $editor_configs['width']  = '100%';
-        $editor_configs['height'] = '400px';
+        $editor_configs['height'] = '200px';
         $editor_configs['editor'] = $this->helper->getConfig('wgteams_editor');
         $form->addElement(new \XoopsFormEditor(_AM_WGTEAMS_RELATION_INFO_2, 'rel_info_2', $editor_configs));
 
@@ -176,7 +176,7 @@ class Relations extends \XoopsObject
         $editor_configs['rows']   = 5;
         $editor_configs['cols']   = 40;
         $editor_configs['width']  = '100%';
-        $editor_configs['height'] = '400px';
+        $editor_configs['height'] = '200px';
         $editor_configs['editor'] = $this->helper->getConfig('wgteams_editor');
         $form->addElement(new \XoopsFormEditor(_AM_WGTEAMS_RELATION_INFO_3, 'rel_info_3', $editor_configs));
 
@@ -193,7 +193,7 @@ class Relations extends \XoopsObject
         $editor_configs['rows']   = 5;
         $editor_configs['cols']   = 40;
         $editor_configs['width']  = '100%';
-        $editor_configs['height'] = '400px';
+        $editor_configs['height'] = '200px';
         $editor_configs['editor'] = $this->helper->getConfig('wgteams_editor');
         $form->addElement(new \XoopsFormEditor(_AM_WGTEAMS_RELATION_INFO_4, 'rel_info_4', $editor_configs));
 
@@ -210,7 +210,7 @@ class Relations extends \XoopsObject
         $editor_configs['rows']   = 5;
         $editor_configs['cols']   = 40;
         $editor_configs['width']  = '100%';
-        $editor_configs['height'] = '400px';
+        $editor_configs['height'] = '200px';
         $editor_configs['editor'] = $this->helper->getConfig('wgteams_editor');
         $form->addElement(new \XoopsFormEditor(_AM_WGTEAMS_RELATION_INFO_5, 'rel_info_5', $editor_configs));
 

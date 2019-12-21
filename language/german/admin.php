@@ -21,6 +21,7 @@
  */
  
 require_once __DIR__ . '/common.php';
+require_once __DIR__ . '/modinfo.php';
 
 // ---------------- Admin Index ----------------
 define('_AM_WGTEAMS_STATISTICS', 'Statistiken');
@@ -162,5 +163,7 @@ define('_AM_WGTEAMS_IMG_EDITOR_CROP_ASPECTRATIO', 'Seitenverhältnis');
 define('_AM_WGTEAMS_IMG_EDITOR_CROP_ASPECTRATIO_FREE', 'Frei');
 define('_AM_WGTEAMS_IMG_EDITOR_CURRENT2', 'Quelle für aktuelles Bild');
 define('_AM_WGTEAMS_IMG_EDITOR_RESXY', 'Auflösung');
-
+define('_AM_WGTEAMS_IMG_EDITOR_UPLOAD', 'Voraussetzungen für Bilderupload');
+define('_AM_WGTEAMS_IMG_EDITOR_RESIZE', 'Bild automatisch verkleinern');
+define('_AM_WGTEAMS_IMG_EDITOR_RESIZE_DESC', 'Bild automatisch auf folgende Standardwerte verkleinern: Breite max. %w px / Höhe max. %h px');
 define('_AM_WGTEAMS_FORM_ERROR_INVALID_ID', 'Invalid ID');

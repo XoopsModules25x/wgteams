@@ -100,7 +100,7 @@ class Members extends \XoopsObject
         $editor_configs['rows']   = 5;
         $editor_configs['cols']   = 40;
         $editor_configs['width']  = '100%';
-        $editor_configs['height'] = '400px';
+        $editor_configs['height'] = '200px';
         $editor_configs['editor'] = $this->helper->getConfig('wgteams_editor');
         $form->addElement(new \XoopsFormEditor(_AM_WGTEAMS_MEMBER_ADDRESS, 'member_address', $editor_configs));
         // Form Text Area member_phone
@@ -110,7 +110,7 @@ class Members extends \XoopsObject
         $editor_configs['rows']   = 5;
         $editor_configs['cols']   = 40;
         $editor_configs['width']  = '100%';
-        $editor_configs['height'] = '400px';
+        $editor_configs['height'] = '200px';
         $editor_configs['editor'] = $this->helper->getConfig('wgteams_editor');
         $form->addElement(new \XoopsFormEditor(_AM_WGTEAMS_MEMBER_PHONE, 'member_phone', $editor_configs));
         // Form Text memberEmail

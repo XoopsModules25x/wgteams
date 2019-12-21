@@ -33,12 +33,13 @@ require_once XOOPS_ROOT_PATH . '/header.php';
 /** @var \XoopsModules\Wgteams\Utility $utility */
 $utility = new \XoopsModules\Wgteams\Utility();
 
-$op       = Request::getString('op', 'list');
-$memberId = Request::getInt('member_id', 0);
-$origin   = Request::getString('imageOrigin');
-$teamId   = Request::getInt('team_id', 0);
-$start    = Request::getInt('start', 0);
-$limit    = Request::getInt('limit', $helper->getConfig('adminpager'));
+$op         = Request::getString('op', 'list');
+$memberId   = Request::getInt('member_id', 0);
+$origin     = Request::getString('imageOrigin');
+$teamId     = Request::getInt('team_id', 0);
+$start      = Request::getInt('start', 0);
+$limit      = Request::getInt('limit', $helper->getConfig('adminpager'));
+$img_resize = Request::getInt('img_resize', 0);
 
 // get all objects/classes/vars needed for image editor
 $imageClass = 0;
@@ -316,15 +317,17 @@ switch ($op) {
                 $savedFilename = $uploader->getSavedFileName();
                 $imageObj->setVar($fieldObj, $savedFilename);
                 // resize image
-                $maxwidth  = $helper->getConfig('maxwidth_imgeditor');
-                $maxheight = $helper->getConfig('maxheight_imgeditor');
-                $imgHandler                = new Wgteams\Resizer();
-                $imgHandler->sourceFile    = $imgPath . $savedFilename;
-                $imgHandler->endFile       = $imgPath . $savedFilename;
-                $imgHandler->imageMimetype = $imageMimetype;
-                $imgHandler->maxWidth      = $maxwidth;
-                $imgHandler->maxHeight     = $maxheight;
-                $result                    = $imgHandler->resizeImage();
+                if (1 == $img_resize) {
+                    $maxwidth  = $helper->getConfig('maxwidth_imgeditor');
+                    $maxheight = $helper->getConfig('maxheight_imgeditor');
+                    $imgHandler                = new Wgteams\Resizer();
+                    $imgHandler->sourceFile    = $imgPath . $savedFilename;
+                    $imgHandler->endFile       = $imgPath . $savedFilename;
+                    $imgHandler->imageMimetype = $imageMimetype;
+                    $imgHandler->maxWidth      = $maxwidth;
+                    $imgHandler->maxHeight     = $maxheight;
+                    $result                    = $imgHandler->resizeImage();
+                }
 
                 $imageObj->setVar($fieldObj, $savedFilename);
                 $imageObj->setVar($submObj, $uid);
@@ -397,9 +400,22 @@ function getFormUploadImage($imageOrigin, $imageId)
     $form = new \XoopsThemeForm('', 'formuploadimmage', 'image_editor.php', 'post', true);
     $form->setExtra('enctype="multipart/form-data"');
     // upload new image
-    $imageTray3      = new \XoopsFormElementTray(_AM_WGTEAMS_FORM_UPLOAD_IMG, '<br>');
+    $imageTray1      = new \XoopsFormElementTray(_AM_WGTEAMS_FORM_UPLOAD_IMG, '<br>');
     $imageFileSelect = new \XoopsFormFile('', 'attachedfile', $helper->getConfig('maxsize'));
-    $imageTray3->addElement($imageFileSelect);
+    $imageTray1->addElement($imageFileSelect);
+    $form->addElement($imageTray1);
+    
+    $cond = _MI_WGTEAMS_IMG_MAXSIZE . ': ' . ($helper->getConfig('wgteams_img_maxsize') / 1048576) . ' ' . _MI_WGTEAMS_SIZE_MB . '<br>';
+    $cond .= _MI_WGTEAMS_MAXWIDTH . ': ' . $helper->getConfig('maxwidth') . ' px<br>';
+    $cond .= _MI_WGTEAMS_MAXHEIGHT . ': ' . $helper->getConfig('maxheight') . ' px<br>';
+    $cond .= _MI_WGTEAMS_IMG_MIMETYPES . ': ' . implode(', ', $helper->getConfig('wgteams_img_mimetypes')) . '<br>';
+    $form->addElement(new \XoopsFormLabel(_AM_WGTEAMS_IMG_EDITOR_UPLOAD, $cond));
+      
+    $imageTray3      = new \XoopsFormElementTray(_AM_WGTEAMS_IMG_EDITOR_RESIZE, '<br>');   
+    $resizeinfo = str_replace('%w', $helper->getConfig('maxwidth_imgeditor'), _AM_WGTEAMS_IMG_EDITOR_RESIZE_DESC);
+    $resizeinfo = str_replace('%h', $helper->getConfig('maxheight_imgeditor'), $resizeinfo);
+    $imageTray3->addElement(new \XoopsFormLabel($resizeinfo, ''));
+    $imageTray3->addElement(new \XoopsFormRadioYN('', 'img_resize', 1));
     $form->addElement($imageTray3);
 
     $form->addElement(new \XoopsFormHidden($imageOrigin, $imageId));
