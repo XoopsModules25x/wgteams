@@ -117,8 +117,9 @@ function b_wgteams_teams_edit($options)
     $form .= "<option value='4' " . (4 === (int)$options[5] ? "selected='selected'" : '') . '>4</option>';
     $form .= "<option value='6' " . (6 === (int)$options[5] ? "selected='selected'" : '') . '>6</option>';
     $form .= '</select><br>';
-    $form .= _MB_WGTEAMS_TEMPLATE . ": <select name='options[6]' size='2'>";
+    $form .= _MB_WGTEAMS_TEMPLATE . ": <select name='options[6]' size='3'>";
     $form .= "<option value='default' " . ('default' === $options[6] ? "selected='selected'" : '') . '>' . _MB_WGTEAMS_TEMPLATE_DEFAULT . '</option>';
+    $form .= "<option value='list' " . ('list' === $options[6] ? "selected='selected'" : '') . '>' . _MB_WGTEAMS_TEMPLATE_LIST . '</option>';
     $form .= "<option value='bcards' " . ('bcards' === $options[6] ? "selected='selected'" : '') . '>' . _MB_WGTEAMS_TEMPLATE_BCARDS . '</option>';
     $form .= '</select><br>';
     array_shift($options);

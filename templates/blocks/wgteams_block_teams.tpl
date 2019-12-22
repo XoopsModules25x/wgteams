@@ -31,6 +31,19 @@
                     <div class="clear"></div>
                 <{/if}>
             <{/foreach}>
+        <{if $template == 'list'}> 
+            <ul class="nav nav-pills nav-stacked">
+                <{foreach name=team item=team from=$block}>
+                    <li class='wgt-list-item'>
+                        <a class='' href='<{$wgteams_url_index}>?op=list&amp;team_id=<{$team.team_id}>' title='<{$smarty.const._MB_WGTEAMS_SHOWTEAM}>'>
+                            <{if $team.team_image}>
+                                <img class="wgt-list-img <{$team.team_imagestyle}>" src="<{$wgteams_teams_upload_url}><{$team.team_image}>" alt="<{$team.team_name}>" title="<{$team.team_name}>">
+                            <{/if}>
+                            <{if $showName}><{$team.team_name}><{/if}>
+                        </a>
+                    </li>
+                <{/foreach}>
+            </ul>
         <{else}>
             <{foreach name=team item=team from=$block}>
                 <div class="row">

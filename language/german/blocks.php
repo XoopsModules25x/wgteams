@@ -27,7 +27,8 @@ define('_MB_WGTEAMS_DESC_LENGTH', 'Beschreibung Länge (0 bedeutet vollständige
 define('_MB_WGTEAMS_NUMB_TEAMS', 'Anzahl der Teams pro Reihe');
 define('_MB_WGTEAMS_TEMPLATE', 'Vorlage');
 define('_MB_WGTEAMS_TEMPLATE_DEFAULT', 'default');
-define('_MB_WGTEAMS_TEMPLATE_BCARDS', 'Bootstrap cards');
+define('_MB_WGTEAMS_TEMPLATE_LIST', 'Einfache Liste');
+define('_MB_WGTEAMS_TEMPLATE_BCARDS', 'Bootstrap Cards');
 define('_MB_WGTEAMS_TEAMS_TO_DISPLAY', 'Teams für die Anzeige (Teams müssen für die Anzeige zusätzlich "online" sein)');
 define('_MB_WGTEAMS_ALL_TEAMS', 'Alle Teams');
 define('_MB_WGTEAMS_SHOWTEAM', 'Team anzeigen');
