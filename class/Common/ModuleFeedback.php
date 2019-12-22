@@ -70,7 +70,7 @@ class ModuleFeedback extends \XoopsObject
         }
         // Get Theme Form
         xoops_load('XoopsFormLoader');
-        $form = new \XoopsThemeForm(_FB_FORM_TITLE, 'formfeedback', 'feedback.php', 'post', true);
+        $form = new \XoopsThemeForm(_FB_FORM_TITLE, 'formfeedback', $action, 'post', true);
         $form->setExtra('enctype="multipart/form-data"');
 
         $recipient = new \XoopsFormText(_FB_RECIPIENT, 'recipient', 50, 255, $GLOBALS['xoopsModule']->getInfo('author_mail'));

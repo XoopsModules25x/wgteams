@@ -189,6 +189,9 @@ require __DIR__ . '/footer.php';
 /**
  * @function getFormFilterTeam:
  * provide form with a dropdown select containing all existing teams
+ * @param $teamId
+ * @param $start
+ * @param $limit
  * @param bool $action
  * @return \XoopsThemeForm
  */

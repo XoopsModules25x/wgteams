@@ -85,17 +85,19 @@ function wgteamsMetaDescription($content)
 
 /**
  * @param      $teamsAll
+ * @param int $lengthName
  * @param bool $show_descr
+ * @param int $lengthDescr
  * @return array
  */
 function wgteamsGetTeamDetails(&$teamsAll, $lengthName = 0, $show_descr = true, $lengthDescr = 0)
 {
     // Get All Teams
-    global $xoopsTpl, $xoTheme;
+//    global $xoopsTpl, $xoTheme;
 
     /** @var Wgteams\Helper $helper */
     $helper       = Wgteams\Helper::getInstance();
-    $teamsHandler = $helper->getHandler('Teams');
+//    $teamsHandler = $helper->getHandler('Teams');
 
     xoops_loadLanguage('main', WGTEAMS_DIRNAME);
 
@@ -148,11 +150,11 @@ function wgteamsGetTeamDetails(&$teamsAll, $lengthName = 0, $show_descr = true, 
 function wgteamsGetTeamMemberDetails(&$teamsAll)
 {
     // Get All Teams
-    global $xoopsTpl, $xoTheme;
+//    global $xoopsTpl, $xoTheme;
     /** @var Wgteams\Helper $helper */
     $helper            = Wgteams\Helper::getInstance();
     $db                = \XoopsDatabaseFactory::getDatabaseConnection();
-    $teamsHandler      = new Wgteams\TeamsHandler($db);
+//    $teamsHandler      = new Wgteams\TeamsHandler($db);
     $membersHandler    = new Wgteams\MembersHandler($db);
     $relationsHandler  = new Wgteams\RelationsHandler($db);
     $infofieldsHandler = new Wgteams\InfofieldsHandler($db);
@@ -187,7 +189,7 @@ function wgteamsGetTeamMemberDetails(&$teamsAll)
         $crit_rels->add(new \Criteria('rel_team_id', $team_id));
         $crit_rels->setSort('rel_weight');
         $crit_rels->setOrder('ASC');
-        $relsCount = $relationsHandler->getCount($crit_rels);
+//        $relsCount = $relationsHandler->getCount($crit_rels);
         $relsAll   = $relationsHandler->getAll($crit_rels);
         unset($relations);
         $relations = [];

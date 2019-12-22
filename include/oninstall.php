@@ -41,7 +41,6 @@ function xoops_module_pre_install_wgteams(\XoopsModule $module)
     }
 
     return $xoopsSuccess && $phpSuccess;
-	return true;
 }
 
 /**
@@ -54,7 +53,7 @@ function xoops_module_install_wgteams(\XoopsModule $module)
 {
     require_once dirname(dirname(dirname(__DIR__))) . '/mainfile.php';
 
-    $moduleDirName = basename(dirname(__DIR__));
+//    $moduleDirName = basename(dirname(__DIR__));
 
     /** @var Wgteams\Helper $helper */
     $helper       = Wgteams\Helper::getInstance();

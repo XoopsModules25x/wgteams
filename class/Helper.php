@@ -126,7 +126,6 @@ class Helper extends \Xmf\Module\Helper
             return $this->config[$name];
         }
 
-        return $this->config[$name];
         $this->addLog("Getting config '{$name}' : " . $this->config[$name]);
 
         return $this->config[$name];
@@ -156,7 +155,6 @@ class Helper extends \Xmf\Module\Helper
      */
     public function getHandler($name)
     {
-        $ret   = false;
         $class = '\\XoopsModules\\' . ucfirst(mb_strtolower(basename(dirname(__DIR__)))) . '\\' . $name . 'Handler';
 
         if (!class_exists($class)) {

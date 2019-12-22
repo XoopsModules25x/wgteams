@@ -44,10 +44,8 @@ function tableExists($tablename)
  */
 function xoops_module_pre_update_wgteams(\XoopsModule $module)
 {
-    $moduleDirName = basename(dirname(__DIR__));
-    /** @var Wgteams\Helper $helper */
-    /** @var Wgteams\Utility $utility */
-    $helper  = Wgteams\Helper::getInstance();
+//    $moduleDirName = basename(dirname(__DIR__));
+//    $helper  = Wgteams\Helper::getInstance();
     $utility = new Wgteams\Utility();
 
     $xoopsSuccess = $utility::checkVerXoops($module);
@@ -66,12 +64,8 @@ function xoops_module_pre_update_wgteams(\XoopsModule $module)
 function xoops_module_update_wgteams(\XoopsModule $module, $previousVersion = null)
 {
     $moduleDirName      = basename(dirname(__DIR__));
-    $moduleDirNameUpper = mb_strtoupper($moduleDirName);
-
-    /** @var Wgteams\Helper $helper */
-    /** @var Wgteams\Utility $utility */
-    /** @var Wgteams\Common\Configurator $configurator */
-    $helper       = Wgteams\Helper::getInstance();
+//    $moduleDirNameUpper = mb_strtoupper($moduleDirName);
+//    $helper       = Wgteams\Helper::getInstance();
     $utility      = new Wgteams\Utility();
     $configurator = new Wgteams\Common\Configurator();
 
@@ -122,7 +116,7 @@ function xoops_module_update_wgteams(\XoopsModule $module, $previousVersion = nu
 	// maintenance of tables
     $ret = maintaintables($module);
 
-    return true;
+    return $ret;
 }
 
 /**

@@ -74,7 +74,7 @@ function b_wgteams_teamsmembers_edit($options)
     $helper       = Wgteams\Helper::getInstance();
     $teamsHandler = $helper->getHandler('Teams');
     $GLOBALS['xoopsTpl']->assign('wgteams_upload_url', WGTEAMS_UPLOAD_URL);
-    $form = _MB_WGTEAMS_TEAM_TO_DISPLAY;
+    $form = _MB_WGTEAMS_TEAMS_TO_DISPLAY;
     $form .= "<input type='hidden' name='options[0]' value='" . $options[0] . "'>";
     array_shift($options);
     $criteria = new \CriteriaCompo();
