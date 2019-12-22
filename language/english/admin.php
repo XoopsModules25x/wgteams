@@ -128,6 +128,9 @@ define('_AM_WGTEAMS_FORM_EDIT', 'Modification');
 define('_AM_WGTEAMS_FORM_DELETE', 'Clear');
 define('_AM_WGTEAMS_SUBMITTER', 'Submitter');
 define('_AM_WGTEAMS_DATE_CREATE', 'Date create');
+define('_AM_WGTEAMS_FORM_SELTEAM', 'Select Team');
+define('_AM_WGTEAMS_RELATIONS_NOTEAM', 'There are no relations for selected team');
+define('_AM_WGTEAMS_RELATIONS_NOTEAMSEL', 'No team selected');
 // ---------------- Admin Others ----------------
 define('_AM_WGTEAMS_MAINTAINEDBY', " is maintained by <a href='https://wedega.com'>https://wedega.com</a> und <a href='https://xoops.wedega.com'>https://xoops.wedega.com</a>");
 define('_AM_WGTEAMS_MAX_FILESIZE', 'Max File Size');

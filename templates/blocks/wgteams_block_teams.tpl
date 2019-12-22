@@ -31,7 +31,7 @@
                     <div class="clear"></div>
                 <{/if}>
             <{/foreach}>
-        <{if $template == 'list'}> 
+        <{elseif $template == 'list'}> 
             <ul class="nav nav-pills nav-stacked">
                 <{foreach name=team item=team from=$block}>
                     <li class='wgt-list-item'>

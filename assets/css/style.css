@@ -32,6 +32,7 @@
 .member-label {padding: 2px;vertical-align:top;}
 .member-text {padding: 2px;vertical-align:top;}
 .member-info {height: auto;}
+.member-info ul {padding-left: 0;}
 .wgteams-odd div {background-color: #DFDFDF;padding: 5px;border-bottom: 1px solid #ccc;}
 .wgteams-even div {background-color: #EFEFEF;padding: 5px;border-bottom: 1px solid #ccc;}
 .wgteams-bordered div {border: 1px solid #e9e9e9;}

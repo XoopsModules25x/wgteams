@@ -25,9 +25,9 @@ use Xmf\Request;
 
 require __DIR__ . '/header.php';
 // It recovered the value of argument op in URL$
-$op = Request::getString('op', 'list');
-// Request rel_id
-$relId = Request::getInt('rel_id', 0);
+$op     = Request::getString('op', 'list');
+$relId  = Request::getInt('rel_id', 0);
+$teamId = Request::getInt('team_id', 0);
 // Switch options
 switch ($op) {
     case 'list':
@@ -37,14 +37,22 @@ switch ($op) {
         $limit        = Request::getInt('limit', $helper->getConfig('adminpager'));
         $templateMain = 'wgteams_admin_relations.tpl';
         $GLOBALS['xoopsTpl']->assign('navigation', $adminObject->displayNavigation('relations.php'));
-        $adminObject->addItemButton(_AM_WGTEAMS_RELATION_ADD, 'relations.php?op=new', 'add');
+        $adminObject->addItemButton(_AM_WGTEAMS_RELATION_ADD, 'relations.php?op=new&amp;team_id=' . $teamId, 'add');
         $GLOBALS['xoopsTpl']->assign('buttons', $adminObject->displayButton('left', ''));
-        $relationsCount = $relationsHandler->getCountRelations();
-        $relationsAll   = $relationsHandler->getAllRelations($start, $limit);
+        
+        $form = getFormFilterTeam($teamId, $start, $limit);
+        $GLOBALS['xoopsTpl']->assign('form', $form->render());
+        $crRelations = new \CriteriaCompo();
+        $crRelations->add(new \Criteria('rel_team_id', $teamId));  
+        $relationsCount = $relationsHandler->getCount($crRelations);
+        $crRelations->setStart($start);
+        $crRelations->setLimit($limit);
+        $relationsAll   = $relationsHandler->getAll($crRelations);
         $GLOBALS['xoopsTpl']->assign('relations_count', $relationsCount);
         $GLOBALS['xoopsTpl']->assign('wgteams_url', WGTEAMS_URL);
         $GLOBALS['xoopsTpl']->assign('wgteams_upload_url', WGTEAMS_UPLOAD_URL);
         $GLOBALS['xoopsTpl']->assign('wgteams_icons_url', WGTEAMS_ICONS_URL);
+
         // Table view
         if ($relationsCount > 0) {
             $team_id_prev = 0;
@@ -65,11 +73,15 @@ switch ($op) {
             }
             if ($relationsCount > $limit) {
                 require_once XOOPS_ROOT_PATH . '/class/pagenav.php';
-                $pagenav = new \XoopsPageNav($relationsCount, $limit, $start, 'start', 'op=list&limit=' . $limit);
+                $pagenav = new \XoopsPageNav($relationsCount, $limit, $start, 'start', 'op=list&amp;limit=' . $limit . '&amp;team_id=' . $teamId);
                 $GLOBALS['xoopsTpl']->assign('pagenav', $pagenav->renderNav(4));
             }
         } else {
-            $GLOBALS['xoopsTpl']->assign('error', _AM_WGTEAMS_THEREARENT_RELATIONS);
+            if (0 == $teamId) {
+                $GLOBALS['xoopsTpl']->assign('error', _AM_WGTEAMS_RELATIONS_NOTEAMSEL);
+            } else {
+                $GLOBALS['xoopsTpl']->assign('error', _AM_WGTEAMS_RELATIONS_NOTEAM);
+            }
         }
         break;
     case 'new':
@@ -79,6 +91,7 @@ switch ($op) {
         $GLOBALS['xoopsTpl']->assign('buttons', $adminObject->displayButton('left', ''));
         // Get Form
         $relationsObj = $relationsHandler->create();
+        $relationsObj->setVar('rel_team_id', $teamId);
         $form         = $relationsObj->getFormRelations();
         $GLOBALS['xoopsTpl']->assign('form', $form->render());
         break;
@@ -124,7 +137,7 @@ switch ($op) {
         $relationsObj->setVar('rel_date_create', time());
         // Insert Data
         if ($relationsHandler->insert($relationsObj)) {
-            redirect_header('relations.php?op=list', 2, _AM_WGTEAMS_FORM_OK);
+            redirect_header('relations.php?op=list&amp;team_id=' . $_POST['rel_team_id'], 2, _AM_WGTEAMS_FORM_OK);
         }
         // Get Form
         $GLOBALS['xoopsTpl']->assign('error', $relationsObj->getHtmlErrors());
@@ -172,3 +185,36 @@ switch ($op) {
 }
 
 require __DIR__ . '/footer.php';
+
+/**
+ * @function getFormFilterTeam:
+ * provide form with a dropdown select containing all existing teams
+ * @param bool $action
+ * @return \XoopsThemeForm
+ */
+function getFormFilterTeam($teamId, $start, $limit, $action = false)
+{
+    $helper = \XoopsModules\Wgteams\Helper::getInstance();
+    if (!$action) {
+        $action = $_SERVER['REQUEST_URI'];
+    }
+    // Get Theme Form
+    xoops_load('XoopsFormLoader');
+    $form = new \XoopsThemeForm(_AM_WGTEAMS_FORM_SELTEAM, 'formselteam', $action, 'post', true);
+    $form->setExtra('enctype="multipart/form-data"');
+    $teamsHandler = $helper->getHandler('Teams');
+    $teamIdSelect = new \XoopsFormSelect(_AM_WGTEAMS_TEAMS_LIST, 'team_id', $teamId);
+    $teamIdSelect->setExtra('onchange="submit()"');
+    $teamIdSelect->addOption(0, '&nbsp;');
+    $teamsAll = $teamsHandler->getAll();
+
+    foreach (array_keys($teamsAll) as $i) {
+        $teamIdSelect->addOption($teamsAll[$i]->getVar('team_id'), $teamsAll[$i]->getVar('team_name'));
+    }
+    $form->addElement($teamIdSelect);
+    $form->addElement(new \XoopsFormHidden('op', 'list'));
+    $form->addElement(new \XoopsFormHidden('start', $start));
+    $form->addElement(new \XoopsFormHidden('limit', $limit));
+
+    return $form;
+}

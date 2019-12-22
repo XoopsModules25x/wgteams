@@ -117,7 +117,7 @@ function wgteamsGetTeamDetails(&$teamsAll, $lengthName = 0, $show_descr = true, 
                 $team_descr = $helper::truncateHtml($team_descr, $lengthDescr);
             }
         }
-        if ('blank.gif' === $teamsAll[$i]->getVar('team_image')) {
+        if ('blank.gif' === $teamsAll[$i]->getVar('team_image') || 'blank.png' === $teamsAll[$i]->getVar('team_image')) {
             $team_image = '';
         } else {
             $team_image = $teamsAll[$i]->getVar('team_image');

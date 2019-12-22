@@ -7,6 +7,7 @@
  - fixed bug with cropping images (goffy)
  - added option to resize image during upload or not (goffy)
  - added new block style 'list' (goffy)
+ - added filter team in admin/relations (goffy)
  
 <h5>1.09 RC2</h5> [2019/04/09]
 <hr>
