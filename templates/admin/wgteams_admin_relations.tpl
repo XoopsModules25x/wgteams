@@ -9,8 +9,7 @@
     <table class="table table-bordered  table-striped" id="sortable">
         <thead>
             <tr class="head">
-                <th class="center"><{$smarty.const._AM_WGTEAMS_RELATION_TEAM_ID}></th>
-                <th class="center"><{$smarty.const._AM_WGTEAMS_RELATION_ID}></th>
+                <th class="center">&nbsp;</th>
                 <th class="center"><{$smarty.const._AM_WGTEAMS_RELATION_MEMBER_ID}></th>
                 <th class="center"><{$smarty.const._AM_WGTEAMS_RELATION_INFO_1_FIELD}></th>
                 <th class="center"><{$smarty.const._AM_WGTEAMS_RELATION_INFO_1}></th>
@@ -29,12 +28,6 @@
         </thead>
     <{if $relations_count}>
         <{foreach item=relation from=$relations_list}>
-        <{if $relation.new_team > 0}>
-        <tbody>
-            <tr class="odd">
-            <td class="left" colspan="16"><{$relation.team_name}></td>
-            </tr>
-        <{/if}>
             <tr class="even" id="rorder_<{$relation.id}>">
 
                 <td class="center">
@@ -44,7 +37,6 @@
                     &nbsp;
                 <{/if}>
                 </td>
-                <td class="center"><{$relation.id}></td>
                 <td class="center"><{$relation.member_name}></td>
                 <td class="center"><{$relation.info_1_field}></td>
                 <td class="left"><{$relation.info_1}></td>

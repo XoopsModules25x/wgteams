@@ -226,7 +226,7 @@
             </div>
 			
             <!-- ***************Tab for upload image ***************-->
-			<div class='tab-pane center' id='5'>
+			<div class='tab-pane' id='5'>
 				<{$form_uploadimage}>
 			</div>
 		</div>

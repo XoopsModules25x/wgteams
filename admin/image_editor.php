@@ -51,25 +51,21 @@ if ('team_id' === $origin) {
     $teamId = Request::getInt('imageIdCrop', 0);
 }
 if ( 0 < $memberId ) {
-	$imageId      = $memberId;
-	$imageHandler = $membersHandler;
-	$imageObj     = $membersHandler->get($imageId);
 	$imageClass   = Constants::IMAGECLASS_MEMBER;
-    $imageOrigin  = 'member_id';
 } else {
 	if ($teamId > 0) {
-		$imageId      = $teamId;
-		$imageObj     = $teamsHandler->get($imageId);
-		$imageHandler = $teamsHandler;
 		$imageClass   = Constants::IMAGECLASS_TEAM;
-        $imageOrigin  = 'team_id';
 	} else {
 		redirect_header('index.php', 3, _AM_WGTEAMS_FORM_ERROR_INVALID_ID);
 	}
 }
 
 if ($imageClass === Constants::IMAGECLASS_MEMBER) {
-    $imgName  = 'member' . $imageId . '.jpg';
+    $imageId      = $memberId;
+    $imageHandler = $membersHandler;
+    $imageObj     = $membersHandler->get($imageId);
+    $imageOrigin  = 'member_id';
+    $imgName  = mb_substr(str_replace(' ', '', $imageObj->getVar('member_lastname') . $imageObj->getVar('member_firstname')), 0, 20);
     $imageDir = '/uploads/wgteams/members/images/';
     $imgPath  = XOOPS_ROOT_PATH . $imageDir;
     $imgUrl   = XOOPS_URL . $imageDir;
@@ -80,7 +76,11 @@ if ($imageClass === Constants::IMAGECLASS_MEMBER) {
     $fieldObj = 'member_image';
     $submObj  = 'member_submitter';
 } else {
-    $imgName  = 'team' . $imageId . '.jpg';
+    $imageId      = $teamId;
+    $imageObj     = $teamsHandler->get($imageId);
+    $imageHandler = $teamsHandler;
+    $imageOrigin  = 'team_id';
+    $imgName  = mb_substr(str_replace(' ', '', $imageObj->getVar('team_name')), 0, 20);
     $imageDir = '/uploads/wgteams/teams/images/';
     $imgPath  = XOOPS_ROOT_PATH . $imageDir;
     $imgUrl   = XOOPS_URL . $imageDir;
@@ -305,10 +305,12 @@ switch ($op) {
         $fileName       = $_FILES['attachedfile']['name'];
         $imageMimetype  = $_FILES['attachedfile']['type'];
         $uploaderErrors = '';
-        $uploader       = new \XoopsMediaUploader($imgPath, $mimetypes, $maxsize, null, null);
+        $maxwidth  = $helper->getConfig('maxwidth');
+        $maxheight = $helper->getConfig('maxheight');
+        $uploader       = new \XoopsMediaUploader($imgPath, $mimetypes, $maxsize, $maxwidth, $maxheight);
         if ($uploader->fetchMedia($_POST['xoops_upload_file'][0])) {
             $extension = preg_replace('/^.+\.([^.]+)$/sU', '', $fileName);
-            $imgName   = 'image_' . $memberId . '.' . $extension;
+            $imgName   .= '.' . $extension;
             $uploader->setPrefix($imgName);
             $uploader->fetchMedia($_POST['xoops_upload_file'][0]);
             if (!$uploader->upload()) {
@@ -318,14 +320,14 @@ switch ($op) {
                 $imageObj->setVar($fieldObj, $savedFilename);
                 // resize image
                 if (1 == $img_resize) {
-                    $maxwidth  = $helper->getConfig('maxwidth_imgeditor');
-                    $maxheight = $helper->getConfig('maxheight_imgeditor');
                     $imgHandler                = new Wgteams\Resizer();
+                    $maxwidth_imgeditor        = $helper->getConfig('maxwidth_imgeditor');
+                    $maxheight_imgeditor       = $helper->getConfig('maxheight_imgeditor');
                     $imgHandler->sourceFile    = $imgPath . $savedFilename;
                     $imgHandler->endFile       = $imgPath . $savedFilename;
                     $imgHandler->imageMimetype = $imageMimetype;
-                    $imgHandler->maxWidth      = $maxwidth;
-                    $imgHandler->maxHeight     = $maxheight;
+                    $imgHandler->maxWidth      = $maxwidth_imgeditor;
+                    $imgHandler->maxHeight     = $maxheight_imgeditor;
                     $result                    = $imgHandler->resizeImage();
                 }
 
@@ -338,7 +340,7 @@ switch ($op) {
             }
         }
         if ('' !== $uploaderErrors) {
-            redirect_header($redir, $uploaderErrors);
+            redirect_header($redir, 5, $uploaderErrors);
         }
         // Insert Data
         if ($imageHandler->insert($imageObj)) {
@@ -363,7 +365,7 @@ switch ($op) {
         if ('' == $currImage) {
             $currImage = 'blank.gif';
         }
-        $image_path = WGTEAMS_UPLOAD_URL . '/members/images/' . $currImage;
+        $image_path = $imgPath . $currImage;
         // get size of current album image
         list($width, $height, $type, $attr) = getimagesize($image_path);
         $GLOBALS['xoopsTpl']->assign('image_path', $image_path);
@@ -397,7 +399,7 @@ function getFormUploadImage($imageOrigin, $imageId)
     $helper = \XoopsModules\Wgteams\Helper::getInstance();
     // Get Theme Form
     xoops_load('XoopsFormLoader');
-    $form = new \XoopsThemeForm('', 'formuploadimmage', 'image_editor.php', 'post', true);
+    $form = new \XoopsThemeForm('', 'formuploadimage', 'image_editor.php', 'post', true);
     $form->setExtra('enctype="multipart/form-data"');
     // upload new image
     $imageTray1      = new \XoopsFormElementTray(_AM_WGTEAMS_FORM_UPLOAD_IMG, '<br>');
@@ -411,7 +413,7 @@ function getFormUploadImage($imageOrigin, $imageId)
     $cond .= _MI_WGTEAMS_IMG_MIMETYPES . ': ' . implode(', ', $helper->getConfig('wgteams_img_mimetypes')) . '<br>';
     $form->addElement(new \XoopsFormLabel(_AM_WGTEAMS_IMG_EDITOR_UPLOAD, $cond));
       
-    $imageTray3      = new \XoopsFormElementTray(_AM_WGTEAMS_IMG_EDITOR_RESIZE, '<br>');   
+    $imageTray3      = new \XoopsFormElementTray(_AM_WGTEAMS_IMG_EDITOR_RESIZE, '');
     $resizeinfo = str_replace('%w', $helper->getConfig('maxwidth_imgeditor'), _AM_WGTEAMS_IMG_EDITOR_RESIZE_DESC);
     $resizeinfo = str_replace('%h', $helper->getConfig('maxheight_imgeditor'), $resizeinfo);
     $imageTray3->addElement(new \XoopsFormLabel($resizeinfo, ''));

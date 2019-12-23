@@ -168,5 +168,5 @@ define('_AM_WGTEAMS_IMG_EDITOR_CURRENT2', 'Quelle für aktuelles Bild');
 define('_AM_WGTEAMS_IMG_EDITOR_RESXY', 'Auflösung');
 define('_AM_WGTEAMS_IMG_EDITOR_UPLOAD', 'Voraussetzungen für Bilderupload');
 define('_AM_WGTEAMS_IMG_EDITOR_RESIZE', 'Bild automatisch verkleinern');
-define('_AM_WGTEAMS_IMG_EDITOR_RESIZE_DESC', 'Bild automatisch auf folgende Standardwerte verkleinern: Breite max. %w px / Höhe max. %h px');
+define('_AM_WGTEAMS_IMG_EDITOR_RESIZE_DESC', 'Bild automatisch auf Standardwerte (Breite max. %w px / Höhe max. %h px) verkleinern: ');
 define('_AM_WGTEAMS_FORM_ERROR_INVALID_ID', 'Invalid ID');

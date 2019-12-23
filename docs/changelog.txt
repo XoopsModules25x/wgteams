@@ -1,3 +1,11 @@
+<h5>1.09 RC4</h5> [2019/09/17]
+<hr>
+ - added option to resize image during upload or not (goffy)
+ - added new block style 'list' (goffy)
+ - added filter team in admin/relations (goffy)
+ - added info about conditions for image upload (goffy)
+ - fixed missing check of allowed resolution (goffy)
+ 
 <h5>1.09 RC3</h5> [2019/09/17]
 <hr>
  - fixed bug image editor (goffy) 
@@ -5,9 +13,6 @@
  - new preference for show/hide copyright (goffy)
  - fixed bug with upload very big jpg images (goffy)
  - fixed bug with cropping images (goffy)
- - added option to resize image during upload or not (goffy)
- - added new block style 'list' (goffy)
- - added filter team in admin/relations (goffy)
  
 <h5>1.09 RC2</h5> [2019/04/09]
 <hr>

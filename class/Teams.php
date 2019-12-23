@@ -121,8 +121,21 @@ class Teams extends \XoopsObject
         // Form File
         $fileSelectTray = new \XoopsFormElementTray('', '<br>');
         $fileSelectTray->addElement(new \XoopsFormFile(_AM_WGTEAMS_FORM_UPLOAD_IMG, 'attachedfile', $this->helper->getConfig('wgteams_img_maxsize')));
-        $fileSelectTray->addElement(new \XoopsFormLabel(_AM_WGTEAMS_MAX_FILESIZE . $this->helper->getConfig('wgteams_img_maxsize')));
+
+        $cond = '<br>- ' . _MI_WGTEAMS_IMG_MAXSIZE . ': ' . ($this->helper->getConfig('wgteams_img_maxsize') / 1048576) . ' ' . _MI_WGTEAMS_SIZE_MB;
+        $cond .= '<br>- ' . _MI_WGTEAMS_MAXWIDTH . ': ' . $this->helper->getConfig('maxwidth') . ' px';
+        $cond .= '<br>- ' . _MI_WGTEAMS_MAXHEIGHT . ': ' . $this->helper->getConfig('maxheight') . ' px';
+        $cond .= '<br>- ' . _MI_WGTEAMS_IMG_MIMETYPES . ': ' . implode(', ', $this->helper->getConfig('wgteams_img_mimetypes'));
+        $fileSelectTray->addElement(new \XoopsFormLabel(_AM_WGTEAMS_IMG_EDITOR_UPLOAD, $cond));
         $imageTray->addElement($fileSelectTray);
+
+        $imageTray3   = new \XoopsFormElementTray('', '');
+        $resizeinfo = '<br>' . str_replace('%w', $this->helper->getConfig('maxwidth_imgeditor'), _AM_WGTEAMS_IMG_EDITOR_RESIZE_DESC);
+        $resizeinfo = str_replace('%h', $this->helper->getConfig('maxheight_imgeditor'), $resizeinfo);
+        $imageTray3->addElement(new \XoopsFormLabel($resizeinfo, ''));
+        $imageTray3->addElement(new \XoopsFormRadioYN('', 'img_resize', 1));
+        $imageTray->addElement($imageTray3);
+
         $form->addElement($imageTray);
         // Form Text TeamNb_cols
         $teamNb_cols        = $this->isNew() ? 2 : $this->getVar('team_nb_cols');

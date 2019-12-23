@@ -26,9 +26,9 @@ use XoopsModules\Wgteams;
 
 require __DIR__ . '/header.php';
 // It recovered the value of argument op in URL$
-$op = Request::getString('op', 'list');
-// Request member_id
+$op       = Request::getString('op', 'list');
 $memberId = Request::getInt('member_id', 0);
+
 // Switch options
 switch ($op) {
     case 'list':
@@ -48,9 +48,13 @@ switch ($op) {
         if ($membersCount > 0) {
             foreach (array_keys($membersAll) as $i) {
                 $member = $membersAll[$i]->getValuesMember();
-                $image = WGTEAMS_UPLOAD_PATH . '/members/images/' . $member['image'];
-                $size = getimagesize($image);
-                $member['image_resxy'] = $size[0] . ' x ' . $size[1];
+                if ('blank.gif' == $member['image']) {
+                    $member['image'] = false;
+                } else {
+                    $image = WGTEAMS_UPLOAD_PATH . '/members/images/' . $member['image'];
+                    $size = getimagesize($image);
+                    $member['image_resxy'] = $size[0] . ' x ' . $size[1];
+                }
                 $GLOBALS['xoopsTpl']->append('members_list', $member);
                 unset($member);
             }
@@ -100,7 +104,9 @@ switch ($op) {
 		$fileName       = $_FILES['attachedfile']['name'];
         $imageMimetype  = $_FILES['attachedfile']['type'];
         $uploaderErrors = '';
-        $uploader = new \XoopsMediaUploader(WGTEAMS_UPLOAD_PATH . '/members/images', $helper->getConfig('wgteams_img_mimetypes'), $helper->getConfig('wgteams_img_maxsize'), null, null);	
+        $maxwidth  = $helper->getConfig('maxwidth');
+        $maxheight = $helper->getConfig('maxheight');
+        $uploader = new \XoopsMediaUploader(WGTEAMS_UPLOAD_PATH . '/members/images', $helper->getConfig('wgteams_img_mimetypes'), $helper->getConfig('wgteams_img_maxsize'), $maxwidth, $maxheight);
 		if ($uploader->fetchMedia($_POST['xoops_upload_file'][0])) {
             $extension = preg_replace('/^.+\.([^.]+)$/sU', '', $fileName);
 			$imgName   = mb_substr(str_replace(' ', '', $_POST['member_lastname'] . $_POST['member_firstname']), 0, 20) . '_' . $extension;
@@ -112,16 +118,19 @@ switch ($op) {
                 $savedFilename = $uploader->getSavedFileName();
                 $membersObj->setVar('member_image', $savedFilename);
                 // resize image
-                $maxwidth  = (int)$helper->getConfig('maxwidth');
-                $maxheight = (int)$helper->getConfig('maxheight');
-                $imgHandler                = new Wgteams\Resizer();
-                $imgHandler->sourceFile    = WGTEAMS_UPLOAD_PATH . '/members/images/' . $savedFilename;
-                $imgHandler->endFile       = WGTEAMS_UPLOAD_PATH . '/members/images/' . $savedFilename;
-                $imgHandler->imageMimetype = $imageMimetype;
-                $imgHandler->maxWidth      = $maxwidth;
-                $imgHandler->maxHeight     = $maxheight;
-                $result                    = $imgHandler->resizeImage();
-                $membersObj->setVar('member_image', $savedFilename);
+                $img_resize = Request::getInt('img_resize', 0);
+                if (1 == $img_resize) {
+                    $imgHandler                = new Wgteams\Resizer();
+                    $maxwidth_imgeditor        = (int)$helper->getConfig('maxwidth_imgeditor');
+                    $maxheight_imgeditor       = (int)$helper->getConfig('maxheight_imgeditor');
+                    $imgHandler->sourceFile    = WGTEAMS_UPLOAD_PATH . '/members/images/' . $savedFilename;
+                    $imgHandler->endFile       = WGTEAMS_UPLOAD_PATH . '/members/images/' . $savedFilename;
+                    $imgHandler->imageMimetype = $imageMimetype;
+                    $imgHandler->maxWidth      = $maxwidth_imgeditor;
+                    $imgHandler->maxHeight     = $maxheight_imgeditor;
+                    $result = $imgHandler->resizeImage();
+                    $membersObj->setVar('member_image', $savedFilename);
+                }
             }
         } else {
             if ($fileName > '') {

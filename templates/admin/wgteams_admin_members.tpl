@@ -28,7 +28,11 @@
                     <td class="center"><{$member.address}></td>
                     <td class="center"><{$member.phone}></td>
                     <td class="center"><{$member.email}></td>
-                    <td class="center"><img src="<{$wgteams_upload_url}>/members/images/<{$member.image}>" alt="members" style='max-width:50px;'><br><{$member.image_resxy}></td>
+                    <td class="center">
+                        <{if $member.image}>
+                            <img src="<{$wgteams_upload_url}>/members/images/<{$member.image}>" alt="members" style='max-width:50px;'><br><{$member.image_resxy}>
+                        <{/if}>
+                    </td>
                     <td class="center"><{$member.submitter}></td>
                     <td class="center"><{$member.date_create}></td>
                     <td class="center  width5">

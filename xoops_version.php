@@ -33,8 +33,8 @@ $moduleDirNameUpper = mb_strtoupper($moduleDirName);
 // ------------------- Informations ------------------- //
 $modversion = [
     'version'             => '1.09',
-    'module_status'       => 'RC3',
-    'release'             => '2019/04/09',
+    'module_status'       => 'RC4',
+    'release'             => '2019/12/23',
     'name'                => _MI_WGTEAMS_NAME,
     'description'         => _MI_WGTEAMS_DESC,
     'author'              => 'Goffy - Wedega.com',
@@ -47,7 +47,7 @@ $modversion = [
     'help'                => 'page=help',
     'release_info' 		  => 'release_info',
     'release_file'        => XOOPS_URL . '/modules/wgteams/docs/release_info file',
-    'release_date'        => '2019/04/09',
+    'release_date'        => '2019/12/23',
     'manual'              => 'link to manual file',
     'manual_file'         => XOOPS_URL . '/modules/wgteams/docs/install.txt',
     'min_php'             => '7.0',
