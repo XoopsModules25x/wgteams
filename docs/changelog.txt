@@ -1,6 +1,8 @@
 <h5>1.10 RC1</h5> [2020/02/09]
 <hr>
  - added maintenance / cleaning unused images (goffy)
+ - fixed bug with mimetype when cropping image (goffy)
+ - added maintenance / check space (goffy)
 
 <h5>1.09 RC4</h5> [2019/09/17]
 <hr>

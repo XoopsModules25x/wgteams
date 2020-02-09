@@ -181,6 +181,13 @@ define('_AM_WGTEAMS_MAINTENANCE_DELETE_UNUSED', 'Cleanup image directory');
 define('_AM_WGTEAMS_MAINTENANCE_DELETE_UNUSED_DESC', 'Show all currently unused images from following directories:<ul>
 <li>%p/teams/images/</li>
 <li>%p/members/images/</li>
+<li>%p/temp/</li>
 </ul>');
 define('_AM_WGTEAMS_MAINTENANCE_DELETE_UNUSED_NONE', 'No unused images found');
 define('_AM_WGTEAMS_EXEC', 'Execute');
+define('_AM_WGTEAMS_MAINTENANCE_CHECK_SPACE', 'Check used space in upload directory');
+define('_AM_WGTEAMS_MAINTENANCE_CHECK_SPACE_DESC', 'Following upload directories will be checked in order to get used space:<ul>
+<li>%p/teams/images/</li>
+<li>%p/members/images/</li>
+<li>%p/temp/</li>
+</ul>');
