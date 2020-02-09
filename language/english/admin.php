@@ -170,3 +170,17 @@ define('_AM_WGTEAMS_IMG_EDITOR_UPLOAD', 'Conditions for uploading images');
 define('_AM_WGTEAMS_IMG_EDITOR_RESIZE', 'Resize image automatically');
 define('_AM_WGTEAMS_IMG_EDITOR_RESIZE_DESC', 'Resize image automatically to default dimension (width max. %w px / height max. %h px): ');
 define('_AM_WGTEAMS_FORM_ERROR_INVALID_ID', 'Invalid ID');
+//1.10
+define('_AM_WGTEAMS_MAINTENANCE_TYP', 'Typ of maintenance');
+define('_AM_WGTEAMS_MAINTENANCE_DESC', 'Description');
+define('_AM_WGTEAMS_MAINTENANCE_RESULTS', 'Results');
+define('_AM_WGTEAMS_MAINTENANCE_SUCCESS_DELETE', 'Successfully deleted: ');
+define('_AM_WGTEAMS_MAINTENANCE_ERROR_DELETE', 'Error when deleting: ');
+define('_AM_WGTEAMS_MAINTENANCE_ERROR_READDIR', 'Error when reading directory: ');
+define('_AM_WGTEAMS_MAINTENANCE_DELETE_UNUSED', 'Cleanup image directory');
+define('_AM_WGTEAMS_MAINTENANCE_DELETE_UNUSED_DESC', 'Show all currently unused images from following directories:<ul>
+<li>%p/teams/images/</li>
+<li>%p/members/images/</li>
+</ul>');
+define('_AM_WGTEAMS_MAINTENANCE_DELETE_UNUSED_NONE', 'No unused images found');
+define('_AM_WGTEAMS_EXEC', 'Execute');
