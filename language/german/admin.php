@@ -181,6 +181,13 @@ define('_AM_WGTEAMS_MAINTENANCE_DELETE_UNUSED', 'Bilderverzeichnis bereinigen');
 define('_AM_WGTEAMS_MAINTENANCE_DELETE_UNUSED_DESC', 'Alle derzeit nicht verwendeten Bilder in folgenden Verzeichissen anzeigen:<ul>
 <li>%p/teams/images/</li>
 <li>%p/members/images/</li>
+<li>%p/temp/</li>
 </ul>');
 define('_AM_WGTEAMS_MAINTENANCE_DELETE_UNUSED_NONE', 'Es wurden keine nicht verwendeten Bilder gefunden');
 define('_AM_WGTEAMS_EXEC', 'Ausführen');
+define('_AM_WGTEAMS_MAINTENANCE_CHECK_SPACE', 'Verwendeten Speicherplatz Upload-Verzeichnis ermitteln');
+define('_AM_WGTEAMS_MAINTENANCE_CHECK_SPACE_DESC', 'Folgende Upload-Verzeichnisse werden überprüft um festzustellen, wie hoch der verwendete Speicherplatz ist:<ul>
+<li>%p/teams/images/</li>
+<li>%p/members/images/</li>
+<li>%p/temp/</li>
+</ul>');

@@ -49,6 +49,20 @@
                 </td>
             </tr>
         <{/if}>
+        <{if $show_checkspace}>
+            <tr class="<{cycle values='odd, even'}>">
+                <td class='left'><{$smarty.const._AM_WGTEAMS_MAINTENANCE_CHECK_SPACE}></td>
+                <td class='left'><{$maintainance_cs_desc}></td>
+                <td class='left'>
+                    <{if $show_result}>
+                        <{if $result_success}><span><{$result_success}></span><{/if}>
+                        <{if $result_error}><span class='maintenance-error'><{$result_error}></span><{/if}>
+                    <{else}>
+                        <p class='left'><a class='btn maintenance-btn' href='maintenance.php?op=check_space' title='<{$smarty.const._AM_WGTEAMS_EXEC}>'><{$smarty.const._AM_WGTEAMS_EXEC}></a></p>
+                    <{/if}>
+                </td>
+            </tr>
+        <{/if}>
     </tbody>
 </table>
 

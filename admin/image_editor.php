@@ -65,7 +65,7 @@ if ($imageClass === Constants::IMAGECLASS_MEMBER) {
     $imageHandler = $membersHandler;
     $imageObj     = $membersHandler->get($imageId);
     $imageOrigin  = 'member_id';
-    $imgName  = mb_substr(str_replace(' ', '', $imageObj->getVar('member_lastname') . $imageObj->getVar('member_firstname')), 0, 20);
+    $imgName  = mb_substr(str_replace(' ', '', $imageObj->getVar('member_lastname') . $imageObj->getVar('member_firstname')), 0, 20) . '.jpg';
     $imageDir = '/uploads/wgteams/members/images/';
     $imgPath  = XOOPS_ROOT_PATH . $imageDir;
     $imgUrl   = XOOPS_URL . $imageDir;
@@ -80,7 +80,7 @@ if ($imageClass === Constants::IMAGECLASS_MEMBER) {
     $imageObj     = $teamsHandler->get($imageId);
     $imageHandler = $teamsHandler;
     $imageOrigin  = 'team_id';
-    $imgName  = mb_substr(str_replace(' ', '', $imageObj->getVar('team_name')), 0, 20);
+    $imgName  = mb_substr(str_replace(' ', '', $imageObj->getVar('team_name')), 0, 20) . '.jpg';
     $imageDir = '/uploads/wgteams/teams/images/';
     $imgPath  = XOOPS_ROOT_PATH . $imageDir;
     $imgUrl   = XOOPS_URL . $imageDir;
@@ -232,7 +232,6 @@ switch ($op) {
                 unlink($imgTemp . $i . '.jpg');
             }
         }
-
         break; 
 
     case 'cropimage':
@@ -251,7 +250,7 @@ switch ($op) {
         $imgHandler->maxHeight     = $maxheight;
         $ret                       = $imgHandler->resizeImage();
 
-        unlink($imgFinal);
+        //unlink($imgFinal);
         break;
     case 'saveImageSelected':
         // save image selected from list of available images in upload folder
@@ -283,7 +282,8 @@ switch ($op) {
 
         break;
     case 'saveCrop':
-        // save before created grid image
+        // save before created cropped image
+        unlink($imgFinal);
         $ret = rename($imgTemp, $imgFinal);
         // Set Vars
         $imageObj->setVar($fieldObj, $imgName);

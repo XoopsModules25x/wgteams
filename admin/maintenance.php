@@ -32,6 +32,9 @@ $op    = Request::getString('op', 'list');
 $GLOBALS['xoopsTpl']->assign('wgteams_icon_url_16', WGTEAMS_ICONS_URL . '16/');
 
 $maintainance_dui_desc = str_replace('%p', WGTEAMS_UPLOAD_PATH, _AM_WGTEAMS_MAINTENANCE_DELETE_UNUSED_DESC);
+$GLOBALS['xoopsTpl']->assign('maintainance_dui_desc', $maintainance_dui_desc);
+$maintainance_cs_desc = str_replace('%p', WGTEAMS_UPLOAD_PATH, _AM_WGTEAMS_MAINTENANCE_CHECK_SPACE_DESC);
+$GLOBALS['xoopsTpl']->assign('maintainance_cs_desc', $maintainance_cs_desc);
 
 switch ($op) {
     case 'unused_images_search':
@@ -48,6 +51,11 @@ switch ($op) {
         if (false === getUnusedImages($unused, $directory, $url)) {
             $errors[] = _AM_WGTEAMS_MAINTENANCE_ERROR_READDIR . $directory;
         }
+        $directory = WGTEAMS_UPLOAD_PATH . '/temp';
+        $url       = WGTEAMS_UPLOAD_URL . '/temp';
+        if (false === getUnusedImages($unused, $directory, $url)) {
+            $errors[] = _AM_WGTEAMS_MAINTENANCE_ERROR_READDIR . $directory;
+        }
 
         $templateMain = 'wgteams_admin_maintenance.tpl';
         $unused_text  = '';
@@ -60,8 +68,6 @@ switch ($op) {
         if (count($unused) === 0) {
             $unused_text = _AM_WGTEAMS_MAINTENANCE_DELETE_UNUSED_NONE;
         }
-        // $GLOBALS['xoopsTpl']->assign('maintainance_resize_desc', $maintainance_resize_desc);
-        $GLOBALS['xoopsTpl']->assign('maintainance_dui_desc', $maintainance_dui_desc);
         $GLOBALS['xoopsTpl']->assign('result_unused', $unused);
         $GLOBALS['xoopsTpl']->assign('result_success', $unused_text);
         $GLOBALS['xoopsTpl']->assign('result_error', $err_text);
@@ -89,19 +95,13 @@ switch ($op) {
         $success = [];
         $errors  = [];
 
-        $path      = WGTEAMS_UPLOAD_IMAGE_PATH . '/albums';
+        $path      = WGTEAMS_UPLOAD_PATH . '/teams/images';
         $disk_used = wgg_foldersize($path);
         $success[] = $path . ': ' . wgg_format_size($disk_used);
-        $path      = WGTEAMS_UPLOAD_IMAGE_PATH . '/large';
+        $path      = WGTEAMS_UPLOAD_PATH . '/members/images';
         $disk_used = wgg_foldersize($path);
         $success[] = $path . ': ' . wgg_format_size($disk_used);
-        $path      = WGTEAMS_UPLOAD_IMAGE_PATH . '/medium';
-        $disk_used = wgg_foldersize($path);
-        $success[] = $path . ': ' . wgg_format_size($disk_used);
-        $path      = WGTEAMS_UPLOAD_IMAGE_PATH . '/thumbs';
-        $disk_used = wgg_foldersize($path);
-        $success[] = $path . ': ' . wgg_format_size($disk_used);
-        $path      = WGTEAMS_UPLOAD_IMAGE_PATH . '/temp';
+        $path      = WGTEAMS_UPLOAD_PATH . '/temp';
         $disk_used = wgg_foldersize($path);
         $success[] = $path . ': ' . wgg_format_size($disk_used);
 
@@ -181,6 +181,8 @@ function getUnusedImages(&$unused, $directory, $url)
                     case 'blank.png':
                     case 'index.html':
                     case 'noimage.png':
+                    case 'anonymous.png':
+                    case 'anonymous.jpg':
                     case '..':
                     case '.':
                         break;
