@@ -32,6 +32,7 @@ define('_MI_WGTEAMS_ADMENU4', 'Mitglieder');
 define('_MI_WGTEAMS_ADMENU2', 'Infofelder');
 define('_MI_WGTEAMS_ADMENU5', 'Beziehungen');
 define('_MI_WGTEAMS_ADMENU6', 'Feedback');
+define('_MI_WGTEAMS_ADMENU7', 'Wartung');
 define('_MI_WGTEAMS_ABOUT', 'Über');
 // ---------------- Admin Nav ----------------
 define('_MI_WGTEAMS_ADMIN_PAGER', 'Admin Listenzeilen');

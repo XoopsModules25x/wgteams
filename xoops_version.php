@@ -32,9 +32,9 @@ $moduleDirNameUpper = mb_strtoupper($moduleDirName);
 
 // ------------------- Informations ------------------- //
 $modversion = [
-    'version'             => '1.09',
-    'module_status'       => 'RC4',
-    'release'             => '2019/12/23',
+    'version'             => '1.10',
+    'module_status'       => 'RC1',
+    'release'             => '2020/02/09',
     'name'                => _MI_WGTEAMS_NAME,
     'description'         => _MI_WGTEAMS_DESC,
     'author'              => 'Goffy - Wedega.com',
@@ -47,7 +47,7 @@ $modversion = [
     'help'                => 'page=help',
     'release_info' 		  => 'release_info',
     'release_file'        => XOOPS_URL . '/modules/wgteams/docs/release_info file',
-    'release_date'        => '2019/12/23',
+    'release_date'        => '2019/02/09',
     'manual'              => 'link to manual file',
     'manual_file'         => XOOPS_URL . '/modules/wgteams/docs/install.txt',
     'min_php'             => '7.0',
@@ -92,6 +92,7 @@ $modversion['templates'][] = ['file' => 'wgteams_admin_teams.tpl', 'description'
 $modversion['templates'][] = ['file' => 'wgteams_admin_members.tpl', 'description' => '', 'type' => 'admin'];
 $modversion['templates'][] = ['file' => 'wgteams_admin_relations.tpl', 'description' => '', 'type' => 'admin'];
 $modversion['templates'][] = ['file' => 'wgteams_admin_infofields.tpl', 'description' => '', 'type' => 'admin'];
+$modversion['templates'][] = ['file' => 'wgteams_admin_maintenance.tpl', 'description' => '', 'type' => 'admin'];
 $modversion['templates'][] = ['file' => 'wgteams_admin_image_editor.tpl', 'description' => '', 'type' => 'admin'];
 $modversion['templates'][] = ['file' => 'wgteams_admin_footer.tpl', 'description' => '', 'type' => 'admin'];
 // User

@@ -32,6 +32,7 @@ define('_MI_WGTEAMS_ADMENU4', 'Members');
 define('_MI_WGTEAMS_ADMENU2', 'Infofields');
 define('_MI_WGTEAMS_ADMENU5', 'Relations');
 define('_MI_WGTEAMS_ADMENU6', 'Feedback');
+define('_MI_WGTEAMS_ADMENU7', 'Maintenance');
 define('_MI_WGTEAMS_ABOUT', 'About');
 // ---------------- Admin Nav ----------------
 define('_MI_WGTEAMS_ADMIN_PAGER', 'Admin pager');
