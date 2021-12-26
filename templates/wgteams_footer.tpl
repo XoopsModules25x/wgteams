@@ -6,10 +6,10 @@
 <{include file="db:system_fbcomments.tpl"}>
 <{/if}>
 <div class="pull-right"><{$copyright}></div>
-<{if $pagenav != ''}>
+<{if $pagenav|default:'' != ''}>
     <div class="pull-right"><{$pagenav}></div>
 <{/if}>
 <br>
-<{if $xoops_isadmin}>
+<{if $xoops_isadmin|default:false}>
    <div class="text-center bold"><a href="<{$xoops_url}>/modules/wgteams/admin/"><{$smarty.const._CO_WGTEAMS_ADMIN}></a></div><br>
 <{/if}>

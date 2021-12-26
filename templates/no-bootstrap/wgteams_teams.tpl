@@ -1,5 +1,5 @@
 <{include file='db:wgteams_header.tpl'}>
-<{if $teams_list > 0}>
+<{if $teams_list|default:0 > 0}>
     <div id="team" class="container-team">
         <{foreach item=teams from=$teams_list}>
             <{foreach item=team from=$teams}>
