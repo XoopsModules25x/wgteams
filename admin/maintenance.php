@@ -183,6 +183,7 @@ function getUnusedImages(&$unused, $directory, $url)
                     case 'blank.gif':
                     case 'blank.png':
                     case 'index.html':
+                    case 'index.php':
                     case 'noimage.png':
                     case 'anonymous.png':
                     case 'anonymous.jpg':

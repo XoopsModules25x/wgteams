@@ -57,8 +57,11 @@ switch ($op) {
                     $team['image'] = false;
                 } else {
                     $image = WGTEAMS_UPLOAD_PATH . '/teams/images/' . $team['image'];
-                    $size = getimagesize($image);
-                    $team['image_resxy'] = $size[0] . ' x ' . $size[1];
+                    $team['image_resxy'] = '0 x 0';
+                    if (file_exists($image)) {
+                        $size = getimagesize($image);
+                        $team['image_resxy'] = $size[0] . ' x ' . $size[1];
+                    }
                 }
                 $crit_rels = new \CriteriaCompo();
                 $crit_rels->add(new \Criteria('rel_team_id', $team['team_id']));

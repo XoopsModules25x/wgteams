@@ -369,8 +369,12 @@ switch ($op) {
             $currImage = 'blank.gif';
         }
         $image_path = $imgPath . $currImage;
-        // get size of current album image
-        list($width, $height, $type, $attr) = getimagesize($image_path);
+        $width = 0;
+        $height= 0;
+        if (file_exists($image_path)) {
+            // get size of current album image
+            list($width, $height, $type, $attr) = getimagesize($image_path);
+        }
         $GLOBALS['xoopsTpl']->assign('image_path', $image_path);
         $GLOBALS['xoopsTpl']->assign('albimage_width', $width);
         $GLOBALS['xoopsTpl']->assign('albimage_height', $height);
@@ -417,8 +421,8 @@ function getFormUploadImage($imageOrigin, $imageId)
     $form->addElement(new \XoopsFormLabel(_AM_WGTEAMS_IMG_EDITOR_UPLOAD, $cond));
       
     $imageTray3      = new \XoopsFormElementTray(_AM_WGTEAMS_IMG_EDITOR_RESIZE, '');
-    $resizeinfo = str_replace('%w', $helper->getConfig('maxwidth_imgeditor'), _AM_WGTEAMS_IMG_EDITOR_RESIZE_DESC);
-    $resizeinfo = str_replace('%h', $helper->getConfig('maxheight_imgeditor'), $resizeinfo);
+    $resizeinfo = str_replace('%w', (string)$helper->getConfig('maxwidth_imgeditor'), _AM_WGTEAMS_IMG_EDITOR_RESIZE_DESC);
+    $resizeinfo = str_replace('%h', (string)$helper->getConfig('maxheight_imgeditor'), $resizeinfo);
     $imageTray3->addElement(new \XoopsFormLabel($resizeinfo, ''));
     $imageTray3->addElement(new \XoopsFormRadioYN('', 'img_resize', 1));
     $form->addElement($imageTray3);
