@@ -69,12 +69,12 @@ if ($helper->getConfig('displaySampleButton')) {
     if (1 == $displaySampleButton) {
         \xoops_loadLanguage('admin/modulesadmin', 'system');
         require \dirname(__DIR__) . '/testdata/index.php';
-        $adminObject->addItemButton(\constant('CO_' . $moduleDirNameUpper . '_' . 'ADD_SAMPLEDATA'), '__DIR__ . /../../testdata/index.php?op=load', 'add');
-        $adminObject->addItemButton(\constant('CO_' . $moduleDirNameUpper . '_' . 'SAVE_SAMPLEDATA'), '__DIR__ . /../../testdata/index.php?op=save', 'add');
+        $adminObject->addItemButton(\constant('CO_' . $moduleDirNameUpper . '_' . 'ADD_SAMPLEDATA'), '__DIR__ . /../../testdata/index.php?op=load');
+        $adminObject->addItemButton(\constant('CO_' . $moduleDirNameUpper . '_' . 'SAVE_SAMPLEDATA'), '__DIR__ . /../../testdata/index.php?op=save');
         //    $adminObject->addItemButton(\constant('CO_' . $moduleDirNameUpper . '_' . 'EXPORT_SCHEMA'), '__DIR__ . /../../testdata/index.php?op=exportschema', 'add');
         $adminObject->addItemButton(\constant('CO_' . $moduleDirNameUpper . '_' . 'HIDE_SAMPLEDATA_BUTTONS'), '?op=hide_buttons', 'delete');
     } else {
-        $adminObject->addItemButton(\constant('CO_' . $moduleDirNameUpper . '_' . 'SHOW_SAMPLEDATA_BUTTONS'), '?op=show_buttons', 'add');
+        $adminObject->addItemButton(\constant('CO_' . $moduleDirNameUpper . '_' . 'SHOW_SAMPLEDATA_BUTTONS'), '?op=show_buttons');
         $displaySampleButton = $config['displaySampleButton'];
     }
     $adminObject->displayButton('left', '');
@@ -99,7 +99,7 @@ function hideButtons($yamlFile)
 {
     $app['displaySampleButton'] = 0;
     Yaml::save($app, $yamlFile);
-    \redirect_header('index.php', 0, '');
+    \redirect_header('index.php', 0);
 }
 
 /**
@@ -109,7 +109,7 @@ function showButtons($yamlFile)
 {
     $app['displaySampleButton'] = 1;
     Yaml::save($app, $yamlFile);
-    \redirect_header('index.php', 0, '');
+    \redirect_header('index.php', 0);
 }
 
 $op = \Xmf\Request::getString('op', 0, 'GET');

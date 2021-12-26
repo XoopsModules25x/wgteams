@@ -30,12 +30,11 @@ use XoopsModules\Wgteams;
 require __DIR__ . '/header.php';
 $GLOBALS['xoopsOption']['template_main'] = 'wgteams_teams.tpl';
 require_once \XOOPS_ROOT_PATH . '/header.php';
-/** @var Wgteams\Helper $helper */
 $helper    = Wgteams\Helper::getInstance();
 $startpage = $helper->getConfig('startpage', 0)[0];
 
-$team_id = Request::getInt('team_id', 0);
-$start   = Request::getInt('start', 0);
+$team_id = Request::getInt('team_id');
+$start   = Request::getInt('start');
 $limit   = Request::getInt('limit', $helper->getConfig('userpager'));
 
 // Define Stylesheet
@@ -86,7 +85,7 @@ $GLOBALS['xoopsTpl']->assign('wgteams_teams_upload_url', \WGTEAMS_UPLOAD_URL . '
 if ($teamsCount > $limit) {
     require_once \XOOPS_ROOT_PATH . '/class/pagenav.php';
     $nav = new \XoopsPageNav($teamsCount, $limit, $start, 'start');
-    $GLOBALS['xoopsTpl']->assign('pagenav', $nav->renderNav(4));
+    $GLOBALS['xoopsTpl']->assign('pagenav', $nav->renderNav());
 }
 // Breadcrumbs
 if (1 == $helper->getConfig('wgteams_showbreadcrumbs')) {

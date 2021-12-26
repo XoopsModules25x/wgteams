@@ -30,16 +30,16 @@ require __DIR__ . '/header.php';
 // It recovered the value of argument op in URL$
 $op = Request::getString('op', 'list');
 // Request infofield_id
-$addField_id = Request::getInt('infofield_id', 0);
+$addField_id = Request::getInt('infofield_id');
 // Switch options
 switch ($op) {
     case 'list':
     default:
-        $start        = Request::getInt('start', 0);
+        $start        = Request::getInt('start');
         $limit        = Request::getInt('limit', $helper->getConfig('adminpager'));
         $templateMain = 'wgteams_admin_infofields.tpl';
         $GLOBALS['xoopsTpl']->assign('navigation', $adminObject->displayNavigation('infofields.php'));
-        $adminObject->addItemButton(_AM_WGTEAMS_INFOFIELD_ADD, 'infofields.php?op=new', 'add');
+        $adminObject->addItemButton(_AM_WGTEAMS_INFOFIELD_ADD, 'infofields.php?op=new');
         $GLOBALS['xoopsTpl']->assign('buttons', $adminObject->displayButton('left', ''));
         $infofieldsCount = $infofieldsHandler->getCountInfofields();
         $infofieldsAll   = $infofieldsHandler->getAllInfofields($start, $limit);
@@ -56,7 +56,7 @@ switch ($op) {
             if ($infofieldsCount > $limit) {
                 require_once \XOOPS_ROOT_PATH . '/class/pagenav.php';
                 $pagenav = new \XoopsPageNav($infofieldsCount, $limit, $start, 'start', 'op=list&limit=' . $limit);
-                $GLOBALS['xoopsTpl']->assign('pagenav', $pagenav->renderNav(4));
+                $GLOBALS['xoopsTpl']->assign('pagenav', $pagenav->renderNav());
             }
         } else {
             $GLOBALS['xoopsTpl']->assign('error', _AM_WGTEAMS_THEREARENT_INFOFIELDS);
@@ -99,7 +99,7 @@ switch ($op) {
         break;
     case 'edit':
         $templateMain = 'wgteams_admin_infofields.tpl';
-        $adminObject->addItemButton(_AM_WGTEAMS_INFOFIELD_ADD, 'infofields.php?op=new', 'add');
+        $adminObject->addItemButton(_AM_WGTEAMS_INFOFIELD_ADD, 'infofields.php?op=new');
         $adminObject->addItemButton(_AM_WGTEAMS_INFOFIELDS_LIST, 'infofields.php', 'list');
         $GLOBALS['xoopsTpl']->assign('navigation', $adminObject->displayNavigation('infofields.php'));
         $GLOBALS['xoopsTpl']->assign('buttons', $adminObject->displayButton('left', ''));

@@ -31,17 +31,17 @@ require __DIR__ . '/header.php';
 // It recovered the value of argument op in URL$
 $op = Request::getString('op', 'list');
 // Request team_id
-$teamId = Request::getInt('team_id', 0);
+$teamId = Request::getInt('team_id');
 // Switch options
 switch ($op) {
     case 'list':
     default:
         $GLOBALS['xoTheme']->addScript(\WGTEAMS_URL . '/assets/js/sortable-teams.js');
-        $start        = Request::getInt('start', 0);
+        $start        = Request::getInt('start');
         $limit        = Request::getInt('limit', $helper->getConfig('adminpager'));
         $templateMain = 'wgteams_admin_teams.tpl';
         $GLOBALS['xoopsTpl']->assign('navigation', $adminObject->displayNavigation('teams.php'));
-        $adminObject->addItemButton(_AM_WGTEAMS_TEAM_ADD, 'teams.php?op=new', 'add');
+        $adminObject->addItemButton(_AM_WGTEAMS_TEAM_ADD, 'teams.php?op=new');
         $GLOBALS['xoopsTpl']->assign('buttons', $adminObject->displayButton('left', ''));
         $teamsCount = $teamsHandler->getCountTeams();
         $teamsAll   = $teamsHandler->getAllTeams($start, $limit);
@@ -72,7 +72,7 @@ switch ($op) {
             if ($teamsCount > $limit) {
                 require_once \XOOPS_ROOT_PATH . '/class/pagenav.php';
                 $pagenav = new \XoopsPageNav($teamsCount, $limit, $start, 'start', 'op=list&limit=' . $limit);
-                $GLOBALS['xoopsTpl']->assign('pagenav', $pagenav->renderNav(4));
+                $GLOBALS['xoopsTpl']->assign('pagenav', $pagenav->renderNav());
             }
         } else {
             $GLOBALS['xoopsTpl']->assign('error', _AM_WGTEAMS_THEREARENT_TEAMS);
@@ -135,7 +135,7 @@ switch ($op) {
                 $savedFilename = $uploader->getSavedFileName();
                 $teamsObj->setVar('team_image', $savedFilename);
                 // resize image
-                $img_resize = Request::getInt('img_resize', 0);
+                $img_resize = Request::getInt('img_resize');
                 if (1 == $img_resize) {
                     $imgHandler                = new Wgteams\Resizer();
                     $maxwidth_imgeditor        = (int)$helper->getConfig('maxwidth_imgeditor');
@@ -186,7 +186,7 @@ switch ($op) {
         break;
     case 'edit':
         $templateMain = 'wgteams_admin_teams.tpl';
-        $adminObject->addItemButton(_AM_WGTEAMS_TEAM_ADD, 'teams.php?op=new', 'add');
+        $adminObject->addItemButton(_AM_WGTEAMS_TEAM_ADD, 'teams.php?op=new');
         $adminObject->addItemButton(_AM_WGTEAMS_TEAMS_LIST, 'teams.php', 'list');
         $GLOBALS['xoopsTpl']->assign('navigation', $adminObject->displayNavigation('teams.php'));
         $GLOBALS['xoopsTpl']->assign('buttons', $adminObject->displayButton('left', ''));

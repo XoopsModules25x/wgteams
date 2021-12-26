@@ -29,18 +29,18 @@ use Xmf\Request;
 require __DIR__ . '/header.php';
 // It recovered the value of argument op in URL$
 $op     = Request::getString('op', 'list');
-$relId  = Request::getInt('rel_id', 0);
-$teamId = Request::getInt('team_id', 0);
+$relId  = Request::getInt('rel_id');
+$teamId = Request::getInt('team_id');
 // Switch options
 switch ($op) {
     case 'list':
     default:
         $GLOBALS['xoTheme']->addScript(\WGTEAMS_URL . '/assets/js/sortable-relations.js');
-        $start        = Request::getInt('start', 0);
+        $start        = Request::getInt('start');
         $limit        = Request::getInt('limit', $helper->getConfig('adminpager'));
         $templateMain = 'wgteams_admin_relations.tpl';
         $GLOBALS['xoopsTpl']->assign('navigation', $adminObject->displayNavigation('relations.php'));
-        $adminObject->addItemButton(_AM_WGTEAMS_RELATION_ADD, 'relations.php?op=new&amp;team_id=' . $teamId, 'add');
+        $adminObject->addItemButton(_AM_WGTEAMS_RELATION_ADD, 'relations.php?op=new&amp;team_id=' . $teamId);
         $GLOBALS['xoopsTpl']->assign('buttons', $adminObject->displayButton('left', ''));
         
         $form = getFormFilterTeam($teamId, $start, $limit);
@@ -77,7 +77,7 @@ switch ($op) {
             if ($relationsCount > $limit) {
                 require_once \XOOPS_ROOT_PATH . '/class/pagenav.php';
                 $pagenav = new \XoopsPageNav($relationsCount, $limit, $start, 'start', 'op=list&amp;limit=' . $limit . '&amp;team_id=' . $teamId);
-                $GLOBALS['xoopsTpl']->assign('pagenav', $pagenav->renderNav(4));
+                $GLOBALS['xoopsTpl']->assign('pagenav', $pagenav->renderNav());
             }
         } else {
             if (0 == $teamId) {
@@ -149,7 +149,7 @@ switch ($op) {
         break;
     case 'edit':
         $templateMain = 'wgteams_admin_relations.tpl';
-        $adminObject->addItemButton(_AM_WGTEAMS_RELATION_ADD, 'relations.php?op=new', 'add');
+        $adminObject->addItemButton(_AM_WGTEAMS_RELATION_ADD, 'relations.php?op=new');
         $adminObject->addItemButton(_AM_WGTEAMS_RELATIONS_LIST, 'relations.php', 'list');
         $GLOBALS['xoopsTpl']->assign('navigation', $adminObject->displayNavigation('relations.php'));
         $GLOBALS['xoopsTpl']->assign('buttons', $adminObject->displayButton('left', ''));

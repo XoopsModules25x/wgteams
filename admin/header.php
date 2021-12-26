@@ -35,7 +35,6 @@ $pathModuleAdmin = $GLOBALS['xoopsModule']->getInfo('dirmoduleadmin');
 $pathModIcon16   = $GLOBALS['xoopsModule']->getInfo('modicons16');
 $pathModIcon32   = $GLOBALS['xoopsModule']->getInfo('modicons32');
 // Get instance of module
-/** @var Wgteams\Helper $helper */
 $helper            = Wgteams\Helper::getInstance();
 $db                = \XoopsDatabaseFactory::getDatabaseConnection();
 $teamsHandler      = new Wgteams\TeamsHandler($db); //$helper->getHandler('Teams');

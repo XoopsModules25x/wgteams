@@ -164,14 +164,14 @@ function returnCleanBytes($val)
 
 /**
  * get unused images of given directory
- * @param array  $unused
+ * @param array $unused
  * @param string $directory
+ * @param $url
  * @return bool
  */
 function getUnusedImages(&$unused, $directory, $url)
 {
     // Get instance of module
-    /** @var \XoopsModules\Wgteams\Helper $helper */
     $helper        = \XoopsModules\Wgteams\Helper::getInstance();
     $membersHandler = $helper->getHandler('Members');
     $teamsHandler = $helper->getHandler('Teams');

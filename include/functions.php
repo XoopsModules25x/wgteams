@@ -42,7 +42,7 @@ function wgteams_CleanVars(&$global, $key, $default = '', $type = 'int')
 {
     switch ($type) {
         case 'string':
-            $ret = isset($global[$key]) ? filter_var($global[$key], FILTER_SANITIZE_MAGIC_QUOTES) : $default;
+            $ret = isset($global[$key]) ? filter_var($global[$key], FILTER_SANITIZE_ADD_SLASHES ) : $default;
             break;
         case 'int':
         default:
@@ -98,7 +98,6 @@ function wgteamsGetTeamDetails(&$teamsAll, $lengthName = 0, $show_descr = true, 
     // Get All Teams
 //    global $xoopsTpl, $xoTheme;
 
-    /** @var Wgteams\Helper $helper */
     $helper       = Wgteams\Helper::getInstance();
 //    $teamsHandler = $helper->getHandler('Teams');
 
@@ -107,7 +106,7 @@ function wgteamsGetTeamDetails(&$teamsAll, $lengthName = 0, $show_descr = true, 
     $team_image_url = \WGTEAMS_UPLOAD_URL . '/teams/images/';
     $teams_list = [];
     
-    $show_teamname = (1 == $helper->getConfig('wgteams_showteamname')) ? true : false;
+    $show_teamname = 1 == $helper->getConfig('wgteams_showteamname');
 
     foreach (\array_keys($teamsAll) as $i) {
         $team_id    = $teamsAll[$i]->getVar('team_id');
@@ -154,7 +153,6 @@ function wgteamsGetTeamMemberDetails(&$teamsAll)
 {
     // Get All Teams
 //    global $xoopsTpl, $xoTheme;
-    /** @var Wgteams\Helper $helper */
     $helper            = Wgteams\Helper::getInstance();
     $db                = \XoopsDatabaseFactory::getDatabaseConnection();
 //    $teamsHandler      = new Wgteams\TeamsHandler($db);
@@ -167,9 +165,9 @@ function wgteamsGetTeamMemberDetails(&$teamsAll)
     $team_image_url   = \WGTEAMS_UPLOAD_URL . '/teams/images/';
     $member_image_url = \WGTEAMS_UPLOAD_URL . '/members/images/';
     
-    $member_labels     = (1 == $helper->getConfig('wgteams_labels_member')) ? true : false;
-    $infofield_labels  = (1 == $helper->getConfig('wgteams_labels_infofields')) ? true : false;
-    $show_teamname     = (1 == $helper->getConfig('wgteams_showteamname')) ? true : false;
+    $member_labels     = (1 == (int)$helper->getConfig('wgteams_labels_member'));
+    $infofield_labels  = (1 == (int)$helper->getConfig('wgteams_labels_infofields'));
+    $show_teamname     = (1 == (int)$helper->getConfig('wgteams_showteamname'));
 
     $teams_list = [];
 

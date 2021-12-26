@@ -46,7 +46,6 @@ function b_wgteams_teamsmembers_show($options)
     \array_shift($options);
     \array_shift($options);
 
-    /** @var Wgteams\Helper $helper */
     $helper       = Wgteams\Helper::getInstance();
     $teamsHandler = $helper->getHandler('Teams');
 
@@ -73,7 +72,6 @@ function b_wgteams_teamsmembers_show($options)
  */
 function b_wgteams_teamsmembers_edit($options)
 {
-    /** @var Wgteams\Helper $helper */
     $helper       = Wgteams\Helper::getInstance();
     $teamsHandler = $helper->getHandler('Teams');
     $GLOBALS['xoopsTpl']->assign('wgteams_upload_url', \WGTEAMS_UPLOAD_URL);

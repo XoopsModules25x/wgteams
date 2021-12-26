@@ -33,25 +33,24 @@ $GLOBALS['xoopsOption']['template_main'] = 'wgteams_admin_image_editor.tpl';
 
 require_once \XOOPS_ROOT_PATH . '/header.php';
 
-/** @var \XoopsModules\Wgteams\Utility $utility */
 $utility = new \XoopsModules\Wgteams\Utility();
 
 $op         = Request::getString('op', 'list');
-$memberId   = Request::getInt('member_id', 0);
+$memberId   = Request::getInt('member_id');
 $origin     = Request::getString('imageOrigin');
-$teamId     = Request::getInt('team_id', 0);
-$start      = Request::getInt('start', 0);
+$teamId     = Request::getInt('team_id');
+$start      = Request::getInt('start');
 $limit      = Request::getInt('limit', $helper->getConfig('adminpager'));
-$img_resize = Request::getInt('img_resize', 0);
+$img_resize = Request::getInt('img_resize');
 
 // get all objects/classes/vars needed for image editor
 $imageClass = 0;
 $imgCurrent = [];
 if ('member_id' === $origin) {
-    $memberId = Request::getInt('imageIdCrop', 0);
+    $memberId = Request::getInt('imageIdCrop');
 }
 if ('team_id' === $origin) {
-    $teamId = Request::getInt('imageIdCrop', 0);
+    $teamId = Request::getInt('imageIdCrop');
 }
 if ( 0 < $memberId ) {
     $imageClass   = Constants::IMAGECLASS_MEMBER;
@@ -157,13 +156,13 @@ switch ($op) {
     case 'creategrid':
         // create an image grid based on given sources
         $type   = Request::getInt('type', 4);
-        $src[1] = Request::getString('src1', '');
-        $src[2] = Request::getString('src2', '');
-        $src[3] = Request::getString('src3', '');
-        $src[4] = Request::getString('src4', '');
-        $src[5] = Request::getString('src5', '');
-        $src[6] = Request::getString('src6', '');
-        $target = Request::getString('target', '');
+        $src[1] = Request::getString('src1');
+        $src[2] = Request::getString('src2');
+        $src[3] = Request::getString('src3');
+        $src[4] = Request::getString('src4');
+        $src[5] = Request::getString('src5');
+        $src[6] = Request::getString('src6');
+        $target = Request::getString('target');
         // replace thumbs dir by dir for medium images, only for wggallery
         // $src[1] = \str_replace('/thumbs/', '/medium/', $src[1]);
         // $src[2] = \str_replace('/thumbs/', '/medium/', $src[2]);
@@ -239,7 +238,7 @@ switch ($op) {
 
     case 'cropimage':
         // save base64_image and resize to maxwidth/maxheight
-        $base64_image_content = Request::getString('croppedImage', '');
+        $base64_image_content = Request::getString('croppedImage');
         if (\preg_match('/^(data:\s*image\/(\w+);base64,)/', $base64_image_content, $result)) {
             $type = $result[2];
             \file_put_contents($imgTemp, base64_decode(\str_replace($result[1], '', $base64_image_content), true));

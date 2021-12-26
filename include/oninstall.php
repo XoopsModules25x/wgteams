@@ -58,7 +58,6 @@ function xoops_module_install_wgteams(\XoopsModule $module)
 
 //    $moduleDirName = \basename(\dirname(__DIR__));
 
-    /** @var Wgteams\Helper $helper */
     $helper       = Wgteams\Helper::getInstance();
     $utility      = new Wgteams\Utility();
     $configurator = new Wgteams\Common\Configurator();

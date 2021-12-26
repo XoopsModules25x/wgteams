@@ -93,7 +93,7 @@ class TeamsHandler extends \XoopsPersistableObjectHandler
     /**
      * get IDs of objects matching a condition
      *
-     * @param  \CriteriaElement $criteria {@link CriteriaElement} to match
+     * @param \CriteriaElement|null $criteria {@link CriteriaElement} to match
      * @return array  of object IDs
      */
     public function &getIds(\CriteriaElement $criteria = null)

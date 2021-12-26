@@ -37,10 +37,8 @@ function xoops_module_uninstall_wgteams(\XoopsModule $module)
 
     $moduleDirName      = \basename(\dirname(__DIR__));
     $moduleDirNameUpper = \mb_strtoupper($moduleDirName);
-    /** @var Wgteams\Helper $helper */
     $helper = Wgteams\Helper::getInstance();
 
-    /** @var Wgteams\Utility $utility */
     $utility = new Wgteams\Utility();
 
     $success = true;

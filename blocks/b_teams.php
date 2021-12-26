@@ -59,7 +59,6 @@ function b_wgteams_teams_show($options)
     
     $arrTeams    = $options;
 
-    /** @var Wgteams\Helper $helper */
     $helper       = Wgteams\Helper::getInstance();
     $teamsHandler = $helper->getHandler('Teams');
    
@@ -134,10 +133,10 @@ function b_wgteams_teams_edit($options)
     \array_shift($options);
 
     $form .= _MB_WGTEAMS_TEAMS_TO_DISPLAY . ": <select name='options[]' multiple='multiple' size='5'>";
-    $form .= "<option value='0' " . (\in_array(0, $options, false) ? "selected='selected'" : '') . '>' . _MB_WGTEAMS_ALL_TEAMS . '</option>';
+    $form .= "<option value='0' " . (\in_array(0, $options) ? "selected='selected'" : '') . '>' . _MB_WGTEAMS_ALL_TEAMS . '</option>';
     foreach (\array_keys($teamsAll) as $i) {
         $team_id = $teamsAll[$i]->getVar('team_id');
-        $form   .= "<option value='" . $team_id . "' " . (\in_array($team_id, $options, false) && false === \in_array(0, $options, false) ? "selected='selected'" : '') . '>' . $teamsAll[$i]->getVar('team_name') . '</option>';
+        $form   .= "<option value='" . $team_id . "' " . (\in_array($team_id, $options) && false === \in_array(0, $options) ? "selected='selected'" : '') . '>' . $teamsAll[$i]->getVar('team_name') . '</option>';
     }
     $form .= '</select>';
 

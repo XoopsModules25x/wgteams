@@ -132,7 +132,6 @@ if (\is_object($xoopsModule) && $xoopsModule->getVar('dirname') == $moduleDirNam
 
     $s = 0;
 
-    /** @var Wgteams\Helper $helper */
     $helper = Wgteams\Helper::getInstance();
     //    $teamsHandler =  $helper->getHandler('TeamsHandler');
     $db           = \XoopsDatabaseFactory::getDatabaseConnection();
