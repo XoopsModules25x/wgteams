@@ -67,14 +67,14 @@
 </table>
 
 <{if $show_result|default:false}>
-	<p><a class='btn maintenance-btn pull-right' href='maintenance.php?op=list' title='<{$smarty.const._BACK}>'><{$smarty.const._BACK}></a></p>
+    <p><a class='btn maintenance-btn pull-right' href='maintenance.php?op=list' title='<{$smarty.const._BACK}>'><{$smarty.const._BACK}></a></p>
 <{/if}>
 
 <{if $form|default:false}>
-	<{$form}>
+    <{$form}>
 <{/if}>
 <{if $error|default:false}>
-	<div class='errorMsg'><strong><{$error}></strong></div>
+    <div class='errorMsg'><strong><{$error}></strong></div>
 <{/if}>
 <br>
 <!-- Footer --><{include file='db:wgteams_admin_footer.tpl'}>

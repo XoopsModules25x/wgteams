@@ -87,7 +87,7 @@ class Relations extends \XoopsObject
     public function getFormRelations($action = false)
     {
         global $xoopsUser;
-		
+        
         if (false === $action) {
             $action = $_SERVER['REQUEST_URI'];
         }
@@ -96,11 +96,11 @@ class Relations extends \XoopsObject
         $infofieldsHandler = $this->helper->getHandler('Infofields');
         $teamsHandler      = $this->helper->getHandler('Teams');
         $membersHandler    = $this->helper->getHandler('Members');
-		
-		// $db           = \XoopsDatabaseFactory::getDatabaseConnection();
-		// $infofieldsHandler = new Wgteams\InfofieldsHandler($db);
-		// $teamsHandler = new Wgteams\TeamsHandler($db);
-		// $membersHandler    = new Wgteams\MembersHandler($db);
+        
+        // $db           = \XoopsDatabaseFactory::getDatabaseConnection();
+        // $infofieldsHandler = new Wgteams\InfofieldsHandler($db);
+        // $teamsHandler = new Wgteams\TeamsHandler($db);
+        // $membersHandler    = new Wgteams\MembersHandler($db);
 
         if (0 == $infofieldsHandler->getCountInfofields()) {
             \redirect_header('infofields.php', 3, _AM_WGTEAMS_THEREARENT_INFOFIELDS);

@@ -48,7 +48,7 @@ $modversion = [
     'license'             => 'GPL 2.0 or later',
     'license_url'         => 'www.gnu.org/licenses/gpl-2.0.html/',
     'help'                => 'page=help',
-    'release_info' 		  => 'release_info',
+    'release_info'           => 'release_info',
     'release_file'        => \XOOPS_URL . '/modules/wgteams/docs/release_info file',
     'release_date'        => '2022/12/26',
     'manual'              => 'link to manual file',
@@ -84,7 +84,7 @@ $modversion = [
     // Install/Update
     'onInstall'           => 'include/oninstall.php',
     'onUpdate'            => 'include/onupdate.php',
-	'onUninstall'         => 'include/onuninstall.php',
+    'onUninstall'         => 'include/onuninstall.php',
 ];
 // ------------------- Templates ------------------- //
 // Admin

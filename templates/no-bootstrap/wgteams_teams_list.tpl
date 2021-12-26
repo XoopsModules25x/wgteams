@@ -4,11 +4,11 @@
             <td class="team-img" rowspan="2"><img class="" src="<{$wgteams_teams_upload_url}><{$team.team_image}>" alt="<{$team.team_name}>" title="<{$team.team_name}>"></td>
         </tr>
     <{/if}>
-	<{if $team.show_teamname|default:false}>
-		<tr class="">
-			<td class="team-heading center"><h3 class="team-title center"><{$team.team_name}></h3></td>
-		</tr>
-	<{/if}>
+    <{if $team.show_teamname|default:false}>
+        <tr class="">
+            <td class="team-heading center"><h3 class="team-title center"><{$team.team_name}></h3></td>
+        </tr>
+    <{/if}>
     <{if $team.team_descr|default:false}>
         <tr class="">
             <td class="team-descr"><p><{$team.team_descr}></p></td>

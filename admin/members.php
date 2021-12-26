@@ -104,15 +104,15 @@ switch ($op) {
         $membersObj->setVar('member_email', $_POST['member_email']);
         // Set Var member_image
         require_once \XOOPS_ROOT_PATH . '/class/uploader.php';
-		$fileName       = $_FILES['attachedfile']['name'];
+        $fileName       = $_FILES['attachedfile']['name'];
         $imageMimetype  = $_FILES['attachedfile']['type'];
         $uploaderErrors = '';
         $maxwidth  = $helper->getConfig('maxwidth');
         $maxheight = $helper->getConfig('maxheight');
         $uploader = new \XoopsMediaUploader(\WGTEAMS_UPLOAD_PATH . '/members/images', $helper->getConfig('wgteams_img_mimetypes'), $helper->getConfig('wgteams_img_maxsize'), $maxwidth, $maxheight);
-		if ($uploader->fetchMedia($_POST['xoops_upload_file'][0])) {
+        if ($uploader->fetchMedia($_POST['xoops_upload_file'][0])) {
             $extension = \preg_replace('/^.+\.([^.]+)$/sU', '', $fileName);
-			$imgName   = mb_substr(\str_replace(' ', '', $_POST['member_lastname'] . $_POST['member_firstname']), 0, 20) . '_' . $extension;
+            $imgName   = mb_substr(\str_replace(' ', '', $_POST['member_lastname'] . $_POST['member_firstname']), 0, 20) . '_' . $extension;
             $uploader->setPrefix($imgName);
             $uploader->fetchMedia($_POST['xoops_upload_file'][0]);
             if (!$uploader->upload()) {
@@ -141,7 +141,7 @@ switch ($op) {
             }
             $membersObj->setVar('member_image', Request::getString('member_image'));
         }
-		
+        
         // Set Var member_submitter
         $membersObj->setVar('member_submitter', $_POST['member_submitter']);
         // Set Var member_date_create
@@ -149,10 +149,10 @@ switch ($op) {
         // Insert Data
         if ($membersHandler->insert($membersObj)) {
             if ('' !== $uploaderErrors) {
-				\redirect_header('members.php?op=edit&member_id=' . $memberId, 4, $uploaderErrors);
-			} else {
-				\redirect_header('members.php?op=list', 2, _AM_WGTEAMS_FORM_OK);
-			}
+                \redirect_header('members.php?op=edit&member_id=' . $memberId, 4, $uploaderErrors);
+            } else {
+                \redirect_header('members.php?op=list', 2, _AM_WGTEAMS_FORM_OK);
+            }
         }
         // Get Form
         $GLOBALS['xoopsTpl']->assign('error', $membersObj->getHtmlErrors());

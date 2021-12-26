@@ -67,7 +67,7 @@ function xoops_module_install_wgteams(\XoopsModule $module)
     $helper->loadLanguage('modinfo');
 
     /* 
-	// default Permission Settings ----------------------
+    // default Permission Settings ----------------------
     global $xoopsModule;
     $moduleId         = $xoopsModule->getVar('mid');
     // $moduleId2        = $helper->getModule()->mid();
@@ -78,7 +78,7 @@ function xoops_module_install_wgteams(\XoopsModule $module)
     $grouppermHandler->addRight($moduleDirName . '_view', 1, \XOOPS_GROUP_ADMIN, $moduleId);
     $grouppermHandler->addRight($moduleDirName . '_view', 1, \XOOPS_GROUP_USERS, $moduleId);
     $grouppermHandler->addRight($moduleDirName . '_view', 1, \XOOPS_GROUP_ANONYMOUS, $moduleId); 
-	*/
+    */
 
     //  ---  CREATE FOLDERS ---------------
     if (\count($configurator->uploadFolders) > 0) {

@@ -54,13 +54,13 @@ if ('team_id' === $origin) {
     $teamId = Request::getInt('imageIdCrop', 0);
 }
 if ( 0 < $memberId ) {
-	$imageClass   = Constants::IMAGECLASS_MEMBER;
+    $imageClass   = Constants::IMAGECLASS_MEMBER;
 } else {
-	if ($teamId > 0) {
-		$imageClass   = Constants::IMAGECLASS_TEAM;
-	} else {
-		\redirect_header('index.php', 3, _AM_WGTEAMS_FORM_ERROR_INVALID_ID);
-	}
+    if ($teamId > 0) {
+        $imageClass   = Constants::IMAGECLASS_TEAM;
+    } else {
+        \redirect_header('index.php', 3, _AM_WGTEAMS_FORM_ERROR_INVALID_ID);
+    }
 }
 
 if ($imageClass === Constants::IMAGECLASS_MEMBER) {
@@ -262,10 +262,10 @@ switch ($op) {
         // remove '_image' from id
         $image_id = \substr($image_id, 0, -6);
         $imageObj->setVar($fieldObj, $image_id);
-		$imageObj->setVar($submObj, $uid);
+        $imageObj->setVar($submObj, $uid);
         // Insert Data
         if ($imageHandler->insert($imageObj)) {  
-			\redirect_header($redir, 2, _AM_WGTEAMS_FORM_OK);
+            \redirect_header($redir, 2, _AM_WGTEAMS_FORM_OK);
         }
         $GLOBALS['xoopsTpl']->assign('error', $imageObj->getHtmlErrors());
         break;
@@ -276,10 +276,10 @@ switch ($op) {
         $ret = \rename($imgTempGrid, $imgFinal);
         // Set Vars
         $imageObj->setVar($fieldObj, $imgName);
-		$imageObj->setVar($submObj, $uid);
+        $imageObj->setVar($submObj, $uid);
         // Insert Data
         if ($imageHandler->insert($imageObj)) {
-			\redirect_header($redir, 2, _AM_WGTEAMS_FORM_OK);
+            \redirect_header($redir, 2, _AM_WGTEAMS_FORM_OK);
         }
         $GLOBALS['xoopsTpl']->assign('error', $imageObj->getHtmlErrors());
 
@@ -362,7 +362,7 @@ switch ($op) {
         $GLOBALS['xoTheme']->addScript(\WGTEAMS_URL . '/assets/js/cropper-main.js');
 
         $GLOBALS['xoopsTpl']->assign('nbModals', [1, 2, 3, 4, 5, 6]);
-		
+        
         // get form for upload album image
         $currImage   = $imageObj->getVar($fieldObj);
         if ('' == $currImage) {

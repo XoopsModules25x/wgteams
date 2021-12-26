@@ -1,25 +1,25 @@
 <{include file='db:wgteams_header.tpl'}>
 
-	<div id='imghandler' class='col-xs-12 col-sm-12'>
-		<ul class='nav nav-tabs'>
-			<li class='active'><a id='navtab_main' href='#1' data-toggle='tab'><{$smarty.const._AM_WGTEAMS_IMG_EDITOR_CURRENT}></a></li>
-			<li><a id='navtab_exist' href='#2' data-toggle='tab'><{$smarty.const._AM_WGTEAMS_IMG_EDITOR_USE_EXISTING}></a></li>
-			<li><a id='navtab_grid' href='#3' data-toggle='tab'><{$smarty.const._AM_WGTEAMS_IMG_EDITOR_GRID}></a></li>
-			<li><a id='navtab_crop' href='#4' data-toggle='tab'><{$smarty.const._AM_WGTEAMS_IMG_EDITOR_CROP}></a></li>
+    <div id='imghandler' class='col-xs-12 col-sm-12'>
+        <ul class='nav nav-tabs'>
+            <li class='active'><a id='navtab_main' href='#1' data-toggle='tab'><{$smarty.const._AM_WGTEAMS_IMG_EDITOR_CURRENT}></a></li>
+            <li><a id='navtab_exist' href='#2' data-toggle='tab'><{$smarty.const._AM_WGTEAMS_IMG_EDITOR_USE_EXISTING}></a></li>
+            <li><a id='navtab_grid' href='#3' data-toggle='tab'><{$smarty.const._AM_WGTEAMS_IMG_EDITOR_GRID}></a></li>
+            <li><a id='navtab_crop' href='#4' data-toggle='tab'><{$smarty.const._AM_WGTEAMS_IMG_EDITOR_CROP}></a></li>
             <li><a id='navtab_upload' href='#5' data-toggle='tab'><{$smarty.const._AM_WGTEAMS_FORM_UPLOAD_IMG}></a></li>
-		</ul>
+        </ul>
 
-		<div class='tab-content '>
-			<!-- *************** Basic Tab ***************-->
+        <div class='tab-content '>
+            <!-- *************** Basic Tab ***************-->
             <div class='tab-pane active center' id='1'>
-				<img id='currentImg' class='img-responsive imageeditor-img center' src='<{$imgCurrent.src|default:''}>' alt='<{$imgCurrent.img_name|default:''}>'>
+                <img id='currentImg' class='img-responsive imageeditor-img center' src='<{$imgCurrent.src|default:''}>' alt='<{$imgCurrent.img_name|default:''}>'>
                 <p><{$smarty.const._AM_WGTEAMS_IMG_EDITOR_CURRENT2}>: <{$image_path|default:''}><br>
                 <{$smarty.const._AM_WGTEAMS_IMG_EDITOR_RESXY}>: <{$albimage_width|default:''}> / <{$albimage_height|default:''}></p>
                 <input type='button' class='btn <{$btn_style|default:''}>' value='<{$smarty.const._CANCEL}>' onclick='history.go(-1);return true;'>
-			</div>
+            </div>
             
             <!-- *************** Tab for select image of albums ***************-->
-			<div class='tab-pane' id='2'>
+            <div class='tab-pane' id='2'>
                 <div class='col-xs-12 col-sm-6'>
                     <{foreach item=image from=$images name=fe_image}>
                         <{if $image.group|default:false}><h4 class='modal-title'><{$image.group}></h4><{/if}>
@@ -30,66 +30,66 @@
                             <div class='clear'></div>
                         <{/if}>
                     <{/foreach}>
-					
+                    
                 </div>
                 <div class='col-xs-12 col-sm-6'>
                     <h5>&nbsp;</h5>
                     <img id='ImageSelected' class='img-responsive imageeditor-img' src='<{$imgCurrent.src|default:''}>' alt='<{$imgCurrent.img_name|default:''}>'>
                 </div>
                 <div class='col-xs-12 col-sm-12 center'>
-					<form class='form-horizontal' name='form' id='form_selectimage' action='image_editor.php' method='post' enctype='multipart/form-data'>
-						<input type='hidden' name='<{$imageOrigin|default:''}>' id='<{$imageOrigin|default:''}>' value='<{$imageId|default:0}>'>	
+                    <form class='form-horizontal' name='form' id='form_selectimage' action='image_editor.php' method='post' enctype='multipart/form-data'>
+                        <input type='hidden' name='<{$imageOrigin|default:''}>' id='<{$imageOrigin|default:''}>' value='<{$imageId|default:0}>'>    
                         <input type='hidden' name='image_id' id='image_id' value='<{$imgCurrent.img_name|default:''}>'>
-						<input type='hidden' name='op' id='op' value='saveImageSelected'>
-						<input type="submit" class="btn <{$btn_style|default:''}> disabled" name="btnApplySelected" id="btnApplySelected" value="<{$smarty.const._AM_WGTEAMS_IMG_EDITOR_APPLY}>">
-						<input type='button' class='btn <{$btn_style|default:''}>' value='<{$smarty.const._CANCEL}>' onclick='history.go(-1);return true;'>
-					</form>
+                        <input type='hidden' name='op' id='op' value='saveImageSelected'>
+                        <input type="submit" class="btn <{$btn_style|default:''}> disabled" name="btnApplySelected" id="btnApplySelected" value="<{$smarty.const._AM_WGTEAMS_IMG_EDITOR_APPLY}>">
+                        <input type='button' class='btn <{$btn_style|default:''}>' value='<{$smarty.const._CANCEL}>' onclick='history.go(-1);return true;'>
+                    </form>
                 </div>
-			</div>
+            </div>
             
             <!-- *************** Tab for image grid ***************-->
-			<div class='tab-pane' id='3'>
-				<div class='col-xs-12 col-sm-12'>
-					<label class='radio-inline'><input type='radio' name='gridtype' id='alb_imgcat1' title='<{$smarty.const._AM_WGTEAMS_IMG_EDITOR_GRID4}>' value='1' checked onchange='changeGridSetting(this)'><{$smarty.const._AM_WGTEAMS_IMG_EDITOR_GRID4}>&nbsp;</label>
-					<label class='radio-inline'><input type='radio' name='gridtype' id='alb_imgcat2' title='<{$smarty.const._AM_WGTEAMS_IMG_EDITOR_GRID6}>' value='2' onchange='changeGridSetting(this)'><{$smarty.const._AM_WGTEAMS_IMG_EDITOR_GRID6}>&nbsp;</label>
-				</div>
-				<div class='col-xs-12 col-sm-4'>
-					<button id='btnGridAdd1' type='button' class='btn <{$btn_style|default:''}>' style='display:inline;margin:5px' data-toggle='modal' data-target='#myModalImagePicker1'><{$smarty.const._AM_WGTEAMS_IMG_EDITOR_GRID_SRC1}></button>
-					<img src='<{$wgteams_upload_image_url}>blank.gif' name='imageGrid1' id='imageGrid1' alt='imageGrid1' style='margin:5px;max-width:75px'>
-					<br>
-					<button id='btnGridAdd2' type='button' class='btn <{$btn_style|default:''}>' style='display:inline;margin:5px' data-toggle='modal' data-target='#myModalImagePicker2'><{$smarty.const._AM_WGTEAMS_IMG_EDITOR_GRID_SRC2}></button>
-					<img src='<{$wgteams_upload_image_url}>blank.gif' name='imageGrid2' id='imageGrid2' alt='imageGrid2' style='margin:5px;max-width:75px'>
-					<br>
-					<button id='btnGridAdd3' type='button' class='btn <{$btn_style|default:''}>' style='display:inline;margin:5px' data-toggle='modal' data-target='#myModalImagePicker3'><{$smarty.const._AM_WGTEAMS_IMG_EDITOR_GRID_SRC3}></button>
-					<img src='<{$wgteams_upload_image_url}>blank.gif' name='imageGrid3' id='imageGrid3' alt='imageGrid3' style='margin:5px;max-width:75px'>
-					<br>
-					<button id='btnGridAdd4' type='button' class='btn <{$btn_style|default:''}>' style='display:inline;margin:5px' data-toggle='modal' data-target='#myModalImagePicker4'><{$smarty.const._AM_WGTEAMS_IMG_EDITOR_GRID_SRC4}></button>
-					<img src='<{$wgteams_upload_image_url}>blank.gif' name='imageGrid4' id='imageGrid4' alt='imageGrid4' style='margin:5px;max-width:75px'>
-					<br>
-					<button id='btnGridAdd5' type='button' class='btn <{$btn_style|default:''}>' style='display:inline;margin:5px' data-toggle='modal' data-target='#myModalImagePicker5' disabled='disabled'><{$smarty.const._AM_WGTEAMS_IMG_EDITOR_GRID_SRC5}></button>
-					<img src='<{$wgteams_upload_image_url}>blank.gif' name='imageGrid5' id='imageGrid5' alt='imageGrid5' style='margin:5px;max-width:75px'>
-					<br>
-					<button id='btnGridAdd6' type='button' class='btn <{$btn_style|default:''}>' style='display:inline;margin:5px' data-toggle='modal' data-target='#myModalImagePicker6' disabled='disabled'><{$smarty.const._AM_WGTEAMS_IMG_EDITOR_GRID_SRC6}></button>
-					<img src='<{$wgteams_upload_image_url}>blank.gif' name='imageGrid6' id='imageGrid6' alt='imageGrid6' style='margin:5px;max-width:75px'>
-				</div>
+            <div class='tab-pane' id='3'>
+                <div class='col-xs-12 col-sm-12'>
+                    <label class='radio-inline'><input type='radio' name='gridtype' id='alb_imgcat1' title='<{$smarty.const._AM_WGTEAMS_IMG_EDITOR_GRID4}>' value='1' checked onchange='changeGridSetting(this)'><{$smarty.const._AM_WGTEAMS_IMG_EDITOR_GRID4}>&nbsp;</label>
+                    <label class='radio-inline'><input type='radio' name='gridtype' id='alb_imgcat2' title='<{$smarty.const._AM_WGTEAMS_IMG_EDITOR_GRID6}>' value='2' onchange='changeGridSetting(this)'><{$smarty.const._AM_WGTEAMS_IMG_EDITOR_GRID6}>&nbsp;</label>
+                </div>
+                <div class='col-xs-12 col-sm-4'>
+                    <button id='btnGridAdd1' type='button' class='btn <{$btn_style|default:''}>' style='display:inline;margin:5px' data-toggle='modal' data-target='#myModalImagePicker1'><{$smarty.const._AM_WGTEAMS_IMG_EDITOR_GRID_SRC1}></button>
+                    <img src='<{$wgteams_upload_image_url}>blank.gif' name='imageGrid1' id='imageGrid1' alt='imageGrid1' style='margin:5px;max-width:75px'>
+                    <br>
+                    <button id='btnGridAdd2' type='button' class='btn <{$btn_style|default:''}>' style='display:inline;margin:5px' data-toggle='modal' data-target='#myModalImagePicker2'><{$smarty.const._AM_WGTEAMS_IMG_EDITOR_GRID_SRC2}></button>
+                    <img src='<{$wgteams_upload_image_url}>blank.gif' name='imageGrid2' id='imageGrid2' alt='imageGrid2' style='margin:5px;max-width:75px'>
+                    <br>
+                    <button id='btnGridAdd3' type='button' class='btn <{$btn_style|default:''}>' style='display:inline;margin:5px' data-toggle='modal' data-target='#myModalImagePicker3'><{$smarty.const._AM_WGTEAMS_IMG_EDITOR_GRID_SRC3}></button>
+                    <img src='<{$wgteams_upload_image_url}>blank.gif' name='imageGrid3' id='imageGrid3' alt='imageGrid3' style='margin:5px;max-width:75px'>
+                    <br>
+                    <button id='btnGridAdd4' type='button' class='btn <{$btn_style|default:''}>' style='display:inline;margin:5px' data-toggle='modal' data-target='#myModalImagePicker4'><{$smarty.const._AM_WGTEAMS_IMG_EDITOR_GRID_SRC4}></button>
+                    <img src='<{$wgteams_upload_image_url}>blank.gif' name='imageGrid4' id='imageGrid4' alt='imageGrid4' style='margin:5px;max-width:75px'>
+                    <br>
+                    <button id='btnGridAdd5' type='button' class='btn <{$btn_style|default:''}>' style='display:inline;margin:5px' data-toggle='modal' data-target='#myModalImagePicker5' disabled='disabled'><{$smarty.const._AM_WGTEAMS_IMG_EDITOR_GRID_SRC5}></button>
+                    <img src='<{$wgteams_upload_image_url}>blank.gif' name='imageGrid5' id='imageGrid5' alt='imageGrid5' style='margin:5px;max-width:75px'>
+                    <br>
+                    <button id='btnGridAdd6' type='button' class='btn <{$btn_style|default:''}>' style='display:inline;margin:5px' data-toggle='modal' data-target='#myModalImagePicker6' disabled='disabled'><{$smarty.const._AM_WGTEAMS_IMG_EDITOR_GRID_SRC6}></button>
+                    <img src='<{$wgteams_upload_image_url}>blank.gif' name='imageGrid6' id='imageGrid6' alt='imageGrid6' style='margin:5px;max-width:75px'>
+                </div>
                 <div class='col-xs-12 col-sm-8'>
                     <img id='gridImg' class='img-responsive' src='<{$wgteams_upload_image_url}>blank.gif' alt='<{$smarty.const._AM_WGTEAMS_IMG_EDITOR_GRID}>'>
                 </div>
-				<div class='col-xs-12 col-sm-12 center'>
-					<button id='btnCreateGrid4' type='button' class='btn <{$btn_style|default:''}>' style='display:inline;margin:5px'><{$smarty.const._AM_WGTEAMS_IMG_EDITOR_CREATE}></button>
-					<button id='btnCreateGrid6' type='button' class='btn <{$btn_style|default:''}> hidden' style='display:inline;margin:5px'><{$smarty.const._AM_WGTEAMS_IMG_EDITOR_CREATE}></button>
-					<form class='form-horizontal' name='form' id='form_imagegrid' action='image_editor.php' method='post' enctype='multipart/form-data'>
-						<input type='hidden' name='op' value='saveGrid'>
+                <div class='col-xs-12 col-sm-12 center'>
+                    <button id='btnCreateGrid4' type='button' class='btn <{$btn_style|default:''}>' style='display:inline;margin:5px'><{$smarty.const._AM_WGTEAMS_IMG_EDITOR_CREATE}></button>
+                    <button id='btnCreateGrid6' type='button' class='btn <{$btn_style|default:''}> hidden' style='display:inline;margin:5px'><{$smarty.const._AM_WGTEAMS_IMG_EDITOR_CREATE}></button>
+                    <form class='form-horizontal' name='form' id='form_imagegrid' action='image_editor.php' method='post' enctype='multipart/form-data'>
+                        <input type='hidden' name='op' value='saveGrid'>
                         <input type='hidden' name='gridImgFinal' id='gridImgFinal' value=''>
-						<input type='hidden' name='<{$imageOrigin|default:''}>' value='<{$imageId|default:0}>'>
-						<input type="submit" class="btn <{$btn_style|default:''}> disabled" name="btnApplyGrid" id="btnApplyGrid" value="<{$smarty.const._AM_WGTEAMS_IMG_EDITOR_APPLY}>">
-						<input type='button' class='btn <{$btn_style|default:''}>' value='<{$smarty.const._CANCEL}>' onclick='history.go(-1);return true;'>
-					</form>
-				</div>
-			</div>
-			
-			<!-- ***************Tab for crop image ***************-->
-			<div class='tab-pane center' id='4' >
+                        <input type='hidden' name='<{$imageOrigin|default:''}>' value='<{$imageId|default:0}>'>
+                        <input type="submit" class="btn <{$btn_style|default:''}> disabled" name="btnApplyGrid" id="btnApplyGrid" value="<{$smarty.const._AM_WGTEAMS_IMG_EDITOR_APPLY}>">
+                        <input type='button' class='btn <{$btn_style|default:''}>' value='<{$smarty.const._CANCEL}>' onclick='history.go(-1);return true;'>
+                    </form>
+                </div>
+            </div>
+            
+            <!-- ***************Tab for crop image ***************-->
+            <div class='tab-pane center' id='4' >
                 <input type='hidden' id='imageIdCrop' name='imageIdCrop' value='<{$imageId|default:0}>'>
                 <input type='hidden' id='imageOriginCrop' name='$imageOriginCrop' value='<{$imageOrigin|default:''}>'>
                 <!-- Content -->
@@ -101,8 +101,8 @@
                     </div>
                 </div>
                 <div class="row" id="actions">
-					<div class="col-md-12 docs-toggles">
-						<!-- <h3>Toggles:</h3> -->
+                    <div class="col-md-12 docs-toggles">
+                        <!-- <h3>Toggles:</h3> -->
                         <div class="btn-group d-flex flex-nowrap" data-toggle="buttons">
                             <label class="btn imageeditor-btn-crop <{$btn_style|default:''}>">
                                 <input type="radio" class="sr-only" id="aspectRatio1" name="aspectRatio" value="1.7777777777777777">
@@ -133,9 +133,9 @@
                                 <span class="docs-tooltip" data-toggle="tooltip" title="<{$smarty.const._AM_WGTEAMS_IMG_EDITOR_CROP_MOVE}>"><span class="fa fa-arrows"></span></span>
                             </button>
                             <button type="button" class="btn imageeditor-btn-crop <{$btn_style|default:''}>" data-method="setDragMode" data-option="crop" title="<{$smarty.const._AM_WGTEAMS_IMG_EDITOR_CROP}>">
-								<span class="docs-tooltip" data-toggle="tooltip" title="<{$smarty.const._AM_WGTEAMS_IMG_EDITOR_CROP}>"><span class="fa fa-crop"></span>
-								</span>
-							</button>
+                                <span class="docs-tooltip" data-toggle="tooltip" title="<{$smarty.const._AM_WGTEAMS_IMG_EDITOR_CROP}>"><span class="fa fa-crop"></span>
+                                </span>
+                            </button>
                         </div>
 
                         <div class="btn-group">
@@ -200,8 +200,8 @@
                                 <span class="docs-tooltip" data-toggle="tooltip" title="<{$smarty.const._AM_WGTEAMS_IMG_EDITOR_CREATE}>"><{$smarty.const._AM_WGTEAMS_IMG_EDITOR_CREATE}></span>
                             </button>
                             <a class="btn <{$btn_style|default:''}> disabled" id="btnCropApply" href="<{$wgteams_image_editor}>/image_editor.php?op=saveCrop&<{$imageOrigin|default:''}>=<{$imageId|default:0}>&target=<{$croptarget|default:''}>&start=<{$start|default:0}>&limit=<{$limit|default:0}>"> <{$smarty.const._AM_WGTEAMS_IMG_EDITOR_APPLY}></a>
-							<button type="button" class="btn btn-crop <{$btn_style|default:''}>"onclick='history.go(-1);return true;'><{$smarty.const._CANCEL}></button>
-						</div>
+                            <button type="button" class="btn btn-crop <{$btn_style|default:''}>"onclick='history.go(-1);return true;'><{$smarty.const._CANCEL}></button>
+                        </div>
 
                         <!-- Show the cropped image in modal -->
                         <div class="modal fade docs-cropped" id="getCroppedCanvasModal" role="dialog" aria-hidden="true" aria-labelledby="getCroppedCanvasTitle" tabindex="-1">
@@ -224,13 +224,13 @@
                     </div><!-- /.docs-buttons -->
                 </div>
             </div>
-			
+            
             <!-- ***************Tab for upload image ***************-->
-			<div class='tab-pane' id='5'>
-				<{$form_uploadimage}>
-			</div>
-		</div>
-	</div>				
+            <div class='tab-pane' id='5'>
+                <{$form_uploadimage}>
+            </div>
+        </div>
+    </div>                
 
 <div class='clear'>&nbsp;</div>
  
@@ -259,77 +259,77 @@
 <!-- end of modals -->
 
  <script type='application/javascript'>
-	function changeGridSetting(element) {
-		$('#btnGridAdd5').attr('disabled', 'disabled');
-		$('#btnGridAdd6').attr('disabled', 'disabled');
-		$('#btnCreateGrid4').addClass('hidden');
-		$('#btnCreateGrid6').addClass('hidden');
-		
-		if (element.value == 1) {
-			$('#btnCreateGrid4').removeClass('hidden');
-		} else {
-			$('#btnGridAdd5').removeAttr('disabled');
-			$('#btnGridAdd6').removeAttr('disabled');
-			$('#btnCreateGrid6').removeClass('hidden');
-		}
-	}
-	
-	$('#btnCropCreate').click(function () {
+    function changeGridSetting(element) {
+        $('#btnGridAdd5').attr('disabled', 'disabled');
+        $('#btnGridAdd6').attr('disabled', 'disabled');
+        $('#btnCreateGrid4').addClass('hidden');
+        $('#btnCreateGrid6').addClass('hidden');
+        
+        if (element.value == 1) {
+            $('#btnCreateGrid4').removeClass('hidden');
+        } else {
+            $('#btnGridAdd5').removeAttr('disabled');
+            $('#btnGridAdd6').removeAttr('disabled');
+            $('#btnCreateGrid6').removeClass('hidden');
+        }
+    }
+    
+    $('#btnCropCreate').click(function () {
         $('#btnCropApply').removeClass('disabled');
-	})
-	
-	$('#btnCreateGrid4').click(function () {
+    })
+    
+    $('#btnCreateGrid4').click(function () {
         document.getElementById('gridImg').src='<{$wgteams_url}>/assets/images/loading.gif';
-		$.ajax({
+        $.ajax({
             data: 'op=creategrid&type=4&<{$imageOrigin|default:''}>=<{$imageId|default:0}>&src1=' + $('#imageGrid1').attr('src') + '&src2=' + $('#imageGrid2').attr('src') + '&src3=' + $('#imageGrid3').attr('src') + '&src4=' + $('#imageGrid4').attr('src') + '&target=<{$gridtarget}>',
             url: 'image_editor.php',
             method: 'POST',
             success: function() {
                 document.getElementById('gridImg').src='<{$wgteams_upload_url}>/temp/<{$gridtarget}>?' + new Date().getTime();
                 $('#gridImgFinal').val('<{$wgteams_upload_path}>/temp/<{$gridtarget}>');
-				$('#gridImg').addClass('imageeditor-img');
-				$('#btnApplyGrid').removeClass('disabled');
+                $('#gridImg').addClass('imageeditor-img');
+                $('#btnApplyGrid').removeClass('disabled');
             }
         });
-	})
-	$('#btnCreateGrid6').click(function () {
+    })
+    $('#btnCreateGrid6').click(function () {
         document.getElementById('gridImg').src='<{$wgteams_url}>/assets/images/loading.gif';
-		$.ajax({
+        $.ajax({
             data: 'op=creategrid&type=6&<{$imageOrigin|default:''}>=<{$imageId|default:0}>&src1=' + $('#imageGrid1').attr('src') + '&src2=' + $('#imageGrid2').attr('src') + '&src3=' + $('#imageGrid3').attr('src') + '&src4=' + $('#imageGrid4').attr('src') + '&src5=' + $('#imageGrid5').attr('src') + '&src6=' + $('#imageGrid6').attr('src') + '&target=<{$gridtarget}>',
             url: 'image_editor.php',
             method: 'POST',
             success: function() {
                 document.getElementById('gridImg').src='<{$wgteams_upload_url}>/temp/<{$gridtarget}>?' + new Date().getTime();
-				$('#gridImg').addClass('imageeditor-img');
-				$('#btnApplyGrid').removeClass('disabled');
+                $('#gridImg').addClass('imageeditor-img');
+                $('#btnApplyGrid').removeClass('disabled');
             }
         });
-	})
-	
+    })
+    
     function selectGridImage(element, id) {
-		document.getElementById('imageGrid' + id).src=element.src;
-		var elements = document.getElementsByClassName('imageeditor-modal-selected');
-		while(elements.length > 0){
-			elements[0].classList.remove('imageeditor-modal-selected');
-		}
-		$('#imageGrid' + id).addClass('imageeditor-img');
+        document.getElementById('imageGrid' + id).src=element.src;
+        var elements = document.getElementsByClassName('imageeditor-modal-selected');
+        while(elements.length > 0){
+            elements[0].classList.remove('imageeditor-modal-selected');
+        }
+        $('#imageGrid' + id).addClass('imageeditor-img');
         element.classList.add('imageeditor-modal-selected');
-		$('#myModalImagePicker' + id).modal('hide');
-		return false;
-	}
-	
-	$('.imgSelect1').click(function () {
-		$('#image_id').val($(this).attr('id'));
-		document.getElementById('ImageSelected').src=$(this).attr('src');
-		var elements = document.getElementsByClassName('imageeditor-modal-selected');
-		while(elements.length > 0){
-			elements[0].classList.remove('imageeditor-modal-selected');
-		}
-		$(this).addClass('imageeditor-modal-selected');
-		$('#btnApplySelected').removeClass('disabled');
-		return false;
-	})
-	
+        $('#myModalImagePicker' + id).modal('hide');
+        return false;
+    }
+    
+    $('.imgSelect1').click(function () {
+        $('#image_id').val($(this).attr('id'));
+        document.getElementById('ImageSelected').src=$(this).attr('src');
+        var elements = document.getElementsByClassName('imageeditor-modal-selected');
+        while(elements.length > 0){
+            elements[0].classList.remove('imageeditor-modal-selected');
+        }
+        $(this).addClass('imageeditor-modal-selected');
+        $('#btnApplySelected').removeClass('disabled');
+        return false;
+    })
+    
 </script>
 
 <{include file='db:wgteams_footer.tpl'}>
