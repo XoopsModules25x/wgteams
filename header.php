@@ -26,7 +26,7 @@ declare(strict_types=1);
 
 use XoopsModules\Wgteams;
 
-require \dirname(\dirname(__DIR__)) . '/mainfile.php';
+require \dirname(__DIR__, 2) . '/mainfile.php';
 require __DIR__ . '/include/common.php';
 $dirname = \basename(__DIR__);
 // Breadcrumbs

@@ -26,7 +26,7 @@ declare(strict_types=1);
 
 use XoopsModules\Wgteams;
 
-require \dirname(\dirname(\dirname(__DIR__))) . '/include/cp_header.php';
+require \dirname(__DIR__, 3) . '/include/cp_header.php';
 $thisPath = \dirname(__DIR__);
 require_once $thisPath . '/include/common.php';
 $pathIcon16      = '../' . $GLOBALS['xoopsModule']->getInfo('sysicons16');

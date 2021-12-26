@@ -21,7 +21,7 @@
  * @version   $Id: 1.0 main.php 1 Mon 2018-03-19 10:04:56Z XOOPS Project (www.xoops.org) $
  */
  
-$moduleDirName = \basename(\dirname(\dirname(__DIR__)));
+$moduleDirName = \basename(\dirname(__DIR__, 2));
 $moduleDirNameUpper = \mb_strtoupper($moduleDirName);
 
 // General

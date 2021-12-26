@@ -16,7 +16,7 @@
 use XoopsModules\Wgteams;
 use XoopsModules\Wgteams\Common;
 
-require \dirname(\dirname(\dirname(__DIR__))) . '/include/cp_header.php';
+require \dirname(__DIR__, 3) . '/include/cp_header.php';
 include \dirname(__DIR__) . '/preloads/autoloader.php';
 $op = \Xmf\Request::getCmd('op', '');
 
