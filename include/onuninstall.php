@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 /**
  * uninstall.php - cleanup on module uninstall
  *
