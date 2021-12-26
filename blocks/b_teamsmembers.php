@@ -26,7 +26,7 @@ declare(strict_types=1);
 
 use XoopsModules\Wgteams;
 
-require_once XOOPS_ROOT_PATH . '/modules/wgteams/include/common.php';
+require_once \XOOPS_ROOT_PATH . '/modules/wgteams/include/common.php';
 
 // Function show block
 /**
@@ -35,16 +35,16 @@ require_once XOOPS_ROOT_PATH . '/modules/wgteams/include/common.php';
  */
 function b_wgteams_teamsmembers_show($options)
 {
-    require_once XOOPS_ROOT_PATH . '/modules/wgteams/include/functions.php';
+    require_once \XOOPS_ROOT_PATH . '/modules/wgteams/include/functions.php';
 
-    $GLOBALS['xoTheme']->addStylesheet(XOOPS_URL . '/modules/wgteams/assets/css/style.css');
-    $GLOBALS['xoopsTpl']->assign('wgteams_teams_upload_url', WGTEAMS_UPLOAD_URL . '/teams/images/');
-    $GLOBALS['xoopsTpl']->assign('wgteams_url_index', WGTEAMS_URL . '/index.php');
+    $GLOBALS['xoTheme']->addStylesheet(\XOOPS_URL . '/modules/wgteams/assets/css/style.css');
+    $GLOBALS['xoopsTpl']->assign('wgteams_teams_upload_url', \WGTEAMS_UPLOAD_URL . '/teams/images/');
+    $GLOBALS['xoopsTpl']->assign('wgteams_url_index', \WGTEAMS_URL . '/index.php');
 
     $typeBlock = $options[0];
     $team_id   = $options[1];
-    array_shift($options);
-    array_shift($options);
+    \array_shift($options);
+    \array_shift($options);
 
     /** @var Wgteams\Helper $helper */
     $helper       = Wgteams\Helper::getInstance();
@@ -76,10 +76,10 @@ function b_wgteams_teamsmembers_edit($options)
     /** @var Wgteams\Helper $helper */
     $helper       = Wgteams\Helper::getInstance();
     $teamsHandler = $helper->getHandler('Teams');
-    $GLOBALS['xoopsTpl']->assign('wgteams_upload_url', WGTEAMS_UPLOAD_URL);
+    $GLOBALS['xoopsTpl']->assign('wgteams_upload_url', \WGTEAMS_UPLOAD_URL);
     $form = _MB_WGTEAMS_TEAMS_TO_DISPLAY;
     $form .= "<input type='hidden' name='options[0]' value='" . $options[0] . "'>";
-    array_shift($options);
+    \array_shift($options);
     $criteria = new \CriteriaCompo();
     $criteria->add(new \Criteria('team_id', 0, '!='));
     $criteria->add(new \Criteria('team_online', 1));
@@ -88,9 +88,9 @@ function b_wgteams_teamsmembers_edit($options)
     $teamsAll = $teamsHandler->getAll($criteria);
     unset($criteria);
     $form .= "<select name='options[]' size='5'>";
-    foreach (array_keys($teamsAll) as $i) {
+    foreach (\array_keys($teamsAll) as $i) {
         $team_id = $teamsAll[$i]->getVar('team_id');
-        $form    .= "<option value='" . $team_id . "' " . (false === array_search($team_id, $options, true) ? '' : 'selected') . '>' . $teamsAll[$i]->getVar('team_name') . '</option>';
+        $form    .= "<option value='" . $team_id . "' " . (false === \array_search($team_id, $options, true) ? '' : 'selected') . '>' . $teamsAll[$i]->getVar('team_name') . '</option>';
     }
     $form .= '</select>';
 

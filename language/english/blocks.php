@@ -21,16 +21,16 @@
  */
 // Admin Edit
 
-define('_MB_WGTEAMS_NAME_SHOW', 'Show team title');
-define('_MB_WGTEAMS_NAME_LENGTH', 'Title length (0 means full length)');
-define('_MB_WGTEAMS_DESC_SHOW', 'Show team description');
-define('_MB_WGTEAMS_DESC_LENGTH', 'Description length (0 means full length)');
-define('_MB_WGTEAMS_NUMB_TEAMS', 'Number of teams in each row');
-define('_MB_WGTEAMS_TEMPLATE', 'Template');
-define('_MB_WGTEAMS_TEMPLATE_DEFAULT', 'Default');
-define('_MB_WGTEAMS_TEMPLATE_LIST', 'Simple List');
-define('_MB_WGTEAMS_TEMPLATE_BCARDS', 'Bootstrap cards');
-define('_MB_WGTEAMS_TEAMS_TO_DISPLAY', 'Teams to Display (Teams to show must be "online" additionally)');
-define('_MB_WGTEAMS_ALL_TEAMS', 'All teams');
-define('_MB_WGTEAMS_SHOWTEAM', 'Show team');
+\define('_MB_WGTEAMS_NAME_SHOW', 'Show team title');
+\define('_MB_WGTEAMS_NAME_LENGTH', 'Title length (0 means full length)');
+\define('_MB_WGTEAMS_DESC_SHOW', 'Show team description');
+\define('_MB_WGTEAMS_DESC_LENGTH', 'Description length (0 means full length)');
+\define('_MB_WGTEAMS_NUMB_TEAMS', 'Number of teams in each row');
+\define('_MB_WGTEAMS_TEMPLATE', 'Template');
+\define('_MB_WGTEAMS_TEMPLATE_DEFAULT', 'Default');
+\define('_MB_WGTEAMS_TEMPLATE_LIST', 'Simple List');
+\define('_MB_WGTEAMS_TEMPLATE_BCARDS', 'Bootstrap cards');
+\define('_MB_WGTEAMS_TEAMS_TO_DISPLAY', 'Teams to Display (Teams to show must be "online" additionally)');
+\define('_MB_WGTEAMS_ALL_TEAMS', 'All teams');
+\define('_MB_WGTEAMS_SHOWTEAM', 'Show team');
 // ---------------- End ----------------

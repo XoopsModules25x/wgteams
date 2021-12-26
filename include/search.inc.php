@@ -36,7 +36,7 @@ function wgteams_search($queryarray, $andor, $limit, $offset, $userid)
     if (0 != $userid) {
         $sql .= ' AND infofield_submitter=' . (int)$userid;
     }
-    if (is_array($queryarray) && $count = count($queryarray)) {
+    if (\is_array($queryarray) && $count = \count($queryarray)) {
         $sql .= " AND ((a LIKE %$queryarray[0]%)";
         for ($i = 1; $i < $count; ++$i) {
             $sql .= " $andor ";

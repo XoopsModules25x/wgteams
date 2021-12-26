@@ -22,7 +22,7 @@ namespace XoopsModules\Wgteams;
  * @author          Goffy - Wedega.com - Email:<webmaster@wedega.com> - Website:<https://wedega.com>
  * @version         $Id: 1.0 teams.php 1 Sun 2015/12/27 23:18:00Z Goffy - Wedega $
  */
-defined('XOOPS_ROOT_PATH') || exit('Restricted access');
+\defined('XOOPS_ROOT_PATH') || exit('Restricted access');
 
 /**
  * Class Teams
@@ -42,18 +42,18 @@ class Teams extends \XoopsObject
     public function __construct()
     {
         $this->helper = Helper::getInstance();
-        $this->initVar('team_id', XOBJ_DTYPE_INT);
-        $this->initVar('team_name', XOBJ_DTYPE_TXTBOX);
-        $this->initVar('team_descr', XOBJ_DTYPE_TXTAREA);
-        $this->initVar('team_image', XOBJ_DTYPE_TXTBOX);
-        $this->initVar('team_nb_cols', XOBJ_DTYPE_INT);
-        $this->initVar('team_tablestyle', XOBJ_DTYPE_TXTBOX);
-        $this->initVar('team_imagestyle', XOBJ_DTYPE_TXTBOX);
-        $this->initVar('team_displaystyle', XOBJ_DTYPE_TXTBOX);
-        $this->initVar('team_weight', XOBJ_DTYPE_INT);
-        $this->initVar('team_online', XOBJ_DTYPE_INT);
-        $this->initVar('team_submitter', XOBJ_DTYPE_INT);
-        $this->initVar('team_date_create', XOBJ_DTYPE_INT);
+        $this->initVar('team_id', \XOBJ_DTYPE_INT);
+        $this->initVar('team_name', \XOBJ_DTYPE_TXTBOX);
+        $this->initVar('team_descr', \XOBJ_DTYPE_TXTAREA);
+        $this->initVar('team_image', \XOBJ_DTYPE_TXTBOX);
+        $this->initVar('team_nb_cols', \XOBJ_DTYPE_INT);
+        $this->initVar('team_tablestyle', \XOBJ_DTYPE_TXTBOX);
+        $this->initVar('team_imagestyle', \XOBJ_DTYPE_TXTBOX);
+        $this->initVar('team_displaystyle', \XOBJ_DTYPE_TXTBOX);
+        $this->initVar('team_weight', \XOBJ_DTYPE_INT);
+        $this->initVar('team_online', \XOBJ_DTYPE_INT);
+        $this->initVar('team_submitter', \XOBJ_DTYPE_INT);
+        $this->initVar('team_date_create', \XOBJ_DTYPE_INT);
     }
 
     /**
@@ -85,9 +85,9 @@ class Teams extends \XoopsObject
             $action = $_SERVER['REQUEST_URI'];
         }
         // Title
-        $title = $this->isNew() ? sprintf(_AM_WGTEAMS_TEAM_ADD) : sprintf(_AM_WGTEAMS_TEAM_EDIT);
+        $title = $this->isNew() ? \sprintf(_AM_WGTEAMS_TEAM_ADD) : \sprintf(_AM_WGTEAMS_TEAM_EDIT);
         // Get Theme Form
-        xoops_load('XoopsFormLoader');
+        \xoops_load('XoopsFormLoader');
         $form = new \XoopsThemeForm($title, 'form', $action, 'post', true);
         $form->setExtra('enctype="multipart/form-data"');
         // Teams handler
@@ -111,13 +111,13 @@ class Teams extends \XoopsObject
 
         $imageTray   = new \XoopsFormElementTray(_AM_WGTEAMS_TEAM_IMAGE, '<br>');
         $imageSelect = new \XoopsFormSelect(_AM_WGTEAMS_FORM_IMAGE_EXIST, 'team_image', $teamImage, 5);
-        $imageArray  = \XoopsLists::getImgListAsArray(XOOPS_ROOT_PATH . $imageDirectory);
+        $imageArray  = \XoopsLists::getImgListAsArray(\XOOPS_ROOT_PATH . $imageDirectory);
         foreach ($imageArray as $image) {
             $imageSelect->addOption($image, $image);
         }
-        $imageSelect->setExtra("onchange='showImgSelected(\"image2\", \"team_image\", \"" . $imageDirectory . '", "", "' . XOOPS_URL . "\")'");
+        $imageSelect->setExtra("onchange='showImgSelected(\"image2\", \"team_image\", \"" . $imageDirectory . '", "", "' . \XOOPS_URL . "\")'");
         $imageTray->addElement($imageSelect, false);
-        $imageTray->addElement(new \XoopsFormLabel('', "<br><img src='" . XOOPS_URL . '/' . $imageDirectory . '/' . $teamImage . "' name='image2' id='image2' alt='' style='max-width:100px;' />"));
+        $imageTray->addElement(new \XoopsFormLabel('', "<br><img src='" . \XOOPS_URL . '/' . $imageDirectory . '/' . $teamImage . "' name='image2' id='image2' alt='' style='max-width:100px;' />"));
         // Form File
         $fileSelectTray = new \XoopsFormElementTray('', '<br>');
         $fileSelectTray->addElement(new \XoopsFormFile(_AM_WGTEAMS_FORM_UPLOAD_IMG, 'attachedfile', $this->helper->getConfig('wgteams_img_maxsize')));
@@ -125,13 +125,13 @@ class Teams extends \XoopsObject
         $cond = '<br>- ' . _MI_WGTEAMS_IMG_MAXSIZE . ': ' . ($this->helper->getConfig('wgteams_img_maxsize') / 1048576) . ' ' . _MI_WGTEAMS_SIZE_MB;
         $cond .= '<br>- ' . _MI_WGTEAMS_MAXWIDTH . ': ' . $this->helper->getConfig('maxwidth') . ' px';
         $cond .= '<br>- ' . _MI_WGTEAMS_MAXHEIGHT . ': ' . $this->helper->getConfig('maxheight') . ' px';
-        $cond .= '<br>- ' . _MI_WGTEAMS_IMG_MIMETYPES . ': ' . implode(', ', $this->helper->getConfig('wgteams_img_mimetypes'));
+        $cond .= '<br>- ' . _MI_WGTEAMS_IMG_MIMETYPES . ': ' . \implode(', ', $this->helper->getConfig('wgteams_img_mimetypes'));
         $fileSelectTray->addElement(new \XoopsFormLabel(_AM_WGTEAMS_IMG_EDITOR_UPLOAD, $cond));
         $imageTray->addElement($fileSelectTray);
 
         $imageTray3   = new \XoopsFormElementTray('', '');
-        $resizeinfo = '<br>' . str_replace('%w', $this->helper->getConfig('maxwidth_imgeditor'), _AM_WGTEAMS_IMG_EDITOR_RESIZE_DESC);
-        $resizeinfo = str_replace('%h', $this->helper->getConfig('maxheight_imgeditor'), $resizeinfo);
+        $resizeinfo = '<br>' . \str_replace('%w', $this->helper->getConfig('maxwidth_imgeditor'), _AM_WGTEAMS_IMG_EDITOR_RESIZE_DESC);
+        $resizeinfo = \str_replace('%h', $this->helper->getConfig('maxheight_imgeditor'), $resizeinfo);
         $imageTray3->addElement(new \XoopsFormLabel($resizeinfo, ''));
         $imageTray3->addElement(new \XoopsFormRadioYN('', 'img_resize', 1));
         $imageTray->addElement($imageTray3);
@@ -198,7 +198,7 @@ class Teams extends \XoopsObject
         $helper              = Helper::getInstance();
         $ret                 = $this->getValues($keys, $format, $maxDepth);
         $ret['id']           = $this->getVar('team_id');
-        $ret['name']         = strip_tags($this->getVar('team_name'));
+        $ret['name']         = \strip_tags($this->getVar('team_name'));
         $ret['descr']        = $helper::truncateHtml($this->getVar('team_descr', 'n'));
         $ret['image']        = $this->getVar('team_image');
         $ret['nb_cols']      = $this->getVar('team_nb_cols');
@@ -208,7 +208,7 @@ class Teams extends \XoopsObject
         $ret['weight']       = $this->getVar('team_weight');
         $ret['online']       = 1 == $this->getVar('team_online') ? _YES : _NO;
         $ret['submitter']    = \XoopsUser::getUnameFromId($this->getVar('team_submitter'));
-        $ret['date_create']  = formatTimestamp($this->getVar('team_date_create'), 'M');
+        $ret['date_create']  = \formatTimestamp($this->getVar('team_date_create'), 'M');
 
         return $ret;
     }
@@ -222,7 +222,7 @@ class Teams extends \XoopsObject
     {
         $ret  = [];
         $vars = &$this->getVars();
-        foreach (array_keys($vars) as $var) {
+        foreach (\array_keys($vars) as $var) {
             $ret[$var] = $this->getVar($var);
         }
 

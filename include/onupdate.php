@@ -22,7 +22,7 @@ declare(strict_types=1);
 
 use XoopsModules\Wgteams;
 
-if ((!defined('XOOPS_ROOT_PATH')) || !($GLOBALS['xoopsUser'] instanceof \XoopsUser)
+if ((!\defined('XOOPS_ROOT_PATH')) || !($GLOBALS['xoopsUser'] instanceof \XoopsUser)
     || !$GLOBALS['xoopsUser']->IsAdmin()) {
     exit('Restricted access' . PHP_EOL);
 }
@@ -47,7 +47,7 @@ function tableExists($tablename)
  */
 function xoops_module_pre_update_wgteams(\XoopsModule $module)
 {
-//    $moduleDirName = basename(dirname(__DIR__));
+//    $moduleDirName = \basename(\dirname(__DIR__));
 //    $helper  = Wgteams\Helper::getInstance();
     $utility = new Wgteams\Utility();
 
@@ -66,28 +66,28 @@ function xoops_module_pre_update_wgteams(\XoopsModule $module)
  */
 function xoops_module_update_wgteams(\XoopsModule $module, $previousVersion = null)
 {
-    $moduleDirName      = basename(dirname(__DIR__));
-//    $moduleDirNameUpper = mb_strtoupper($moduleDirName);
+    $moduleDirName      = \basename(\dirname(__DIR__));
+//    $moduleDirNameUpper = \mb_strtoupper($moduleDirName);
 //    $helper       = Wgteams\Helper::getInstance();
     $utility      = new Wgteams\Utility();
     $configurator = new Wgteams\Common\Configurator();
 
 	//  ---  DELETE OLD FILES ---------------
-	if (count($configurator->oldFiles) > 0) {
-		//    foreach (array_keys($GLOBALS['uploadFolders']) as $i) {
-		foreach (array_keys($configurator->oldFiles) as $i) {
+	if (\count($configurator->oldFiles) > 0) {
+		//    foreach (\array_keys($GLOBALS['uploadFolders']) as $i) {
+		foreach (\array_keys($configurator->oldFiles) as $i) {
 			$tempFile = $GLOBALS['xoops']->path('modules/' . $moduleDirName . $configurator->oldFiles[$i]);
-			if (is_file($tempFile)) {
-				unlink($tempFile);
+			if (\is_file($tempFile)) {
+				\unlink($tempFile);
 			}
 		}
 	}
 
 	//  ---  DELETE OLD FOLDERS ---------------
-	xoops_load('XoopsFile');
-	if (count($configurator->oldFolders) > 0) {
-		//    foreach (array_keys($GLOBALS['uploadFolders']) as $i) {
-		foreach (array_keys($configurator->oldFolders) as $i) {
+	\xoops_load('XoopsFile');
+	if (\count($configurator->oldFolders) > 0) {
+		//    foreach (\array_keys($GLOBALS['uploadFolders']) as $i) {
+		foreach (\array_keys($configurator->oldFolders) as $i) {
 			$tempFolder = $GLOBALS['xoops']->path('modules/' . $moduleDirName . $configurator->oldFolders[$i]);
 			/* @var XoopsObjectHandler $folderHandler */
 			$folderHandler = \XoopsFile::getHandler('folder', $tempFolder);
@@ -96,17 +96,17 @@ function xoops_module_update_wgteams(\XoopsModule $module, $previousVersion = nu
 	}
 
 	//  ---  CREATE FOLDERS ---------------
-	if (count($configurator->uploadFolders) > 0) {
-		//    foreach (array_keys($GLOBALS['uploadFolders']) as $i) {
-		foreach (array_keys($configurator->uploadFolders) as $i) {
+	if (\count($configurator->uploadFolders) > 0) {
+		//    foreach (\array_keys($GLOBALS['uploadFolders']) as $i) {
+		foreach (\array_keys($configurator->uploadFolders) as $i) {
 			$utility::createFolder($configurator->uploadFolders[$i]);
 		}
 	}
 
 	//  ---  COPY blank.png FILES ---------------
-	if (count($configurator->copyBlankFiles) > 0) {
-		$file = dirname(__DIR__) . '/assets/images/blank.png';
-		foreach (array_keys($configurator->copyBlankFiles) as $i) {
+	if (\count($configurator->copyBlankFiles) > 0) {
+		$file = \dirname(__DIR__) . '/assets/images/blank.png';
+		foreach (\array_keys($configurator->copyBlankFiles) as $i) {
 			$dest = $configurator->copyBlankFiles[$i] . '/blank.png';
 			$utility::copyFile($file, $dest);
 		}

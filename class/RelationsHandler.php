@@ -26,7 +26,7 @@ namespace XoopsModules\Wgteams;
 
 use XoopsModules\Wgteams;
 
-defined('XOOPS_ROOT_PATH') || die('Restricted access');
+\defined('XOOPS_ROOT_PATH') || die('Restricted access');
 
 /**
  * Class RelationsHandler

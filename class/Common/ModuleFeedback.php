@@ -22,7 +22,7 @@ namespace XoopsModules\Wgteams\Common;
  * @min_xoops      2.5.9
  * @author         XOOPS - Website:<https://xoops.org>
  */
-defined('XOOPS_ROOT_PATH') || die('Restricted access');
+\defined('XOOPS_ROOT_PATH') || die('Restricted access');
 
 /**
  * Class Object ModuleFeedback
@@ -69,7 +69,7 @@ class ModuleFeedback extends \XoopsObject
             $action = $_SERVER['REQUEST_URI'];
         }
         // Get Theme Form
-        xoops_load('XoopsFormLoader');
+        \xoops_load('XoopsFormLoader');
         $form = new \XoopsThemeForm(_FB_FORM_TITLE, 'formfeedback', $action, 'post', true);
         $form->setExtra('enctype="multipart/form-data"');
 
@@ -103,10 +103,10 @@ class ModuleFeedback extends \XoopsObject
         $editorConfigs['width']  = '100%';
         $editorConfigs['height'] = '400px';
         /** @var \XoopsModuleHandler $moduleHandler */
-        $moduleHandler           = xoops_getHandler('module');
+        $moduleHandler           = \xoops_getHandler('module');
         $module                  = $moduleHandler->getByDirname('system');
         /** @var \XoopsConfigHandler $configHandler */
-        $configHandler           = xoops_getHandler('config');
+        $configHandler           = \xoops_getHandler('config');
         $config                  = $configHandler->getConfigsByCat(0, $module->getVar('mid'));
         $editorConfigs['editor'] = $config['general_editor'];
         $editor                  = new \XoopsFormEditor(_FB_TYPE_CONTENT, 'fb_content', $editorConfigs);

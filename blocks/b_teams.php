@@ -26,7 +26,7 @@ declare(strict_types=1);
 
 use XoopsModules\Wgteams;
 
-require_once XOOPS_ROOT_PATH . '/modules/wgteams/include/common.php';
+require_once \XOOPS_ROOT_PATH . '/modules/wgteams/include/common.php';
 
 // Function show block
 /**
@@ -35,13 +35,13 @@ require_once XOOPS_ROOT_PATH . '/modules/wgteams/include/common.php';
  */
 function b_wgteams_teams_show($options)
 {
-    require_once XOOPS_ROOT_PATH . '/modules/wgteams/include/functions.php';
+    require_once \XOOPS_ROOT_PATH . '/modules/wgteams/include/functions.php';
 
-    $GLOBALS['xoTheme']->addStylesheet(XOOPS_URL . '/modules/wgteams/assets/css/style.css');
+    $GLOBALS['xoTheme']->addStylesheet(\XOOPS_URL . '/modules/wgteams/assets/css/style.css');
 
-    $GLOBALS['xoopsTpl']->assign('wgteams_teams_upload_url', WGTEAMS_UPLOAD_URL . '/teams/images/');
-    $GLOBALS['xoopsTpl']->assign('wgteams_url', WGTEAMS_URL);
-    $GLOBALS['xoopsTpl']->assign('wgteams_url_index', WGTEAMS_URL . '/index.php');
+    $GLOBALS['xoopsTpl']->assign('wgteams_teams_upload_url', \WGTEAMS_UPLOAD_URL . '/teams/images/');
+    $GLOBALS['xoopsTpl']->assign('wgteams_url', \WGTEAMS_URL);
+    $GLOBALS['xoopsTpl']->assign('wgteams_url_index', \WGTEAMS_URL . '/index.php');
     
     $showName   = (boolean)$options[1];
     $lengthName = $options[2];
@@ -49,13 +49,13 @@ function b_wgteams_teams_show($options)
     $lengthDescr = $options[4];
     $numbTeams   = $options[5];
     $template    = $options[6];
-    array_shift($options);
-    array_shift($options);
-    array_shift($options);
-    array_shift($options);
-    array_shift($options);
-    array_shift($options);
-    array_shift($options);
+    \array_shift($options);
+    \array_shift($options);
+    \array_shift($options);
+    \array_shift($options);
+    \array_shift($options);
+    \array_shift($options);
+    \array_shift($options);
     
     $arrTeams    = $options;
 
@@ -66,7 +66,7 @@ function b_wgteams_teams_show($options)
     $crit_teams = new \CriteriaCompo();
     $crit_teams->add(new \Criteria('team_online', '1'));
     if ($arrTeams[0] > 0) {
-        $team_ids     = implode(',', $options);
+        $team_ids     = \implode(',', $options);
         $crit_teams->add(new \Criteria('team_id', '(' . $team_ids . ')', 'IN'));
     }
     $crit_teams->setSort('team_weight');
@@ -125,19 +125,19 @@ function b_wgteams_teams_edit($options)
     $form .= "<option value='list' " . ('list' === $options[6] ? "selected='selected'" : '') . '>' . _MB_WGTEAMS_TEMPLATE_LIST . '</option>';
     $form .= "<option value='bcards' " . ('bcards' === $options[6] ? "selected='selected'" : '') . '>' . _MB_WGTEAMS_TEMPLATE_BCARDS . '</option>';
     $form .= '</select><br>';
-    array_shift($options);
-    array_shift($options);
-    array_shift($options);
-    array_shift($options);
-    array_shift($options);
-    array_shift($options);
-    array_shift($options);
+    \array_shift($options);
+    \array_shift($options);
+    \array_shift($options);
+    \array_shift($options);
+    \array_shift($options);
+    \array_shift($options);
+    \array_shift($options);
 
     $form .= _MB_WGTEAMS_TEAMS_TO_DISPLAY . ": <select name='options[]' multiple='multiple' size='5'>";
-    $form .= "<option value='0' " . (in_array(0, $options, false) ? "selected='selected'" : '') . '>' . _MB_WGTEAMS_ALL_TEAMS . '</option>';
-    foreach (array_keys($teamsAll) as $i) {
+    $form .= "<option value='0' " . (\in_array(0, $options, false) ? "selected='selected'" : '') . '>' . _MB_WGTEAMS_ALL_TEAMS . '</option>';
+    foreach (\array_keys($teamsAll) as $i) {
         $team_id = $teamsAll[$i]->getVar('team_id');
-        $form   .= "<option value='" . $team_id . "' " . (in_array($team_id, $options, false) && false === in_array(0, $options, false) ? "selected='selected'" : '') . '>' . $teamsAll[$i]->getVar('team_name') . '</option>';
+        $form   .= "<option value='" . $team_id . "' " . (\in_array($team_id, $options, false) && false === \in_array(0, $options, false) ? "selected='selected'" : '') . '>' . $teamsAll[$i]->getVar('team_name') . '</option>';
     }
     $form .= '</select>';
 

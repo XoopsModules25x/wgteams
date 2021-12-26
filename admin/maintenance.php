@@ -32,11 +32,11 @@ require __DIR__ . '/header.php';
 
 $op    = Request::getString('op', 'list');
 
-$GLOBALS['xoopsTpl']->assign('wgteams_icon_url_16', WGTEAMS_ICONS_URL . '16/');
+$GLOBALS['xoopsTpl']->assign('wgteams_icon_url_16', \WGTEAMS_ICONS_URL . '16/');
 
-$maintainance_dui_desc = str_replace('%p', WGTEAMS_UPLOAD_PATH, _AM_WGTEAMS_MAINTENANCE_DELETE_UNUSED_DESC);
+$maintainance_dui_desc = \str_replace('%p', \WGTEAMS_UPLOAD_PATH, _AM_WGTEAMS_MAINTENANCE_DELETE_UNUSED_DESC);
 $GLOBALS['xoopsTpl']->assign('maintainance_dui_desc', $maintainance_dui_desc);
-$maintainance_cs_desc = str_replace('%p', WGTEAMS_UPLOAD_PATH, _AM_WGTEAMS_MAINTENANCE_CHECK_SPACE_DESC);
+$maintainance_cs_desc = \str_replace('%p', \WGTEAMS_UPLOAD_PATH, _AM_WGTEAMS_MAINTENANCE_CHECK_SPACE_DESC);
 $GLOBALS['xoopsTpl']->assign('maintainance_cs_desc', $maintainance_cs_desc);
 
 switch ($op) {
@@ -44,18 +44,18 @@ switch ($op) {
         $unused = [];
         $errors = [];
 
-        $directory = WGTEAMS_UPLOAD_PATH . '/teams/images';
-        $url       = WGTEAMS_UPLOAD_URL . '/teams/images';
+        $directory = \WGTEAMS_UPLOAD_PATH . '/teams/images';
+        $url       = \WGTEAMS_UPLOAD_URL . '/teams/images';
         if (false === getUnusedImages($unused, $directory, $url)) {
             $errors[] = _AM_WGTEAMS_MAINTENANCE_ERROR_READDIR . $directory;
         }
-        $directory = WGTEAMS_UPLOAD_PATH . '/members/images';
-        $url       = WGTEAMS_UPLOAD_URL . '/members/images';
+        $directory = \WGTEAMS_UPLOAD_PATH . '/members/images';
+        $url       = \WGTEAMS_UPLOAD_URL . '/members/images';
         if (false === getUnusedImages($unused, $directory, $url)) {
             $errors[] = _AM_WGTEAMS_MAINTENANCE_ERROR_READDIR . $directory;
         }
-        $directory = WGTEAMS_UPLOAD_PATH . '/temp';
-        $url       = WGTEAMS_UPLOAD_URL . '/temp';
+        $directory = \WGTEAMS_UPLOAD_PATH . '/temp';
+        $url       = \WGTEAMS_UPLOAD_URL . '/temp';
         if (false === getUnusedImages($unused, $directory, $url)) {
             $errors[] = _AM_WGTEAMS_MAINTENANCE_ERROR_READDIR . $directory;
         }
@@ -63,12 +63,12 @@ switch ($op) {
         $templateMain = 'wgteams_admin_maintenance.tpl';
         $unused_text  = '';
         $err_text     = '';
-        if (count($errors) > 0) {
+        if (\count($errors) > 0) {
             foreach ($errors as $error) {
                 $err_text .= '<br>' . $error;
             }
         }
-        if (count($unused) === 0) {
+        if (\count($unused) === 0) {
             $unused_text = _AM_WGTEAMS_MAINTENANCE_DELETE_UNUSED_NONE;
         }
         $GLOBALS['xoopsTpl']->assign('result_unused', $unused);
@@ -81,16 +81,16 @@ switch ($op) {
         $del_img_path = Request::getString('del_img_path', 'none');
         if (isset($_REQUEST['ok']) && 1 == $_REQUEST['ok']) {
             if (!$GLOBALS['xoopsSecurity']->check()) {
-                redirect_header('maintenance.php', 3, implode(', ', $GLOBALS['xoopsSecurity']->getErrors()));
+                \redirect_header('maintenance.php', 3, \implode(', ', $GLOBALS['xoopsSecurity']->getErrors()));
             }
-            unlink($del_img_path);
-            if (file_exists($del_img_path)) {
-                redirect_header('maintenance.php?op=unused_images_search', 2, _AM_WGTEAMS_MAINTENANCE_ERROR_DELETE . $del_img_path);
+            \unlink($del_img_path);
+            if (\file_exists($del_img_path)) {
+                \redirect_header('maintenance.php?op=unused_images_search', 2, _AM_WGTEAMS_MAINTENANCE_ERROR_DELETE . $del_img_path);
             } else {
-                redirect_header('maintenance.php?op=unused_images_search', 2, _AM_WGTEAMS_MAINTENANCE_SUCCESS_DELETE . $del_img_path);
+                \redirect_header('maintenance.php?op=unused_images_search', 2, _AM_WGTEAMS_MAINTENANCE_SUCCESS_DELETE . $del_img_path);
             }
         } else {
-            xoops_confirm(['ok' => 1, 'op' => 'delete_unused_image'], $_SERVER['REQUEST_URI'], str_replace('%s', $del_img_path, _AM_WGTEAMS_FORM_SURE_DELETE));
+            xoops_confirm(['ok' => 1, 'op' => 'delete_unused_image'], $_SERVER['REQUEST_URI'], \str_replace('%s', $del_img_path, _AM_WGTEAMS_FORM_SURE_DELETE));
         }
         break;
 
@@ -98,26 +98,26 @@ switch ($op) {
         $success = [];
         $errors  = [];
 
-        $path      = WGTEAMS_UPLOAD_PATH . '/teams/images';
+        $path      = \WGTEAMS_UPLOAD_PATH . '/teams/images';
         $disk_used = wgg_foldersize($path);
         $success[] = $path . ': ' . wgg_format_size($disk_used);
-        $path      = WGTEAMS_UPLOAD_PATH . '/members/images';
+        $path      = \WGTEAMS_UPLOAD_PATH . '/members/images';
         $disk_used = wgg_foldersize($path);
         $success[] = $path . ': ' . wgg_format_size($disk_used);
-        $path      = WGTEAMS_UPLOAD_PATH . '/temp';
+        $path      = \WGTEAMS_UPLOAD_PATH . '/temp';
         $disk_used = wgg_foldersize($path);
         $success[] = $path . ': ' . wgg_format_size($disk_used);
 
         $templateMain = 'wgteams_admin_maintenance.tpl';
         $err_text     = '';
-        if (count($errors) > 0) {
+        if (\count($errors) > 0) {
             $err_text = '<ul>';
             foreach ($errors as $error) {
                 $err_text .= '<li>' . $error . '</li>';
             }
             $err_text .= '</ul>';
         }
-        if (count($success) > 0) {
+        if (\count($success) > 0) {
             $success_text = '<ul>';
             foreach ($success as $s) {
                 $success_text .= '<li>' . $s . '</li>';
@@ -176,9 +176,9 @@ function getUnusedImages(&$unused, $directory, $url)
     $membersHandler = $helper->getHandler('Members');
     $teamsHandler = $helper->getHandler('Teams');
 
-    if (is_dir($directory)) {
-        if ($handle = opendir($directory)) {
-            while (false !== ($entry = readdir($handle))) {
+    if (\is_dir($directory)) {
+        if ($handle = \opendir($directory)) {
+            while (false !== ($entry = \readdir($handle))) {
                 switch ($entry) {
                     case 'blank.gif':
                     case 'blank.png':
@@ -207,7 +207,7 @@ function getUnusedImages(&$unused, $directory, $url)
                         break;
                 }
             }
-            closedir($handle);
+            \closedir($handle);
         } else {
             return false;
         }
@@ -226,17 +226,17 @@ function getUnusedImages(&$unused, $directory, $url)
 function wgg_foldersize($path)
 {
     $total_size = 0;
-    $files      = scandir($path);
+    $files      = \scandir($path);
 
     foreach ($files as $t) {
-        if (is_dir(rtrim($path, '/') . '/' . $t)) {
+        if (\is_dir(\rtrim($path, '/') . '/' . $t)) {
             if ('.' != $t && '..' != $t) {
-                $size = wgg_foldersize(rtrim($path, '/') . '/' . $t);
+                $size = wgg_foldersize(\rtrim($path, '/') . '/' . $t);
 
                 $total_size += $size;
             }
         } else {
-            $size       = filesize(rtrim($path, '/') . '/' . $t);
+            $size       = filesize(\rtrim($path, '/') . '/' . $t);
             $total_size += $size;
         }
     }
@@ -252,12 +252,12 @@ function wgg_foldersize($path)
 function wgg_format_size($size)
 {
     $mod   = 1024;
-    $units = explode(' ', 'B KB MB GB TB PB');
+    $units = \explode(' ', 'B KB MB GB TB PB');
     for ($i = 0; $size > $mod; $i++) {
         $size /= $mod;
     }
 
-    return round($size, 2) . ' ' . $units[$i];
+    return \round($size, 2) . ' ' . $units[$i];
 }
 
 require __DIR__ . '/footer.php';

@@ -44,17 +44,17 @@ switch ($op) {
         $infofieldsCount = $infofieldsHandler->getCountInfofields();
         $infofieldsAll   = $infofieldsHandler->getAllInfofields($start, $limit);
         $GLOBALS['xoopsTpl']->assign('infofields_count', $infofieldsCount);
-        $GLOBALS['xoopsTpl']->assign('wgteams_url', WGTEAMS_URL);
-        $GLOBALS['xoopsTpl']->assign('wgteams_upload_url', WGTEAMS_UPLOAD_URL);
+        $GLOBALS['xoopsTpl']->assign('wgteams_url', \WGTEAMS_URL);
+        $GLOBALS['xoopsTpl']->assign('wgteams_upload_url', \WGTEAMS_UPLOAD_URL);
         // Table view
         if ($infofieldsCount > 0) {
-            foreach (array_keys($infofieldsAll) as $i) {
+            foreach (\array_keys($infofieldsAll) as $i) {
                 $infofield = $infofieldsAll[$i]->getValuesInfofields();
                 $GLOBALS['xoopsTpl']->append('infofields_list', $infofield);
                 unset($infofield);
             }
             if ($infofieldsCount > $limit) {
-                require_once XOOPS_ROOT_PATH . '/class/pagenav.php';
+                require_once \XOOPS_ROOT_PATH . '/class/pagenav.php';
                 $pagenav = new \XoopsPageNav($infofieldsCount, $limit, $start, 'start', 'op=list&limit=' . $limit);
                 $GLOBALS['xoopsTpl']->assign('pagenav', $pagenav->renderNav(4));
             }
@@ -74,7 +74,7 @@ switch ($op) {
         break;
     case 'save':
         if (!$GLOBALS['xoopsSecurity']->check()) {
-            redirect_header('infofields.php', 3, implode(',', $GLOBALS['xoopsSecurity']->getErrors()));
+            \redirect_header('infofields.php', 3, \implode(',', $GLOBALS['xoopsSecurity']->getErrors()));
         }
         if (isset($addField_id)) {
             $infofieldsObj = $infofieldsHandler->get($addField_id);
@@ -87,10 +87,10 @@ switch ($op) {
         // Set Var infofield_submitter
         $infofieldsObj->setVar('infofield_submitter', $_POST['infofield_submitter']);
         // Set Var infofield_date_created
-        $infofieldsObj->setVar('infofield_date_created', time());
+        $infofieldsObj->setVar('infofield_date_created', \time());
         // Insert Data
         if ($infofieldsHandler->insert($infofieldsObj)) {
-            redirect_header('infofields.php?op=list', 2, _AM_WGTEAMS_FORM_OK);
+            \redirect_header('infofields.php?op=list', 2, _AM_WGTEAMS_FORM_OK);
         }
         // Get Form
         $GLOBALS['xoopsTpl']->assign('error', $infofieldsObj->getHtmlErrors());
@@ -112,15 +112,15 @@ switch ($op) {
         $infofieldsObj = $infofieldsHandler->get($addField_id);
         if (\Xmf\Request::hasVar('ok') && 1 == $_REQUEST['ok']) {
             if (!$GLOBALS['xoopsSecurity']->check()) {
-                redirect_header('infofields.php', 3, implode(', ', $GLOBALS['xoopsSecurity']->getErrors()));
+                \redirect_header('infofields.php', 3, \implode(', ', $GLOBALS['xoopsSecurity']->getErrors()));
             }
             if ($infofieldsHandler->delete($infofieldsObj)) {
-                redirect_header('infofields.php', 3, _AM_WGTEAMS_FORM_DELETE_OK);
+                \redirect_header('infofields.php', 3, _AM_WGTEAMS_FORM_DELETE_OK);
             } else {
                 $GLOBALS['xoopsTpl']->assign('error', $infofieldsObj->getHtmlErrors());
             }
         } else {
-            xoops_confirm(['ok' => 1, 'infofield_id' => $addField_id, 'op' => 'delete'], $_SERVER['REQUEST_URI'], sprintf(_AM_WGTEAMS_FORM_SURE_DELETE, $infofieldsObj->getVar('infofield_name')));
+            xoops_confirm(['ok' => 1, 'infofield_id' => $addField_id, 'op' => 'delete'], $_SERVER['REQUEST_URI'], \sprintf(_AM_WGTEAMS_FORM_SURE_DELETE, $infofieldsObj->getVar('infofield_name')));
         }
         break;
 }

@@ -36,7 +36,7 @@ $teamId = Request::getInt('team_id', 0);
 switch ($op) {
     case 'list':
     default:
-        $GLOBALS['xoTheme']->addScript(WGTEAMS_URL . '/assets/js/sortable-teams.js');
+        $GLOBALS['xoTheme']->addScript(\WGTEAMS_URL . '/assets/js/sortable-teams.js');
         $start        = Request::getInt('start', 0);
         $limit        = Request::getInt('limit', $helper->getConfig('adminpager'));
         $templateMain = 'wgteams_admin_teams.tpl';
@@ -46,20 +46,20 @@ switch ($op) {
         $teamsCount = $teamsHandler->getCountTeams();
         $teamsAll   = $teamsHandler->getAllTeams($start, $limit);
         $GLOBALS['xoopsTpl']->assign('teams_count', $teamsCount);
-        $GLOBALS['xoopsTpl']->assign('wgteams_url', WGTEAMS_URL);
-        $GLOBALS['xoopsTpl']->assign('wgteams_upload_url', WGTEAMS_UPLOAD_URL);
-        $GLOBALS['xoopsTpl']->assign('wgteams_icons_url', WGTEAMS_ICONS_URL);
+        $GLOBALS['xoopsTpl']->assign('wgteams_url', \WGTEAMS_URL);
+        $GLOBALS['xoopsTpl']->assign('wgteams_upload_url', \WGTEAMS_UPLOAD_URL);
+        $GLOBALS['xoopsTpl']->assign('wgteams_icons_url', \WGTEAMS_ICONS_URL);
         // Table view
         if ($teamsCount > 0) {
-            foreach (array_keys($teamsAll) as $i) {
+            foreach (\array_keys($teamsAll) as $i) {
                 $team = $teamsAll[$i]->getValuesTeams();
                 if ('blank.gif' == $team['image']) {
                     $team['image'] = false;
                 } else {
-                    $image = WGTEAMS_UPLOAD_PATH . '/teams/images/' . $team['image'];
+                    $image = \WGTEAMS_UPLOAD_PATH . '/teams/images/' . $team['image'];
                     $team['image_resxy'] = '0 x 0';
-                    if (file_exists($image)) {
-                        $size = getimagesize($image);
+                    if (\file_exists($image)) {
+                        $size = \getimagesize($image);
                         $team['image_resxy'] = $size[0] . ' x ' . $size[1];
                     }
                 }
@@ -70,7 +70,7 @@ switch ($op) {
                 unset($team);
             }
             if ($teamsCount > $limit) {
-                require_once XOOPS_ROOT_PATH . '/class/pagenav.php';
+                require_once \XOOPS_ROOT_PATH . '/class/pagenav.php';
                 $pagenav = new \XoopsPageNav($teamsCount, $limit, $start, 'start', 'op=list&limit=' . $limit);
                 $GLOBALS['xoopsTpl']->assign('pagenav', $pagenav->renderNav(4));
             }
@@ -86,7 +86,7 @@ switch ($op) {
             // Set Var team_online
             $teamsObj->setVar('team_online', $team_online);
             if ($teamsHandler->insert($teamsObj, true)) {
-                redirect_header('teams.php?op=list', 2, _AM_WGTEAMS_FORM_OK);
+                \redirect_header('teams.php?op=list', 2, _AM_WGTEAMS_FORM_OK);
             }
         } else {
             echo 'invalid params';
@@ -104,7 +104,7 @@ switch ($op) {
         break;
     case 'save':
         if (!$GLOBALS['xoopsSecurity']->check()) {
-            redirect_header('teams.php', 3, implode(',', $GLOBALS['xoopsSecurity']->getErrors()));
+            \redirect_header('teams.php', 3, \implode(',', $GLOBALS['xoopsSecurity']->getErrors()));
         }
         if (isset($teamId)) {
             $teamsObj = $teamsHandler->get($teamId);
@@ -117,16 +117,16 @@ switch ($op) {
         // Set Var team_descr
         $teamsObj->setVar('team_descr', $_POST['team_descr']);
         // Set Var team_image
-        require_once XOOPS_ROOT_PATH . '/class/uploader.php';
+        require_once \XOOPS_ROOT_PATH . '/class/uploader.php';
         $fileName       = $_FILES['attachedfile']['name'];
         $imageMimetype  = $_FILES['attachedfile']['type'];
         $uploaderErrors = '';
         $maxwidth  = $helper->getConfig('maxwidth');
         $maxheight = $helper->getConfig('maxheight');
-        $uploader = new \XoopsMediaUploader(WGTEAMS_UPLOAD_PATH . '/teams/images', $helper->getConfig('wgteams_img_mimetypes'), $helper->getConfig('wgteams_img_maxsize'), $maxwidth, $maxheight);
+        $uploader = new \XoopsMediaUploader(\WGTEAMS_UPLOAD_PATH . '/teams/images', $helper->getConfig('wgteams_img_mimetypes'), $helper->getConfig('wgteams_img_maxsize'), $maxwidth, $maxheight);
         if ($uploader->fetchMedia($_POST['xoops_upload_file'][0])) {
-            $extension = preg_replace('/^.+\.([^.]+)$/sU', '', $fileName);
-            $imgName   = mb_substr(str_replace(' ', '', $_POST['team_name']), 0, 20) . '_' . $extension;
+            $extension = \preg_replace('/^.+\.([^.]+)$/sU', '', $fileName);
+            $imgName   = mb_substr(\str_replace(' ', '', $_POST['team_name']), 0, 20) . '_' . $extension;
             $uploader->setPrefix($imgName);
             $uploader->fetchMedia($_POST['xoops_upload_file'][0]);
             if (!$uploader->upload()) {
@@ -140,8 +140,8 @@ switch ($op) {
                     $imgHandler                = new Wgteams\Resizer();
                     $maxwidth_imgeditor        = (int)$helper->getConfig('maxwidth_imgeditor');
                     $maxheight_imgeditor       = (int)$helper->getConfig('maxheight_imgeditor');
-                    $imgHandler->sourceFile    = WGTEAMS_UPLOAD_PATH . '/teams/images/' . $savedFilename;
-                    $imgHandler->endFile       = WGTEAMS_UPLOAD_PATH . '/teams/images/' . $savedFilename;
+                    $imgHandler->sourceFile    = \WGTEAMS_UPLOAD_PATH . '/teams/images/' . $savedFilename;
+                    $imgHandler->endFile       = \WGTEAMS_UPLOAD_PATH . '/teams/images/' . $savedFilename;
                     $imgHandler->imageMimetype = $imageMimetype;
                     $imgHandler->maxWidth      = $maxwidth_imgeditor;
                     $imgHandler->maxHeight     = $maxheight_imgeditor;
@@ -170,13 +170,13 @@ switch ($op) {
         // Set Var team_submitter
         $teamsObj->setVar('team_submitter', $_POST['team_submitter']);
         // Set Var team_date_create
-        $teamsObj->setVar('team_date_create', time());
+        $teamsObj->setVar('team_date_create', \time());
         // Insert Data
         if ($teamsHandler->insert($teamsObj)) {
             if ('' !== $uploaderErrors) {
-                redirect_header('teams.php?op=edit&team_id=' . $teamId, 4, $uploaderErrors);
+                \redirect_header('teams.php?op=edit&team_id=' . $teamId, 4, $uploaderErrors);
             } else {
-                redirect_header('teams.php?op=list', 2, _AM_WGTEAMS_FORM_OK);
+                \redirect_header('teams.php?op=list', 2, _AM_WGTEAMS_FORM_OK);
             }
         }
         // Get Form
@@ -199,14 +199,14 @@ switch ($op) {
         $teamsObj = $teamsHandler->get($teamId);
         if (\Xmf\Request::hasVar('ok', 'REQUEST') && 1 == $_REQUEST['ok']) {
             if (!$GLOBALS['xoopsSecurity']->check()) {
-                redirect_header('teams.php', 3, implode(', ', $GLOBALS['xoopsSecurity']->getErrors()));
+                \redirect_header('teams.php', 3, \implode(', ', $GLOBALS['xoopsSecurity']->getErrors()));
             }
             $team_img = $teamsObj->getVar('team_image');
             $team_id  = $teamsObj->getVar('team_id');
             if ($teamsHandler->delete($teamsObj)) {
                 //delete team image
                 if ('' === !$team_img) {
-                    unlink(WGTEAMS_UPLOAD_PATH . '/teams/images/' . $team_img);
+                    \unlink(\WGTEAMS_UPLOAD_PATH . '/teams/images/' . $team_img);
                 }
                 //delete relations
                 $crit_rels = new \CriteriaCompo();
@@ -214,22 +214,22 @@ switch ($op) {
                 $relsCount = $relationsHandler->getCount($crit_rels);
                 if ($relsCount > 0) {
                     $relationsAll = $relationsHandler->getAll($crit_rels);
-                    foreach (array_keys($relationsAll) as $i) {
+                    foreach (\array_keys($relationsAll) as $i) {
                         $relationsObj = $relationsHandler->get($relationsAll[$i]->getVar('rel_id'));
                         $relationsHandler->delete($relationsObj);
                     }
                 }
-                redirect_header('teams.php', 3, _AM_WGTEAMS_FORM_DELETE_OK);
+                \redirect_header('teams.php', 3, _AM_WGTEAMS_FORM_DELETE_OK);
             } else {
                 $GLOBALS['xoopsTpl']->assign('error', $teamsObj->getHtmlErrors());
             }
         } else {
-            xoops_confirm(['ok' => 1, 'team_id' => $teamId, 'op' => 'delete'], $_SERVER['REQUEST_URI'], sprintf(_AM_WGTEAMS_FORM_SURE_DELETE, $teamsObj->getVar('team_name')));
+            xoops_confirm(['ok' => 1, 'team_id' => $teamId, 'op' => 'delete'], $_SERVER['REQUEST_URI'], \sprintf(_AM_WGTEAMS_FORM_SURE_DELETE, $teamsObj->getVar('team_name')));
         }
         break;
     case 'order':
         $torder = $_POST['torder'];
-        for ($i = 0, $iMax = count($torder); $i < $iMax; $i++) {
+        for ($i = 0, $iMax = \count($torder); $i < $iMax; $i++) {
             $teamsObj = $teamsHandler->get($torder[$i]);
             $teamsObj->setVar('team_weight', $i + 1);
             $teamsHandler->insert($teamsObj);

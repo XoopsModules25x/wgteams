@@ -26,12 +26,12 @@ declare(strict_types=1);
 
 use XoopsModules\Wgteams;
 
-defined('XOOPS_ROOT_PATH') || die('Restricted access');
+\defined('XOOPS_ROOT_PATH') || die('Restricted access');
 
 require_once __DIR__ . '/preloads/autoloader.php';
 
-$moduleDirName      = basename(__DIR__);
-$moduleDirNameUpper = mb_strtoupper($moduleDirName);
+$moduleDirName      = \basename(__DIR__);
+$moduleDirNameUpper = \mb_strtoupper($moduleDirName);
 
 // ------------------- Informations ------------------- //
 $modversion = [
@@ -49,10 +49,10 @@ $modversion = [
     'license_url'         => 'www.gnu.org/licenses/gpl-2.0.html/',
     'help'                => 'page=help',
     'release_info' 		  => 'release_info',
-    'release_file'        => XOOPS_URL . '/modules/wgteams/docs/release_info file',
+    'release_file'        => \XOOPS_URL . '/modules/wgteams/docs/release_info file',
     'release_date'        => '2022/12/26',
     'manual'              => 'link to manual file',
-    'manual_file'         => XOOPS_URL . '/modules/wgteams/docs/install.txt',
+    'manual_file'         => \XOOPS_URL . '/modules/wgteams/docs/install.txt',
     'min_php'             => '7.4',
     'min_xoops'           => '2.5.11 Beta1',
     'min_admin'           => '1.1',
@@ -127,7 +127,7 @@ $modversion['search']['func'] = 'wgteams_search';
 
 // ------------------- Submenu ------------------- //
 global $xoopsModule;
-if (is_object($xoopsModule) && $xoopsModule->getVar('dirname') == $moduleDirName) {
+if (\is_object($xoopsModule) && $xoopsModule->getVar('dirname') == $moduleDirName) {
     global $xoopsModuleConfig, $xoopsUser;
 
     $s = 0;
@@ -144,7 +144,7 @@ if (is_object($xoopsModule) && $xoopsModule->getVar('dirname') == $moduleDirName
     $crit_teams->setOrder('ASC');
 
     $teamsAll = $teamsHandler->getAll($crit_teams);
-    foreach (array_keys($teamsAll) as $i) {
+    foreach (\array_keys($teamsAll) as $i) {
         $s++;
         $modversion['sub'][$s]['name'] = $teamsAll[$i]->getVar('team_name');
         $modversion['sub'][$s]['url']  = 'index.php?team_id=' . $teamsAll[$i]->getVar('team_id');
@@ -211,7 +211,7 @@ $modversion['config'][] = [
 ];
 
 // Editor
-xoops_load('xoopseditorhandler');
+\xoops_load('xoopseditorhandler');
 $editorHandler          = \XoopsEditorHandler::getInstance();
 $modversion['config'][] = [
     'name'        => 'wgteams_editor',
@@ -219,14 +219,14 @@ $modversion['config'][] = [
     'description' => '_MI_WGTEAMS_EDITOR_DESC',
     'formtype'    => 'select',
     'valuetype'   => 'text',
-    'options'     => array_flip($editorHandler->getList()),
+    'options'     => \array_flip($editorHandler->getList()),
     'default'     => 'dhtmltextarea',
 ];
 
 // Uploads : maxsize of image
 include_once __DIR__ . '/include/xoops_version.inc.php';
-$iniPostMaxSize = wgteamsReturnBytes(ini_get('post_max_size'));
-$iniUploadMaxFileSize = wgteamsReturnBytes(ini_get('upload_max_filesize'));
+$iniPostMaxSize = wgteamsReturnBytes(\ini_get('post_max_size'));
+$iniUploadMaxFileSize = wgteamsReturnBytes(\ini_get('upload_max_filesize'));
 $maxSize = min($iniPostMaxSize, $iniUploadMaxFileSize);
 if ($maxSize > 10000 * 1048576) {
     $increment = 500;

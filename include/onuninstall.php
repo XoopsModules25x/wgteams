@@ -35,8 +35,8 @@ function xoops_module_uninstall_wgteams(\XoopsModule $module)
 {
     //    return true;
 
-    $moduleDirName      = basename(dirname(__DIR__));
-    $moduleDirNameUpper = mb_strtoupper($moduleDirName);
+    $moduleDirName      = \basename(\dirname(__DIR__));
+    $moduleDirNameUpper = \mb_strtoupper($moduleDirName);
     /** @var Wgteams\Helper $helper */
     $helper = Wgteams\Helper::getInstance();
 
@@ -56,7 +56,7 @@ function xoops_module_uninstall_wgteams(\XoopsModule $module)
         if ($dirInfo->isDir()) {
             // The directory exists so delete it
             if (false === $utility::rrmdir($old_dir)) {
-                $module->setErrors(sprintf(constant('CO_' . $moduleDirNameUpper . '_ERROR_BAD_DEL_PATH'), $old_dir));
+                $module->setErrors(\sprintf(\constant('CO_' . $moduleDirNameUpper . '_ERROR_BAD_DEL_PATH'), $old_dir));
                 $success = false;
             }
         }
@@ -68,9 +68,9 @@ function xoops_module_uninstall_wgteams(\XoopsModule $module)
     // Remove xsitemap.xml from XOOPS root folder if it exists
     //------------------------------------------------------------------
     $xmlfile = $GLOBALS['xoops']->path('xsitemap.xml');
-    if (is_file($xmlfile)) {
-        if (false === ($delOk = unlink($xmlfile))) {
-            $module->setErrors(sprintf(_AM_wgteamsX_ERROR_BAD_REMOVE, $xmlfile));
+    if (\is_file($xmlfile)) {
+        if (false === ($delOk = \unlink($xmlfile))) {
+            $module->setErrors(\sprintf(_AM_wgteamsX_ERROR_BAD_REMOVE, $xmlfile));
         }
     }
 //    return $success && $delOk; // use this if you're using this routine

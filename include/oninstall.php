@@ -30,7 +30,7 @@ use XoopsModules\Wgteams;
  */
 function xoops_module_pre_install_wgteams(\XoopsModule $module)
 {
-    require dirname(__DIR__) . '/preloads/autoloader.php';
+    require \dirname(__DIR__) . '/preloads/autoloader.php';
     // /** @var Wgteams\Utility $utility */
     $utility      = new \XoopsModules\Wgteams\Utility();
     $xoopsSuccess = $utility::checkVerXoops($module);
@@ -54,9 +54,9 @@ function xoops_module_pre_install_wgteams(\XoopsModule $module)
  */
 function xoops_module_install_wgteams(\XoopsModule $module)
 {
-    require_once dirname(dirname(dirname(__DIR__))) . '/mainfile.php';
+    require_once \dirname(\dirname(\dirname(__DIR__))) . '/mainfile.php';
 
-//    $moduleDirName = basename(dirname(__DIR__));
+//    $moduleDirName = \basename(\dirname(__DIR__));
 
     /** @var Wgteams\Helper $helper */
     $helper       = Wgteams\Helper::getInstance();
@@ -71,27 +71,27 @@ function xoops_module_install_wgteams(\XoopsModule $module)
     global $xoopsModule;
     $moduleId         = $xoopsModule->getVar('mid');
     // $moduleId2        = $helper->getModule()->mid();
-    $grouppermHandler = xoops_getHandler('groupperm');
+    $grouppermHandler = \xoops_getHandler('groupperm');
     // access rights ------------------------------------------
-    $grouppermHandler->addRight($moduleDirName . '_approve', 1, XOOPS_GROUP_ADMIN, $moduleId);
-    $grouppermHandler->addRight($moduleDirName . '_submit', 1, XOOPS_GROUP_ADMIN, $moduleId);
-    $grouppermHandler->addRight($moduleDirName . '_view', 1, XOOPS_GROUP_ADMIN, $moduleId);
-    $grouppermHandler->addRight($moduleDirName . '_view', 1, XOOPS_GROUP_USERS, $moduleId);
-    $grouppermHandler->addRight($moduleDirName . '_view', 1, XOOPS_GROUP_ANONYMOUS, $moduleId); 
+    $grouppermHandler->addRight($moduleDirName . '_approve', 1, \XOOPS_GROUP_ADMIN, $moduleId);
+    $grouppermHandler->addRight($moduleDirName . '_submit', 1, \XOOPS_GROUP_ADMIN, $moduleId);
+    $grouppermHandler->addRight($moduleDirName . '_view', 1, \XOOPS_GROUP_ADMIN, $moduleId);
+    $grouppermHandler->addRight($moduleDirName . '_view', 1, \XOOPS_GROUP_USERS, $moduleId);
+    $grouppermHandler->addRight($moduleDirName . '_view', 1, \XOOPS_GROUP_ANONYMOUS, $moduleId); 
 	*/
 
     //  ---  CREATE FOLDERS ---------------
-    if (count($configurator->uploadFolders) > 0) {
-        //    foreach (array_keys($GLOBALS['uploadFolders']) as $i) {
-        foreach (array_keys($configurator->uploadFolders) as $i) {
+    if (\count($configurator->uploadFolders) > 0) {
+        //    foreach (\array_keys($GLOBALS['uploadFolders']) as $i) {
+        foreach (\array_keys($configurator->uploadFolders) as $i) {
             $utility::createFolder($configurator->uploadFolders[$i]);
         }
     }
 
     //  ---  COPY blank.png FILES ---------------
-    if (count($configurator->copyBlankFiles) > 0) {
-        $file = dirname(__DIR__) . '/assets/images/blank.gif';
-        foreach (array_keys($configurator->copyBlankFiles) as $i) {
+    if (\count($configurator->copyBlankFiles) > 0) {
+        $file = \dirname(__DIR__) . '/assets/images/blank.gif';
+        foreach (\array_keys($configurator->copyBlankFiles) as $i) {
             $dest = $configurator->copyBlankFiles[$i] . '/blank.gif';
             $utility::copyFile($file, $dest);
         }

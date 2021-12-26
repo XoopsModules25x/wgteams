@@ -22,28 +22,28 @@ declare(strict_types=1);
  * @author          Goffy - Wedega.com - Email:<webmaster@wedega.com> - Website:<https://wedega.com>
  * @version         $Id: 1.0 common.php 1 Sun 2015/12/27 23:18:02Z Goffy - Wedega $
  */
-defined('XOOPS_ROOT_PATH') || die('Restricted access');
-if (!defined('WGTEAMS_PATH')) {
-    if (!defined('XOOPS_ICONS32_PATH')) {
-        define('XOOPS_ICONS32_PATH', XOOPS_ROOT_PATH . '/Frameworks/moduleclasses/icons/32');
+\defined('XOOPS_ROOT_PATH') || die('Restricted access');
+if (!\defined('WGTEAMS_PATH')) {
+    if (!\defined('XOOPS_ICONS32_PATH')) {
+        \define('XOOPS_ICONS32_PATH', \XOOPS_ROOT_PATH . '/Frameworks/moduleclasses/icons/32');
     }
-    if (!defined('XOOPS_ICONS32_URL')) {
-        define('XOOPS_ICONS32_URL', XOOPS_URL . '/Frameworks/moduleclasses/icons/32');
+    if (!\defined('XOOPS_ICONS32_URL')) {
+        \define('XOOPS_ICONS32_URL', \XOOPS_URL . '/Frameworks/moduleclasses/icons/32');
     }
-    define('WGTEAMS_DIRNAME', 'wgteams');
-    define('WGTEAMS_PATH', XOOPS_ROOT_PATH . '/modules/' . WGTEAMS_DIRNAME);
-    define('WGTEAMS_URL', XOOPS_URL . '/modules/' . WGTEAMS_DIRNAME);
-    define('WGTEAMS_ICONS_PATH', WGTEAMS_PATH . '/assets/icons');
-    define('WGTEAMS_ICONS_URL', WGTEAMS_URL . '/assets/icons');
-    define('WGTEAMS_IMAGE_PATH', WGTEAMS_PATH . '/assets/images');
-    define('WGTEAMS_IMAGE_URL', WGTEAMS_URL . '/assets/images');
-    define('WGTEAMS_UPLOAD_PATH', XOOPS_UPLOAD_PATH . '/' . WGTEAMS_DIRNAME);
-    define('WGTEAMS_UPLOAD_URL', XOOPS_UPLOAD_URL . '/' . WGTEAMS_DIRNAME);
-    define('WGTEAMS_ADMIN', WGTEAMS_URL . '/admin/index.php');
-    $local_logo = WGTEAMS_IMAGE_URL . '/wedega.png';
+    \define('WGTEAMS_DIRNAME', 'wgteams');
+    \define('WGTEAMS_PATH', \XOOPS_ROOT_PATH . '/modules/' . \WGTEAMS_DIRNAME);
+    \define('WGTEAMS_URL', \XOOPS_URL . '/modules/' . \WGTEAMS_DIRNAME);
+    \define('WGTEAMS_ICONS_PATH', \WGTEAMS_PATH . '/assets/icons');
+    \define('WGTEAMS_ICONS_URL', \WGTEAMS_URL . '/assets/icons');
+    \define('WGTEAMS_IMAGE_PATH', \WGTEAMS_PATH . '/assets/images');
+    \define('WGTEAMS_IMAGE_URL', \WGTEAMS_URL . '/assets/images');
+    \define('WGTEAMS_UPLOAD_PATH', XOOPS_UPLOAD_PATH . '/' . \WGTEAMS_DIRNAME);
+    \define('WGTEAMS_UPLOAD_URL', XOOPS_UPLOAD_URL . '/' . \WGTEAMS_DIRNAME);
+    \define('WGTEAMS_ADMIN', \WGTEAMS_URL . '/admin/index.php');
+    $local_logo = \WGTEAMS_IMAGE_URL . '/wedega.png';
 }
 // module information
 $copyright = "<a href='https://wedega.com' title='XOOPS on Wedega' target='_blank'>
                      <img src='" . $local_logo . "' alt='XOOPS on Wedega' style='height:40px;'></a>";
 
-require_once WGTEAMS_PATH . '/include/functions.php';
+require_once \WGTEAMS_PATH . '/include/functions.php';

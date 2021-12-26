@@ -64,10 +64,10 @@ function wgteamsMetaKeywords($content)
     global $xoopsTpl, $xoTheme;
     $myts    = \MyTextSanitizer::getInstance();
     $content = $myts->undoHtmlSpecialChars($myts->displayTarea($content));
-    if (isset($xoTheme) && is_object($xoTheme)) {
-        $xoTheme->addMeta('meta', 'keywords', strip_tags($content));
+    if (isset($xoTheme) && \is_object($xoTheme)) {
+        $xoTheme->addMeta('meta', 'keywords', \strip_tags($content));
     } else {    // Compatibility for old Xoops versions
-        $xoopsTpl->assign('xoops_meta_keywords', strip_tags($content));
+        $xoopsTpl->assign('xoops_meta_keywords', \strip_tags($content));
     }
 }
 
@@ -79,10 +79,10 @@ function wgteamsMetaDescription($content)
     global $xoopsTpl, $xoTheme;
     $myts    = \MyTextSanitizer::getInstance();
     $content = $myts->undoHtmlSpecialChars($myts->displayTarea($content));
-    if (isset($xoTheme) && is_object($xoTheme)) {
-        $xoTheme->addMeta('meta', 'description', strip_tags($content));
+    if (isset($xoTheme) && \is_object($xoTheme)) {
+        $xoTheme->addMeta('meta', 'description', \strip_tags($content));
     } else {    // Compatibility for old Xoops versions
-        $xoopsTpl->assign('xoops_meta_description', strip_tags($content));
+        $xoopsTpl->assign('xoops_meta_description', \strip_tags($content));
     }
 }
 
@@ -102,14 +102,14 @@ function wgteamsGetTeamDetails(&$teamsAll, $lengthName = 0, $show_descr = true, 
     $helper       = Wgteams\Helper::getInstance();
 //    $teamsHandler = $helper->getHandler('Teams');
 
-    xoops_loadLanguage('main', WGTEAMS_DIRNAME);
+    \xoops_loadLanguage('main', \WGTEAMS_DIRNAME);
 
-    $team_image_url = WGTEAMS_UPLOAD_URL . '/teams/images/';
+    $team_image_url = \WGTEAMS_UPLOAD_URL . '/teams/images/';
     $teams_list = [];
 	
 	$show_teamname = (1 == $helper->getConfig('wgteams_showteamname')) ? true : false;
 
-    foreach (array_keys($teamsAll) as $i) {
+    foreach (\array_keys($teamsAll) as $i) {
         $team_id    = $teamsAll[$i]->getVar('team_id');
         $team_name  = $teamsAll[$i]->getVar('team_name');
         if ($lengthName > 0) {
@@ -162,10 +162,10 @@ function wgteamsGetTeamMemberDetails(&$teamsAll)
     $relationsHandler  = new Wgteams\RelationsHandler($db);
     $infofieldsHandler = new Wgteams\InfofieldsHandler($db);
 
-    xoops_loadLanguage('main', WGTEAMS_DIRNAME);
+    \xoops_loadLanguage('main', \WGTEAMS_DIRNAME);
 
-    $team_image_url   = WGTEAMS_UPLOAD_URL . '/teams/images/';
-    $member_image_url = WGTEAMS_UPLOAD_URL . '/members/images/';
+    $team_image_url   = \WGTEAMS_UPLOAD_URL . '/teams/images/';
+    $member_image_url = \WGTEAMS_UPLOAD_URL . '/members/images/';
 	
 	$member_labels     = (1 == $helper->getConfig('wgteams_labels_member')) ? true : false;
 	$infofield_labels  = (1 == $helper->getConfig('wgteams_labels_infofields')) ? true : false;
@@ -173,7 +173,7 @@ function wgteamsGetTeamMemberDetails(&$teamsAll)
 
     $teams_list = [];
 
-    foreach (array_keys($teamsAll) as $i) {
+    foreach (\array_keys($teamsAll) as $i) {
         $team_id    = $teamsAll[$i]->getVar('team_id');
 		$team_name  = $teamsAll[$i]->getVar('team_name');
         $team_descr = $teamsAll[$i]->getVar('team_descr', 'n');
@@ -198,7 +198,7 @@ function wgteamsGetTeamMemberDetails(&$teamsAll)
         $relations = [];
         $counter   = 0;
         $nb_infos  = 0;
-        foreach (array_keys($relsAll) as $r) {
+        foreach (\array_keys($relsAll) as $r) {
             $member_id    = $relsAll[$r]->getVar('rel_member_id');
             $member_obj   = $membersHandler->get($member_id);
             $member_title = $member_obj->getVar('member_title');
@@ -209,7 +209,7 @@ function wgteamsGetTeamMemberDetails(&$teamsAll)
             $member_lastname  = $member_obj->getVar('member_lastname');
             $member_name      = $member_firstname;
             $member_name      .= ' ' . $member_lastname;
-            $member_name      = trim($member_name);
+            $member_name      = \trim($member_name);
             if ('' !== $member_name) {
                 $nb_infos++;
             }

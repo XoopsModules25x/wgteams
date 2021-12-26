@@ -21,16 +21,16 @@ declare(strict_types=1);
  */
 function getConfig()
 {
-    $moduleDirName      = basename(dirname(__DIR__));
-//    $moduleDirNameUpper = mb_strtoupper($moduleDirName);
+    $moduleDirName      = \basename(\dirname(__DIR__));
+//    $moduleDirNameUpper = \mb_strtoupper($moduleDirName);
 
     return (object)[
-        'name'           => mb_strtoupper($moduleDirName) . ' Module Configurator',
+        'name'           => \mb_strtoupper($moduleDirName) . ' Module Configurator',
         'paths'          => [
             'dirname'    => $moduleDirName,
-            'admin'      => XOOPS_ROOT_PATH . '/modules/' . $moduleDirName . '/admin',
-            'modPath'    => XOOPS_ROOT_PATH . '/modules/' . $moduleDirName,
-            'modUrl'     => XOOPS_URL . '/modules/' . $moduleDirName,
+            'admin'      => \XOOPS_ROOT_PATH . '/modules/' . $moduleDirName . '/admin',
+            'modPath'    => \XOOPS_ROOT_PATH . '/modules/' . $moduleDirName,
+            'modUrl'     => \XOOPS_URL . '/modules/' . $moduleDirName,
             'uploadPath' => XOOPS_UPLOAD_PATH . '/' . $moduleDirName,
             'uploadUrl'  => XOOPS_UPLOAD_URL . '/' . $moduleDirName,
         ],
@@ -54,11 +54,11 @@ function getConfig()
 
         'copyTestFolders' => [
             [
-               XOOPS_ROOT_PATH . '/modules/' . $moduleDirName . '/testdata/uploads/teams/images',
+               \XOOPS_ROOT_PATH . '/modules/' . $moduleDirName . '/testdata/uploads/teams/images',
                XOOPS_UPLOAD_PATH . '/' . $moduleDirName . '/teams/images',
             ],
 			[
-               XOOPS_ROOT_PATH . '/modules/' . $moduleDirName . '/testdata/uploads/members/images',
+               \XOOPS_ROOT_PATH . '/modules/' . $moduleDirName . '/testdata/uploads/members/images',
                XOOPS_UPLOAD_PATH . '/' . $moduleDirName . '/members/images',
             ]
         ],
@@ -85,6 +85,6 @@ function getConfig()
         'renameTables'    => [//         'XX_archive'     => 'ZZZZ_archive',
         ],
         'modCopyright'    => "<a href='https://xoops.wedega.com' title='XOOPS on Wedega - Webdesign Gabor' target='_blank'>
-                     <img src='" . XOOPS_URL . '/modules/' . $moduleDirName . "/assets/images/wedega.png' alt='XOOPS on Wedega - Webdesign Gabor' /></a>",
+                     <img src='" . \XOOPS_URL . '/modules/' . $moduleDirName . "/assets/images/wedega.png' alt='XOOPS on Wedega - Webdesign Gabor' /></a>",
     ];
 }

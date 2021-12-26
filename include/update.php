@@ -66,12 +66,12 @@ function update_wgteams_v10(&$module)
     while (false !== (list($tplid) = $xoopsDB->fetchRow($result))) {
         $tplids[] = $tplid;
     }
-    if (count($tplids) > 0) {
-        $tplfileHandler  = xoops_getHandler('tplfile');
-        $duplicate_files = $tplfileHandler->getObjects(new \Criteria('tpl_id', '(' . implode(',', $tplids) . ')', 'IN'));
+    if (\count($tplids) > 0) {
+        $tplfileHandler  = \xoops_getHandler('tplfile');
+        $duplicate_files = $tplfileHandler->getObjects(new \Criteria('tpl_id', '(' . \implode(',', $tplids) . ')', 'IN'));
 
-        if (count($duplicate_files) > 0) {
-            foreach (array_keys($duplicate_files) as $i) {
+        if (\count($duplicate_files) > 0) {
+            foreach (\array_keys($duplicate_files) as $i) {
                 $tplfileHandler->delete($duplicate_files[$i]);
             }
         }
