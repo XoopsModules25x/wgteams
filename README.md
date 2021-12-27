@@ -1,4 +1,7 @@
 ![alt XOOPS CMS](https://xoops.org/images/logoXoops4GithubRepository.png)
+
+![alt XOOPS CMS](https://xoops.org/images/logoXoopsPhp8.png)
+
 ## wgTeams module for  [XOOPS CMS 2.5.11+](https://xoops.org)
 [![Software License](https://img.shields.io/badge/license-GPL-brightgreen.svg?style=flat)](LICENSE)
 [![Latest Pre-Release](https://img.shields.io/github/tag/ggoffy/wgteams.svg?style=flat)](https://github.com/ggoffy/wgteams/tags/)
@@ -9,7 +12,15 @@
 You can select between different templates, which have also various settings.
                                                                                                                        
 The templates on user side are fully responsive, but for proper displaying you must use a Bootstrap theme.
-                                                                                                                       
+
+### Require:
+- XOOPS 2.5.11;
+- XOOPS Admin 1.2;
+- PHP 7.4 or higher;
+- MySQL 5.5; -> Minimum Recommended Using InnoDB Version 5.1 or Later
+
+wgTeams is ready for PHP 8.0
+
 #### Demo: 
 * https://xoops.wedega.com/modules/wgteams/
 
