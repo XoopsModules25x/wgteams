@@ -21,7 +21,6 @@ namespace XoopsModules\Wgteams\Common;
  * @since       1.05
  */
 
-//require_once dirname(dirname(__DIR__)) . '/include/common.php';
 
 /**
  * Class Configurator
@@ -37,6 +36,8 @@ class Configurator
     public $oldFiles        = [];
     public $oldFolders      = [];
     public $renameTables    = [];
+    public $renameFields    = [];
+    public $moduleStats     = [];
     public $modCopyright;
 
     /**
@@ -44,11 +45,7 @@ class Configurator
      */
     public function __construct()
     {
-//        $moduleDirName      = basename(dirname(dirname(__DIR__)));
-//        $moduleDirNameUpper = mb_strtoupper($moduleDirName);
-
-        require dirname(dirname(__DIR__)) . '/include/config.php';
-        $config = getConfig();
+        $config = require \dirname(__DIR__, 2) . '/config/config.php';
 
         $this->name            = $config->name;
         $this->paths           = $config->paths;
@@ -59,6 +56,8 @@ class Configurator
         $this->oldFiles        = $config->oldFiles;
         $this->oldFolders      = $config->oldFolders;
         $this->renameTables    = $config->renameTables;
+        $this->renameFields    = $config->renameFields;
+        $this->moduleStats     = $config->moduleStats;
         $this->modCopyright    = $config->modCopyright;
     }
 }

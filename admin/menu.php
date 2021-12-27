@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 /*
  You may not change or alter any portion of this comment or credits
  of supporting developers from this source code or any supporting source code
@@ -26,7 +29,7 @@ use XoopsModules\Wgteams;
 $helper = Wgteams\Helper::getInstance();
 
 $pathIcon32 = \Xmf\Module\Admin::menuIconPath('');
-if (is_object($helper->getModule())) {
+if (\is_object($helper->getModule())) {
     $pathModIcon32 = $helper->getModule()->getInfo('modicons32');
 }
 $adminmenu[] = [

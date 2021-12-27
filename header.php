@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 /*
  You may not change or alter any portion of this comment or credits
  of supporting developers from this source code or any supporting source code
@@ -23,9 +26,9 @@
 
 use XoopsModules\Wgteams;
 
-require dirname(dirname(__DIR__)) . '/mainfile.php';
+require \dirname(__DIR__, 2) . '/mainfile.php';
 require __DIR__ . '/include/common.php';
-$dirname = basename(__DIR__);
+$dirname = \basename(__DIR__);
 // Breadcrumbs
 $xoBreadcrumbs   = [];
 // Get instance of module
@@ -36,16 +39,16 @@ $relationsHandler  = new Wgteams\RelationsHandler($db);
 $infofieldsHandler = new Wgteams\InfofieldsHandler($db);
 
 // Permission
-require_once XOOPS_ROOT_PATH . '/class/xoopsform/grouppermform.php';
-$grouppermHandler = xoops_getHandler('groupperm');
-if (is_object($xoopsUser)) {
+require_once \XOOPS_ROOT_PATH . '/class/xoopsform/grouppermform.php';
+$grouppermHandler = \xoops_getHandler('groupperm');
+if (\is_object($xoopsUser)) {
     $groups = $xoopsUser->getGroups();
 } else {
-    $groups = XOOPS_GROUP_ANONYMOUS;
+    $groups = \XOOPS_GROUP_ANONYMOUS;
 }
 
 $myts = \MyTextSanitizer::getInstance();
-if (!file_exists($style = WGTEAMS_URL . '/assets/css/style.css')) {
+if (!\file_exists($style = \WGTEAMS_URL . '/assets/css/style.css')) {
     return false;
 }
 
@@ -56,5 +59,5 @@ $pathModuleAdmin = $GLOBALS['xoopsModule']->getInfo('dirmoduleadmin');
 $pathModIcon16 = $xoopsModule->getInfo('modicons16');
 $pathModIcon32 = $xoopsModule->getInfo('modicons32');
 
-xoops_loadLanguage('modinfo', $dirname);
-xoops_loadLanguage('main', $dirname);
+\xoops_loadLanguage('modinfo', $dirname);
+\xoops_loadLanguage('main', $dirname);

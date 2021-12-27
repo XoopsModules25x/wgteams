@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 /*
  You may not change or alter any portion of this comment or credits
  of supporting developers from this source code or any supporting source code
@@ -33,7 +36,7 @@ function wgteams_search($queryarray, $andor, $limit, $offset, $userid)
     if (0 != $userid) {
         $sql .= ' AND infofield_submitter=' . (int)$userid;
     }
-    if (is_array($queryarray) && $count = count($queryarray)) {
+    if (\is_array($queryarray) && $count = \count($queryarray)) {
         $sql .= " AND ((a LIKE %$queryarray[0]%)";
         for ($i = 1; $i < $count; ++$i) {
             $sql .= " $andor ";

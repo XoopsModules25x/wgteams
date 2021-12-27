@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 /*
  You may not change or alter any portion of this comment or credits
  of supporting developers from this source code or any supporting source code
@@ -26,13 +29,12 @@ use XoopsModules\Wgteams;
 
 require __DIR__ . '/header.php';
 $GLOBALS['xoopsOption']['template_main'] = 'wgteams_teams.tpl';
-require_once XOOPS_ROOT_PATH . '/header.php';
-/** @var Wgteams\Helper $helper */
+require_once \XOOPS_ROOT_PATH . '/header.php';
 $helper    = Wgteams\Helper::getInstance();
 $startpage = $helper->getConfig('startpage', 0)[0];
 
-$team_id = Request::getInt('team_id', 0);
-$start   = Request::getInt('start', 0);
+$team_id = Request::getInt('team_id');
+$start   = Request::getInt('start');
 $limit   = Request::getInt('limit', $helper->getConfig('userpager'));
 
 // Define Stylesheet
@@ -65,8 +67,8 @@ if ($teamsCount > 0) {
 }
 
 $team_name = '';
-if (count($teams_list) > 0) {
-    foreach (array_keys($teams_list) as $i) {
+if (\count($teams_list) > 0) {
+    foreach (\array_keys($teams_list) as $i) {
         $team_name  = $teams_list[$i]['team_name'];
         $keywords[] = $teams_list[$i]['team_name'];
     }
@@ -76,19 +78,19 @@ if (count($teams_list) > 0) {
 
 // fill in template
 $GLOBALS['xoopsTpl']->assign('xoops_icons32_url', XOOPS_ICONS32_URL);
-$GLOBALS['xoopsTpl']->assign('wgteams_upload_url', WGTEAMS_UPLOAD_URL);
-$GLOBALS['xoopsTpl']->assign('wgteams_teams_upload_url', WGTEAMS_UPLOAD_URL . '/teams/images/');
+$GLOBALS['xoopsTpl']->assign('wgteams_upload_url', \WGTEAMS_UPLOAD_URL);
+$GLOBALS['xoopsTpl']->assign('wgteams_teams_upload_url', \WGTEAMS_UPLOAD_URL . '/teams/images/');
 
 // Display Navigation
 if ($teamsCount > $limit) {
-    require_once XOOPS_ROOT_PATH . '/class/pagenav.php';
+    require_once \XOOPS_ROOT_PATH . '/class/pagenav.php';
     $nav = new \XoopsPageNav($teamsCount, $limit, $start, 'start');
-    $GLOBALS['xoopsTpl']->assign('pagenav', $nav->renderNav(4));
+    $GLOBALS['xoopsTpl']->assign('pagenav', $nav->renderNav());
 }
 // Breadcrumbs
 if (1 == $helper->getConfig('wgteams_showbreadcrumbs')) {
     if ($team_id > 0 && '' !== $team_name) {
-        $xoBreadcrumbs[] = ['title' => $GLOBALS['xoopsModule']->getVar('name'), 'link' => WGTEAMS_URL . '/'];
+        $xoBreadcrumbs[] = ['title' => $GLOBALS['xoopsModule']->getVar('name'), 'link' => \WGTEAMS_URL . '/'];
         $xoBreadcrumbs[] = ['title' => $team_name];
     } else {
         $xoBreadcrumbs[] = ['title' => $GLOBALS['xoopsModule']->getVar('name')];
@@ -96,11 +98,11 @@ if (1 == $helper->getConfig('wgteams_showbreadcrumbs')) {
     $GLOBALS['xoopsTpl']->assign('showbreadcrumbs', '1');
 }
 // keywords
-wgteamsMetaKeywords($helper->getConfig('keywords') . ', ' . implode(', ', $keywords));
+wgteamsMetaKeywords($helper->getConfig('keywords') . ', ' . \implode(', ', $keywords));
 unset($keywords);
 // description
 wgteamsMetaDescription(_MA_WGTEAMS_TEAM_DESC);
 
-$GLOBALS['xoopsTpl']->assign('wgteams_url_index', WGTEAMS_URL . '/index.php');
-$GLOBALS['xoopsTpl']->assign('xoops_mpageurl', WGTEAMS_URL . '/index.php');
+$GLOBALS['xoopsTpl']->assign('wgteams_url_index', \WGTEAMS_URL . '/index.php');
+$GLOBALS['xoopsTpl']->assign('xoops_mpageurl', \WGTEAMS_URL . '/index.php');
 require __DIR__ . '/footer.php';

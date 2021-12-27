@@ -16,12 +16,12 @@
 use XoopsModules\Wgteams;
 use XoopsModules\Wgteams\Common;
 
-require dirname(dirname(dirname(__DIR__))) . '/include/cp_header.php';
-include dirname(__DIR__) . '/preloads/autoloader.php';
-$op = \Xmf\Request::getCmd('op', '');
+require \dirname(__DIR__, 3) . '/include/cp_header.php';
+include \dirname(__DIR__) . '/preloads/autoloader.php';
+$op = \Xmf\Request::getCmd('op');
 
-$moduleDirName = basename(dirname(__DIR__));
-$moduleDirNameUpper = mb_strtoupper($moduleDirName);
+$moduleDirName = \basename(\dirname(__DIR__));
+$moduleDirNameUpper = \mb_strtoupper($moduleDirName);
 
 $helper = Wgteams\Helper::getInstance();
 // Load language files
@@ -31,12 +31,12 @@ switch ($op) {
     case 'load':
         if (\Xmf\Request::hasVar('ok', 'REQUEST') && 1 == $_REQUEST['ok']) {
             if (!$GLOBALS['xoopsSecurity']->check()) {
-                redirect_header('../admin/index.php', 3, implode(',', $GLOBALS['xoopsSecurity']->getErrors()));
+                \redirect_header('../admin/index.php', 3, \implode(',', $GLOBALS['xoopsSecurity']->getErrors()));
             }
             loadSampleData();
         } else {
             xoops_cp_header();
-            xoops_confirm(['ok' => 1, 'op' => 'load'], 'index.php', sprintf(constant('CO_' . $moduleDirNameUpper . '_' . 'ADD_SAMPLEDATA_OK')), constant('CO_' . $moduleDirNameUpper . '_' . 'CONFIRM'), true);
+            xoops_confirm(['ok' => 1, 'op' => 'load'], 'index.php', \sprintf(\constant('CO_' . $moduleDirNameUpper . '_' . 'ADD_SAMPLEDATA_OK')), \constant('CO_' . $moduleDirNameUpper . '_' . 'CONFIRM'));
             xoops_cp_footer();
         }
         break;
@@ -49,8 +49,8 @@ switch ($op) {
 
 function loadSampleData()
 {
-    $moduleDirName = basename(dirname(__DIR__));
-    $moduleDirNameUpper = mb_strtoupper($moduleDirName);
+    $moduleDirName = \basename(\dirname(__DIR__));
+    $moduleDirNameUpper = \mb_strtoupper($moduleDirName);
 
     $utility = new Wgteams\Utility();
     $configurator = new Wgteams\Common\Configurator();
@@ -64,55 +64,55 @@ function loadSampleData()
     }
 
     //  ---  COPY test folder files ---------------
-    if (is_array($configurator->copyTestFolders) && count($configurator->copyTestFolders) > 0) {
-        //        $file =  dirname(__DIR__) . '/testdata/images/';
-        foreach (array_keys($configurator->copyTestFolders) as $i) {
+    if (\is_array($configurator->copyTestFolders) && \count($configurator->copyTestFolders) > 0) {
+        //        $file =  \dirname(__DIR__) . '/testdata/images/';
+        foreach (\array_keys($configurator->copyTestFolders) as $i) {
             $src = $configurator->copyTestFolders[$i][0];
             $dest = $configurator->copyTestFolders[$i][1];
             $utility::rcopy($src, $dest);
         }
     }
 
-    redirect_header('../admin/index.php', 1, constant('CO_' . $moduleDirNameUpper . '_' . 'SAMPLEDATA_SUCCESS'));
+    \redirect_header('../admin/index.php', 1, \constant('CO_' . $moduleDirNameUpper . '_' . 'SAMPLEDATA_SUCCESS'));
 }
 
 function saveSampleData()
 {
-    $moduleDirName = basename(dirname(__DIR__));
-    $moduleDirNameUpper = mb_strtoupper($moduleDirName);
-	$utility = new Wgteams\Utility();
-	$configurator = new Common\Configurator();
+    $moduleDirName = \basename(\dirname(__DIR__));
+    $moduleDirNameUpper = \mb_strtoupper($moduleDirName);
+    $utility = new Wgteams\Utility();
+    $configurator = new Common\Configurator();
 
     $tables = \Xmf\Module\Helper::getHelper($moduleDirName)->getModule()->getInfo('tables');
 
     foreach ($tables as $table) {
         \Xmf\Database\TableLoad::saveTableToYamlFile($table, $table . '_' . date('Y-m-d H-i-s') . '.yml');
     }
-	
-	//  ---  COPY test folder files ---------------
-    if (is_array($configurator->copyTestFolders) && count($configurator->copyTestFolders) > 0) {
-        //        $file =  dirname(__DIR__) . '/testdata/images/';
-        foreach (array_keys($configurator->copyTestFolders) as $i) {
+    
+    //  ---  COPY test folder files ---------------
+    if (\is_array($configurator->copyTestFolders) && \count($configurator->copyTestFolders) > 0) {
+        //        $file =  \dirname(__DIR__) . '/testdata/images/';
+        foreach (\array_keys($configurator->copyTestFolders) as $i) {
             $src = $configurator->copyTestFolders[$i][1];
             $dest = $configurator->copyTestFolders[$i][0];
             $utility::rcopy($src, $dest);
         }
     }
 
-    redirect_header('../admin/index.php', 1, constant('CO_' . $moduleDirNameUpper . '_' . 'SAMPLEDATA_SUCCESS'));
+    \redirect_header('../admin/index.php', 1, \constant('CO_' . $moduleDirNameUpper . '_' . 'SAMPLEDATA_SUCCESS'));
 }
 
 function exportSchema()
 {
     try {
-        $moduleDirName = basename(dirname(__DIR__));
-        $moduleDirNameUpper = mb_strtoupper($moduleDirName);
+        $moduleDirName = \basename(\dirname(__DIR__));
+        $moduleDirNameUpper = \mb_strtoupper($moduleDirName);
 
         $migrate = new  \Xmf\Database\Migrate($moduleDirName);
         $migrate->saveCurrentSchema();
 
-        redirect_header('../admin/index.php', 1, constant('CO_' . $moduleDirNameUpper . '_' . 'EXPORT_SCHEMA_SUCCESS'));
+        \redirect_header('../admin/index.php', 1, \constant('CO_' . $moduleDirNameUpper . '_' . 'EXPORT_SCHEMA_SUCCESS'));
     } catch (\Exception $e) {
-        exit(constant('CO_' . $moduleDirNameUpper . '_' . 'EXPORT_SCHEMA_ERROR'));
+        exit(\constant('CO_' . $moduleDirNameUpper . '_' . 'EXPORT_SCHEMA_ERROR'));
     }
 }

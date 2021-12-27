@@ -18,7 +18,7 @@
  * @min_xoops       2.5.7
  * @author          Goffy - Wedega.com - Email:<webmaster@wedega.com> - Website:<https://wedega.com>
  */
-defined('XOOPS_ROOT_PATH') || die('Restricted access');
+\defined('XOOPS_ROOT_PATH') || die('Restricted access');
 
 /**
  * Class WgteamsCorePreload

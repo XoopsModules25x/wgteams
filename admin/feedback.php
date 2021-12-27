@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 /*
  You may not change or alter any portion of this comment or credits
  of supporting developers from this source code or any supporting source code
@@ -31,7 +34,7 @@ $feedback = new \XoopsModules\Wgteams\Common\ModuleFeedback();
 // It recovered the value of argument op in URL$
 $op            = Request::getString('op', 'list');
 $moduleDirName = $GLOBALS['xoopsModule']->getVar('dirname');
-xoops_loadLanguage('feedback', $moduleDirName);
+\xoops_loadLanguage('feedback', $moduleDirName);
 
 switch ($op) {
     case 'list':
@@ -39,24 +42,24 @@ switch ($op) {
         $GLOBALS['xoopsTpl']->assign('navigation', $adminObject->displayNavigation('feedback.php'));
         $feedback->name  = $GLOBALS['xoopsUser']->getVar('name');
         $feedback->email = $GLOBALS['xoopsUser']->getVar('email');
-        $feedback->site  = XOOPS_URL;
+        $feedback->site  = \XOOPS_URL;
         $form            = $feedback->getFormFeedback();
         echo $form->display();
         break;
     case 'send':
         // Security Check
         if (!$GLOBALS['xoopsSecurity']->check()) {
-            redirect_header('index.php', 3, implode(',', $GLOBALS['xoopsSecurity']->getErrors()));
+            \redirect_header('index.php', 3, \implode(',', $GLOBALS['xoopsSecurity']->getErrors()));
         }
 
         $GLOBALS['xoopsTpl']->assign('navigation', $adminObject->displayNavigation('feedback.php'));
 
-        $your_name  = Request::getString('your_name', '');
-        $your_site  = Request::getString('your_site', '');
-        $your_mail  = Request::getString('your_mail', '');
-        $fb_type    = Request::getString('fb_type', '');
-        $fb_content = Request::getText('fb_content', '');
-        $fb_content = str_replace(["\r\n", "\n", "\r"], '<br>', $fb_content); //clean line break from dhtmltextarea
+        $your_name  = Request::getString('your_name');
+        $your_site  = Request::getString('your_site');
+        $your_mail  = Request::getString('your_mail');
+        $fb_type    = Request::getString('fb_type');
+        $fb_content = Request::getText('fb_content');
+        $fb_content = \str_replace(["\r\n", "\n", "\r"], '<br>', $fb_content); //clean line break from dhtmltextarea
 
         $title       = _FB_SEND_FOR . $GLOBALS['xoopsModule']->getVar('dirname');
         $body        = _FB_NAME . ': ' . $your_name . '<br>';
@@ -71,11 +74,11 @@ switch ($op) {
         $xoopsMailer->setFromEmail($your_mail);
         $xoopsMailer->setFromName($your_name);
         $xoopsMailer->setSubject($title);
-        $xoopsMailer->multimailer->isHTML(true);
+        $xoopsMailer->multimailer->isHTML();
         $xoopsMailer->setBody($body);
         $ret = $xoopsMailer->send();
         if ($ret) {
-            redirect_header('index.php', 3, _FB_SEND_SUCCESS);
+            \redirect_header('index.php', 3, _FB_SEND_SUCCESS);
         }
 
         // show form with content again

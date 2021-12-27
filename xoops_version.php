@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 /*
  You may not change or alter any portion of this comment or credits
  of supporting developers from this source code or any supporting source code
@@ -23,18 +26,18 @@
 
 use XoopsModules\Wgteams;
 
-defined('XOOPS_ROOT_PATH') || die('Restricted access');
+\defined('XOOPS_ROOT_PATH') || die('Restricted access');
 
 require_once __DIR__ . '/preloads/autoloader.php';
 
-$moduleDirName      = basename(__DIR__);
-$moduleDirNameUpper = mb_strtoupper($moduleDirName);
+$moduleDirName      = \basename(__DIR__);
+$moduleDirNameUpper = \mb_strtoupper($moduleDirName);
 
 // ------------------- Informations ------------------- //
 $modversion = [
-    'version'             => '1.10',
-    'module_status'       => 'Final',
-    'release'             => '2020/07/03',
+    'version'             => '2.0.0',
+    'module_status'       => 'Beta1',
+    'release'             => '2022/12/26',
     'name'                => _MI_WGTEAMS_NAME,
     'description'         => _MI_WGTEAMS_DESC,
     'author'              => 'Goffy - Wedega.com',
@@ -45,13 +48,13 @@ $modversion = [
     'license'             => 'GPL 2.0 or later',
     'license_url'         => 'www.gnu.org/licenses/gpl-2.0.html/',
     'help'                => 'page=help',
-    'release_info' 		  => 'release_info',
-    'release_file'        => XOOPS_URL . '/modules/wgteams/docs/release_info file',
-    'release_date'        => '2020/07/03',
+    'release_info'           => 'release_info',
+    'release_file'        => \XOOPS_URL . '/modules/wgteams/docs/release_info file',
+    'release_date'        => '2022/12/26',
     'manual'              => 'link to manual file',
-    'manual_file'         => XOOPS_URL . '/modules/wgteams/docs/install.txt',
-    'min_php'             => '7.0',
-    'min_xoops'           => '2.5.10',
+    'manual_file'         => \XOOPS_URL . '/modules/wgteams/docs/install.txt',
+    'min_php'             => '7.4',
+    'min_xoops'           => '2.5.11 Beta1',
     'min_admin'           => '1.1',
     'min_db'              => ['mysql' => '5.0.7', 'mysqli' => '5.0.7'],
     'image'               => 'assets/images/wgteams_logo.png',
@@ -81,7 +84,7 @@ $modversion = [
     // Install/Update
     'onInstall'           => 'include/oninstall.php',
     'onUpdate'            => 'include/onupdate.php',
-	'onUninstall'         => 'include/onuninstall.php',
+    'onUninstall'         => 'include/onuninstall.php',
 ];
 // ------------------- Templates ------------------- //
 // Admin
@@ -124,12 +127,11 @@ $modversion['search']['func'] = 'wgteams_search';
 
 // ------------------- Submenu ------------------- //
 global $xoopsModule;
-if (is_object($xoopsModule) && $xoopsModule->getVar('dirname') == $moduleDirName) {
+if (\is_object($xoopsModule) && $xoopsModule->getVar('dirname') == $moduleDirName) {
     global $xoopsModuleConfig, $xoopsUser;
 
     $s = 0;
 
-    /** @var Wgteams\Helper $helper */
     $helper = Wgteams\Helper::getInstance();
     //    $teamsHandler =  $helper->getHandler('TeamsHandler');
     $db           = \XoopsDatabaseFactory::getDatabaseConnection();
@@ -141,7 +143,7 @@ if (is_object($xoopsModule) && $xoopsModule->getVar('dirname') == $moduleDirName
     $crit_teams->setOrder('ASC');
 
     $teamsAll = $teamsHandler->getAll($crit_teams);
-    foreach (array_keys($teamsAll) as $i) {
+    foreach (\array_keys($teamsAll) as $i) {
         $s++;
         $modversion['sub'][$s]['name'] = $teamsAll[$i]->getVar('team_name');
         $modversion['sub'][$s]['url']  = 'index.php?team_id=' . $teamsAll[$i]->getVar('team_id');
@@ -208,7 +210,7 @@ $modversion['config'][] = [
 ];
 
 // Editor
-xoops_load('xoopseditorhandler');
+\xoops_load('xoopseditorhandler');
 $editorHandler          = \XoopsEditorHandler::getInstance();
 $modversion['config'][] = [
     'name'        => 'wgteams_editor',
@@ -216,14 +218,14 @@ $modversion['config'][] = [
     'description' => '_MI_WGTEAMS_EDITOR_DESC',
     'formtype'    => 'select',
     'valuetype'   => 'text',
-    'options'     => array_flip($editorHandler->getList()),
+    'options'     => \array_flip($editorHandler->getList()),
     'default'     => 'dhtmltextarea',
 ];
 
 // Uploads : maxsize of image
 include_once __DIR__ . '/include/xoops_version.inc.php';
-$iniPostMaxSize = wgteamsReturnBytes(ini_get('post_max_size'));
-$iniUploadMaxFileSize = wgteamsReturnBytes(ini_get('upload_max_filesize'));
+$iniPostMaxSize = wgteamsReturnBytes(\ini_get('post_max_size'));
+$iniUploadMaxFileSize = wgteamsReturnBytes(\ini_get('upload_max_filesize'));
 $maxSize = min($iniPostMaxSize, $iniUploadMaxFileSize);
 if ($maxSize > 10000 * 1048576) {
     $increment = 500;

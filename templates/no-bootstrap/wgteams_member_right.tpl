@@ -3,23 +3,23 @@
         <tr>
             <td class="member-label"><{$smarty.const._MA_WGTEAMS_MEMBER_NAME}></td>
             <td class="member-text member-name"><{$member.member_name}></td>
-            <{if $member.member_image}>
+            <{if $member.member_image|default:false}>
             <td class="member-img center" rowspan="<{$member.rel_nb_infos}>"><img class="center <{$member.rel_imagestyle}>" src="<{$member.member_image_url}><{$member.member_image}>" alt="<{$member.member_name}>" title="<{$member.member_name}>"></td>
             <{/if}>
         </tr>
-        <{if $member.member_address}>
+        <{if $member.member_address|default:false}>
             <tr>
                 <td class="member-label"><{$smarty.const._MA_WGTEAMS_MEMBER_ADDRESS}></td>
                 <td class="member-text member-address"><{$member.member_address}></td>
             </tr>
         <{/if}>
-        <{if $member.member_phone}>
+        <{if $member.member_phone|default:false}>
             <tr>
                 <td class="member-label"><{$smarty.const._MA_WGTEAMS_MEMBER_PHONE}></td>
                 <td class="member-text member-phone"><{$member.member_phone}></td>
             </tr>
         <{/if}>
-        <{if $member.member_email}>
+        <{if $member.member_email|default:false}>
             <tr>
                 <td class="member-label"><{$smarty.const._MA_WGTEAMS_MEMBER_EMAIL}></td>
                 <td class="member-text member-email"><{$member.member_email}></td>

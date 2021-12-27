@@ -22,7 +22,7 @@ namespace XoopsModules\Wgteams;
  * @author          Goffy - Wedega.com - Email:<webmaster@wedega.com> - Website:<https://wedega.com>
  * @version         $Id: 1.0 infofields.php 1 Sun 2015/12/27 23:18:00Z Goffy - Wedega $
  */
-defined('XOOPS_ROOT_PATH') || exit('Restricted access');
+\defined('XOOPS_ROOT_PATH') || exit('Restricted access');
 
 /**
  * Class Infofields
@@ -42,10 +42,10 @@ class Infofields extends \XoopsObject
     public function __construct()
     {
         $this->helper = Helper::getInstance();
-        $this->initVar('infofield_id', XOBJ_DTYPE_INT);
-        $this->initVar('infofield_name', XOBJ_DTYPE_TXTBOX);
-        $this->initVar('infofield_submitter', XOBJ_DTYPE_INT);
-        $this->initVar('infofield_date_created', XOBJ_DTYPE_INT);
+        $this->initVar('infofield_id', \XOBJ_DTYPE_INT);
+        $this->initVar('infofield_name', \XOBJ_DTYPE_TXTBOX);
+        $this->initVar('infofield_submitter', \XOBJ_DTYPE_INT);
+        $this->initVar('infofield_date_created', \XOBJ_DTYPE_INT);
     }
 
     /**
@@ -78,9 +78,9 @@ class Infofields extends \XoopsObject
         }
 
         // Title
-        $title = $this->isNew() ? sprintf(_AM_WGTEAMS_INFOFIELD_ADD) : sprintf(_AM_WGTEAMS_INFOFIELD_EDIT);
+        $title = $this->isNew() ? \sprintf(_AM_WGTEAMS_INFOFIELD_ADD) : \sprintf(_AM_WGTEAMS_INFOFIELD_EDIT);
         // Get Theme Form
-        xoops_load('XoopsFormLoader');
+        \xoops_load('XoopsFormLoader');
         $form = new \XoopsThemeForm($title, 'form', $action, 'post', true);
         $form->setExtra('enctype="multipart/form-data"');
         // Form Text AddField_name
@@ -110,7 +110,7 @@ class Infofields extends \XoopsObject
         $ret['field_id']           = $this->getVar('infofield_id');
         $ret['field_name']         = $this->getVar('infofield_name');
         $ret['field_submitter']    = \XoopsUser::getUnameFromId($this->getVar('infofield_submitter'));
-        $ret['field_date_created'] = formatTimestamp($this->getVar('infofield_date_created'));
+        $ret['field_date_created'] = \formatTimestamp($this->getVar('infofield_date_created'));
 
         return $ret;
     }
@@ -124,7 +124,7 @@ class Infofields extends \XoopsObject
     {
         $ret  = [];
         $vars = &$this->getVars();
-        foreach (array_keys($vars) as $var) {
+        foreach (\array_keys($vars) as $var) {
             $ret[$var] = $this->getVar($var);
         }
 

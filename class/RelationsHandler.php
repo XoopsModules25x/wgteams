@@ -26,7 +26,7 @@ namespace XoopsModules\Wgteams;
 
 use XoopsModules\Wgteams;
 
-defined('XOOPS_ROOT_PATH') || die('Restricted access');
+\defined('XOOPS_ROOT_PATH') || die('Restricted access');
 
 /**
  * Class RelationsHandler
@@ -93,7 +93,7 @@ class RelationsHandler extends \XoopsPersistableObjectHandler
     /**
      * get IDs of objects matching a condition
      *
-     * @param \CriteriaElement $criteria {@link CriteriaElement}
+     * @param \CriteriaElement|null $criteria {@link CriteriaElement}
      *                                   to match
      * @return array  of object IDs
      */

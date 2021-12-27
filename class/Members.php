@@ -22,7 +22,7 @@ namespace XoopsModules\Wgteams;
  * @author          Goffy - Wedega.com - Email:<webmaster@wedega.com> - Website:<https://wedega.com>
  * @version         $Id: 1.0 members.php 1 Sun 2015/12/27 23:18:00Z Goffy - Wedega $
  */
-defined('XOOPS_ROOT_PATH') || exit('Restricted access');
+\defined('XOOPS_ROOT_PATH') || exit('Restricted access');
 
 /**
  * Class Members
@@ -42,16 +42,16 @@ class Members extends \XoopsObject
     public function __construct()
     {
         $this->helper = Helper::getInstance();
-        $this->initVar('member_id', XOBJ_DTYPE_INT);
-        $this->initVar('member_firstname', XOBJ_DTYPE_TXTBOX);
-        $this->initVar('member_lastname', XOBJ_DTYPE_TXTBOX);
-        $this->initVar('member_title', XOBJ_DTYPE_TXTBOX);
-        $this->initVar('member_address', XOBJ_DTYPE_TXTAREA);
-        $this->initVar('member_phone', XOBJ_DTYPE_TXTAREA);
-        $this->initVar('member_email', XOBJ_DTYPE_TXTBOX);
-        $this->initVar('member_image', XOBJ_DTYPE_TXTBOX);
-        $this->initVar('member_submitter', XOBJ_DTYPE_INT);
-        $this->initVar('member_date_create', XOBJ_DTYPE_INT);
+        $this->initVar('member_id', \XOBJ_DTYPE_INT);
+        $this->initVar('member_firstname', \XOBJ_DTYPE_TXTBOX);
+        $this->initVar('member_lastname', \XOBJ_DTYPE_TXTBOX);
+        $this->initVar('member_title', \XOBJ_DTYPE_TXTBOX);
+        $this->initVar('member_address', \XOBJ_DTYPE_TXTAREA);
+        $this->initVar('member_phone', \XOBJ_DTYPE_TXTAREA);
+        $this->initVar('member_email', \XOBJ_DTYPE_TXTBOX);
+        $this->initVar('member_image', \XOBJ_DTYPE_TXTBOX);
+        $this->initVar('member_submitter', \XOBJ_DTYPE_INT);
+        $this->initVar('member_date_create', \XOBJ_DTYPE_INT);
     }
 
     /**
@@ -82,9 +82,9 @@ class Members extends \XoopsObject
             $action = $_SERVER['REQUEST_URI'];
         }
         // Title
-        $title = $this->isNew() ? sprintf(_AM_WGTEAMS_MEMBER_ADD) : sprintf(_AM_WGTEAMS_MEMBER_EDIT);
+        $title = $this->isNew() ? \sprintf(_AM_WGTEAMS_MEMBER_ADD) : \sprintf(_AM_WGTEAMS_MEMBER_EDIT);
         // Get Theme Form
-        xoops_load('XoopsFormLoader');
+        \xoops_load('XoopsFormLoader');
         $form = new \XoopsThemeForm($title, 'form', $action, 'post', true);
         $form->setExtra('enctype="multipart/form-data"');
         // Form Text memberFirstname
@@ -122,13 +122,13 @@ class Members extends \XoopsObject
 
         $imageTray   = new \XoopsFormElementTray(_AM_WGTEAMS_MEMBER_IMAGE, '<br>');
         $imageSelect = new \XoopsFormSelect(_AM_WGTEAMS_FORM_IMAGE_EXIST, 'member_image', $memberImage, 5);
-        $imageArray  = \XoopsLists::getImgListAsArray(XOOPS_ROOT_PATH . $imageDirectory);
+        $imageArray  = \XoopsLists::getImgListAsArray(\XOOPS_ROOT_PATH . $imageDirectory);
         foreach ($imageArray as $image) {
             $imageSelect->addOption($image, $image);
         }
-        $imageSelect->setExtra("onchange='showImgSelected(\"image2\", \"member_image\", \"" . $imageDirectory . '", "", "' . XOOPS_URL . "\")'");
+        $imageSelect->setExtra("onchange='showImgSelected(\"image2\", \"member_image\", \"" . $imageDirectory . '", "", "' . \XOOPS_URL . "\")'");
         $imageTray->addElement($imageSelect, false);
-        $imageTray->addElement(new \XoopsFormLabel('', "<br><img src='" . XOOPS_URL . '/' . $imageDirectory . '/' . $memberImage . "' name='image2' id='image2' alt='' style='max-width:100px;' />"));
+        $imageTray->addElement(new \XoopsFormLabel('', "<br><img src='" . \XOOPS_URL . '/' . $imageDirectory . '/' . $memberImage . "' name='image2' id='image2' alt='' style='max-width:100px;' />"));
         // Form File
         $fileSelectTray = new \XoopsFormElementTray('', '<br>');
         $fileSelectTray->addElement(new \XoopsFormFile(_AM_WGTEAMS_FORM_UPLOAD_IMG, 'attachedfile', $this->helper->getConfig('wgteams_img_maxsize')));
@@ -136,13 +136,13 @@ class Members extends \XoopsObject
         $cond = '<br>- ' . _MI_WGTEAMS_IMG_MAXSIZE . ': ' . ($this->helper->getConfig('wgteams_img_maxsize') / 1048576) . ' ' . _MI_WGTEAMS_SIZE_MB;
         $cond .= '<br>- ' . _MI_WGTEAMS_MAXWIDTH . ': ' . $this->helper->getConfig('maxwidth') . ' px';
         $cond .= '<br>- ' . _MI_WGTEAMS_MAXHEIGHT . ': ' . $this->helper->getConfig('maxheight') . ' px';
-        $cond .= '<br>- ' . _MI_WGTEAMS_IMG_MIMETYPES . ': ' . implode(', ', $this->helper->getConfig('wgteams_img_mimetypes'));
+        $cond .= '<br>- ' . _MI_WGTEAMS_IMG_MIMETYPES . ': ' . \implode(', ', $this->helper->getConfig('wgteams_img_mimetypes'));
         $fileSelectTray->addElement(new \XoopsFormLabel(_AM_WGTEAMS_IMG_EDITOR_UPLOAD, $cond));
         $imageTray->addElement($fileSelectTray);
 
         $imageTray3   = new \XoopsFormElementTray('', '');
-        $resizeinfo = '<br>' . str_replace('%w', $this->helper->getConfig('maxwidth_imgeditor'), _AM_WGTEAMS_IMG_EDITOR_RESIZE_DESC);
-        $resizeinfo = str_replace('%h', $this->helper->getConfig('maxheight_imgeditor'), $resizeinfo);
+        $resizeinfo = '<br>' . \str_replace('%w', $this->helper->getConfig('maxwidth_imgeditor'), _AM_WGTEAMS_IMG_EDITOR_RESIZE_DESC);
+        $resizeinfo = \str_replace('%h', $this->helper->getConfig('maxheight_imgeditor'), $resizeinfo);
         $imageTray3->addElement(new \XoopsFormLabel($resizeinfo, ''));
         $imageTray3->addElement(new \XoopsFormRadioYN('', 'img_resize', 1));
         $imageTray->addElement($imageTray3);
@@ -176,11 +176,11 @@ class Members extends \XoopsObject
         $ret['lastname']    = $this->getVar('member_lastname');
         $ret['title']       = $this->getVar('member_title');
         $ret['address']     = $helper::truncateHtml($this->getVar('member_address', 'n'));
-        $ret['phone']       = strip_tags($this->getVar('member_phone', 'n'));
+        $ret['phone']       = \strip_tags($this->getVar('member_phone', 'n'));
         $ret['email']       = $this->getVar('member_email');
         $ret['image']       = $this->getVar('member_image');
         $ret['submitter']   = \XoopsUser::getUnameFromId($this->getVar('member_submitter'));
-        $ret['date_create'] = formatTimestamp($this->getVar('member_date_create'));
+        $ret['date_create'] = \formatTimestamp($this->getVar('member_date_create'));
 
         return $ret;
     }
@@ -194,7 +194,7 @@ class Members extends \XoopsObject
     {
         $ret  = [];
         $vars = &$this->getVars();
-        foreach (array_keys($vars) as $var) {
+        foreach (\array_keys($vars) as $var) {
             $ret[$var] = $this->getVar($var);
         }
 
