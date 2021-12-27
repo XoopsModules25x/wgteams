@@ -21,6 +21,7 @@ declare(strict_types=1);
  */
 
 use XoopsModules\Wgteams;
+use XoopsModules\Wgteams\Common;
 
 /**
  * Prepares system prior to attempting to install module
@@ -31,7 +32,7 @@ use XoopsModules\Wgteams;
 function xoops_module_pre_install_wgteams(\XoopsModule $module)
 {
     require \dirname(__DIR__) . '/preloads/autoloader.php';
-    // /** @var Wgteams\Utility $utility */
+
     $utility      = new \XoopsModules\Wgteams\Utility();
     $xoopsSuccess = $utility::checkVerXoops($module);
     $phpSuccess   = $utility::checkVerPhp($module);
@@ -56,28 +57,17 @@ function xoops_module_install_wgteams(\XoopsModule $module)
 {
     require_once \dirname(__DIR__, 3) . '/mainfile.php';
 
-//    $moduleDirName = \basename(\dirname(__DIR__));
+    $moduleDirName      = \basename(\dirname(__DIR__));
 
     $helper       = Wgteams\Helper::getInstance();
     $utility      = new Wgteams\Utility();
     $configurator = new Wgteams\Common\Configurator();
+    
     // Load language files
     $helper->loadLanguage('admin');
     $helper->loadLanguage('modinfo');
+    $helper->loadLanguage('common');
 
-    /* 
-    // default Permission Settings ----------------------
-    global $xoopsModule;
-    $moduleId         = $xoopsModule->getVar('mid');
-    // $moduleId2        = $helper->getModule()->mid();
-    $grouppermHandler = \xoops_getHandler('groupperm');
-    // access rights ------------------------------------------
-    $grouppermHandler->addRight($moduleDirName . '_approve', 1, \XOOPS_GROUP_ADMIN, $moduleId);
-    $grouppermHandler->addRight($moduleDirName . '_submit', 1, \XOOPS_GROUP_ADMIN, $moduleId);
-    $grouppermHandler->addRight($moduleDirName . '_view', 1, \XOOPS_GROUP_ADMIN, $moduleId);
-    $grouppermHandler->addRight($moduleDirName . '_view', 1, \XOOPS_GROUP_USERS, $moduleId);
-    $grouppermHandler->addRight($moduleDirName . '_view', 1, \XOOPS_GROUP_ANONYMOUS, $moduleId); 
-    */
 
     //  ---  CREATE FOLDERS ---------------
     if (\count($configurator->uploadFolders) > 0) {
@@ -95,6 +85,28 @@ function xoops_module_install_wgteams(\XoopsModule $module)
             $utility::copyFile($file, $dest);
         }
     }
+    
+        //  ---  DELETE OLD FILES ---------------
+    if (\count($configurator->oldFiles) > 0) {
+        foreach (\array_keys($configurator->oldFiles) as $i) {
+            $tempFile = $GLOBALS['xoops']->path('modules/' . $moduleDirName . $configurator->oldFiles[$i]);
+            if (\is_file($tempFile)) {
+                \unlink($tempFile);
+            }
+        }
+    }
+
+    //  ---  DELETE OLD FOLDERS ---------------
+    \xoops_load('XoopsFile');
+    if (\count($configurator->oldFolders) > 0) {
+        foreach (\array_keys($configurator->oldFolders) as $i) {
+            $tempFolder = $GLOBALS['xoops']->path('modules/' . $moduleDirName . $configurator->oldFolders[$i]);
+            /* @var XoopsObjectHandler $folderHandler */
+            $folderHandler = \XoopsFile::getHandler('folder', $tempFolder);
+            $folderHandler->delete($tempFolder);
+        }
+    }
+
     //delete .html entries from the tpl table
     $sql = 'DELETE FROM ' . $GLOBALS['xoopsDB']->prefix('tplfile') . " WHERE `tpl_module` = '" . $module->getVar('dirname', 'n') . "' AND `tpl_file` LIKE '%.html%'";
     $GLOBALS['xoopsDB']->queryF($sql);

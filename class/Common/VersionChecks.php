@@ -22,9 +22,9 @@ trait VersionChecks
     /**
      * Verifies XOOPS version meets minimum requirements for this module
      * @static
-     * @param \XoopsModule|null $module
      *
-     * @param null $requiredVer
+     * @param \XoopsModule|null $module
+     * @param null|string $requiredVer
      * @return bool true if meets requirements, false if not
      */
     public static function checkVerXoops(\XoopsModule $module = null, $requiredVer = null)
@@ -35,9 +35,10 @@ trait VersionChecks
             $module = \XoopsModule::getByDirname($moduleDirName);
         }
         \xoops_loadLanguage('admin', $moduleDirName);
+        \xoops_loadLanguage('common', $moduleDirName);
 
         //check for minimum XOOPS version
-        $currentVer = mb_substr(XOOPS_VERSION, 6, 6); // get the numeric part of string
+        $currentVer = \mb_substr(\XOOPS_VERSION, 6); // get the numeric part of string
         if (null === $requiredVer) {
             $requiredVer = '' . $module->getInfo('min_xoops'); //making sure it's a string
         }
@@ -54,8 +55,8 @@ trait VersionChecks
     /**
      * Verifies PHP version meets minimum requirements for this module
      * @static
-     * @param \XoopsModule|null $module
      *
+     * @param \XoopsModule|null $module
      * @return bool true if meets requirements, false if not
      */
     public static function checkVerPhp(\XoopsModule $module = null)
@@ -69,7 +70,7 @@ trait VersionChecks
         // check for minimum PHP version
         $success = true;
 
-        $verNum = PHP_VERSION;
+        $verNum = \PHP_VERSION;
         $reqVer = &$module->getInfo('min_php');
 
         if (false !== $reqVer && '' !== $reqVer) {
@@ -83,8 +84,7 @@ trait VersionChecks
     }
 
     /**
-     *
-     * compares current module version with latest GitHub release
+     * compares current module version with the latest GitHub release
      * @static
      * @param \Xmf\Module\Helper $helper
      * @param string|null        $source
@@ -92,30 +92,29 @@ trait VersionChecks
      *
      * @return string|array info about the latest module version, if newer
      */
-
-    public static function checkVerModule($helper, $source = 'github', $default = 'master')
+    public static function checkVerModule(\Xmf\Module\Helper $helper, ?string $source = 'github', ?string $default = 'master'): ?array
     {
         $moduleDirName      = \basename(\dirname(__DIR__, 2));
         $moduleDirNameUpper = \mb_strtoupper($moduleDirName);
         $update             = '';
         $repository         = 'XoopsModules25x/' . $moduleDirName;
         //        $repository         = 'XoopsModules25x/publisher'; //for testing only
-        $ret             = '';
+        $ret             = null;
         $infoReleasesUrl = "https://api.github.com/repos/$repository/releases";
         if ('github' === $source) {
             if (\function_exists('curl_init') && false !== ($curlHandle = \curl_init())) {
-                \curl_setopt($curlHandle, CURLOPT_URL, $infoReleasesUrl);
-                \curl_setopt($curlHandle, CURLOPT_RETURNTRANSFER, true);
-                \curl_setopt($curlHandle, CURLOPT_SSL_VERIFYPEER, false);
-                \curl_setopt($curlHandle, CURLOPT_HTTPHEADER, ["User-Agent:Publisher\r\n"]);
+                \curl_setopt($curlHandle, \CURLOPT_URL, $infoReleasesUrl);
+                \curl_setopt($curlHandle, \CURLOPT_RETURNTRANSFER, true);
+                \curl_setopt($curlHandle, \CURLOPT_SSL_VERIFYPEER, false);
+                \curl_setopt($curlHandle, \CURLOPT_HTTPHEADER, ["User-Agent:Publisher\r\n"]);
                 $curlReturn = \curl_exec($curlHandle);
                 if (false === $curlReturn) {
                     \trigger_error(\curl_error($curlHandle));
-                } elseif (false !== \strpos($curlReturn, 'Not Found')) {
+                } elseif (mb_strpos($curlReturn, 'Not Found')) {
                     \trigger_error('Repository Not Found: ' . $infoReleasesUrl);
                 } else {
                     $file              = \json_decode($curlReturn, false);
-                    $latestVersionLink = \sprintf("https://github.com/$repository/archive/%s.zip", $file ? reset($file)->tag_name : $default);
+                    $latestVersionLink = \sprintf("https://github.com/$repository/archive/%s.zip", $file ? \reset($file)->tag_name : $default);
                     $latestVersion     = $file[0]->tag_name;
                     $prerelease        = $file[0]->prerelease;
                     if ('master' !== $latestVersionLink) {
@@ -123,7 +122,7 @@ trait VersionChecks
                     }
                     //"PHP-standardized" version
                     $latestVersion = \mb_strtolower($latestVersion);
-                    if (false !== \mb_strpos($latestVersion, 'final')) {
+                    if (false !== mb_strpos($latestVersion, 'final')) {
                         $latestVersion = \str_replace('_', '', \mb_strtolower($latestVersion));
                         $latestVersion = \str_replace('final', '', \mb_strtolower($latestVersion));
                     }
@@ -141,6 +140,7 @@ trait VersionChecks
                 \curl_close($curlHandle);
             }
         }
+
         return $ret;
     }
 }
