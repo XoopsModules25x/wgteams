@@ -65,7 +65,10 @@ class Migrate extends \Xmf\Database\Migrate
             if ($this->tableHandler->useTable($table)) {
                 foreach ($columns as $oldName => $newName) {
                     $attributes = $this->tableHandler->getColumnAttributes($table, $oldName);
-                    $this->tableHandler->alterColumn($table, $oldName, $attributes, $newName);
+                    if ('' != $attributes) {
+                        // column exists
+                        $this->tableHandler->alterColumn($table, $oldName, $attributes, $newName);
+                    }
                 }
             }
         }
