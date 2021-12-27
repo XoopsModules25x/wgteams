@@ -250,11 +250,14 @@ class MigrateHelper
             $arrName = \explode('(', $line);
             if (\count($arrName) > 0) {
                 $name = \str_replace(['`', ' '], '', $arrName[0]);
+                $columns = \str_replace(['`', '),', ')'], '', $arrName[1]);
+                if ('' == $name) {
+                    $name = $columns;
+                }
                 if (\strpos($name,' ') > 0) {
                     $name = "'" . $name . "'";
                 }
                 $key[$name] = [];
-                $columns = \str_replace(['`', '),', ')'], '', $arrName[1]);
                 if (\strpos($columns,' ') > 0) {
                     $columns = "'" . $columns . "'";
                 }
