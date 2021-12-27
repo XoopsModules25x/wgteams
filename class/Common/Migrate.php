@@ -28,7 +28,7 @@ class Migrate extends \Xmf\Database\Migrate
 {
     private $renameTables;
 
-    private $renameFields;
+    private $renameColumns;
 
     /**
      * @param \XoopsModules\Wgteams\Common\Configurator|null $configurator
@@ -37,8 +37,7 @@ class Migrate extends \Xmf\Database\Migrate
     {
         if (null !== $configurator) {
             $this->renameTables = $configurator->renameTables;
-
-            $this->renameFields = $configurator->renameFields;
+            $this->renameColumns = $configurator->renameColumns;
 
             $moduleDirName = \basename(\dirname(__DIR__, 2));
             parent::__construct($moduleDirName);
@@ -58,13 +57,13 @@ class Migrate extends \Xmf\Database\Migrate
     }
 
     /**
-     * change field name of given table if needed
+     * change column name of given table if needed
      */
-    private function changeFieldName()
+    private function changeColumnNames()
     {
-        foreach ($this->renameFields as $table => $fields) {
+        foreach ($this->renameColumns as $table => $columns) {
             if ($this->tableHandler->useTable($table)) {
-                foreach ($fields as $oldName => $newName) {
+                foreach ($columns as $oldName => $newName) {
                     $attributes = $this->tableHandler->getColumnAttributes($table, $oldName);
                     $this->tableHandler->alterColumn($table, $oldName, $attributes, $newName);
                 }
@@ -126,9 +125,9 @@ class Migrate extends \Xmf\Database\Migrate
             // change 'bb' table prefix to 'newbb'
             $this->changePrefix();
         }
-        if (\count($this->renameFields) > 0) {
+        if (\count($this->renameColumns) > 0) {
             // change 'bb' table prefix to 'newbb'
-            $this->changeFieldName();
+            $this->changeColumnNames();
         }
 
         /*

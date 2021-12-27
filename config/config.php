@@ -84,9 +84,9 @@ return (object)[
         '/images',
     ],
     'renameTables'  => [
-        'wgteams_members_old' => 'wgteams_members'
+        //'wgteams_members_old' => 'wgteams_members'
     ],
-    'renameFields'  => [
+    'renameColumns'  => [
         'wgteams_members' => [
             'member_firstname_old' => 'member_firstname',
             'member_lastname_old' => 'member_lastname',
