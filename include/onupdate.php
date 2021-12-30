@@ -63,7 +63,7 @@ function xoops_module_update_wgteams(\XoopsModule $module, $previousVersion = nu
     $ret = wgteams_check_db($module);
 
     //check upload directory
-	require_once __DIR__ . '/oninstall.php';
+    require_once __DIR__ . '/oninstall.php';
     $ret = xoops_module_install_wgteams($module);
 
     // update DB corresponding to sql/mysql.sql
@@ -156,7 +156,7 @@ function maintaintables(&$module)
 function wgteams_check_db($module)
 {
     $ret = true;
-	//insert here code for database check
+    //insert here code for database check
 
     /*
     // Example: update table (add new field)
