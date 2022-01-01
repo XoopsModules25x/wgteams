@@ -1,6 +1,6 @@
 <?php
 
-namespace XoopsModules\Wgtransifex\Common;
+namespace XoopsModules\Wgteams\Common;
 
 /*
  You may not change or alter any portion of this comment or credits
