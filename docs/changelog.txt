@@ -11,7 +11,8 @@
  - php inspection code (goffy)
  - security.md (goffy)
  - new update with db migration (goffy)
- - replaced Common/XoopsConfirm by Common/Confirm(mamba/goffy)
+ - replaced Common/XoopsConfirm by Common/Confirm (mamba/goffy)
+ - uninstall with bak-file creation (mamba/goffy)
  
 <h5>1.10 Final</h5> [2020/07/03]
 <hr>
