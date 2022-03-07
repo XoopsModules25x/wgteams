@@ -31,6 +31,8 @@ require __DIR__ . '/header.php';
 $op     = Request::getString('op', 'list');
 $relId  = Request::getInt('rel_id');
 $teamId = Request::getInt('team_id');
+$sortby = Request::getString('sortby', 'rel_weight');
+$order  = Request::getString('order', 'asc');
 // Switch options
 switch ($op) {
     case 'list':
@@ -48,6 +50,8 @@ switch ($op) {
         $crRelations = new \CriteriaCompo();
         $crRelations->add(new \Criteria('rel_team_id', $teamId));  
         $relationsCount = $relationsHandler->getCount($crRelations);
+        $crRelations->setSort($sortby);
+        $crRelations->setOrder($order);
         $crRelations->setStart($start);
         $crRelations->setLimit($limit);
         $relationsAll   = $relationsHandler->getAll($crRelations);
