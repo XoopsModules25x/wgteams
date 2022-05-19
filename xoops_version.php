@@ -98,6 +98,7 @@ $modversion['templates'][] = ['file' => 'wgteams_admin_infofields.tpl', 'descrip
 $modversion['templates'][] = ['file' => 'wgteams_admin_maintenance.tpl', 'description' => '', 'type' => 'admin'];
 $modversion['templates'][] = ['file' => 'wgteams_admin_image_editor.tpl', 'description' => '', 'type' => 'admin'];
 $modversion['templates'][] = ['file' => 'wgteams_admin_footer.tpl', 'description' => '', 'type' => 'admin'];
+$modversion['templates'][] = ['file' => 'wgteams_admin_clone.tpl', 'description' => '', 'type' => 'admin'];
 // User
 $modversion['templates'][] = ['file' => 'wgteams_header.tpl', 'description' => ''];
 $modversion['templates'][] = ['file' => 'wgteams_teams.tpl', 'description' => ''];
