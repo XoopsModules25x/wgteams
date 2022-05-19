@@ -56,6 +56,8 @@ $teamsCount = $teamsHandler->getCount($crit_teams);
 $teamsAll   = $teamsHandler->getAll($crit_teams);
 $teams_list = [];
 
+$GLOBALS['xoopsTpl']->assign('teamsCount', $teamsCount);
+
 if ($teamsCount > 0) {
     // Get All Teams
     $teams_list = wgteamsGetTeamMemberDetails($teamsAll);
