@@ -1,5 +1,5 @@
 wgteams_teams:
-    options: ''
+    options: 'ENGINE = InnoDB'
     columns: 
         -
             name: team_id
@@ -37,15 +37,12 @@ wgteams_teams:
         -
             name: team_date_create
             attributes: ' INT(10)         NOT NULL DEFAULT ''0'' '
-        -
-            name: ENGINE
-            attributes: ' = InnoDB; '
     keys:
         PRIMARY:
             columns: team_id
             unique: true
 wgteams_members:
-    options: ''
+    options: 'ENGINE = InnoDB'
     columns: 
         -
             name: member_id
@@ -77,15 +74,12 @@ wgteams_members:
         -
             name: member_date_create
             attributes: ' INT(10)         NOT NULL DEFAULT ''0'' '
-        -
-            name: ENGINE
-            attributes: ' = InnoDB; '
     keys:
         PRIMARY:
             columns: member_id
             unique: true
 wgteams_relations:
-    options: ''
+    options: 'ENGINE = InnoDB'
     columns: 
         -
             name: rel_id
@@ -135,15 +129,12 @@ wgteams_relations:
         -
             name: rel_date_create
             attributes: ' INT(10)         NOT NULL DEFAULT ''0'' '
-        -
-            name: ENGINE
-            attributes: ' = InnoDB; '
     keys:
         PRIMARY:
             columns: rel_id
             unique: true
 wgteams_infofields:
-    options: ''
+    options: 'ENGINE = InnoDB'
     columns: 
         -
             name: infofield_id
@@ -157,9 +148,6 @@ wgteams_infofields:
         -
             name: infofield_date_created
             attributes: ' INT(10)         NOT NULL DEFAULT ''0'' '
-        -
-            name: ENGINE
-            attributes: ' = InnoDB; '
     keys:
         PRIMARY:
             columns: infofield_id

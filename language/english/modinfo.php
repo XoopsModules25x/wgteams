@@ -33,6 +33,7 @@ require_once __DIR__ . '/common.php';
 \define('_MI_WGTEAMS_ADMENU5', 'Relations');
 \define('_MI_WGTEAMS_ADMENU6', 'Feedback');
 \define('_MI_WGTEAMS_ADMENU7', 'Maintenance');
+\define('_MI_WGTEAMS_ADMENU8', 'Clone');
 \define('_MI_WGTEAMS_ABOUT', 'About');
 // ---------------- Admin Nav ----------------
 \define('_MI_WGTEAMS_ADMIN_PAGER', 'Admin pager');

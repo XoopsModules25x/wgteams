@@ -191,3 +191,14 @@ require_once __DIR__ . '/modinfo.php';
 <li>%p/members/images/</li>
 <li>%p/temp/</li>
 </ul>');
+// Clone feature
+\define('_AM_WGTEAMS_CLONE', 'Klonen');
+\define('_AM_WGTEAMS_CLONE_DSC', 'Ein Modul zu klonen war noch nie so einfach! Geben Sie einfach den Namen den Sie wollen und Knopf drücken!');
+\define('_AM_WGTEAMS_CLONE_TITLE', 'Klone %s');
+\define('_AM_WGTEAMS_CLONE_NAME', 'Wählen Sie einen Namen für das neue Modul');
+\define('_AM_WGTEAMS_CLONE_NAME_DSC', 'Verwenden Sie keine Sonderzeichen ! <br> Wählen Sie bitte kein vorhandenes Modul Modul Verzeichnisname  oder Datenbank-Tabellenname!');
+\define('_AM_WGTEAMS_CLONE_INVALIDNAME', 'FEHLER: Ungültige Modulnamen, bitte versuchen Sie einen anderen!');
+\define('_AM_WGTEAMS_CLONE_EXISTS', 'FEHLER: Modulnamen bereits benutzt, bitte versuchen Sie einen anderen!');
+\define('_AM_WGTEAMS_CLONE_CONGRAT', 'Herzliche Glückwünsche! %s wurde erfolgreich erstellt! <br /> Sie können Änderungen in Sprachdateien machen.');
+\define('_AM_WGTEAMS_CLONE_IMAGEFAIL', 'Achtung, wir haben es nicht geschafft, das neue Modul-Logo zu erstellen. Bitte beachten Sie assets / images / logo_module.png manuell zu modifizieren!');
+\define('_AM_WGTEAMS_CLONE_FAIL', "Leider konnten wir den neuen Klon nicht erstellen . Vielleicht müssen Sie die Schreibrechte von 'modules' Verzeichnis auf  (CHMOD 777) festlegen und neu versuchen.");

@@ -63,6 +63,11 @@ $adminmenu[] = [
     'icon'  => 'assets/icons/32/maintenance.png'
 ];
 $adminmenu[] = [
+    'title' => _MI_WGTEAMS_ADMENU8,
+    'link'  => 'admin/clone.php',
+    'icon'  => 'assets/icons/32/clone.png'
+];
+$adminmenu[] = [
     'title' => _MI_WGTEAMS_ADMENU6,
     'link'  => 'admin/feedback.php',
     'icon'  => 'assets/icons/32/feedback.png'
