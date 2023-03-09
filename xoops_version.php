@@ -35,7 +35,7 @@ $moduleDirNameUpper = \mb_strtoupper($moduleDirName);
 
 // ------------------- Informations ------------------- //
 $modversion = [
-    'version'             => '2.0.0',
+    'version'             => '2.0.1',
     'module_status'       => 'Stable',
     'release'             => '2023/02/28', // format: yyyy/mm/dd
     'name'                => _MI_WGTEAMS_NAME,
