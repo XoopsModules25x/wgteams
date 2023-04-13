@@ -36,8 +36,8 @@ $moduleDirNameUpper = \mb_strtoupper($moduleDirName);
 // ------------------- Informations ------------------- //
 $modversion = [
     'version'             => '2.0.1',
-    'module_status'       => 'Stable',
-    'release'             => '2023/02/28', // format: yyyy/mm/dd
+    'module_status'       => 'RC1',
+    'release'             => '2023/03/14', // format: yyyy/mm/dd
     'name'                => _MI_WGTEAMS_NAME,
     'description'         => _MI_WGTEAMS_DESC,
     'author'              => 'Goffy - Wedega.com',
@@ -50,11 +50,11 @@ $modversion = [
     'help'                => 'page=help',
     'release_info'           => 'release_info',
     'release_file'        => \XOOPS_URL . '/modules/wgteams/docs/release_info file',
-    'release_date'        => '2023/02/28', // format: yyyy/mm/dd
+    'release_date'        => '2023/03/14', // format: yyyy/mm/dd
     'manual'              => 'link to manual file',
     'manual_file'         => \XOOPS_URL . '/modules/wgteams/docs/install.txt',
     'min_php'             => '7.4',
-    'min_xoops'           => '2.5.11 Beta1',
+    'min_xoops'           => '2.5.11 RC1',
     'min_admin'           => '1.1',
     'min_db'              => ['mysql' => '5.0.7', 'mysqli' => '5.0.7'],
     'image'               => 'assets/images/wgteams_logo.png',

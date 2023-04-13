@@ -42,17 +42,17 @@
                         <td class="center">
                             <a href="teams.php?op=set_onoff&amp;team_id=<{$team.id}>" title="<{$team.online}>">
                                 <{if $team.online|default:'' == $smarty.const._YES}>
-                                    <img src="<{xoModuleIcons16 on.png}>" alt="teams"></a>
+                                    <img src="<{xoModuleIcons16 'on.png'}>" alt="teams"></a>
                                 <{else}>
-                                    <img src="<{xoModuleIcons16 off.png}>" alt="teams"></a>
+                                    <img src="<{xoModuleIcons16 'off.png'}>" alt="teams"></a>
                                 <{/if}>
                         </td>
                         <td class="center"><{$team.submitter}></td>
                         <td class="center"><{$team.date_create}></td>
                         <td class="center  width5">
-                        <a href="teams.php?op=edit&amp;team_id=<{$team.id}>" title="<{$smarty.const._EDIT}>"><img src="<{xoModuleIcons16 edit.png}>" alt="teams"></a>
+                        <a href="teams.php?op=edit&amp;team_id=<{$team.id}>" title="<{$smarty.const._EDIT}>"><img src="<{xoModuleIcons16 'edit.png'}>" alt="teams"></a>
                         <a href="image_editor.php?op=edit_team&amp;team_id=<{$team.id}>" title="<{$smarty.const._AM_WGTEAMS_IMG_EDITOR}>"><img src="<{$pathModIcon16}>/image_editor.png" alt="<{$smarty.const._AM_WGTEAMS_IMG_EDITOR}>"></a>
-                        <a href="teams.php?op=delete&amp;team_id=<{$team.id}>" title="<{$smarty.const._DELETE}>"><img src="<{xoModuleIcons16 delete.png}>" alt="teams"></a>
+                        <a href="teams.php?op=delete&amp;team_id=<{$team.id}>" title="<{$smarty.const._DELETE}>"><img src="<{xoModuleIcons16 'delete.png'}>" alt="teams"></a>
                         </td>
                     </tr>
                 <{/foreach}>

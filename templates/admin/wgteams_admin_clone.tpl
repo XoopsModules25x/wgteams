@@ -1,13 +1,13 @@
 <!-- Header -->
 <{include file='db:wgteams_admin_header.tpl' }>
 
-<{if $form|default:''}>
+<{if !empty($form)}>
     <{$form|default:false}>
 <{/if}>
 <{if $result|default:''}>
     <{$result|default:false}>
 <{/if}>
-<{if $error|default:''}>
+<{if !empty($error)}>
     <div class="errorMsg"><strong><{$error|default:false}></strong></div>
 <{/if}>
 

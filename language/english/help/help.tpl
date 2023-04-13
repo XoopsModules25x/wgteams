@@ -1,7 +1,7 @@
 <div id="help-template" class="outer">
     <h1 class="head">Help:
         <a class="ui-corner-all tooltip" href="<{$xoops_url}>/modules/wgteams/admin/index.php"
-           title="Back to the administration of wgTeams"> wgTeams <img src="<{xoAdminIcons home.png}>"
+           title="Back to the administration of wgTeams"> wgTeams <img src="<{xoAdminIcons 'home.png'}>"
                                                                        alt="Back to the Administration of wgTeams">
         </a></h1>
     <!-- -----Help Content ---------- -->
