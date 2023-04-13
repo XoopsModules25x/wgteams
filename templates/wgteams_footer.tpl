@@ -12,6 +12,6 @@
     <div class="pull-right"><{$pagenav}></div>
 <{/if}>
 <br>
-<{if $xoops_isadmin|default:false}>
+<{if !empty($xoops_isadmin)}>
    <div class="text-center bold"><a href="<{$xoops_url}>/modules/wgteams/admin/"><{$smarty.const._CO_WGTEAMS_ADMIN}></a></div><br>
 <{/if}>
