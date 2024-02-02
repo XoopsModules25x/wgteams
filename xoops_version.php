@@ -54,7 +54,7 @@ $modversion = [
     'manual'              => 'link to manual file',
     'manual_file'         => \XOOPS_URL . '/modules/wgteams/docs/install.txt',
     'min_php'             => '7.4',
-    'min_xoops'           => '2.5.11 RC1',
+    'min_xoops'           => '2.5.11 Stable',
     'min_admin'           => '1.1',
     'min_db'              => ['mysql' => '5.0.7', 'mysqli' => '5.0.7'],
     'image'               => 'assets/images/wgteams_logo.png',
