@@ -157,8 +157,8 @@ class Teams extends \XoopsObject
         $team_imagestyle    = $this->isNew() ? 'default' : $this->getVar('team_imagestyle');
         $team_imagestyleSel = new \XoopsFormSelect(_AM_WGTEAMS_TEAM_IMAGESTYLE, 'team_imagestyle', $team_imagestyle);
         $team_imagestyleSel->addOption('default', _AM_WGTEAMS_TEAM_IMAGESTYLE_DEF);
-        $team_imagestyleSel->addOption('img-circle', _AM_WGTEAMS_TEAM_IMAGESTYLE_CIRCLE);
-        $team_imagestyleSel->addOption('img-rounded', _AM_WGTEAMS_TEAM_IMAGESTYLE_ROUNDED);
+        $team_imagestyleSel->addOption('img-circle rounded-circle', _AM_WGTEAMS_TEAM_IMAGESTYLE_CIRCLE);
+        $team_imagestyleSel->addOption('img-rounded rounded', _AM_WGTEAMS_TEAM_IMAGESTYLE_ROUNDED);
         $team_imagestyleSel->addOption('img-thumbnail', _AM_WGTEAMS_TEAM_IMAGESTYLE_THUMBNAIL);
         $form->addElement($team_imagestyleSel, false);
         // Form Text Teamdisplaystyle

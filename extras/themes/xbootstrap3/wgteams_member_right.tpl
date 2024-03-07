@@ -104,7 +104,7 @@
     </div>
     <{if $member.member_image|default:false}>
         <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-            <img class="img-fluid center member-img <{$member.rel_imagestyle}>" src="<{$member.member_image_url}><{$member.member_image}>" alt="<{$member.member_name}>" title="<{$member.member_name}>">
+            <img class="img-responsive center member-img <{$member.rel_imagestyle}>" src="<{$member.member_image_url}><{$member.member_image}>" alt="<{$member.member_name}>" title="<{$member.member_name}>">
         </div>
     <{/if}>
 </div>

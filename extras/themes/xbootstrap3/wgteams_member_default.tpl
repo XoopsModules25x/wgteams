@@ -1,7 +1,7 @@
                 <div class="member-card col-xs-12">
                     <{if $member.member_image|default:false}>
                     <div class="member-img center <{$member.rel_tablestyle}>">
-                        <img class="img-fluid center <{$member.rel_imagestyle}>" src="<{$member.member_image_url}><{$member.member_image}>" alt="<{$member.member_name}>" title="<{$member.member_name}>">
+                        <img class="img-responsive center <{$member.rel_imagestyle}>" src="<{$member.member_image_url}><{$member.member_image}>" alt="<{$member.member_name}>" title="<{$member.member_name}>">
                     </div>
                     <{/if}>
                     <div class='<{if $member.rel_tablestyle|default:'' == 'wgteams-striped'}><{cycle values="wgteams-odd, wgteams-even"}><{else}><{$member.rel_tablestyle}><{/if}>'>
