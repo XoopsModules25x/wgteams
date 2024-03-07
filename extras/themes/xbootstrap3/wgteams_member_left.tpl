@@ -1,5 +1,8 @@
-<div class="row member-table">
+<div id="member_<{$member.id}>" class="row member-table">
     <{if $member.member_image|default:false}>
+        <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+            <img class="img-responsive center member-img <{$member.rel_imagestyle}>" src="<{$member.member_image_url}><{$member.member_image}>" alt="<{$member.member_name}>" title="<{$member.member_name}>">
+        </div>
         <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8">
     <{else}>
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
@@ -102,9 +105,4 @@
             </div>
         <{/if}>
     </div>
-    <{if $member.member_image|default:false}>
-        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-            <img class="img-fluid center member-img <{$member.rel_imagestyle}>" src="<{$member.member_image_url}><{$member.member_image}>" alt="<{$member.member_name}>" title="<{$member.member_name}>">
-        </div>
-    <{/if}>
 </div>

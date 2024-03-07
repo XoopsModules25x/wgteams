@@ -326,6 +326,7 @@ function wgteamsGetTeamMemberDetails(&$teamsAll)
             'team_image_url' => $team_image_url,
             'members'        => $relations,
             'show_teamname'  => $show_teamname,
+            'team_imagestyle' => $team_imagestyle,
         ];
     }
 

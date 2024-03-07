@@ -12,7 +12,7 @@
         <div class='tab-content '>
             <!-- *************** Basic Tab ***************-->
             <div class='tab-pane active center' id='1'>
-                <img id='currentImg' class='img-fluid imageeditor-img center' src='<{$imgCurrent.src|default:''}>' alt='<{$imgCurrent.img_name|default:''}>'>
+                <img id='currentImg' class='img-responsive imageeditor-img center' src='<{$imgCurrent.src|default:''}>' alt='<{$imgCurrent.img_name|default:''}>'>
                 <p><{$smarty.const._AM_WGTEAMS_IMG_EDITOR_CURRENT2}>: <{$image_path|default:''}><br>
                 <{$smarty.const._AM_WGTEAMS_IMG_EDITOR_RESXY}>: <{$albimage_width|default:''}> / <{$albimage_height|default:''}></p>
                 <input type='button' class='btn <{$btn_style|default:''}>' value='<{$smarty.const._CANCEL}>' onclick='history.go(-1);return true;'>
@@ -24,7 +24,7 @@
                     <{foreach item=image from=$images name=fe_image}>
                         <{if $image.group|default:false}><h4 class='modal-title'><{$image.group}></h4><{/if}>
                         <div class='imageeditor-selimages col-xs-12 col-sm-4'>
-                        <input id='<{$image.name}>_image' class='imgSelect1 img-fluid imageeditor-img <{if $image.selected|default:false}>imageeditor-modal-selected<{/if}>' type='image' src='<{$image.src}>' alt='<{$image.title}>' style='padding:3px;' value='<{$image.name}>'>
+                        <input id='<{$image.name}>_image' class='imgSelect1 img-responsive imageeditor-img <{if $image.selected|default:false}>imageeditor-modal-selected<{/if}>' type='image' src='<{$image.src}>' alt='<{$image.title}>' style='padding:3px;' value='<{$image.name}>'>
                         </div>
                         <{if $smarty.foreach.fe_image.iteration % 3 == 0}>
                             <div class='clear'></div>
@@ -34,7 +34,7 @@
                 </div>
                 <div class='col-xs-12 col-sm-6'>
                     <h5>&nbsp;</h5>
-                    <img id='ImageSelected' class='img-fluid imageeditor-img' src='<{$imgCurrent.src|default:''}>' alt='<{$imgCurrent.img_name|default:''}>'>
+                    <img id='ImageSelected' class='img-responsive imageeditor-img' src='<{$imgCurrent.src|default:''}>' alt='<{$imgCurrent.img_name|default:''}>'>
                 </div>
                 <div class='col-xs-12 col-sm-12 center'>
                     <form class='form-horizontal' name='form' id='form_selectimage' action='image_editor.php' method='post' enctype='multipart/form-data'>
@@ -73,7 +73,7 @@
                     <img src='<{$wgteams_upload_image_url}>blank.gif' name='imageGrid6' id='imageGrid6' alt='imageGrid6' style='margin:5px;max-width:75px'>
                 </div>
                 <div class='col-xs-12 col-sm-8'>
-                    <img id='gridImg' class='img-fluid' src='<{$wgteams_upload_image_url}>blank.gif' alt='<{$smarty.const._AM_WGTEAMS_IMG_EDITOR_GRID}>'>
+                    <img id='gridImg' class='img-responsive' src='<{$wgteams_upload_image_url}>blank.gif' alt='<{$smarty.const._AM_WGTEAMS_IMG_EDITOR_GRID}>'>
                 </div>
                 <div class='col-xs-12 col-sm-12 center'>
                     <button id='btnCreateGrid4' type='button' class='btn <{$btn_style|default:''}>' style='display:inline;margin:5px'><{$smarty.const._AM_WGTEAMS_IMG_EDITOR_CREATE}></button>
@@ -96,7 +96,7 @@
                 <div class="container-crop">
                     <div class="row">
                         <div class="img-container">
-                            <img id='cropImg' class="img-fluid" src="<{$imgCurrent.src|default:''}>" alt="<{$imgCurrent.img_name|default:''}>'">
+                            <img id='cropImg' class="img-responsive" src="<{$imgCurrent.src|default:''}>" alt="<{$imgCurrent.img_name|default:''}>'">
                         </div>
                     </div>
                 </div>
