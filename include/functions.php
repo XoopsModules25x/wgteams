@@ -239,7 +239,9 @@ function wgteamsGetTeamMemberDetails(&$teamsAll)
             $infofield_id = $relsAll[$r]->getVar('rel_info_1_field');
             if ($infofield_id > 0) {
                 $infofield_obj   = $infofieldsHandler->get($infofield_id);
-                $rel_info_1_name = $infofield_obj->getVar('infofield_name', 'n');
+                if ($infofield_obj !== null) {
+                    $rel_info_1_name = $infofield_obj->getVar('infofield_name', 'n');
+                }
                 $infofield_id    = 0;
                 unset($infofield_obj);
                 $nb_infos++;
@@ -249,7 +251,9 @@ function wgteamsGetTeamMemberDetails(&$teamsAll)
             $infofield_id = $relsAll[$r]->getVar('rel_info_2_field');
             if ($infofield_id > 0) {
                 $infofield_obj   = $infofieldsHandler->get($infofield_id);
-                $rel_info_2_name = $infofield_obj->getVar('infofield_name');
+                if ($infofield_obj !== null) {
+                    $rel_info_2_name = $infofield_obj->getVar('infofield_name');
+                }
                 $infofield_id    = 0;
                 unset($infofield_obj);
                 $nb_infos++;
@@ -259,7 +263,9 @@ function wgteamsGetTeamMemberDetails(&$teamsAll)
             $infofield_id = $relsAll[$r]->getVar('rel_info_3_field');
             if ($infofield_id > 0) {
                 $infofield_obj   = $infofieldsHandler->get($infofield_id);
-                $rel_info_3_name = $infofield_obj->getVar('infofield_name');
+                if ($infofield_obj !== null) {
+                    $rel_info_3_name = $infofield_obj->getVar('infofield_name');
+                }
                 $infofield_id    = 0;
                 unset($infofield_obj);
                 $nb_infos++;
@@ -269,7 +275,9 @@ function wgteamsGetTeamMemberDetails(&$teamsAll)
             $infofield_id = $relsAll[$r]->getVar('rel_info_4_field');
             if ($infofield_id > 0) {
                 $infofield_obj   = $infofieldsHandler->get($infofield_id);
-                $rel_info_4_name = $infofield_obj->getVar('infofield_name');
+                if ($infofield_obj !== null) {
+                    $rel_info_4_name = $infofield_obj->getVar('infofield_name');
+                }
                 $infofield_id    = 0;
                 unset($infofield_obj);
                 $nb_infos++;
@@ -279,7 +287,9 @@ function wgteamsGetTeamMemberDetails(&$teamsAll)
             $infofield_id = $relsAll[$r]->getVar('rel_info_5_field');
             if ($infofield_id > 0) {
                 $infofield_obj   = $infofieldsHandler->get($infofield_id);
-                $rel_info_5_name = $infofield_obj->getVar('infofield_name');
+                if ($infofield_obj !== null) {
+                    $rel_info_5_name = $infofield_obj->getVar('infofield_name');
+                }
                 $infofield_id    = 0;
                 unset($infofield_obj);
                 $nb_infos++;
