@@ -114,6 +114,35 @@ switch ($op) {
             if (!$GLOBALS['xoopsSecurity']->check()) {
                 \redirect_header('infofields.php', 3, \implode(', ', $GLOBALS['xoopsSecurity']->getErrors()));
             }
+            // Get the handler for Relations
+            $relationsHandler = $helper->getHandler('Relations');
+
+            // Get all Relations objects
+            $allRelations = $relationsHandler->getAll();
+
+            // Go through all Relations objects
+            foreach ($allRelations as $relation) {
+                $relationModified = false;
+
+                // Check each rel_info_X_field
+                for ($i = 1; $i <= 5; $i++) {
+                    $infoFieldVar = 'rel_info_' . $i . '_field';
+                    $infoVar = 'rel_info_' . $i;
+
+                    // If the Relation has the Infofield that is being deleted, clear the corresponding rel_info_X field
+                    if ($relation->getVar($infoFieldVar) == $addField_id) {
+                        $relation->setVar($infoFieldVar, 0);
+                        $relation->setVar($infoVar, '');
+                        $relationModified = true;
+                    }
+                }
+
+                // If the Relation was modified, update it in the database
+                if ($relationModified) {
+                    $relationsHandler->insert($relation);
+                }
+            }
+
             if ($infofieldsHandler->delete($infofieldsObj)) {
                 \redirect_header('infofields.php', 3, _AM_WGTEAMS_FORM_DELETE_OK);
             } else {
