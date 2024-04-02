@@ -245,16 +245,22 @@ class Relations extends \XoopsObject
         $ret['team_name']    = $this->helper->getHandler('teams')->get($this->getVar('rel_team_id'))->getVar('team_name');
         $ret['member_id']    = $this->getVar('rel_member_id');
         $ret['member_name']  = \trim($this->helper->getHandler('members')->get($this->getVar('rel_member_id'))->getVar('member_firstname') . ' ' . $this->helper->getHandler('members')->get($this->getVar('rel_member_id'))->getVar('member_lastname'));
-        $ret['info_1_field'] = $this->helper->getHandler('infofields')->get($this->getVar('rel_info_1_field'))->getVar('infofield_name');
-        $ret['info_1']       = $helper::truncateHtml($this->getVar('rel_info_1', 'n'));
-        $ret['info_2_field'] = $this->helper->getHandler('infofields')->get($this->getVar('rel_info_2_field'))->getVar('infofield_name');
-        $ret['info_2']       = $helper::truncateHtml($this->getVar('rel_info_2', 'n'));
-        $ret['info_3_field'] = $this->helper->getHandler('infofields')->get($this->getVar('rel_info_3_field'))->getVar('infofield_name');
-        $ret['info_3']       = $helper::truncateHtml($this->getVar('rel_info_3', 'n'));
-        $ret['info_4_field'] = $this->helper->getHandler('infofields')->get($this->getVar('rel_info_4_field'))->getVar('infofield_name');
-        $ret['info_4']       = $helper::truncateHtml($this->getVar('rel_info_4', 'n'));
-        $ret['info_5_field'] = $this->helper->getHandler('infofields')->get($this->getVar('rel_info_5_field'))->getVar('infofield_name');
-        $ret['info_5']       = $helper::truncateHtml($this->getVar('rel_info_5', 'n'));
+
+        $infofields = [
+            'info_1_field' => 'rel_info_1_field',
+            'info_2_field' => 'rel_info_2_field',
+            'info_3_field' => 'rel_info_3_field',
+            'info_4_field' => 'rel_info_4_field',
+            'info_5_field' => 'rel_info_5_field'
+        ];
+
+        foreach ($infofields as $key => $field) {
+            $fieldId = $this->getVar($field);
+            $infofield = $this->helper->getHandler('infofields')->get($fieldId);
+            $ret[$key] = $infofield ? $infofield->getVar('infofield_name') : '';
+            $ret[substr($key, 0, -6)] = $helper::truncateHtml($this->getVar(substr($key, 0, -6), 'n'));
+        }
+
         $ret['weight']       = $this->getVar('rel_weight');
         $ret['submitter']    = \XoopsUser::getUnameFromId($this->getVar('rel_submitter'));
         $ret['date_create']  = \formatTimestamp($this->getVar('rel_date_create'));
