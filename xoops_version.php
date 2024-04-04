@@ -33,7 +33,7 @@ require_once __DIR__ . '/preloads/autoloader.php';
 $moduleDirName      = \basename(__DIR__);
 $moduleDirNameUpper = \mb_strtoupper($moduleDirName);
 
-// ------------------- Informations ------------------- //
+// ------------------- Information ------------------- /
 $modversion = [
     'version'             => '2.0.1',
     'module_status'       => 'RC2',
@@ -54,9 +54,9 @@ $modversion = [
     'manual'              => 'link to manual file',
     'manual_file'         => \XOOPS_URL . '/modules/wgteams/docs/install.txt',
     'min_php'             => '7.4',
-    'min_xoops'           => '2.5.11 Stable',
-    'min_admin'           => '1.1',
-    'min_db'              => ['mysql' => '5.0.7', 'mysqli' => '5.0.7'],
+    'min_xoops'           => '2.5.11',
+    'min_admin'           => '1.2',
+    'min_db'              => ['mysql' => '5.5'],
     'image'               => 'assets/images/wgteams_logo.png',
     'dirname'             => $moduleDirName,
     // Frameworks
@@ -133,6 +133,7 @@ if (\is_object($xoopsModule) && $xoopsModule->getVar('dirname') == $moduleDirNam
 
     $s = 0;
 
+    /** @var Wgteams\Helper $helper */
     $helper = Wgteams\Helper::getInstance();
     //    $teamsHandler =  $helper->getHandler('TeamsHandler');
     $db           = \XoopsDatabaseFactory::getDatabaseConnection();
