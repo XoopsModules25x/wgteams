@@ -35,9 +35,9 @@ $moduleDirNameUpper = \mb_strtoupper($moduleDirName);
 
 // ------------------- Information ------------------- /
 $modversion = [
-    'version'             => '2.0.1',
-    'module_status'       => 'RC2',
-    'release'             => '2024/03/07', // format: yyyy/mm/dd
+    'version'             => '2.0.2',
+    'module_status'       => 'Beta1',
+    'release'             => '2024/04/23', // format: yyyy/mm/dd
     'name'                => _MI_WGTEAMS_NAME,
     'description'         => _MI_WGTEAMS_DESC,
     'author'              => 'Goffy - Wedega.com',
