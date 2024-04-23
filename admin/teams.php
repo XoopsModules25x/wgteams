@@ -166,7 +166,7 @@ switch ($op) {
         // Set Var team_weight
         $teamsObj->setVar('team_weight', $_POST['team_weight']);
         // Set Var team_online
-        $teamsObj->setVar('team_online', ((1 == $_REQUEST['team_online']) ? '1' : '0'));
+        $teamsObj->setVar('team_online', (1 == Request::getInt('team_online', 0) ? 1 : 0));
         // Set Var team_submitter
         $teamsObj->setVar('team_submitter', $_POST['team_submitter']);
         // Set Var team_date_create
@@ -197,7 +197,7 @@ switch ($op) {
         break;
     case 'delete':
         $teamsObj = $teamsHandler->get($teamId);
-        if (\Xmf\Request::hasVar('ok', 'REQUEST') && 1 == $_REQUEST['ok']) {
+        if (1 == Request::getInt('ok', 0)) {
             if (!$GLOBALS['xoopsSecurity']->check()) {
                 \redirect_header('teams.php', 3, \implode(', ', $GLOBALS['xoopsSecurity']->getErrors()));
             }

@@ -172,7 +172,7 @@ switch ($op) {
         break;
     case 'delete':
         $membersObj = $membersHandler->get($memberId);
-        if (\Xmf\Request::hasVar('ok') && 1 == $_REQUEST['ok']) {
+        if (1 == Request::getInt('ok', 0)) {
             if (!$GLOBALS['xoopsSecurity']->check()) {
                 \redirect_header('members.php', 3, \implode(', ', $GLOBALS['xoopsSecurity']->getErrors()));
             }
