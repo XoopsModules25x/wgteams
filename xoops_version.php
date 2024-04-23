@@ -109,6 +109,8 @@ $modversion['templates'][] = ['file' => 'wgteams_member_left.tpl', 'description'
 $modversion['templates'][] = ['file' => 'wgteams_member_right.tpl', 'description' => ''];
 $modversion['templates'][] = ['file' => 'wgteams_breadcrumbs.tpl', 'description' => ''];
 $modversion['templates'][] = ['file' => 'wgteams_footer.tpl', 'description' => ''];
+$modversion['templates'][] = ['file' => 'wgteams_member_modal.tpl', 'description' => ''];
+
 
 $modversion['templates'][] = ['file' => 'wgteams_block_teamsmembers.tpl', 'description' => '', 'type' => 'block'];
 $modversion['templates'][] = ['file' => 'wgteams_block_teams.tpl', 'description' => '', 'type' => 'block'];

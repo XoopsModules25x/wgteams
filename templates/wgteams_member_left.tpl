@@ -1,7 +1,7 @@
 <div id="member_<{$member.id}>" class="row member-table">
     <{if $member.member_image|default:false}>
         <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
-            <img class="img-fluid center member-img <{$member.rel_imagestyle}>" src="<{$member.member_image_url}><{$member.member_image}>" alt="<{$member.member_name}>" title="<{$member.member_name}>">
+            <img class="img-fluid center  member-img<{$member.rel_imagestyle}>" src="<{$member.member_image_url}><{$member.member_image}>" alt="<{$member.member_name}>" title="<{$member.member_name}>" data-toggle="modal" data-target="#memberModal" data-member-id="<{$member.member_id}>">
         </div>
         <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8">
     <{else}>
