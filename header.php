@@ -24,7 +24,12 @@ declare(strict_types=1);
  * @version         $Id: 1.0 header.php 1 Sun 2015/12/27 23:18:01Z Goffy - Wedega $
  */
 
-use XoopsModules\Wgteams;
+use XoopsModules\Wgteams\{
+    InfofieldsHandler,
+    MembersHandler,
+    RelationsHandler,
+    TeamsHandler
+};
 
 require \dirname(__DIR__, 2) . '/mainfile.php';
 require __DIR__ . '/include/common.php';
@@ -33,10 +38,10 @@ $dirname = \basename(__DIR__);
 $xoBreadcrumbs   = [];
 // Get instance of module
 $db                = \XoopsDatabaseFactory::getDatabaseConnection();
-$teamsHandler      = new Wgteams\TeamsHandler($db);
-$membersHandler    = new Wgteams\MembersHandler($db);
-$relationsHandler  = new Wgteams\RelationsHandler($db);
-$infofieldsHandler = new Wgteams\InfofieldsHandler($db);
+$teamsHandler      = new TeamsHandler($db);
+$membersHandler    = new MembersHandler($db);
+$relationsHandler  = new RelationsHandler($db);
+$infofieldsHandler = new InfofieldsHandler($db);
 
 // Permission
 require_once \XOOPS_ROOT_PATH . '/class/xoopsform/grouppermform.php';

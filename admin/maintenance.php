@@ -79,7 +79,7 @@ switch ($op) {
         break;
     case 'delete_unused_image':
         $del_img_path = Request::getString('del_img_path', 'none');
-        if (isset($_REQUEST['ok']) && 1 == $_REQUEST['ok']) {
+        if (1 == Request::getInt('ok', 0)) {
             if (!$GLOBALS['xoopsSecurity']->check()) {
                 \redirect_header('maintenance.php', 3, \implode(', ', $GLOBALS['xoopsSecurity']->getErrors()));
             }

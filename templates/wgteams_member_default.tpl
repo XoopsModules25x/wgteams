@@ -1,8 +1,10 @@
                 <div class="member-card col-xs-12">
                     <{if $member.member_image|default:false}>
-                    <div class="member-img center <{$member.rel_tablestyle}>">
-                        <img class="img-fluid center <{$member.rel_imagestyle}>" src="<{$member.member_image_url}><{$member.member_image}>" alt="<{$member.member_name}>" title="<{$member.member_name}>">
-                    </div>
+                        <div class="member-img center <{$member.rel_tablestyle}>">
+                            <img class="img-fluid center <{$member.rel_imagestyle}>" src="<{$member.member_image_url}><{$member.member_image}>" alt="<{$member.member_name}>" title="<{$member.member_name}>" data-toggle="modal" data-target="#memberModal" data-member-id="<{$member.member_id}>">
+                        </div>
+
+
                     <{/if}>
                     <div class='<{if $member.rel_tablestyle|default:'' == 'wgteams-striped'}><{cycle values="wgteams-odd, wgteams-even"}><{else}><{$member.rel_tablestyle}><{/if}>'>
                         <{if $member.member_labels|default:false}>
@@ -102,3 +104,5 @@
                         </div>
                     <{/if}>
                 </div>
+
+
