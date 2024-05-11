@@ -17,11 +17,8 @@ declare(strict_types=1);
  *
  * @copyright      module for xoops
  * @license        GPL 2.0 or later
- * @package        wgteams
- * @since          1.0
- * @min_xoops      2.5.9
- * @author         Wedega - Email:<webmaster@wedega.com> - Website:<https://wedega.com>
- * @version        $Id: 1.0 albums.php 1 Mon 2018-03-19 10:04:49Z XOOPS Project (www.xoops.org) $
+ * @package         wgteams
+ * @author          Goffy - Wedega.com - Email:<webmaster@wedega.com> - Website:<https://wedega.com>
  */
 
 use Xmf\Request;
