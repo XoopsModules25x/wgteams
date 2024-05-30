@@ -18,29 +18,43 @@ declare(strict_types=1);
  * @copyright       The XOOPS Project (https://xoops.org)
  * @license         GPL 2.0 or later
  * @package         wgteams
- * @since           1.0
- * @min_xoops       2.5.7
  * @author          Goffy - Wedega.com - Email:<webmaster@wedega.com> - Website:<https://wedega.com>
- * @version         $Id: 1.0 teams.php 1 Sun 2015/12/27 23:18:00Z Goffy - Wedega $
  */
 
 use Xmf\Request;
-use Xmf\Module\Helper\AjaxHelper;
+//use XoopsModules\Wgteams\Common\AjaxHelper;
 use XoopsModules\Wgteams\{
     Helper,
-    Members
+    Members,
+    Constants
 };
 
 require __DIR__ . '/header.php';
 
 $GLOBALS['xoopsOption']['template_main'] = 'wgteams_teams.tpl';
 require_once \XOOPS_ROOT_PATH . '/header.php';
-$helper    = Helper::getInstance();
-$startpage = $helper->getConfig('startpage', 0)[0];
 
+$helper     = Helper::getInstance();
 $team_id = Request::getInt('team_id');
 $start   = Request::getInt('start');
 $limit   = Request::getInt('limit', $helper->getConfig('userpager'));
+$rel_id  = Request::getInt('rel_id');
+
+$startpage  = $helper->getConfig('startpage', 0)[0];
+$useDetails = (int)$helper->getConfig('wgteams_usedetails');
+$useModal   = Constants::USEDETAILS_MODAL === $useDetails;
+$GLOBALS['xoopsTpl']->assign('useModal', $useModal);
+if ($useModal) {
+    $xoTheme->addStylesheet(\WGTEAMS_URL . '/assets/css/modal.css');
+}
+$useTab = Constants::USEDETAILS_TAB === $useDetails;
+
+if ($rel_id > 0) {
+    $GLOBALS['xoopsTpl']->assign('member_show_details', true);
+} else {
+    $GLOBALS['xoopsTpl']->assign('useTab', $useTab);
+    $GLOBALS['xoopsTpl']->assign('team_show', true);
+}
 
 // Define Stylesheet
 $xoTheme->addStylesheet($style);
@@ -65,7 +79,7 @@ $GLOBALS['xoopsTpl']->assign('teamsCount', $teamsCount);
 
 if ($teamsCount > 0) {
     // Get All Teams
-    $teams_list = wgteamsGetTeamMemberDetails($teamsAll);
+    $teams_list = wgteamsGetTeamMemberDetails($teamsAll, $rel_id);
     if (0 == $team_id && 1 == $startpage[0]) {
         $teams_list = wgteamsGetTeamDetails($teamsAll);
     }
@@ -87,7 +101,7 @@ if (\count($teams_list) > 0) {
 $GLOBALS['xoopsTpl']->assign('xoops_icons32_url', XOOPS_ICONS32_URL);
 $GLOBALS['xoopsTpl']->assign('wgteams_upload_url', \WGTEAMS_UPLOAD_URL);
 $GLOBALS['xoopsTpl']->assign('wgteams_teams_upload_url', \WGTEAMS_UPLOAD_URL . '/teams/images/');
-$GLOBALS['xoopsTpl']->assign('wgteams_url', WGTEAMS_URL);
+$GLOBALS['xoopsTpl']->assign('wgteams_url', \WGTEAMS_URL);
 
 // Display Navigation
 if ($teamsCount > $limit) {
@@ -107,9 +121,7 @@ if (1 == $helper->getConfig('wgteams_showbreadcrumbs')) {
 }
 
 //---------- AJAX Modal Start -------------------
-
-$xoopsLogger->activated = false;
-
+//$xoopsLogger->activated = false;
 if (Request::getMethod() === 'POST' && Request::hasVar('member_id', 'POST')) {
     $memberId = Request::getInt('member_id', 0, 'POST');
     if ($memberId > 0) {
@@ -117,72 +129,12 @@ if (Request::getMethod() === 'POST' && Request::hasVar('member_id', 'POST')) {
         $member = $membersHandler->get($memberId);
 
         if ($member instanceof Members) {
+            $modalMember = $member->getValuesMember();
+            $GLOBALS['xoopsTpl']->assign('modalMember', $modalMember);
             $memberDetails = renderMemberDetails($member);
-
-            $ajaxHelper = new AjaxHelper();
-            $ajaxHelper->addData('member_name', $memberDetails['member_name']);
-            $ajaxHelper->addData('member_image', $memberDetails['member_image']);
-            $ajaxHelper->addData('member_details', $memberDetails['member_details']);
-            $ajaxHelper->setSuccess(true);
-            $ajaxHelper->sendResponse();
-            exit();
         }
     }
 }
-
-function renderMemberDetails($member) {
-
-    $details = '';
-    $memberImage = '';
-
-    if ($member->getVar('member_lastname')) {
-        $memberName = '<strong>Name: </strong> ' . html_entity_decode($member->getVar('member_firstname'), ENT_QUOTES | ENT_HTML5) . ' ' . html_entity_decode($member->getVar('member_lastname'), ENT_QUOTES | ENT_HTML5);
-        $details    .= '<strong>Name: </strong> ' . html_entity_decode($member->getVar('member_firstname'), ENT_QUOTES | ENT_HTML5) . ' ' . html_entity_decode($member->getVar('member_lastname'), ENT_QUOTES | ENT_HTML5);
-    }
-
-    if ($member->getVar('member_image')) {
-        $imageUrl =  WGTEAMS_UPLOAD_URL . '/members/images/' . $member->getVar('member_image');
-        $imageName = $member->getVar('member_name');
-        $memberImage = '<img src="' . $imageUrl . '" alt="' . $imageName . '" title="' . $imageName . '" class="img-fluid">';
-    }
-
-
-
-    if ($member->getVar('member_address')) {
-        $address = html_entity_decode($member->getVar('member_address'), ENT_QUOTES | ENT_HTML5);
-        $details .= '<div><strong>' . _MA_WGTEAMS_MEMBER_ADDRESS . ':</strong> ' . $address . '</div>';
-    }
-
-    if ($member->getVar('member_phone')) {
-        $phone = html_entity_decode($member->getVar('member_phone'), ENT_QUOTES | ENT_HTML5);
-        $details .= '<div><strong>' . _MA_WGTEAMS_MEMBER_PHONE . ':</strong> ' . $phone . '</div>';
-    }
-
-    if ($member->getVar('member_email')) {
-        $email = html_entity_decode($member->getVar('member_email'), ENT_QUOTES | ENT_HTML5);
-        $details .= '<div><strong>' . _MA_WGTEAMS_MEMBER_EMAIL . ':</strong> ' . $email . '</div>';
-    }
-
-
-    // Render additional info fields
-    for ($i = 1; $i <= 5; $i++) {
-        $infoField = 'info_' . $i;
-        $infoFieldName = $infoField . '_name';
-
-        if ($member->getVar($infoField)) {
-            $info = html_entity_decode($member->getVar($infoField), ENT_QUOTES | ENT_HTML5);
-            $details .= '<div><strong>' . $member->getVar($infoFieldName) . ':</strong> ' . $info . '</div>';
-        }
-    }
-
-    return [
-        'member_image'   => $memberImage,
-//                'member_name' => $member->getVar('member_name'),
-        'member_name'    => $memberName,
-        'member_details' => $details,
-    ];
-}
-
 //---------- AJAX Modal End -------------------
 
 // keywords

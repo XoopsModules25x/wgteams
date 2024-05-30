@@ -5,12 +5,12 @@
     team_image: dogs-984015_640.jpg
     team_nb_cols: '4'
     team_tablestyle: default
-    team_imagestyle: img-circle
-    team_displaystyle: default
+    team_imagestyle: 'img-circle rounded-circle'
+    team_displaystyle: left
     team_weight: '0'
     team_online: '1'
     team_submitter: '1'
-    team_date_create: '1553961664'
+    team_date_create: '1717089717'
 -
     team_id: '2'
     team_name: Cats
@@ -18,12 +18,12 @@
     team_image: cat-1209067_640.jpg
     team_nb_cols: '2'
     team_tablestyle: default
-    team_imagestyle: img-rounded
-    team_displaystyle: default
+    team_imagestyle: 'img-rounded rounded'
+    team_displaystyle: left
     team_weight: '0'
     team_online: '1'
     team_submitter: '1'
-    team_date_create: '1553961262'
+    team_date_create: '1717074058'
 -
     team_id: '3'
     team_name: 'Animal babys'
@@ -32,8 +32,8 @@
     team_nb_cols: '4'
     team_tablestyle: default
     team_imagestyle: img-thumbnail
-    team_displaystyle: default
+    team_displaystyle: right
     team_weight: '0'
     team_online: '1'
     team_submitter: '1'
-    team_date_create: '1553961885'
+    team_date_create: '1717074084'

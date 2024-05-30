@@ -1,0 +1,157 @@
+wgteams_teams:
+    options: 'ENGINE = InnoDB'
+    columns: 
+        -
+            name: team_id
+            attributes: ' INT(8) UNSIGNED NOT NULL AUTO_INCREMENT '
+        -
+            name: team_name
+            attributes: ' VARCHAR(200)    NOT NULL DEFAULT '''''''' '
+        -
+            name: team_descr
+            attributes: ' TEXT            NULL '
+        -
+            name: team_image
+            attributes: ' VARCHAR(200)    NULL     DEFAULT '''''''' '
+        -
+            name: team_nb_cols
+            attributes: ' INT(8)          NOT NULL DEFAULT ''1'' '
+        -
+            name: team_tablestyle
+            attributes: ' VARCHAR(100)             DEFAULT ''default'' '
+        -
+            name: team_imagestyle
+            attributes: ' VARCHAR(100)             DEFAULT ''default'' '
+        -
+            name: team_displaystyle
+            attributes: ' VARCHAR(100)             DEFAULT ''default'' '
+        -
+            name: team_weight
+            attributes: ' INT(8)          NOT NULL DEFAULT ''0'' '
+        -
+            name: team_online
+            attributes: ' INT(1)          NOT NULL DEFAULT ''0'' '
+        -
+            name: team_submitter
+            attributes: ' INT(10)         NOT NULL DEFAULT ''0'' '
+        -
+            name: team_date_create
+            attributes: ' INT(10)         NOT NULL DEFAULT ''0'' '
+    keys:
+        PRIMARY:
+            columns: team_id
+            unique: true
+wgteams_members:
+    options: 'ENGINE = InnoDB'
+    columns: 
+        -
+            name: member_id
+            attributes: ' INT(8) UNSIGNED NOT NULL AUTO_INCREMENT '
+        -
+            name: member_firstname
+            attributes: ' VARCHAR(200)    NOT NULL DEFAULT '''''''' '
+        -
+            name: member_lastname
+            attributes: ' VARCHAR(200)    NULL     DEFAULT '''''''' '
+        -
+            name: member_title
+            attributes: ' VARCHAR(200)    NULL     DEFAULT '''''''' '
+        -
+            name: member_address
+            attributes: ' TEXT            NULL '
+        -
+            name: member_phone
+            attributes: ' TEXT            NULL '
+        -
+            name: member_email
+            attributes: ' VARCHAR(200)    NULL     DEFAULT '''''''' '
+        -
+            name: member_image
+            attributes: ' VARCHAR(200)    NULL     DEFAULT '''''''' '
+        -
+            name: member_submitter
+            attributes: ' INT(10)         NOT NULL DEFAULT ''0'' '
+        -
+            name: member_date_create
+            attributes: ' INT(10)         NOT NULL DEFAULT ''0'' '
+    keys:
+        PRIMARY:
+            columns: member_id
+            unique: true
+wgteams_relations:
+    options: 'ENGINE = InnoDB'
+    columns: 
+        -
+            name: rel_id
+            attributes: ' INT(8) UNSIGNED NOT NULL AUTO_INCREMENT '
+        -
+            name: rel_team_id
+            attributes: ' INT(10)         NOT NULL DEFAULT ''0'' '
+        -
+            name: rel_member_id
+            attributes: ' INT(10)         NOT NULL DEFAULT ''0'' '
+        -
+            name: rel_info_1_field
+            attributes: ' INT(10)         NULL     DEFAULT ''0'' '
+        -
+            name: rel_info_1
+            attributes: ' TEXT            NULL '
+        -
+            name: rel_info_2_field
+            attributes: ' INT(10)         NULL     DEFAULT ''0'' '
+        -
+            name: rel_info_2
+            attributes: ' TEXT            NULL '
+        -
+            name: rel_info_3_field
+            attributes: ' INT(10)         NULL     DEFAULT ''0'' '
+        -
+            name: rel_info_3
+            attributes: ' TEXT            NULL '
+        -
+            name: rel_info_4_field
+            attributes: ' INT(10)         NULL     DEFAULT ''0'' '
+        -
+            name: rel_info_4
+            attributes: ' TEXT            NULL '
+        -
+            name: rel_info_5_field
+            attributes: ' INT(10)         NULL     DEFAULT ''0'' '
+        -
+            name: rel_info_5
+            attributes: ' TEXT            NULL '
+        -
+            name: rel_weight
+            attributes: ' INT(10)         NOT NULL DEFAULT ''0'' '
+        -
+            name: rel_submitter
+            attributes: ' INT(10)         NOT NULL DEFAULT ''0'' '
+        -
+            name: rel_date_create
+            attributes: ' INT(10)         NOT NULL DEFAULT ''0'' '
+    keys:
+        PRIMARY:
+            columns: rel_id
+            unique: true
+wgteams_infofields:
+    options: 'ENGINE = InnoDB'
+    columns: 
+        -
+            name: infofield_id
+            attributes: ' INT(8) UNSIGNED NOT NULL AUTO_INCREMENT '
+        -
+            name: infofield_name
+            attributes: ' VARCHAR(200)    NOT NULL DEFAULT '''''''' '
+        -
+            name: infofield_class
+            attributes: ' INT(1)          NOT NULL DEFAULT ''0'' '
+        -
+            name: infofield_submitter
+            attributes: ' INT(10)         NOT NULL DEFAULT ''0'' '
+        -
+            name: infofield_date_created
+            attributes: ' INT(10)         NOT NULL DEFAULT ''0'' '
+    keys:
+        PRIMARY:
+            columns: infofield_id
+            unique: true

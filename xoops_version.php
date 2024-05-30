@@ -22,6 +22,7 @@ declare(strict_types=1);
  */
 
 use XoopsModules\Wgteams;
+use XoopsModules\Wgteams\Constants;
 
 \defined('XOOPS_ROOT_PATH') || die('Restricted access');
 
@@ -106,9 +107,9 @@ $modversion['templates'][] = ['file' => 'wgteams_member_left.tpl', 'description'
 $modversion['templates'][] = ['file' => 'wgteams_member_right.tpl', 'description' => ''];
 $modversion['templates'][] = ['file' => 'wgteams_breadcrumbs.tpl', 'description' => ''];
 $modversion['templates'][] = ['file' => 'wgteams_footer.tpl', 'description' => ''];
-$modversion['templates'][] = ['file' => 'wgteams_member_modal.tpl', 'description' => ''];
-
-
+$modversion['templates'][] = ['file' => 'wgteams_member_modal_default.tpl', 'description' => ''];
+$modversion['templates'][] = ['file' => 'wgteams_member_modal_left.tpl', 'description' => ''];
+$modversion['templates'][] = ['file' => 'wgteams_member_modal_right.tpl', 'description' => ''];
 $modversion['templates'][] = ['file' => 'wgteams_block_teamsmembers.tpl', 'description' => '', 'type' => 'block'];
 $modversion['templates'][] = ['file' => 'wgteams_block_teams.tpl', 'description' => '', 'type' => 'block'];
 
@@ -354,6 +355,20 @@ $modversion['config'][] = [
     'formtype'    => 'yesno',
     'valuetype'   => 'int',
     'default'     => 1,
+];
+
+$modversion['config'][] = [
+    'name'        => 'wgteams_usedetails',
+    'title'       => '_MI_WGTEAMS_USEDETAILS',
+    'description' => '_MI_WGTEAMS_USEDETAILS_DESC',
+    'formtype'    => 'select',
+    'valuetype'   => 'int',
+    'default'     => 0,
+    'options'     => [
+        '_MI_WGTEAMS_USEDETAILS_NONE'  => Constants::USEDETAILS_NONE,
+        '_MI_WGTEAMS_USEDETAILS_TAB'   => Constants::USEDETAILS_TAB,
+        '_MI_WGTEAMS_USEDETAILS_MODAL' => Constants::USEDETAILS_MODAL,
+    ],
 ];
 
 $modversion['config'][] = [

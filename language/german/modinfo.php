@@ -78,5 +78,10 @@ require_once __DIR__ . '/common.php';
 \define('_MI_WGTEAMS_SHOWBREADCRUMBS_DESC', 'Definieren Sie bitte, ob eine Breadcrumb-Navigation angezeigt werden soll.');
 \define('_MI_WGTEAMS_SHOWCOPYRIGHT', 'Copyright anzeigen');
 \define('_MI_WGTEAMS_SHOWCOPYRIGHT_DESC', 'Sie können das Copyright bei den wgTeams-Seiten entfernen, jedoch wird ersucht, an einer beliebigen Stelle einen Backlink auf www.wedega.com anzubringen');
+//version 2.0.2
+\define('_MI_WGTEAMS_USEDETAILS', 'Verwende Details');
+\define('_MI_WGTEAMS_USEDETAILS_DESC', 'Definieren Sie bitte, ob Details zu Mitgliederinformationen angezeigt werden sollen');
+\define('_MI_WGTEAMS_USEDETAILS_NONE', 'Feature Details nicht verwenden. Alle Informationen werden auf der Indexseite angezeigt');
+\define('_MI_WGTEAMS_USEDETAILS_TAB', 'Zeige Details auf neuem Tab');
+\define('_MI_WGTEAMS_USEDETAILS_MODAL', 'Zeige Details in modalem Fenster');
 // ---------------- End ----------------
-

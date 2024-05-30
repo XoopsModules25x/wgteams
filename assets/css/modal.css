@@ -17,18 +17,9 @@
  * @author          Goffy - Wedega.com - Email:<webmaster@wedega.com> - Website:<https://wedega.com>
  */
 
-.imageeditor-img{
-    padding:2px;
-    border:1px solid #cccccc;
+.member-card,
+.member-panel-left,
+.member-panel-right {
+    cursor: pointer;
 }
-.imageeditor-modal-selected {
-    border:1px solid #ff0000;
-    padding:2px;
-}
-.imageeditor-btn-crop {
-    margin:5px 0;
-}
-.imageeditor-selimages {
-    margin:0 !important;
-    padding:2px !important;
-}
+

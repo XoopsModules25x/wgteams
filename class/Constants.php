@@ -33,6 +33,13 @@ class Constants
     // common constants
     // constants for image class
     const IMAGECLASS_MEMBER = 1;
-    const IMAGECLASS_TEAM = 2;
+    const IMAGECLASS_TEAM   = 2;
+
+    // constants for details
+    const USEDETAILS_NONE  = 0;
+    const USEDETAILS_TAB   = 1;
+    const USEDETAILS_MODAL = 2;
+    const CLASS_DEFAULT = 0;
+    const CLASS_DETAILS = 1;
 
 }

@@ -3,69 +3,69 @@
     rel_team_id: '1'
     rel_member_id: '1'
     rel_info_1_field: '1'
-    rel_info_1: Male
+    rel_info_1: 'Bernese Mountain Dog'
     rel_info_2_field: '2'
-    rel_info_2: Brown
-    rel_info_3_field: '0'
-    rel_info_3: ''
-    rel_info_4_field: '0'
-    rel_info_4: ''
+    rel_info_2: Male
+    rel_info_3_field: '3'
+    rel_info_3: 'White, brown and dark brown'
+    rel_info_4_field: '4'
+    rel_info_4: '8'
     rel_info_5_field: '0'
     rel_info_5: ''
     rel_weight: '0'
     rel_submitter: '1'
-    rel_date_create: '1553961936'
+    rel_date_create: '1717088973'
 -
     rel_id: '2'
     rel_team_id: '1'
     rel_member_id: '2'
     rel_info_1_field: '1'
-    rel_info_1: Male
+    rel_info_1: Bulldog
     rel_info_2_field: '2'
-    rel_info_2: White
-    rel_info_3_field: '0'
-    rel_info_3: ''
-    rel_info_4_field: '0'
-    rel_info_4: ''
+    rel_info_2: Male
+    rel_info_3_field: '3'
+    rel_info_3: Brown
+    rel_info_4_field: '4'
+    rel_info_4: '7'
     rel_info_5_field: '0'
     rel_info_5: ''
     rel_weight: '0'
     rel_submitter: '1'
-    rel_date_create: '1553961976'
+    rel_date_create: '1717088913'
 -
     rel_id: '3'
     rel_team_id: '1'
     rel_member_id: '4'
     rel_info_1_field: '1'
-    rel_info_1: Male
+    rel_info_1: 'Jack Russell Dog'
     rel_info_2_field: '2'
-    rel_info_2: White
-    rel_info_3_field: '0'
-    rel_info_3: ''
-    rel_info_4_field: '0'
-    rel_info_4: ''
+    rel_info_2: Female
+    rel_info_3_field: '3'
+    rel_info_3: 'White and brown'
+    rel_info_4_field: '4'
+    rel_info_4: '9'
     rel_info_5_field: '0'
     rel_info_5: ''
     rel_weight: '0'
     rel_submitter: '1'
-    rel_date_create: '1553962042'
+    rel_date_create: '1717089314'
 -
     rel_id: '4'
     rel_team_id: '1'
     rel_member_id: '5'
     rel_info_1_field: '1'
-    rel_info_1: Male
+    rel_info_1: 'Yorkshire Terrier Dog'
     rel_info_2_field: '2'
-    rel_info_2: White
-    rel_info_3_field: '0'
-    rel_info_3: ''
-    rel_info_4_field: '0'
-    rel_info_4: ''
+    rel_info_2: Male
+    rel_info_3_field: '3'
+    rel_info_3: 'Brown and grey'
+    rel_info_4_field: '4'
+    rel_info_4: '4'
     rel_info_5_field: '0'
     rel_info_5: ''
     rel_weight: '0'
     rel_submitter: '1'
-    rel_date_create: '1553962111'
+    rel_date_create: '1717089182'
 -
     rel_id: '5'
     rel_team_id: '2'

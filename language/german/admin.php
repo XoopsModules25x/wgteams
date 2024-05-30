@@ -199,3 +199,7 @@ require_once __DIR__ . '/modinfo.php';
 \define('_AM_WGTEAMS_CLONE_CONGRAT', 'Herzliche Glückwünsche! %s wurde erfolgreich erstellt! <br /> Sie können Änderungen in Sprachdateien machen.');
 \define('_AM_WGTEAMS_CLONE_IMAGEFAIL', 'Achtung, wir haben es nicht geschafft, das neue Modul-Logo zu erstellen. Bitte beachten Sie assets / images / logo_module.png manuell zu modifizieren!');
 \define('_AM_WGTEAMS_CLONE_FAIL', "Leider konnten wir den neuen Klon nicht erstellen . Vielleicht müssen Sie die Schreibrechte von 'modules' Verzeichnis auf  (CHMOD 777) festlegen und neu versuchen.");
+//version 2.0.2
+\define('_AM_WGTEAMS_INFOFIELD_CLASS', 'Anzeigeklasse');
+\define('_AM_WGTEAMS_INFOFIELD_CLASS_DEFAULT', 'Immer anzeigen');
+\define('_AM_WGTEAMS_INFOFIELD_CLASS_DETAILS', 'Nur bei Details anzeigen');

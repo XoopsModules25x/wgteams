@@ -78,6 +78,12 @@ require_once __DIR__ . '/common.php';
 \define('_MI_WGTEAMS_SHOWBREADCRUMBS_DESC', 'Please decide, whether a breadcrumbs-navigation should be shown.');
 \define('_MI_WGTEAMS_SHOWCOPYRIGHT', 'Show copyright');
 \define('_MI_WGTEAMS_SHOWCOPYRIGHT_DESC', 'You can remove the copyright from the wgteams pages, but a backlinks to www.wedega.com is expected, anywhere on your site');
-
+//version 2.0.2
+\define('_MI_WGTEAMS_USEDETAILS', 'Use details');
+\define('_MI_WGTEAMS_USEDETAILS_DESC', 'Decide whether you want to show information details of members');
+\define('_MI_WGTEAMS_USEDETAILS_NONE', 'Do not use feature details. All information will be shown on index page');
+\define('_MI_WGTEAMS_USEDETAILS_TAB', 'Show details on new tab');
+\define('_MI_WGTEAMS_USEDETAILS_MODAL', 'Show details on modal window');
 // ---------------- End ----------------
+
 

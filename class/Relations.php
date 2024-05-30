@@ -242,22 +242,15 @@ class Relations extends \XoopsObject
         $ret['team_name']    = $this->helper->getHandler('teams')->get($this->getVar('rel_team_id'))->getVar('team_name');
         $ret['member_id']    = $this->getVar('rel_member_id');
         $ret['member_name']  = \trim($this->helper->getHandler('members')->get($this->getVar('rel_member_id'))->getVar('member_firstname') . ' ' . $this->helper->getHandler('members')->get($this->getVar('rel_member_id'))->getVar('member_lastname'));
-
-        $infofields = [
-            'info_1_field' => 'rel_info_1_field',
-            'info_2_field' => 'rel_info_2_field',
-            'info_3_field' => 'rel_info_3_field',
-            'info_4_field' => 'rel_info_4_field',
-            'info_5_field' => 'rel_info_5_field'
-        ];
-
-        foreach ($infofields as $key => $field) {
-            $fieldId = $this->getVar($field);
+        for ($i = 1; $i <= 5; $i++) {
+            $ret['info_' . $i . '_field']      = '';
+            $fieldId = $this->getVar('rel_info_' . $i . '_field');
             $infofield = $this->helper->getHandler('infofields')->get($fieldId);
-            $ret[$key] = $infofield ? $infofield->getVar('infofield_name') : '';
-            $ret[substr($key, 0, -6)] = $helper::truncateHtml($this->getVar(substr($key, 0, -6), 'n'));
+            if ($fieldId > 0 && \is_object($infofield)) {
+                $ret['info_' . $i . '_field'] = $infofield->getVar('infofield_name');
+            }
+            $ret['info_' . $i] = $helper::truncateHtml($this->getVar('rel_info_' . $i, 'n'));;
         }
-
         $ret['weight']       = $this->getVar('rel_weight');
         $ret['submitter']    = \XoopsUser::getUnameFromId($this->getVar('rel_submitter'));
         $ret['date_create']  = \formatTimestamp($this->getVar('rel_date_create'));

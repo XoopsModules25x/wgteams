@@ -79,11 +79,9 @@ switch ($op) {
             $infofieldsObj = $infofieldsHandler->create();
         }
         // Set Vars
-        // Set Var infofield_name
-        $infofieldsObj->setVar('infofield_name', $_POST['infofield_name']);
-        // Set Var infofield_submitter
-        $infofieldsObj->setVar('infofield_submitter', $_POST['infofield_submitter']);
-        // Set Var infofield_date_created
+        $infofieldsObj->setVar('infofield_name', Request::getString('infofield_name'));
+        $infofieldsObj->setVar('infofield_class', Request::getInt('infofield_class'));
+        $infofieldsObj->setVar('infofield_submitter', Request::getInt('infofield_submitter'));
         $infofieldsObj->setVar('infofield_date_created', \time());
         // Insert Data
         if ($infofieldsHandler->insert($infofieldsObj)) {

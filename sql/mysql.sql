@@ -79,6 +79,7 @@ CREATE TABLE `wgteams_relations` (
 CREATE TABLE `wgteams_infofields` (
   `infofield_id`           INT(8) UNSIGNED NOT NULL AUTO_INCREMENT,
   `infofield_name`         VARCHAR(200)    NOT NULL DEFAULT '',
+  `infofield_class`        INT(1)          NOT NULL DEFAULT '0',
   `infofield_submitter`    INT(10)         NOT NULL DEFAULT '0',
   `infofield_date_created` INT(10)         NOT NULL DEFAULT '0',
   PRIMARY KEY (`infofield_id`)

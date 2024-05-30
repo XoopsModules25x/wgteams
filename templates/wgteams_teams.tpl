@@ -8,5 +8,4 @@
         <{/foreach}>
     </div>
 <{/if}>
-<{include file='db:wgteams_member_modal.tpl'}>
 <{include file='db:wgteams_footer.tpl'}>
