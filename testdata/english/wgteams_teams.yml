@@ -6,11 +6,11 @@
     team_nb_cols: '4'
     team_tablestyle: default
     team_imagestyle: 'img-circle rounded-circle'
-    team_displaystyle: left
+    team_displaystyle: default
     team_weight: '0'
     team_online: '1'
     team_submitter: '1'
-    team_date_create: '1717089717'
+    team_date_create: '1717168538'
 -
     team_id: '2'
     team_name: Cats

@@ -202,4 +202,7 @@ require_once __DIR__ . '/modinfo.php';
 //version 2.0.2
 \define('_AM_WGTEAMS_INFOFIELD_CLASS', 'Anzeigeklasse');
 \define('_AM_WGTEAMS_INFOFIELD_CLASS_DEFAULT', 'Immer anzeigen');
-\define('_AM_WGTEAMS_INFOFIELD_CLASS_DETAILS', 'Nur bei Details anzeigen');
+\define('_AM_WGTEAMS_INFOFIELD_CLASS_INDEX', 'Auf Indexseite anzeigen');
+\define('_AM_WGTEAMS_INFOFIELD_CLASS_TEAM', 'Auf Teamseite anzeigen');
+\define('_AM_WGTEAMS_INFOFIELD_CLASS_DETAILS', 'In Details anzeigen');
+\define('_AM_WGTEAMS_USEDETAILS_NONE', 'Das Feature Details ist nicht aktiviert. Aktive zuerst das Feature in den Moduleinstellungen');

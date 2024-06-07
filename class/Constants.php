@@ -39,7 +39,9 @@ class Constants
     const USEDETAILS_NONE  = 0;
     const USEDETAILS_TAB   = 1;
     const USEDETAILS_MODAL = 2;
-    const CLASS_DEFAULT = 0;
-    const CLASS_DETAILS = 1;
+    //const CLASS_DEFAULT    = 0;
+    //const CLASS_INDEX      = 1;
+    //const CLASS_TEAM       = 2;
+    //const CLASS_DETAILS    = 3;
 
 }

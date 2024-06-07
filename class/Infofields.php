@@ -20,7 +20,7 @@ namespace XoopsModules\Wgteams;
  * @author          Goffy - Wedega.com - Email:<webmaster@wedega.com> - Website:<https://wedega.com>
  */
 
-use XoopsModules\Wgteams\Constants;
+use XoopsModules\Wgteams\{Constants, Helper};
 
 \defined('XOOPS_ROOT_PATH') || exit('Restricted access');
 
@@ -44,7 +44,9 @@ class Infofields extends \XoopsObject
         $this->helper = Helper::getInstance();
         $this->initVar('infofield_id', \XOBJ_DTYPE_INT);
         $this->initVar('infofield_name', \XOBJ_DTYPE_TXTBOX);
-        $this->initVar('infofield_class', \XOBJ_DTYPE_INT);
+        $this->initVar('infofield_class_index', \XOBJ_DTYPE_INT);
+        $this->initVar('infofield_class_team', \XOBJ_DTYPE_INT);
+        $this->initVar('infofield_class_details', \XOBJ_DTYPE_INT);
         $this->initVar('infofield_submitter', \XOBJ_DTYPE_INT);
         $this->initVar('infofield_date_created', \XOBJ_DTYPE_INT);
     }
@@ -78,6 +80,7 @@ class Infofields extends \XoopsObject
             $action = $_SERVER['REQUEST_URI'];
         }
 
+        $useDetails = (int)$this->helper->getConfig('wgteams_usedetails') > Constants::USEDETAILS_NONE;
         // Title
         $title = $this->isNew() ? \sprintf(_AM_WGTEAMS_INFOFIELD_ADD) : \sprintf(_AM_WGTEAMS_INFOFIELD_EDIT);
         // Get Theme Form
@@ -86,12 +89,23 @@ class Infofields extends \XoopsObject
         $form->setExtra('enctype="multipart/form-data"');
         // Form Text AddField_name
         $form->addElement(new \XoopsFormText(_AM_WGTEAMS_INFOFIELD_NAME, 'infofield_name', 50, 255, $this->getVar('infofield_name')), true);
-        // Form infofield class 2
-        $infofield_class      = $this->isNew() ? 1 : $this->getVar('infofield_class');
-        $infofield_classSelect = new \XoopsFormSelect(_AM_WGTEAMS_INFOFIELD_CLASS, 'infofield_class', $infofield_class);
-        $infofield_classSelect->addOption(Constants::CLASS_DEFAULT, _AM_WGTEAMS_INFOFIELD_CLASS_DEFAULT);
-        $infofield_classSelect->addOption(Constants::CLASS_DETAILS, _AM_WGTEAMS_INFOFIELD_CLASS_DETAILS);
-        $form->addElement($infofield_classSelect);
+        // Form infofield class
+        $classCheckbox1 = $this->isNew() ? 1 : $this->getVar('infofield_class_index');
+        $classCheckbox2 = $this->isNew() ? 1 : $this->getVar('infofield_class_team');
+        $classCheckbox3 = $this->isNew() ? 1 : $this->getVar('infofield_class_details');
+        if ($useDetails) {
+            $classSelectTray = new \XoopsFormElementTray(\_AM_WGTEAMS_INFOFIELD_CLASS, '<br>');
+            $classSelectTray->addElement(new \XoopsFormRadioYN(\_AM_WGTEAMS_INFOFIELD_CLASS_INDEX, 'infofield_class_index', $classCheckbox1));
+            $classSelectTray->addElement(new \XoopsFormRadioYN(\_AM_WGTEAMS_INFOFIELD_CLASS_TEAM, 'infofield_class_team', $classCheckbox2));
+            $classSelectTray->addElement(new \XoopsFormRadioYN(\_AM_WGTEAMS_INFOFIELD_CLASS_INDEX, 'infofield_class_details', $classCheckbox3));
+            $form->addElement($classSelectTray);
+        } else {
+            $labelInfoclass = new \XoopsFormLabel(\_AM_WGTEAMS_INFOFIELD_CLASS, _AM_WGTEAMS_USEDETAILS_NONE);
+            $form->addElement($labelInfoclass);
+            $form->addElement(new \XoopsFormHidden('infofield_class_index', $classCheckbox1));
+            $form->addElement(new \XoopsFormHidden('infofield_class_team', $classCheckbox2));
+            $form->addElement(new \XoopsFormHidden('infofield_class_details', $classCheckbox3));
+        }
         // Form Select User
         $submitter = $this->isNew() ? $xoopsUser->getVar('uid') : $this->getVar('infofield_submitter');
         $form->addElement(new \XoopsFormSelectUser(_AM_WGTEAMS_SUBMITTER, 'infofield_submitter', false, $submitter, 1, false));
@@ -117,7 +131,21 @@ class Infofields extends \XoopsObject
         $ret['field_id']           = $this->getVar('infofield_id');
         $ret['field_name']         = $this->getVar('infofield_name');
         $ret['field_class']        = $this->getVar('infofield_class');
-        $ret['field_class_text']   = Constants::CLASS_DETAILS == $this->getVar('infofield_class') ? \_AM_WGTEAMS_INFOFIELD_CLASS_DETAILS : \_AM_WGTEAMS_INFOFIELD_CLASS_DEFAULT;
+        $field_class_text = '';
+        if ((int)$this->helper->getConfig('wgteams_usedetails') > Constants::USEDETAILS_NONE) {
+            if ((int)$this->getVar('infofield_class_index') > 0) {
+                $field_class_text .= \_AM_WGTEAMS_INFOFIELD_CLASS_INDEX . '<br>';
+            }
+            if ((int)$this->getVar('infofield_class_team') > 0) {
+                $field_class_text .= \_AM_WGTEAMS_INFOFIELD_CLASS_TEAM . '<br>';
+            }
+            if ((int)$this->getVar('infofield_class_details') > 0) {
+                $field_class_text .= \_AM_WGTEAMS_INFOFIELD_CLASS_DETAILS . '<br>';
+            }
+        } else {
+            $field_class_text .= \_AM_WGTEAMS_INFOFIELD_CLASS_DEFAULT;
+        }
+        $ret['field_class_text']   = $field_class_text;
         $ret['field_submitter']    = \XoopsUser::getUnameFromId($this->getVar('infofield_submitter'));
         $ret['field_date_created'] = \formatTimestamp($this->getVar('infofield_date_created'));
 

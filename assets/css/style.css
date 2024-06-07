@@ -18,7 +18,7 @@
  */
 
 .container-team {padding:0;margin:0;}
-.team-img, .member-img {width:100%;}
+.team-img, .member-img {}
 .team-name {}
 .team-descr {}
 .team-readmore {text-align: right;}
@@ -26,8 +26,8 @@
 .member-panel {padding:10px;}
 .member-card {padding:0;}
 .member-table {width: 100%;padding: 0;margin-bottom:20px;}
-.member-label {padding: 2px;vertical-align:top;}
-.member-text {padding: 2px;vertical-align:top;}
+.member-label {padding: 2px 15px;vertical-align:top;}
+.member-text {padding: 2px 15px;vertical-align:top;}
 .member-info {height: auto;}
 .member-info ul {padding-left:10px;}
 .wgteams-odd div {background-color: #DFDFDF;padding: 5px;border-bottom: 1px solid #ccc;}
@@ -37,9 +37,6 @@
 .wgt-card-panel {padding:5px;}
 .wgt-card {padding:10px;background-color:#ffffff;border: 1px solid #cccccc;border-radius:5px;}
 
-.modal-body {
-    text-align: center;
-}
 .member-image {
     margin-bottom: 20px;
 }

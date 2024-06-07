@@ -22,7 +22,7 @@
 \define('_MB_WGTEAMS_NAME_LENGTH', 'Title length (0 means full length)');
 \define('_MB_WGTEAMS_DESC_SHOW', 'Show team description');
 \define('_MB_WGTEAMS_DESC_LENGTH', 'Description length (0 means full length)');
-\define('_MB_WGTEAMS_NUMB_TEAMS', 'Number of teams in each row');
+\define('_MB_WGTEAMS_NUMB_TEAMS', 'Number of teams in each row<br>(Only for Bootstrap cards)');
 \define('_MB_WGTEAMS_TEMPLATE', 'Template');
 \define('_MB_WGTEAMS_TEMPLATE_DEFAULT', 'Default');
 \define('_MB_WGTEAMS_TEMPLATE_LIST', 'Simple List');

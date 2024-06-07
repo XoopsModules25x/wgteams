@@ -80,7 +80,9 @@ switch ($op) {
         }
         // Set Vars
         $infofieldsObj->setVar('infofield_name', Request::getString('infofield_name'));
-        $infofieldsObj->setVar('infofield_class', Request::getInt('infofield_class'));
+        $infofieldsObj->setVar('infofield_class_index', Request::getInt('infofield_class_index'));
+        $infofieldsObj->setVar('infofield_class_team', Request::getInt('infofield_class_team'));
+        $infofieldsObj->setVar('infofield_class_details', Request::getInt('infofield_class_details'));
         $infofieldsObj->setVar('infofield_submitter', Request::getInt('infofield_submitter'));
         $infofieldsObj->setVar('infofield_date_created', \time());
         // Insert Data

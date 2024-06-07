@@ -81,7 +81,7 @@ require_once __DIR__ . '/common.php';
 //version 2.0.2
 \define('_MI_WGTEAMS_USEDETAILS', 'Verwende Details');
 \define('_MI_WGTEAMS_USEDETAILS_DESC', 'Definieren Sie bitte, ob Details zu Mitgliederinformationen angezeigt werden sollen');
-\define('_MI_WGTEAMS_USEDETAILS_NONE', 'Feature Details nicht verwenden. Alle Informationen werden auf der Indexseite angezeigt');
+\define('_MI_WGTEAMS_USEDETAILS_NONE', 'Feature Details nicht verwenden. Es werden immer alle Informationen angezeigt');
 \define('_MI_WGTEAMS_USEDETAILS_TAB', 'Zeige Details auf neuem Tab');
 \define('_MI_WGTEAMS_USEDETAILS_MODAL', 'Zeige Details in modalem Fenster');
 // ---------------- End ----------------

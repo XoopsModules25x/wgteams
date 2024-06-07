@@ -1,24 +1,32 @@
 -
     infofield_id: '1'
     infofield_name: Species
-    infofield_class: '0'
     infofield_submitter: '1'
-    infofield_date_created: '1553961139'
+    infofield_date_created: '1717168327'
+    infofield_class_index: '1'
+    infofield_class_team: '1'
+    infofield_class_details: '1'
 -
     infofield_id: '2'
     infofield_name: Sex
-    infofield_class: '1'
     infofield_submitter: '1'
-    infofield_date_created: '1717073960'
+    infofield_date_created: '1717168381'
+    infofield_class_index: '0'
+    infofield_class_team: '1'
+    infofield_class_details: '1'
 -
     infofield_id: '3'
     infofield_name: Color
-    infofield_class: '1'
     infofield_submitter: '1'
-    infofield_date_created: '1717073983'
+    infofield_date_created: '1717168392'
+    infofield_class_index: '0'
+    infofield_class_team: '0'
+    infofield_class_details: '1'
 -
     infofield_id: '4'
     infofield_name: Age
-    infofield_class: '1'
     infofield_submitter: '1'
-    infofield_date_created: '1717073994'
+    infofield_date_created: '1717168402'
+    infofield_class_index: '0'
+    infofield_class_team: '0'
+    infofield_class_details: '1'

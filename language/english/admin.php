@@ -201,5 +201,8 @@ require_once __DIR__ . '/modinfo.php';
 \define('_AM_WGTEAMS_CLONE_FAIL', 'Sorry, we failed in creating the new clone. Maybe you need to temporally set write permissions (CHMOD 777) to modules folder and try again.');
 //version 2.0.2
 \define('_AM_WGTEAMS_INFOFIELD_CLASS', 'Display class');
-\define('_AM_WGTEAMS_INFOFIELD_CLASS_DEFAULT', 'Show allways');
+\define('_AM_WGTEAMS_INFOFIELD_CLASS_DEFAULT', 'Show always');
+\define('_AM_WGTEAMS_INFOFIELD_CLASS_INDEX', 'Show on index page');
+\define('_AM_WGTEAMS_INFOFIELD_CLASS_TEAM', 'Show on team page');
 \define('_AM_WGTEAMS_INFOFIELD_CLASS_DETAILS', 'Show in details');
+\define('_AM_WGTEAMS_USEDETAILS_NONE', 'Feature details is not activated. Activate in module preferences first');

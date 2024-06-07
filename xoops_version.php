@@ -158,7 +158,7 @@ $modversion['blocks'][] = [
     'description' => _MI_WGTEAMS_TEAMSMEMBERS_BLOCK_DESC,
     'show_func'   => 'b_wgteams_teamsmembers_show',
     'edit_func'   => 'b_wgteams_teamsmembers_edit',
-    'options'     => 'showsingleteam|0',
+    'options'     => 'showsingleteam',
     'template'    => 'wgteams_block_teamsmembers.tpl',
 ];
 
@@ -168,7 +168,7 @@ $modversion['blocks'][] = [
     'description' => _MI_WGTEAMS_TEAMS_BLOCK_DESC,
     'show_func'   => 'b_wgteams_teams_show',
     'edit_func'   => 'b_wgteams_teams_edit',
-    'options'     => 'showlistofteams|1|0|1|0|2|default|0',
+    'options'     => 'showlistofteams|1|0|1|0|1|default|0',
     'template'    => 'wgteams_block_teams.tpl',
 ];
 

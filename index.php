@@ -46,15 +46,10 @@ $useModal   = Constants::USEDETAILS_MODAL === $useDetails;
 $GLOBALS['xoopsTpl']->assign('useModal', $useModal);
 if ($useModal) {
     $xoTheme->addStylesheet(\WGTEAMS_URL . '/assets/css/modal.css');
+    $xoTheme->addScript(\WGTEAMS_URL . '/assets/js/modal.js');
 }
 $useTab = Constants::USEDETAILS_TAB === $useDetails;
-
-if ($rel_id > 0) {
-    $GLOBALS['xoopsTpl']->assign('member_show_details', true);
-} else {
-    $GLOBALS['xoopsTpl']->assign('useTab', $useTab);
-    $GLOBALS['xoopsTpl']->assign('team_show', true);
-}
+$GLOBALS['xoopsTpl']->assign('useTab', $useTab);
 
 // Define Stylesheet
 $xoTheme->addStylesheet($style);
@@ -95,6 +90,18 @@ if (\count($teams_list) > 0) {
     }
     $GLOBALS['xoopsTpl']->append('teams_list', $teams_list);
     unset($teams_list);
+}
+
+if ($rel_id > 0) {
+    $GLOBALS['xoopsTpl']->assign('member_show_details', true);
+} else {
+    $GLOBALS['xoopsTpl']->assign('team_show', true);
+}
+if (0 === $rel_id && 0 === $team_id) {
+    $GLOBALS['xoopsTpl']->assign('member_show_index', true);
+}
+if (0 === $rel_id && $team_id > 0) {
+    $GLOBALS['xoopsTpl']->assign('member_show_team', true);
 }
 
 // fill in template

@@ -27,32 +27,10 @@ declare(strict_types=1);
  */
 
 use XoopsModules\Wgteams;
-use XoopsModules\Wgteams\Constants;
-
-/**
- * @param        $global
- * @param        $key
- * @param string $default
- * @param string $type
- * @return mixed|string
- */
-function wgteams_CleanVars(&$global, $key, $default = '', $type = 'int')
-{
-    switch ($type) {
-        case 'string':
-            $ret = isset($global[$key]) ? filter_var($global[$key], FILTER_SANITIZE_ADD_SLASHES ) : $default;
-            break;
-        case 'int':
-        default:
-            $ret = isset($global[$key]) ? filter_var($global[$key], FILTER_SANITIZE_NUMBER_INT) : $default;
-            break;
-    }
-    if (false === $ret) {
-        return $default;
-    }
-
-    return $ret;
-}
+use XoopsModules\Wgteams\{
+    //Constants,
+    Helper
+};
 
 /**
  * @param $content
@@ -93,7 +71,7 @@ function wgteamsMetaDescription($content)
  */
 function wgteamsGetTeamDetails(&$teamsAll, $lengthName = 0, $show_descr = true, $lengthDescr = 0)
 {
-    $helper       = Wgteams\Helper::getInstance();
+    $helper = Helper::getInstance();
 
     \xoops_loadLanguage('main', \WGTEAMS_DIRNAME);
 
@@ -131,7 +109,7 @@ function wgteamsGetTeamDetails(&$teamsAll, $lengthName = 0, $show_descr = true, 
             'team_image_url'  => $team_image_url,
             'team_tablestyle' => $team_tablestyle,
             'team_imagestyle' => $team_imagestyle,
-            'team_read_more'  => _MA_WGTEAMS_READMORE,
+            'team_read_more'  => \_MA_WGTEAMS_READMORE,
             'show_teamname'   => $show_teamname,
         ];
     }
@@ -146,11 +124,10 @@ function wgteamsGetTeamDetails(&$teamsAll, $lengthName = 0, $show_descr = true, 
 function wgteamsGetTeamMemberDetails(&$teamsAll, $rel_id = 0)
 {
     // Get teams and member relations
-    $helper            = Wgteams\Helper::getInstance();
-    $db                = \XoopsDatabaseFactory::getDatabaseConnection();
-    $membersHandler    = new Wgteams\MembersHandler($db);
-    $relationsHandler  = new Wgteams\RelationsHandler($db);
-    $infofieldsHandler = new Wgteams\InfofieldsHandler($db);
+    $helper            = Helper::getInstance();
+    $membersHandler    = $helper->getHandler('Members');
+    $relationsHandler  = $helper->getHandler('Relations');
+    $infofieldsHandler = $helper->getHandler('Infofields');
 
     \xoops_loadLanguage('main', \WGTEAMS_DIRNAME);
 
@@ -226,161 +203,63 @@ function wgteamsGetTeamMemberDetails(&$teamsAll, $rel_id = 0)
                 $member_image = '';
             }
 
-            $relations[$r]['member_id'] = $member_id;
-            $relations[$r]['member_title'] = $member_title;
+            $relations[$r]['member_id']        = $member_id;
+            $relations[$r]['member_title']     = $member_title;
             $relations[$r]['member_firstname'] = $member_firstname;
-            $relations[$r]['member_lastname'] = $member_lastname;
-            $relations[$r]['member_fullname'] = $member_fullname;
-            $relations[$r]['member_name'] = $member_name;
-            $relations[$r]['member_address'] = $member_address;
-            $relations[$r]['member_phone'] = $member_phone;
-            $relations[$r]['member_email'] = $member_email;
-            $relations[$r]['member_image'] = $member_image;
+            $relations[$r]['member_lastname']  = $member_lastname;
+            $relations[$r]['member_fullname']  = $member_fullname;
+            $relations[$r]['member_name']      = $member_name;
+            $relations[$r]['member_address']   = $member_address;
+            $relations[$r]['member_phone']     = $member_phone;
+            $relations[$r]['member_email']     = $member_email;
+            $relations[$r]['member_image']     = $member_image;
             $relations[$r]['member_image_url'] = $member_image_url;
-            $relations[$r]['member_labels'] = $member_labels;
+            $relations[$r]['member_labels']    = $member_labels;
             $relations[$r]['infofield_labels'] = $infofield_labels;
-
-            // reset info field
-            $rel_info_1_name = '';
-            $rel_info_2_name = '';
-            $rel_info_3_name = '';
-            $rel_info_4_name = '';
-            $rel_info_5_name = '';
-            $rel_info_1_class = 0;
-            $rel_info_2_class = 0;
-            $rel_info_3_class = 0;
-            $rel_info_4_class = 0;
-            $rel_info_5_class = 0;
-
-            $infofield_id = $relsAll[$r]->getVar('rel_info_1_field');
-            if ($infofield_id > 0) {
-                $infofield_obj   = $infofieldsHandler->get($infofield_id);
-                if ($infofield_obj !== null) {
-                    $rel_info_1_name = $infofield_obj->getVar('infofield_name', 'n');
-                    $rel_info_1_class = (int)$infofield_obj->getVar('infofield_class');
-                }
-                unset($infofield_obj);
-                if ($usedetails && Constants::CLASS_DETAILS === $rel_info_1_class) {
-                    $relations[$r]['details'][] = [
-                        'info_name' => $rel_info_1_name,
-                        'info'      => $relsAll[$r]->getVar('rel_info_1', 'n')
-                    ];
-                } else {
+            $relations[$r]['index']            = [];
+            $relations[$r]['team']             = [];
+            $relations[$r]['details']          = [];
+            for ($j = 1; $j <= 5; $j++) {
+                // reset info field
+                $rel_info_name          = '';
+                $rel_info_class_index   = 0;
+                $rel_info_class_team    = 0;
+                $rel_info_class_details = 0;
+                // get info
+                $infofield_id = $relsAll[$r]->getVar('rel_info_' . $j . '_field');
+                if ($infofield_id > 0) {
+                    $infofield_obj   = $infofieldsHandler->get($infofield_id);
+                    if ($infofield_obj !== null) {
+                        $rel_info_name          = $infofield_obj->getVar('infofield_name', 'n');
+                        $rel_info_class_index   = (bool)$infofield_obj->getVar('infofield_class_index');
+                        $rel_info_class_team    = (bool)$infofield_obj->getVar('infofield_class_team');
+                        $rel_info_class_details = (bool)$infofield_obj->getVar('infofield_class_details');
+                    }
+                    unset($infofield_obj);
                     //for old templates
-                    $relations[$r]['info_1_name'] = $rel_info_1_name;
-                    $relations[$r]['info_1']      = $relsAll[$r]->getVar('rel_info_1', 'n');
+                    $relations[$r]['info_' . $j . '_name'] = $rel_info_name;
+                    $relations[$r]['info_' . $j]      = $relsAll[$r]->getVar('rel_info_' . $j, 'n');
                     //for new templates
-                    $relations[$r]['general'][] = [
-                        'info_name' => $rel_info_1_name,
-                        'info'      => $relsAll[$r]->getVar('rel_info_1', 'n')
-                    ];
+                    if (($usedetails && $rel_info_class_index) || !$usedetails) {
+                        $relations[$r]['index'][] = [
+                            'info_name' => $rel_info_name,
+                            'info'      => $relsAll[$r]->getVar('rel_info_' . $j, 'n')
+                        ];
+                    }
+                    if (($usedetails && $rel_info_class_team) || !$usedetails) {
+                        $relations[$r]['team'][] = [
+                            'info_name' => $rel_info_name,
+                            'info'      => $relsAll[$r]->getVar('rel_info_' . $j, 'n')
+                        ];
+                    }
+                    if (($usedetails && $rel_info_class_details) || !$usedetails) {
+                        $relations[$r]['details'][] = [
+                            'info_name' => $rel_info_name,
+                            'info'      => $relsAll[$r]->getVar('rel_info_' . $j, 'n')
+                        ];
+                    }
+                    $nb_infos++;
                 }
-                $nb_infos++;
-            }
-
-            $infofield_id = $relsAll[$r]->getVar('rel_info_2_field');
-            if ($infofield_id > 0) {
-                $infofield_obj   = $infofieldsHandler->get($infofield_id);
-                if ($infofield_obj !== null) {
-                    $rel_info_2_name = $infofield_obj->getVar('infofield_name');
-                    $rel_info_2_class = (int)$infofield_obj->getVar('infofield_class');
-                }
-                unset($infofield_obj);
-                if ($usedetails && Constants::CLASS_DETAILS === $rel_info_2_class) {
-                    $relations[$r]['details'][] = [
-                        'info_name' => $rel_info_2_name,
-                        'info'      => $relsAll[$r]->getVar('rel_info_2', 'n')
-                    ];
-                } else {
-                    //for old templates
-                    $relations[$r]['info_2_name'] = $rel_info_2_name;
-                    $relations[$r]['info_2']      = $relsAll[$r]->getVar('rel_info_2', 'n');
-                    //for new templates
-                    $relations[$r]['general'][] = [
-                        'info_name' => $rel_info_2_name,
-                        'info'      => $relsAll[$r]->getVar('rel_info_2', 'n')
-                    ];
-                }
-                $nb_infos++;
-            }
-
-            $infofield_id = $relsAll[$r]->getVar('rel_info_3_field');
-            if ($infofield_id > 0) {
-                $infofield_obj   = $infofieldsHandler->get($infofield_id);
-                if ($infofield_obj !== null) {
-                    $rel_info_3_name = $infofield_obj->getVar('infofield_name');
-                    $rel_info_3_class = (int)$infofield_obj->getVar('infofield_class');
-                }
-                unset($infofield_obj);
-                if ($usedetails && Constants::CLASS_DETAILS === $rel_info_3_class) {
-                    $relations[$r]['details'][] = [
-                        'info_name' => $rel_info_3_name,
-                        'info'      => $relsAll[$r]->getVar('rel_info_3', 'n')
-                    ];
-                } else {
-                    //for old templates
-                    $relations[$r]['info_3_name'] = $rel_info_3_name;
-                    $relations[$r]['info_3']      = $relsAll[$r]->getVar('rel_info_3', 'n');
-                    //for new templates
-                    $relations[$r]['general'][] = [
-                        'info_name' => $rel_info_3_name,
-                        'info'      => $relsAll[$r]->getVar('rel_info_3', 'n')
-                    ];
-                }
-                $nb_infos++;
-            }
-
-            $infofield_id = $relsAll[$r]->getVar('rel_info_4_field');
-            if ($infofield_id > 0) {
-                $infofield_obj   = $infofieldsHandler->get($infofield_id);
-                if ($infofield_obj !== null) {
-                    $rel_info_4_name = $infofield_obj->getVar('infofield_name');
-                    $rel_info_4_class = (int)$infofield_obj->getVar('infofield_class');
-                }
-                $relations[$r]['info_4_name'] = $rel_info_4_name;
-                unset($infofield_obj);
-                if ($usedetails && Constants::CLASS_DETAILS === $rel_info_4_class) {
-                    $relations[$r]['details'][] = [
-                        'info_name' => $rel_info_4_name,
-                        'info'      => $relsAll[$r]->getVar('rel_info_4', 'n')
-                    ];
-                } else {
-                    //for old templates
-                    $relations[$r]['info_4_name'] = $rel_info_4_name;
-                    $relations[$r]['info_4']      = $relsAll[$r]->getVar('rel_info_4', 'n');
-                    //for new templates
-                    $relations[$r]['general'][] = [
-                        'info_name' => $rel_info_4_name,
-                        'info'      => $relsAll[$r]->getVar('rel_info_4', 'n')
-                    ];
-                }
-                $nb_infos++;
-            }
-
-            $infofield_id = $relsAll[$r]->getVar('rel_info_5_field');
-            if ($infofield_id > 0) {
-                $infofield_obj   = $infofieldsHandler->get($infofield_id);
-                if ($infofield_obj !== null) {
-                    $rel_info_5_name = $infofield_obj->getVar('infofield_name');
-                    $rel_info_5_class = (int)$infofield_obj->getVar('infofield_class');
-                }
-                unset($infofield_obj);
-                if ($usedetails && Constants::CLASS_DETAILS === $rel_info_5_class) {
-                    $relations[$r]['details'][] = [
-                        'info_name' => $rel_info_5_name,
-                        'info'      => $relsAll[$r]->getVar('rel_info_5', 'n')
-                    ];
-                } else {
-                    //for old templates
-                    $relations[$r]['info_5_name'] = $rel_info_5_name;
-                    $relations[$r]['info_5']      = $relsAll[$r]->getVar('rel_info_5', 'n');
-                    //for new templates
-                    $relations[$r]['general'][] = [
-                        'info_name' => $rel_info_5_name,
-                        'info'      => $relsAll[$r]->getVar('rel_info_5', 'n')
-                    ];
-                }
-                $nb_infos++;
             }
             $counter++;
 
