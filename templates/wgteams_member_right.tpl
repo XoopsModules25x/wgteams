@@ -61,6 +61,21 @@
                 <{/if}>
             <{/foreach}>
         <{/if}>
+        <{if $member_show_team|default:false}>
+            <{foreach item=info_team from=$member.team name=info_team}>
+                <{if $info_team.info|default:false || $info_team.info_name|default:''}>
+                    <div class='row <{if $member.rel_tablestyle|default:'' == 'wgteams-striped'}><{cycle values="wgteams-odd, wgteams-even"}><{else}><{$member.rel_tablestyle}><{/if}>'>
+                        <{if $member.infofield_labels|default:false}>
+                            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 member-label"><{$info_team.info_name}></div>
+                            <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 member-label member-info">
+                        <{else}>
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 member-text member-info">
+                        <{/if}>
+                        <{$info_team.info}></div>
+                    </div>
+                <{/if}>
+            <{/foreach}>
+        <{/if}>
         <{if $member_show_details|default:false}>
             <{foreach item=info_details from=$member.details name=info_details}>
                 <{if $info_details.info|default:false || $info_details.info_name|default:''}>

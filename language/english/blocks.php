@@ -22,7 +22,7 @@
 \define('_MB_WGTEAMS_NAME_LENGTH', 'Title length (0 means full length)');
 \define('_MB_WGTEAMS_DESC_SHOW', 'Show team description');
 \define('_MB_WGTEAMS_DESC_LENGTH', 'Description length (0 means full length)');
-\define('_MB_WGTEAMS_NUMB_TEAMS', 'Number of teams in each row<br>(Only for Bootstrap cards)');
+\define('_MB_WGTEAMS_NUMB_TEAMS', 'Number of teams in each row (Only for Bootstrap cards)');
 \define('_MB_WGTEAMS_TEMPLATE', 'Template');
 \define('_MB_WGTEAMS_TEMPLATE_DEFAULT', 'Default');
 \define('_MB_WGTEAMS_TEMPLATE_LIST', 'Simple List');
@@ -30,4 +30,9 @@
 \define('_MB_WGTEAMS_TEAMS_TO_DISPLAY', 'Teams to Display (Teams to show must be "online" additionally)');
 \define('_MB_WGTEAMS_ALL_TEAMS', 'All teams');
 \define('_MB_WGTEAMS_SHOWTEAM', 'Show team');
+//version 2.0.2
+\define('_MB_WGTEAMS_INFOFIELD_CLASS', 'Level of details to show in block');
+\define('_MB_WGTEAMS_INFOFIELD_CLASS_INDEX', 'Show same as on index page');
+\define('_MB_WGTEAMS_INFOFIELD_CLASS_TEAM', 'Show same as on team page');
+\define('_MB_WGTEAMS_INFOFIELD_CLASS_DETAILS', 'Show all details');
 // ---------------- End ----------------

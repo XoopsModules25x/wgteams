@@ -1,4 +1,4 @@
-<{if $team_show|default:false}>
+<{if $blockExtendedTeamShow|default:false}>
     <div class="row">
         <div class="team-heading col-12"><h3 class="team-name center"><{$team.team_name}></h3></div>
     </div>
@@ -21,5 +21,5 @@
     </div>
 <{/if}>
 <{if $team.members|default:false}>
-    <{include file='db:wgteams_members_list.tpl' members=$team.members}>
+    <{include file='db:wgteams_block_ext_members_list.tpl' members=$team.members}>
 <{/if}>

@@ -110,8 +110,8 @@ $modversion['templates'][] = ['file' => 'wgteams_footer.tpl', 'description' => '
 $modversion['templates'][] = ['file' => 'wgteams_member_modal_default.tpl', 'description' => ''];
 $modversion['templates'][] = ['file' => 'wgteams_member_modal_left.tpl', 'description' => ''];
 $modversion['templates'][] = ['file' => 'wgteams_member_modal_right.tpl', 'description' => ''];
-$modversion['templates'][] = ['file' => 'wgteams_block_teamsmembers.tpl', 'description' => '', 'type' => 'block'];
-$modversion['templates'][] = ['file' => 'wgteams_block_teams.tpl', 'description' => '', 'type' => 'block'];
+$modversion['templates'][] = ['file' => 'wgteams_block_ext_members_list.tpl', 'description' => '', 'type' => 'block'];
+$modversion['templates'][] = ['file' => 'wgteams_block_ext_teams_list.tpl', 'description' => '', 'type' => 'block'];
 
 // ------------------- Mysql ------------------- //
 $modversion['sqlfile']['mysql'] = 'sql/mysql.sql';
@@ -153,23 +153,34 @@ if (\is_object($xoopsModule) && $xoopsModule->getVar('dirname') == $moduleDirNam
 }
 // ------------------- Blocks ------------------- //
 $modversion['blocks'][] = [
-    'file'        => 'b_teamsmembers.php',
-    'name'        => _MI_WGTEAMS_TEAMSMEMBERS_BLOCK,
-    'description' => _MI_WGTEAMS_TEAMSMEMBERS_BLOCK_DESC,
-    'show_func'   => 'b_wgteams_teamsmembers_show',
-    'edit_func'   => 'b_wgteams_teamsmembers_edit',
-    'options'     => 'showsingleteam',
-    'template'    => 'wgteams_block_teamsmembers.tpl',
-];
-
-$modversion['blocks'][] = [
     'file'        => 'b_teams.php',
     'name'        => _MI_WGTEAMS_TEAMS_BLOCK,
     'description' => _MI_WGTEAMS_TEAMS_BLOCK_DESC,
     'show_func'   => 'b_wgteams_teams_show',
     'edit_func'   => 'b_wgteams_teams_edit',
-    'options'     => 'showlistofteams|1|0|1|0|1|default|0',
+    'options'     => 'showlistofteams|1|0|1|0|default|1|0',
     'template'    => 'wgteams_block_teams.tpl',
+];
+
+$modversion['blocks'][] = [
+    'file'        => 'b_teamsmembers_extended.php',
+    'name'        => _MI_WGTEAMS_TEAMSMEMBERS_BLOCK_EXTENDED,
+    'description' => _MI_WGTEAMS_TEAMSMEMBERS_BLOCK_EXTENDED_DESC,
+    'show_func'   => 'b_wgteams_teamsmembers_ext_show',
+    'edit_func'   => 'b_wgteams_teamsmembers_ext_edit',
+    'options'     => 'showtmextended|0|0|0|0|1|0',
+    'template'    => 'wgteams_block_ext_teamsmembers.tpl',
+];
+
+// ------------------- Blocks ------------------- //
+$modversion['blocks'][] = [
+    'file'        => 'b_teamsmembers.php',
+    'name'        => _MI_WGTEAMS_TEAMSMEMBERS_BLOCK,
+    'description' => _MI_WGTEAMS_TEAMSMEMBERS_BLOCK_DESC,
+    'show_func'   => 'b_wgteams_teamsmembers_show',
+    'edit_func'   => 'b_wgteams_teamsmembers_edit',
+    'options'     => 'showteamsmembers|0',
+    'template'    => 'wgteams_block_teamsmembers.tpl',
 ];
 
 // ------------------- Config ------------------- //

@@ -41,10 +41,12 @@ require_once __DIR__ . '/common.php';
 // Submenu
 \define('_MI_WGTEAMS_SMNAME1', 'teams');
 // Blocks
-\define('_MI_WGTEAMS_TEAMSMEMBERS_BLOCK', 'Team/Members block');
-\define('_MI_WGTEAMS_TEAMSMEMBERS_BLOCK_DESC', 'Show all Teams with related members in a block');
-\define('_MI_WGTEAMS_TEAMS_BLOCK', 'Block Teams');
+\define('_MI_WGTEAMS_TEAMSMEMBERS_BLOCK', 'Team/Members block default');
+\define('_MI_WGTEAMS_TEAMSMEMBERS_BLOCK_DESC', 'Show all teams with related members in a block');
+\define('_MI_WGTEAMS_TEAMS_BLOCK', 'Teams  block');
 \define('_MI_WGTEAMS_TEAMS_BLOCK_DESC', 'Show a list of the teams');
+\define('_MI_WGTEAMS_TEAMSMEMBERS_BLOCK_EXTENDED', 'Team/Members block extended');
+\define('_MI_WGTEAMS_TEAMSMEMBERS_BLOCK_EXTENDED_DESC', 'Show all teams with related members in a block');
 // Config
 \define('_MI_WGTEAMS_EDITOR', 'Editor');
 \define('_MI_WGTEAMS_EDITOR_DESC', 'Select the Editor to use');

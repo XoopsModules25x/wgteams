@@ -34,7 +34,7 @@ require_once \XOOPS_ROOT_PATH . '/modules/wgteams/include/common.php';
  * @param $options
  * @return array
  */
-function b_wgteams_teamsmembers_show($options)
+function b_wgteams_teamsmembers_ext_show($options)
 {
     require_once \XOOPS_ROOT_PATH . '/modules/wgteams/include/functions.php';
 
@@ -55,6 +55,29 @@ function b_wgteams_teamsmembers_show($options)
     $GLOBALS['xoopsTpl']->assign('useTab', $useTab);
 
     $typeBlock = $options[0];
+    $showTeam   = (boolean)$options[1];
+    $GLOBALS['xoopsTpl']->assign('blockExtendedTeamShow', $showTeam);
+    $lengthName = $options[2];
+    $showDesc   = (boolean)$options[3];
+    $lengthDescr = $options[4];
+    $levelDetail = (int)$options[5];
+    switch ($levelDetail) {
+        case constants::CLASS_INDEX:
+            $GLOBALS['xoopsTpl']->assign('member_show_index', true);
+            break;
+        case constants::CLASS_TEAM:
+            $GLOBALS['xoopsTpl']->assign('member_show_team', true);
+            break;
+        case constants::CLASS_DETAILS:
+        default:
+            $GLOBALS['xoopsTpl']->assign('member_show_details', true);
+            break;
+    }
+    \array_shift($options);
+    \array_shift($options);
+    \array_shift($options);
+    \array_shift($options);
+    \array_shift($options);
     \array_shift($options);
     $teamIds     = \implode(',', $options);
 
@@ -73,7 +96,7 @@ function b_wgteams_teamsmembers_show($options)
 
     $block = [];
     if ($teamsCount > 0) {
-        $block = wgteamsGetTeamMemberDetails($teamsAll);
+        $block = wgteamsGetTeamMemberDetails($teamsAll, 0, $lengthName, $lengthDescr);
     }
 
     return $block;
@@ -84,14 +107,35 @@ function b_wgteams_teamsmembers_show($options)
  * @param $options
  * @return string
  */
-function b_wgteams_teamsmembers_edit($options)
+function b_wgteams_teamsmembers_ext_edit($options)
 {
     $helper       = Wgteams\Helper::getInstance();
     $teamsHandler = $helper->getHandler('Teams');
     $GLOBALS['xoopsTpl']->assign('wgteams_upload_url', \WGTEAMS_UPLOAD_URL);
-    $form = _MB_WGTEAMS_TEAMS_TO_DISPLAY;
-    $form .= "<input type='hidden' name='options[0]' value='" . $options[0] . "'>";
+    $form = "<input type='hidden' name='options[0]' value='" . $options[0] . "'>";
+    $form .= \_MB_WGTEAMS_SHOWTEAM . ": <select name='options[1]' size='2'>";
+    $form .= "<option value='0' " . (0 === (int)$options[1] ? "selected='selected'" : '') . '>' . \_NO . '</option>';
+    $form .= "<option value='1' " . (1 === (int)$options[1] ? "selected='selected'" : '') . '>' . \_YES . '</option>';
+    $form .= '</select><br>';
+    $form .= \_MB_WGTEAMS_NAME_LENGTH . ": <input type='text' name='options[2]' size='5' maxlength='255' value='" . $options[2] . "'><br>";
+    $form .= \_MB_WGTEAMS_DESC_SHOW . ": <select name='options[3]' size='2'>";
+    $form .= "<option value='0' " . (0 === (int)$options[3] ? "selected='selected'" : '') . '>' . \_NO . '</option>';
+    $form .= "<option value='1' " . (1 === (int)$options[3] ? "selected='selected'" : '') . '>' . \_YES . '</option>';
+    $form .= '</select><br>';
+    $form .= \_MB_WGTEAMS_DESC_LENGTH . ": <input type='text' name='options[4]' size='5' maxlength='255' value='" . $options[4] . "'><br>";
+    $form .= \_MB_WGTEAMS_INFOFIELD_CLASS . ": <select name='options[5]' size='3'>";
+    $form .= "<option value='" . Constants::CLASS_INDEX . "' " . (Constants::CLASS_INDEX === (int)$options[5] ? "selected='selected'" : '') . '>' . \_MB_WGTEAMS_INFOFIELD_CLASS_INDEX . '</option>';
+    $form .= "<option value='" . Constants::CLASS_TEAM . "' " . (Constants::CLASS_TEAM === (int)$options[5] ? "selected='selected'" : '') . '>' . \_MB_WGTEAMS_INFOFIELD_CLASS_TEAM . '</option>';
+    $form .= "<option value='" . Constants::CLASS_DETAILS . "' " . (Constants::CLASS_DETAILS === (int)$options[5] ? "selected='selected'" : '') . '>' . \_MB_WGTEAMS_INFOFIELD_CLASS_DETAILS . '</option>';
+    $form .= '</select><br>';
     \array_shift($options);
+    \array_shift($options);
+    \array_shift($options);
+    \array_shift($options);
+    \array_shift($options);
+    \array_shift($options);
+
+    $form .= \_MB_WGTEAMS_TEAMS_TO_DISPLAY;
     $criteria = new \CriteriaCompo();
     $criteria->add(new \Criteria('team_id', 0, '!='));
     $criteria->add(new \Criteria('team_online', 1));

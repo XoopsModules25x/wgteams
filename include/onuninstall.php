@@ -44,12 +44,12 @@ function xoops_module_uninstall_wgteams(\XoopsModule $module)
     //------------------------------------------------------------------
     // Rename uploads folder to BAK and add date to name
     //------------------------------------------------------------------
-    $uploadDirectory = $GLOBALS['xoops']->path("uploads/$moduleDirName");
+    $uploadDirectory = XOOPS_ROOT_PATH . '/uploads/' . $moduleDirName;
     $dirInfo = new \SplFileInfo($uploadDirectory);
     if ($dirInfo->isDir()) {
         // The directory exists so rename it
-        $date = date('Y-m-d');
-        if (!rename($uploadDirectory, $uploadDirectory . "_bak_$date")) {
+        $date = date('Y-m-d-H-i-s');
+        if (!\rename($uploadDirectory, $uploadDirectory . "_bak_$date")) {
             $module->setErrors(sprintf(constant('CO_' . $moduleDirNameUpper . '_ERROR_BAD_DEL_PATH'), $uploadDirectory));
             $success = false;
         }

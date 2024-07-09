@@ -117,11 +117,14 @@ function wgteamsGetTeamDetails(&$teamsAll, $lengthName = 0, $show_descr = true, 
     return $teams_list;
 }
 
-/**
+/** function to get team and member details
  * @param $teamsAll
+ * @param int $rel_id
+ * @param int $lenghtName
+ * @param int $lengthDescr
  * @return array
  */
-function wgteamsGetTeamMemberDetails(&$teamsAll, $rel_id = 0)
+function wgteamsGetTeamMemberDetails(&$teamsAll, $rel_id = 0, $lenghtName = 0, $lengthDescr = 0)
 {
     // Get teams and member relations
     $helper            = Helper::getInstance();
@@ -144,7 +147,17 @@ function wgteamsGetTeamMemberDetails(&$teamsAll, $rel_id = 0)
     foreach (\array_keys($teamsAll) as $i) {
         $team_id    = $teamsAll[$i]->getVar('team_id');
         $team_name  = $teamsAll[$i]->getVar('team_name');
+        if ($lenghtName > 0) {
+            $team_name = $helper::truncateHtml($team_name, $lenghtName, '...', false, false);
+        }
         $team_descr = $teamsAll[$i]->getVar('team_descr', 'n');
+        if ($lengthDescr > 0) {
+            if ($team_descr === strip_tags($team_descr)) {
+                $team_descr = $helper::truncateHtml($team_descr, $lengthDescr, '...', false, false);
+            } else {
+                $team_descr = $helper::truncateHtml($team_descr, $lengthDescr);
+            }
+        }
         if ('blank.gif' === $teamsAll[$i]->getVar('team_image')) {
             $team_image = '';
         } else {

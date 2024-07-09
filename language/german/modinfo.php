@@ -41,10 +41,12 @@ require_once __DIR__ . '/common.php';
 // Submenu
 \define('_MI_WGTEAMS_SMNAME1', 'Teams');
 // Blocks
-\define('_MI_WGTEAMS_TEAMSMEMBERS_BLOCK', 'Block Team/Mitglieder');
-\define('_MI_WGTEAMS_TEAMSMEMBERS_BLOCK_DESC', 'Zeigt ein Team mit den damit verlinkten Mitgliedern');
+\define('_MI_WGTEAMS_TEAMSMEMBERS_BLOCK', 'Block Team/Mitglieder Standard');
+\define('_MI_WGTEAMS_TEAMSMEMBERS_BLOCK_DESC', 'Zeigt Teams mit den damit verbundenen Mitgliedern');
 \define('_MI_WGTEAMS_TEAMS_BLOCK', 'Block Teams');
 \define('_MI_WGTEAMS_TEAMS_BLOCK_DESC', 'Zeigt eine Liste der Teams');
+\define('_MI_WGTEAMS_TEAMSMEMBERS_BLOCK_EXTENDED', 'Block Team/Mitglieder erweitert');
+\define('_MI_WGTEAMS_TEAMSMEMBERS_BLOCK_EXTENDED_DESC', 'Zeigt Teams mit den damit verbundenen Mitgliedern');
 // Config
 \define('_MI_WGTEAMS_EDITOR', 'Editor');
 \define('_MI_WGTEAMS_EDITOR_DESC', 'Bitte Editor für die Eingabefelder wählen');

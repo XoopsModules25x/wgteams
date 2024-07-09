@@ -34,7 +34,7 @@ require __DIR__ . '/header.php';
 $GLOBALS['xoopsOption']['template_main'] = 'wgteams_teams.tpl';
 require_once \XOOPS_ROOT_PATH . '/header.php';
 
-$helper     = Helper::getInstance();
+$helper  = Helper::getInstance();
 $team_id = Request::getInt('team_id');
 $start   = Request::getInt('start');
 $limit   = Request::getInt('limit', $helper->getConfig('userpager'));
@@ -134,12 +134,6 @@ if (Request::getMethod() === 'POST' && Request::hasVar('member_id', 'POST')) {
     if ($memberId > 0) {
         $membersHandler = $helper->getHandler('members');
         $member = $membersHandler->get($memberId);
-
-        if ($member instanceof Members) {
-            $modalMember = $member->getValuesMember();
-            $GLOBALS['xoopsTpl']->assign('modalMember', $modalMember);
-            $memberDetails = renderMemberDetails($member);
-        }
     }
 }
 //---------- AJAX Modal End -------------------

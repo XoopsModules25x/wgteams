@@ -27,13 +27,14 @@ require __DIR__ . '/header.php';
 // It recovered the value of argument op in URL$
 $op = Request::getString('op', 'list');
 // Request infofield_id
-$addField_id = Request::getInt('infofield_id');
+$infofieldId = Request::getInt('infofield_id');
 // Switch options
 switch ($op) {
     case 'list':
     default:
         $start        = Request::getInt('start');
         $limit        = Request::getInt('limit', $helper->getConfig('adminpager'));
+        $useDetails   = (int)$helper->getConfig('wgteams_usedetails');
         $templateMain = 'wgteams_admin_infofields.tpl';
         $GLOBALS['xoopsTpl']->assign('navigation', $adminObject->displayNavigation('infofields.php'));
         $adminObject->addItemButton(_AM_WGTEAMS_INFOFIELD_ADD, 'infofields.php?op=new');
@@ -73,8 +74,8 @@ switch ($op) {
         if (!$GLOBALS['xoopsSecurity']->check()) {
             \redirect_header('infofields.php', 3, \implode(',', $GLOBALS['xoopsSecurity']->getErrors()));
         }
-        if (isset($addField_id)) {
-            $infofieldsObj = $infofieldsHandler->get($addField_id);
+        if (isset($infofieldId)) {
+            $infofieldsObj = $infofieldsHandler->get($infofieldId);
         } else {
             $infofieldsObj = $infofieldsHandler->create();
         }
@@ -101,12 +102,12 @@ switch ($op) {
         $GLOBALS['xoopsTpl']->assign('navigation', $adminObject->displayNavigation('infofields.php'));
         $GLOBALS['xoopsTpl']->assign('buttons', $adminObject->displayButton('left', ''));
         // Get Form
-        $infofieldsObj = $infofieldsHandler->get($addField_id);
+        $infofieldsObj = $infofieldsHandler->get($infofieldId);
         $form          = $infofieldsObj->getFormInfofields();
         $GLOBALS['xoopsTpl']->assign('form', $form->render());
         break;
     case 'delete':
-        $infofieldsObj = $infofieldsHandler->get($addField_id);
+        $infofieldsObj = $infofieldsHandler->get($infofieldId);
         if (1 == Request::getInt('ok', 0)) {
             if (!$GLOBALS['xoopsSecurity']->check()) {
                 \redirect_header('infofields.php', 3, \implode(', ', $GLOBALS['xoopsSecurity']->getErrors()));
@@ -127,7 +128,7 @@ switch ($op) {
                     $infoVar = 'rel_info_' . $i;
 
                     // If the Relation has the Infofield that is being deleted, clear the corresponding rel_info_X field
-                    if ($relation->getVar($infoFieldVar) == $addField_id) {
+                    if ($relation->getVar($infoFieldVar) == $infofieldId) {
                         $relation->setVar($infoFieldVar, 0);
                         $relation->setVar($infoVar, '');
                         $relationModified = true;
@@ -146,7 +147,7 @@ switch ($op) {
                 $GLOBALS['xoopsTpl']->assign('error', $infofieldsObj->getHtmlErrors());
             }
         } else {
-            xoops_confirm(['ok' => 1, 'infofield_id' => $addField_id, 'op' => 'delete'], $_SERVER['REQUEST_URI'], \sprintf(_AM_WGTEAMS_FORM_SURE_DELETE, $infofieldsObj->getVar('infofield_name')));
+            xoops_confirm(['ok' => 1, 'infofield_id' => $infofieldId, 'op' => 'delete'], $_SERVER['REQUEST_URI'], \sprintf(_AM_WGTEAMS_FORM_SURE_DELETE, $infofieldsObj->getVar('infofield_name')));
         }
         break;
 }
