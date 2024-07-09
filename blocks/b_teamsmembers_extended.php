@@ -126,7 +126,8 @@ function b_wgteams_teamsmembers_ext_edit($options)
     $form .= \_MB_WGTEAMS_INFOFIELD_CLASS . ": <select name='options[5]' size='3'>";
     $form .= "<option value='" . Constants::CLASS_INDEX . "' " . (Constants::CLASS_INDEX === (int)$options[5] ? "selected='selected'" : '') . '>' . \_MB_WGTEAMS_INFOFIELD_CLASS_INDEX . '</option>';
     $form .= "<option value='" . Constants::CLASS_TEAM . "' " . (Constants::CLASS_TEAM === (int)$options[5] ? "selected='selected'" : '') . '>' . \_MB_WGTEAMS_INFOFIELD_CLASS_TEAM . '</option>';
-    $form .= "<option value='" . Constants::CLASS_DETAILS . "' " . (Constants::CLASS_DETAILS === (int)$options[5] ? "selected='selected'" : '') . '>' . \_MB_WGTEAMS_INFOFIELD_CLASS_DETAILS . '</option>';
+    //TODO: usage of CLASS_DETAILS causes problems with display
+    //$form .= "<option value='" . Constants::CLASS_DETAILS . "' " . (Constants::CLASS_DETAILS === (int)$options[5] ? "selected='selected'" : '') . '>' . \_MB_WGTEAMS_INFOFIELD_CLASS_DETAILS . '</option>';
     $form .= '</select><br>';
     \array_shift($options);
     \array_shift($options);
