@@ -126,7 +126,7 @@ if (1 == $helper->getConfig('wgteams_showbreadcrumbs')) {
     }
     $GLOBALS['xoopsTpl']->assign('showbreadcrumbs', '1');
 }
-
+/*
 //---------- AJAX Modal Start -------------------
 //$xoopsLogger->activated = false;
 if (Request::getMethod() === 'POST' && Request::hasVar('member_id', 'POST')) {
@@ -137,7 +137,7 @@ if (Request::getMethod() === 'POST' && Request::hasVar('member_id', 'POST')) {
     }
 }
 //---------- AJAX Modal End -------------------
-
+*/
 // keywords
 wgteamsMetaKeywords($helper->getConfig('keywords') . ', ' . \implode(', ', $keywords));
 unset($keywords);
