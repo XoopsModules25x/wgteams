@@ -143,6 +143,15 @@ wgteams_infofields:
             name: infofield_name
             attributes: ' VARCHAR(200)    NOT NULL DEFAULT '''''''' '
         -
+            name: infofield_class_index
+            attributes: ' INT(1)          NOT NULL DEFAULT ''0'' '
+        -
+            name: infofield_class_team
+            attributes: ' INT(1)          NOT NULL DEFAULT ''0'' '
+        -
+            name: infofield_class_details
+            attributes: ' INT(1)          NOT NULL DEFAULT ''0'' '
+        -
             name: infofield_submitter
             attributes: ' INT(10)         NOT NULL DEFAULT ''0'' '
         -

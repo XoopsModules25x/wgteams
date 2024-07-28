@@ -16,6 +16,7 @@
    <div class="text-center bold"><a href="<{$xoops_url}>/modules/wgteams/admin/"><{$smarty.const._CO_WGTEAMS_ADMIN}></a></div><br>
 <{/if}>
 
+<{if $useModal|default:false}>
 <script type="text/javascript">
     //---------- AJAX Modal Start -------------------
     $(document).ready(function () {
@@ -49,5 +50,4 @@
     });
     //---------- AJAX Modal End -------------------
 </script>
-
-
+<{/if}>

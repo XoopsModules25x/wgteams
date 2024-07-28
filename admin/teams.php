@@ -18,10 +18,7 @@ declare(strict_types=1);
  * @copyright       The XOOPS Project (https://xoops.org)
  * @license         GPL 2.0 or later
  * @package         wgteams
- * @since           1.0
- * @min_xoops       2.5.7
  * @author          Goffy - Wedega.com - Email:<webmaster@wedega.com> - Website:<https://wedega.com>
- * @version         $Id: 1.0 teams.php 1 Sun 2015/12/27 23:18:00Z Goffy - Wedega $
  */
 
 use Xmf\Request;
@@ -113,9 +110,9 @@ switch ($op) {
         }
         // Set Vars
         // Set Var team_name
-        $teamsObj->setVar('team_name', $_POST['team_name']);
+        $teamsObj->setVar('team_name', Request::getString('team_name'));
         // Set Var team_descr
-        $teamsObj->setVar('team_descr', $_POST['team_descr']);
+        $teamsObj->setVar('team_descr', Request::getText('team_descr'));
         // Set Var team_image
         require_once \XOOPS_ROOT_PATH . '/class/uploader.php';
         $fileName       = $_FILES['attachedfile']['name'];
@@ -156,19 +153,19 @@ switch ($op) {
             $teamsObj->setVar('team_image', Request::getString('team_image'));
         }
         // Set Var team_nb_cols
-        $teamsObj->setVar('team_nb_cols', $_POST['team_nb_cols']);
+        $teamsObj->setVar('team_nb_cols', Request::getInt('team_nb_cols'));
         // Set Var team_tablestyle
-        $teamsObj->setVar('team_tablestyle', $_POST['team_tablestyle']);
+        $teamsObj->setVar('team_tablestyle', Request::getString('team_tablestyle'));
         // Set Var team_imagestyle
-        $teamsObj->setVar('team_imagestyle', $_POST['team_imagestyle']);
+        $teamsObj->setVar('team_imagestyle', Request::getString('team_imagestyle'));
         // Set Var team_displaystyle
-        $teamsObj->setVar('team_displaystyle', $_POST['team_displaystyle']);
+        $teamsObj->setVar('team_displaystyle', Request::getString('team_displaystyle'));
         // Set Var team_weight
-        $teamsObj->setVar('team_weight', $_POST['team_weight']);
+        $teamsObj->setVar('team_weight', Request::getInt('team_weight'));
         // Set Var team_online
         $teamsObj->setVar('team_online', (1 == Request::getInt('team_online', 0) ? 1 : 0));
         // Set Var team_submitter
-        $teamsObj->setVar('team_submitter', $_POST['team_submitter']);
+        $teamsObj->setVar('team_submitter', Request::getInt('team_submitter'));
         // Set Var team_date_create
         $teamsObj->setVar('team_date_create', \time());
         // Insert Data
@@ -228,7 +225,7 @@ switch ($op) {
         }
         break;
     case 'order':
-        $torder = $_POST['torder'];
+        $torder = Request::getArray('torder');
         for ($i = 0, $iMax = \count($torder); $i < $iMax; $i++) {
             $teamsObj = $teamsHandler->get($torder[$i]);
             $teamsObj->setVar('team_weight', $i + 1);

@@ -14,11 +14,8 @@
  *
  * @copyright module for xoops
  * @license   GPL 2.0 or later
- * @package   wgTeams
- * @since     1.0
- * @min_xoops 2.5.7
- * @author    Wedega - Email:<webmaster@wedega.com> - Website:<https://wedega.com>
- * @version   $Id: 1.0 main.php 1 Mon 2018-03-19 10:04:56Z XOOPS Project (www.xoops.org) $
+ * @package         wgteams
+ * @author          Goffy - Wedega.com - Email:<webmaster@wedega.com> - Website:<https://wedega.com>
  */
 
 $moduleDirName = \basename(\dirname(__DIR__, 2));

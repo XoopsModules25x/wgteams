@@ -18,13 +18,11 @@ declare(strict_types=1);
  * @copyright       The XOOPS Project (https://xoops.org)
  * @license         GPL 2.0 or later
  * @package         wgteams
- * @since           1.0
- * @min_xoops       2.5.10
  * @author          Goffy - Wedega.com - Email:<webmaster@wedega.com> - Website:<https://wedega.com>
- * @version         $Id: 1.0 xoops_version.php 1 Sun 2015/12/27 23:18:02Z Goffy - Wedega $
  */
 
 use XoopsModules\Wgteams;
+use XoopsModules\Wgteams\Constants;
 
 \defined('XOOPS_ROOT_PATH') || die('Restricted access');
 
@@ -109,11 +107,11 @@ $modversion['templates'][] = ['file' => 'wgteams_member_left.tpl', 'description'
 $modversion['templates'][] = ['file' => 'wgteams_member_right.tpl', 'description' => ''];
 $modversion['templates'][] = ['file' => 'wgteams_breadcrumbs.tpl', 'description' => ''];
 $modversion['templates'][] = ['file' => 'wgteams_footer.tpl', 'description' => ''];
-$modversion['templates'][] = ['file' => 'wgteams_member_modal.tpl', 'description' => ''];
-
-
-$modversion['templates'][] = ['file' => 'wgteams_block_teamsmembers.tpl', 'description' => '', 'type' => 'block'];
-$modversion['templates'][] = ['file' => 'wgteams_block_teams.tpl', 'description' => '', 'type' => 'block'];
+$modversion['templates'][] = ['file' => 'wgteams_member_modal_default.tpl', 'description' => ''];
+$modversion['templates'][] = ['file' => 'wgteams_member_modal_left.tpl', 'description' => ''];
+$modversion['templates'][] = ['file' => 'wgteams_member_modal_right.tpl', 'description' => ''];
+$modversion['templates'][] = ['file' => 'wgteams_block_ext_members_list.tpl', 'description' => '', 'type' => 'block'];
+$modversion['templates'][] = ['file' => 'wgteams_block_ext_teams_list.tpl', 'description' => '', 'type' => 'block'];
 
 // ------------------- Mysql ------------------- //
 $modversion['sqlfile']['mysql'] = 'sql/mysql.sql';
@@ -155,23 +153,34 @@ if (\is_object($xoopsModule) && $xoopsModule->getVar('dirname') == $moduleDirNam
 }
 // ------------------- Blocks ------------------- //
 $modversion['blocks'][] = [
-    'file'        => 'b_teamsmembers.php',
-    'name'        => _MI_WGTEAMS_TEAMSMEMBERS_BLOCK,
-    'description' => _MI_WGTEAMS_TEAMSMEMBERS_BLOCK_DESC,
-    'show_func'   => 'b_wgteams_teamsmembers_show',
-    'edit_func'   => 'b_wgteams_teamsmembers_edit',
-    'options'     => 'showsingleteam|0',
-    'template'    => 'wgteams_block_teamsmembers.tpl',
-];
-
-$modversion['blocks'][] = [
     'file'        => 'b_teams.php',
     'name'        => _MI_WGTEAMS_TEAMS_BLOCK,
     'description' => _MI_WGTEAMS_TEAMS_BLOCK_DESC,
     'show_func'   => 'b_wgteams_teams_show',
     'edit_func'   => 'b_wgteams_teams_edit',
-    'options'     => 'showlistofteams|1|0|1|0|2|default|0',
+    'options'     => 'showlistofteams|1|0|1|0|default|1|0',
     'template'    => 'wgteams_block_teams.tpl',
+];
+
+$modversion['blocks'][] = [
+    'file'        => 'b_teamsmembers_extended.php',
+    'name'        => _MI_WGTEAMS_TEAMSMEMBERS_BLOCK_EXTENDED,
+    'description' => _MI_WGTEAMS_TEAMSMEMBERS_BLOCK_EXTENDED_DESC,
+    'show_func'   => 'b_wgteams_teamsmembers_ext_show',
+    'edit_func'   => 'b_wgteams_teamsmembers_ext_edit',
+    'options'     => 'showtmextended|0|0|0|0|1|0',
+    'template'    => 'wgteams_block_ext_teamsmembers.tpl',
+];
+
+// ------------------- Blocks ------------------- //
+$modversion['blocks'][] = [
+    'file'        => 'b_teamsmembers.php',
+    'name'        => _MI_WGTEAMS_TEAMSMEMBERS_BLOCK,
+    'description' => _MI_WGTEAMS_TEAMSMEMBERS_BLOCK_DESC,
+    'show_func'   => 'b_wgteams_teamsmembers_show',
+    'edit_func'   => 'b_wgteams_teamsmembers_edit',
+    'options'     => 'showteamsmembers|0',
+    'template'    => 'wgteams_block_teamsmembers.tpl',
 ];
 
 // ------------------- Config ------------------- //
@@ -357,6 +366,20 @@ $modversion['config'][] = [
     'formtype'    => 'yesno',
     'valuetype'   => 'int',
     'default'     => 1,
+];
+
+$modversion['config'][] = [
+    'name'        => 'wgteams_usedetails',
+    'title'       => '_MI_WGTEAMS_USEDETAILS',
+    'description' => '_MI_WGTEAMS_USEDETAILS_DESC',
+    'formtype'    => 'select',
+    'valuetype'   => 'int',
+    'default'     => 0,
+    'options'     => [
+        '_MI_WGTEAMS_USEDETAILS_NONE'  => Constants::USEDETAILS_NONE,
+        '_MI_WGTEAMS_USEDETAILS_TAB'   => Constants::USEDETAILS_TAB,
+        '_MI_WGTEAMS_USEDETAILS_MODAL' => Constants::USEDETAILS_MODAL,
+    ],
 ];
 
 $modversion['config'][] = [

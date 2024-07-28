@@ -14,10 +14,7 @@
  * @copyright       The XOOPS Project (https://xoops.org)
  * @license         GPL 2.0 or later
  * @package         wgteams
- * @since           1.0
- * @min_xoops       2.5.7
  * @author          Goffy - Wedega.com - Email:<webmaster@wedega.com> - Website:<https://wedega.com>
- * @version         $Id: 1.0 modinfo.php 1 Sun 2015/12/27 23:18:01Z Goffy - Wedega $
  */
  
 require_once __DIR__ . '/common.php';
@@ -44,10 +41,12 @@ require_once __DIR__ . '/common.php';
 // Submenu
 \define('_MI_WGTEAMS_SMNAME1', 'Teams');
 // Blocks
-\define('_MI_WGTEAMS_TEAMSMEMBERS_BLOCK', 'Block Team/Mitglieder');
-\define('_MI_WGTEAMS_TEAMSMEMBERS_BLOCK_DESC', 'Zeigt ein Team mit den damit verlinkten Mitgliedern');
+\define('_MI_WGTEAMS_TEAMSMEMBERS_BLOCK', 'Block Team/Mitglieder Standard');
+\define('_MI_WGTEAMS_TEAMSMEMBERS_BLOCK_DESC', 'Zeigt Teams mit den damit verbundenen Mitgliedern');
 \define('_MI_WGTEAMS_TEAMS_BLOCK', 'Block Teams');
 \define('_MI_WGTEAMS_TEAMS_BLOCK_DESC', 'Zeigt eine Liste der Teams');
+\define('_MI_WGTEAMS_TEAMSMEMBERS_BLOCK_EXTENDED', 'Block Team/Mitglieder erweitert');
+\define('_MI_WGTEAMS_TEAMSMEMBERS_BLOCK_EXTENDED_DESC', 'Zeigt Teams mit den damit verbundenen Mitgliedern');
 // Config
 \define('_MI_WGTEAMS_EDITOR', 'Editor');
 \define('_MI_WGTEAMS_EDITOR_DESC', 'Bitte Editor für die Eingabefelder wählen');
@@ -81,5 +80,10 @@ require_once __DIR__ . '/common.php';
 \define('_MI_WGTEAMS_SHOWBREADCRUMBS_DESC', 'Definieren Sie bitte, ob eine Breadcrumb-Navigation angezeigt werden soll.');
 \define('_MI_WGTEAMS_SHOWCOPYRIGHT', 'Copyright anzeigen');
 \define('_MI_WGTEAMS_SHOWCOPYRIGHT_DESC', 'Sie können das Copyright bei den wgTeams-Seiten entfernen, jedoch wird ersucht, an einer beliebigen Stelle einen Backlink auf www.wedega.com anzubringen');
+//version 2.0.2
+\define('_MI_WGTEAMS_USEDETAILS', 'Verwende Details');
+\define('_MI_WGTEAMS_USEDETAILS_DESC', 'Definieren Sie bitte, ob Details zu Mitgliederinformationen angezeigt werden sollen');
+\define('_MI_WGTEAMS_USEDETAILS_NONE', 'Feature Details nicht verwenden. Es werden immer alle Informationen angezeigt');
+\define('_MI_WGTEAMS_USEDETAILS_TAB', 'Zeige Details auf neuem Tab');
+\define('_MI_WGTEAMS_USEDETAILS_MODAL', 'Zeige Details in modalem Fenster');
 // ---------------- End ----------------
-

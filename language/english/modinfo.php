@@ -14,10 +14,7 @@
  * @copyright       The XOOPS Project (https://xoops.org)
  * @license         GPL 2.0 or later
  * @package         wgteams
- * @since           1.0
- * @min_xoops       2.5.7
  * @author          Goffy - Wedega.com - Email:<webmaster@wedega.com> - Website:<https://wedega.com>
- * @version         $Id: 1.0 modinfo.php 1 Sun 2015/12/27 23:18:01Z Goffy - Wedega $
  */
  
 require_once __DIR__ . '/common.php';
@@ -44,10 +41,12 @@ require_once __DIR__ . '/common.php';
 // Submenu
 \define('_MI_WGTEAMS_SMNAME1', 'teams');
 // Blocks
-\define('_MI_WGTEAMS_TEAMSMEMBERS_BLOCK', 'Team/Members block');
-\define('_MI_WGTEAMS_TEAMSMEMBERS_BLOCK_DESC', 'Show all Teams with related members in a block');
-\define('_MI_WGTEAMS_TEAMS_BLOCK', 'Block Teams');
+\define('_MI_WGTEAMS_TEAMSMEMBERS_BLOCK', 'Team/Members block default');
+\define('_MI_WGTEAMS_TEAMSMEMBERS_BLOCK_DESC', 'Show all teams with related members in a block');
+\define('_MI_WGTEAMS_TEAMS_BLOCK', 'Teams  block');
 \define('_MI_WGTEAMS_TEAMS_BLOCK_DESC', 'Show a list of the teams');
+\define('_MI_WGTEAMS_TEAMSMEMBERS_BLOCK_EXTENDED', 'Team/Members block extended');
+\define('_MI_WGTEAMS_TEAMSMEMBERS_BLOCK_EXTENDED_DESC', 'Show all teams with related members in a block');
 // Config
 \define('_MI_WGTEAMS_EDITOR', 'Editor');
 \define('_MI_WGTEAMS_EDITOR_DESC', 'Select the Editor to use');
@@ -81,6 +80,12 @@ require_once __DIR__ . '/common.php';
 \define('_MI_WGTEAMS_SHOWBREADCRUMBS_DESC', 'Please decide, whether a breadcrumbs-navigation should be shown.');
 \define('_MI_WGTEAMS_SHOWCOPYRIGHT', 'Show copyright');
 \define('_MI_WGTEAMS_SHOWCOPYRIGHT_DESC', 'You can remove the copyright from the wgteams pages, but a backlinks to www.wedega.com is expected, anywhere on your site');
-
+//version 2.0.2
+\define('_MI_WGTEAMS_USEDETAILS', 'Use details');
+\define('_MI_WGTEAMS_USEDETAILS_DESC', 'Decide whether you want to show information details of members');
+\define('_MI_WGTEAMS_USEDETAILS_NONE', 'Do not use feature details. All information will be shown always');
+\define('_MI_WGTEAMS_USEDETAILS_TAB', 'Show details on new tab');
+\define('_MI_WGTEAMS_USEDETAILS_MODAL', 'Show details on modal window');
 // ---------------- End ----------------
+
 

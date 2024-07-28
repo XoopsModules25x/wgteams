@@ -17,11 +17,9 @@ declare(strict_types=1);
  * @copyright       The XOOPS Project (https://xoops.org)
  * @license         GPL 2.0 or later
  * @package         wgteams
- * @since           1.0
- * @min_xoops       2.5.7
  * @author          Goffy - Wedega.com - Email:<webmaster@wedega.com> - Website:<https://wedega.com>
- * @version         $Id: 1.0 common.php 1 Sun 2015/12/27 23:18:02Z Goffy - Wedega $
  */
+ 
 \defined('XOOPS_ROOT_PATH') || die('Restricted access');
 if (!\defined('WGTEAMS_PATH')) {
     if (!\defined('XOOPS_ICONS32_PATH')) {

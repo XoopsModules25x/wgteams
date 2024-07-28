@@ -18,10 +18,7 @@ declare(strict_types=1);
  * @copyright       The XOOPS Project (https://xoops.org)
  * @license         GPL 2.0 or later
  * @package         wgteams
- * @since           1.0
- * @min_xoops       2.5.7
  * @author          Goffy - Wedega.com - Email:<webmaster@wedega.com> - Website:<https://wedega.com>
- * @version         $Id: 1.0 functions.php 1 Sun 2015/12/27 23:18:01Z Goffy - Wedega $
  * @param        $global
  * @param        $key
  * @param string $default
@@ -30,31 +27,10 @@ declare(strict_types=1);
  */
 
 use XoopsModules\Wgteams;
-
-/**
- * @param        $global
- * @param        $key
- * @param string $default
- * @param string $type
- * @return mixed|string
- */
-function wgteams_CleanVars(&$global, $key, $default = '', $type = 'int')
-{
-    switch ($type) {
-        case 'string':
-            $ret = isset($global[$key]) ? filter_var($global[$key], FILTER_SANITIZE_ADD_SLASHES ) : $default;
-            break;
-        case 'int':
-        default:
-            $ret = isset($global[$key]) ? filter_var($global[$key], FILTER_SANITIZE_NUMBER_INT) : $default;
-            break;
-    }
-    if (false === $ret) {
-        return $default;
-    }
-
-    return $ret;
-}
+use XoopsModules\Wgteams\{
+    //Constants,
+    Helper
+};
 
 /**
  * @param $content
@@ -95,11 +71,7 @@ function wgteamsMetaDescription($content)
  */
 function wgteamsGetTeamDetails(&$teamsAll, $lengthName = 0, $show_descr = true, $lengthDescr = 0)
 {
-    // Get All Teams
-//    global $xoopsTpl, $xoTheme;
-
-    $helper       = Wgteams\Helper::getInstance();
-//    $teamsHandler = $helper->getHandler('Teams');
+    $helper = Helper::getInstance();
 
     \xoops_loadLanguage('main', \WGTEAMS_DIRNAME);
 
@@ -137,7 +109,7 @@ function wgteamsGetTeamDetails(&$teamsAll, $lengthName = 0, $show_descr = true, 
             'team_image_url'  => $team_image_url,
             'team_tablestyle' => $team_tablestyle,
             'team_imagestyle' => $team_imagestyle,
-            'team_read_more'  => _MA_WGTEAMS_READMORE,
+            'team_read_more'  => \_MA_WGTEAMS_READMORE,
             'show_teamname'   => $show_teamname,
         ];
     }
@@ -145,36 +117,47 @@ function wgteamsGetTeamDetails(&$teamsAll, $lengthName = 0, $show_descr = true, 
     return $teams_list;
 }
 
-/**
+/** function to get team and member details
  * @param $teamsAll
+ * @param int $rel_id
+ * @param int $lenghtName
+ * @param int $lengthDescr
  * @return array
  */
-function wgteamsGetTeamMemberDetails(&$teamsAll)
+function wgteamsGetTeamMemberDetails(&$teamsAll, $rel_id = 0, $lenghtName = 0, $lengthDescr = 0)
 {
-    // Get All Teams
-//    global $xoopsTpl, $xoTheme;
-    $helper            = Wgteams\Helper::getInstance();
-    $db                = \XoopsDatabaseFactory::getDatabaseConnection();
-//    $teamsHandler      = new Wgteams\TeamsHandler($db);
-    $membersHandler    = new Wgteams\MembersHandler($db);
-    $relationsHandler  = new Wgteams\RelationsHandler($db);
-    $infofieldsHandler = new Wgteams\InfofieldsHandler($db);
+    // Get teams and member relations
+    $helper            = Helper::getInstance();
+    $membersHandler    = $helper->getHandler('Members');
+    $relationsHandler  = $helper->getHandler('Relations');
+    $infofieldsHandler = $helper->getHandler('Infofields');
 
     \xoops_loadLanguage('main', \WGTEAMS_DIRNAME);
 
     $team_image_url   = \WGTEAMS_UPLOAD_URL . '/teams/images/';
     $member_image_url = \WGTEAMS_UPLOAD_URL . '/members/images/';
     
-    $member_labels     = (1 == (int)$helper->getConfig('wgteams_labels_member'));
-    $infofield_labels  = (1 == (int)$helper->getConfig('wgteams_labels_infofields'));
-    $show_teamname     = (1 == (int)$helper->getConfig('wgteams_showteamname'));
+    $member_labels    = (int)$helper->getConfig('wgteams_labels_member');
+    $infofield_labels = (int)$helper->getConfig('wgteams_labels_infofields');
+    $show_teamname    = (int)$helper->getConfig('wgteams_showteamname');
+    $usedetails       = (int)$helper->getConfig('wgteams_usedetails');
 
     $teams_list = [];
 
     foreach (\array_keys($teamsAll) as $i) {
         $team_id    = $teamsAll[$i]->getVar('team_id');
         $team_name  = $teamsAll[$i]->getVar('team_name');
+        if ($lenghtName > 0) {
+            $team_name = $helper::truncateHtml($team_name, $lenghtName, '...', false, false);
+        }
         $team_descr = $teamsAll[$i]->getVar('team_descr', 'n');
+        if ($lengthDescr > 0) {
+            if ($team_descr === strip_tags($team_descr)) {
+                $team_descr = $helper::truncateHtml($team_descr, $lengthDescr, '...', false, false);
+            } else {
+                $team_descr = $helper::truncateHtml($team_descr, $lengthDescr);
+            }
+        }
         if ('blank.gif' === $teamsAll[$i]->getVar('team_image')) {
             $team_image = '';
         } else {
@@ -184,10 +167,12 @@ function wgteamsGetTeamMemberDetails(&$teamsAll)
         $team_tablestyle   = ('default' === $teamsAll[$i]->getVar('team_tablestyle')) ? '' : $teamsAll[$i]->getVar('team_tablestyle');
         $team_imagestyle   = ('default' === $teamsAll[$i]->getVar('team_imagestyle')) ? '' : $teamsAll[$i]->getVar('team_imagestyle');
         $team_displaystyle = $teamsAll[$i]->getVar('team_displaystyle');
-        
 
         $crit_rels = new \CriteriaCompo();
         $crit_rels->add(new \Criteria('rel_team_id', $team_id));
+        if ($rel_id > 0) {
+            $crit_rels->add(new \Criteria('rel_id', $rel_id));
+        }
         $crit_rels->setSort('rel_weight');
         $crit_rels->setOrder('ASC');
 //        $relsCount = $relationsHandler->getCount($crit_rels);
@@ -211,6 +196,9 @@ function wgteamsGetTeamMemberDetails(&$teamsAll)
             if ('' !== $member_name) {
                 $nb_infos++;
             }
+            $member_fullname = $member_title . ' ' . $member_name;
+            $member_fullname = \trim($member_fullname);
+
             $member_address = $member_obj->getVar('member_address', 'n');
             if ('' !== $member_address) {
                 $nb_infos++;
@@ -228,105 +216,72 @@ function wgteamsGetTeamMemberDetails(&$teamsAll)
                 $member_image = '';
             }
 
-            // reset info field
-            $infofield_id    = 0;
-            $rel_info_1_name = '';
-            $rel_info_2_name = '';
-            $rel_info_3_name = '';
-            $rel_info_4_name = '';
-            $rel_info_5_name = '';
-
-            $infofield_id = $relsAll[$r]->getVar('rel_info_1_field');
-            if ($infofield_id > 0) {
-                $infofield_obj   = $infofieldsHandler->get($infofield_id);
-                if ($infofield_obj !== null) {
-                    $rel_info_1_name = $infofield_obj->getVar('infofield_name', 'n');
+            $relations[$r]['member_id']        = $member_id;
+            $relations[$r]['member_title']     = $member_title;
+            $relations[$r]['member_firstname'] = $member_firstname;
+            $relations[$r]['member_lastname']  = $member_lastname;
+            $relations[$r]['member_fullname']  = $member_fullname;
+            $relations[$r]['member_name']      = $member_name;
+            $relations[$r]['member_address']   = $member_address;
+            $relations[$r]['member_phone']     = $member_phone;
+            $relations[$r]['member_email']     = $member_email;
+            $relations[$r]['member_image']     = $member_image;
+            $relations[$r]['member_image_url'] = $member_image_url;
+            $relations[$r]['member_labels']    = $member_labels;
+            $relations[$r]['infofield_labels'] = $infofield_labels;
+            $relations[$r]['index']            = [];
+            $relations[$r]['team']             = [];
+            $relations[$r]['details']          = [];
+            for ($j = 1; $j <= 5; $j++) {
+                // reset info field
+                $rel_info_name          = '';
+                $rel_info_class_index   = 0;
+                $rel_info_class_team    = 0;
+                $rel_info_class_details = 0;
+                // get info
+                $infofield_id = $relsAll[$r]->getVar('rel_info_' . $j . '_field');
+                if ($infofield_id > 0) {
+                    $infofield_obj   = $infofieldsHandler->get($infofield_id);
+                    if ($infofield_obj !== null) {
+                        $rel_info_name          = $infofield_obj->getVar('infofield_name', 'n');
+                        $rel_info_class_index   = (bool)$infofield_obj->getVar('infofield_class_index');
+                        $rel_info_class_team    = (bool)$infofield_obj->getVar('infofield_class_team');
+                        $rel_info_class_details = (bool)$infofield_obj->getVar('infofield_class_details');
+                    }
+                    unset($infofield_obj);
+                    //for old templates
+                    $relations[$r]['info_' . $j . '_name'] = $rel_info_name;
+                    $relations[$r]['info_' . $j]      = $relsAll[$r]->getVar('rel_info_' . $j, 'n');
+                    //for new templates
+                    if (($usedetails && $rel_info_class_index) || !$usedetails) {
+                        $relations[$r]['index'][] = [
+                            'info_name' => $rel_info_name,
+                            'info'      => $relsAll[$r]->getVar('rel_info_' . $j, 'n')
+                        ];
+                    }
+                    if (($usedetails && $rel_info_class_team) || !$usedetails) {
+                        $relations[$r]['team'][] = [
+                            'info_name' => $rel_info_name,
+                            'info'      => $relsAll[$r]->getVar('rel_info_' . $j, 'n')
+                        ];
+                    }
+                    if (($usedetails && $rel_info_class_details) || !$usedetails) {
+                        $relations[$r]['details'][] = [
+                            'info_name' => $rel_info_name,
+                            'info'      => $relsAll[$r]->getVar('rel_info_' . $j, 'n')
+                        ];
+                    }
+                    $nb_infos++;
                 }
-                $infofield_id    = 0;
-                unset($infofield_obj);
-                $nb_infos++;
             }
-            $rel_info_1 = $relsAll[$r]->getVar('rel_info_1', 'n');
-
-            $infofield_id = $relsAll[$r]->getVar('rel_info_2_field');
-            if ($infofield_id > 0) {
-                $infofield_obj   = $infofieldsHandler->get($infofield_id);
-                if ($infofield_obj !== null) {
-                    $rel_info_2_name = $infofield_obj->getVar('infofield_name');
-                }
-                $infofield_id    = 0;
-                unset($infofield_obj);
-                $nb_infos++;
-            }
-            $rel_info_2 = $relsAll[$r]->getVar('rel_info_2', 'n');
-
-            $infofield_id = $relsAll[$r]->getVar('rel_info_3_field');
-            if ($infofield_id > 0) {
-                $infofield_obj   = $infofieldsHandler->get($infofield_id);
-                if ($infofield_obj !== null) {
-                    $rel_info_3_name = $infofield_obj->getVar('infofield_name');
-                }
-                $infofield_id    = 0;
-                unset($infofield_obj);
-                $nb_infos++;
-            }
-            $rel_info_3 = $relsAll[$r]->getVar('rel_info_3', 'n');
-
-            $infofield_id = $relsAll[$r]->getVar('rel_info_4_field');
-            if ($infofield_id > 0) {
-                $infofield_obj   = $infofieldsHandler->get($infofield_id);
-                if ($infofield_obj !== null) {
-                    $rel_info_4_name = $infofield_obj->getVar('infofield_name');
-                }
-                $infofield_id    = 0;
-                unset($infofield_obj);
-                $nb_infos++;
-            }
-            $rel_info_4 = $relsAll[$r]->getVar('rel_info_4', 'n');
-
-            $infofield_id = $relsAll[$r]->getVar('rel_info_5_field');
-            if ($infofield_id > 0) {
-                $infofield_obj   = $infofieldsHandler->get($infofield_id);
-                if ($infofield_obj !== null) {
-                    $rel_info_5_name = $infofield_obj->getVar('infofield_name');
-                }
-                $infofield_id    = 0;
-                unset($infofield_obj);
-                $nb_infos++;
-            }
-            $rel_info_5 = $relsAll[$r]->getVar('rel_info_5', 'n');
             $counter++;
 
-            $relations[] = [
-                'rel_counter'      => $counter,
-                'member_id'        => $member_id,
-                'member_title'     => $member_title,
-                'member_firstname' => $member_firstname,
-                'member_lastname'  => $member_lastname,
-                'member_name'      => $member_name,
-                'member_address'   => $member_address,
-                'member_phone'     => $member_phone,
-                'member_email'     => $member_email,
-                'member_image'     => $member_image,
-                'member_image_url' => $member_image_url,
-                'info_1_name'      => $rel_info_1_name,
-                'info_1'           => $rel_info_1,
-                'info_2_name'      => $rel_info_2_name,
-                'info_2'           => $rel_info_2,
-                'info_3_name'      => $rel_info_3_name,
-                'info_3'           => $rel_info_3,
-                'info_4_name'      => $rel_info_4_name,
-                'info_4'           => $rel_info_4,
-                'info_5_name'      => $rel_info_5_name,
-                'info_5'           => $rel_info_5,
-                'rel_nb_cols'      => $team_nb_cols,
-                'rel_tablestyle'   => $team_tablestyle,
-                'rel_imagestyle'   => $team_imagestyle,
-                'rel_displaystyle' => $team_displaystyle,
-                'rel_nb_infos'     => $nb_infos,
-                'member_labels'    => $member_labels,
-                'infofield_labels' => $infofield_labels,
-            ];
+            $relations[$r]['rel_counter'] = $counter;
+            $relations[$r]['rel_nb_cols'] = $team_nb_cols;
+            $relations[$r]['rel_tablestyle'] = $team_tablestyle;
+            $relations[$r]['rel_imagestyle'] = $team_imagestyle;
+            $relations[$r]['rel_displaystyle'] = $team_displaystyle;
+            $relations[$r]['rel_nb_infos'] = $nb_infos;
         }
         $teams_list[] = [
             'team_id'        => $team_id,

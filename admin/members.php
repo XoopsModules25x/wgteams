@@ -18,10 +18,7 @@ declare(strict_types=1);
  * @copyright       The XOOPS Project (https://xoops.org)
  * @license         GPL 2.0 or later
  * @package         wgteams
- * @since           1.0
- * @min_xoops       2.5.7
  * @author          Goffy - Wedega.com - Email:<webmaster@wedega.com> - Website:<https://wedega.com>
- * @version         $Id: 1.0 members.php 1 Sun 2015/12/27 23:18:00Z Goffy - Wedega $
  */
 
 use Xmf\Request;
@@ -91,17 +88,17 @@ switch ($op) {
         }
         // Set Vars
         // Set Var member_firstname
-        $membersObj->setVar('member_firstname', $_POST['member_firstname']);
+        $membersObj->setVar('member_firstname', Request::getString('member_firstname'));
         // Set Var member_lastname
-        $membersObj->setVar('member_lastname', $_POST['member_lastname']);
+        $membersObj->setVar('member_lastname', Request::getString('member_lastname'));
         // Set Var member_title
-        $membersObj->setVar('member_title', $_POST['member_title']);
+        $membersObj->setVar('member_title', Request::getString('member_title'));
         // Set Var member_address
-        $membersObj->setVar('member_address', $_POST['member_address']);
+        $membersObj->setVar('member_address', Request::getString('member_address'));
         // Set Var member_phone
-        $membersObj->setVar('member_phone', $_POST['member_phone']);
+        $membersObj->setVar('member_phone', Request::getString('member_phone'));
         // Set Var member_email
-        $membersObj->setVar('member_email', $_POST['member_email']);
+        $membersObj->setVar('member_email', Request::getString('member_email'));
         // Set Var member_image
         require_once \XOOPS_ROOT_PATH . '/class/uploader.php';
         $fileName       = $_FILES['attachedfile']['name'];
@@ -112,7 +109,7 @@ switch ($op) {
         $uploader = new \XoopsMediaUploader(\WGTEAMS_UPLOAD_PATH . '/members/images', $helper->getConfig('wgteams_img_mimetypes'), $helper->getConfig('wgteams_img_maxsize'), $maxwidth, $maxheight);
         if ($uploader->fetchMedia($_POST['xoops_upload_file'][0])) {
             $extension = \preg_replace('/^.+\.([^.]+)$/sU', '', $fileName);
-            $imgName   = mb_substr(\str_replace(' ', '', $_POST['member_lastname'] . $_POST['member_firstname']), 0, 20) . '_' . $extension;
+            $imgName   = mb_substr(\str_replace(' ', '', Request::getString('member_lastname') . Request::getString('member_firstname')), 0, 20) . '_' . $extension;
             $uploader->setPrefix($imgName);
             $uploader->fetchMedia($_POST['xoops_upload_file'][0]);
             if (!$uploader->upload()) {
@@ -143,7 +140,7 @@ switch ($op) {
         }
         
         // Set Var member_submitter
-        $membersObj->setVar('member_submitter', $_POST['member_submitter']);
+        $membersObj->setVar('member_submitter', Request::getInt('member_submitter'));
         // Set Var member_date_create
         $membersObj->setVar('member_date_create', \time());
         // Insert Data

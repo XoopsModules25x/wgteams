@@ -10,7 +10,6 @@
  * @copyright       The XOOPS Project http://sourceforge.net/projects/xoops/
  * @license         GNU GPL 2 (http://www.gnu.org/licenses/old-licenses/gpl-2.0.html)
  * @package
- * @since           2.5.9
  * @author          Michael Beck (aka Mamba)
  */
 

@@ -17,10 +17,7 @@ namespace XoopsModules\Wgteams;
  * @copyright       The XOOPS Project (https://xoops.org)
  * @license         GPL 2.0 or later
  * @package         wgteams
- * @since           1.0
- * @min_xoops       2.5.7
  * @author          Goffy - Wedega.com - Email:<webmaster@wedega.com> - Website:<https://wedega.com>
- * @version         $Id: 1.0 teams.php 1 Sun 2015/12/27 23:18:00Z Goffy - Wedega $
  */
 \defined('XOOPS_ROOT_PATH') || exit('Restricted access');
 
@@ -199,14 +196,14 @@ class Teams extends \XoopsObject
         $ret                 = $this->getValues($keys, $format, $maxDepth);
         $ret['id']           = $this->getVar('team_id');
         $ret['name']         = \strip_tags($this->getVar('team_name'));
-        $ret['descr']        = $helper::truncateHtml($this->getVar('team_descr', 'n'));
+        $ret['descr']        = $this->getVar('team_descr', 'n');
         $ret['image']        = $this->getVar('team_image');
         $ret['nb_cols']      = $this->getVar('team_nb_cols');
         $ret['tablestyle']   = $this->getVar('team_tablestyle');
         $ret['imagestyle']   = $this->getVar('team_imagestyle');
         $ret['displaystyle'] = $this->getVar('team_displaystyle');
         $ret['weight']       = $this->getVar('team_weight');
-        $ret['online']       = 1 == $this->getVar('team_online') ? _YES : _NO;
+        $ret['online']       = 1 == (int)$this->getVar('team_online') ? _YES : _NO;
         $ret['submitter']    = \XoopsUser::getUnameFromId($this->getVar('team_submitter'));
         $ret['date_create']  = \formatTimestamp($this->getVar('team_date_create'), 'M');
 

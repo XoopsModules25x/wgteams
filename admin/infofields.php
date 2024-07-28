@@ -18,10 +18,7 @@ declare(strict_types=1);
  * @copyright       The XOOPS Project (https://xoops.org)
  * @license         GPL 2.0 or later
  * @package         wgteams
- * @since           1.0
- * @min_xoops       2.5.7
  * @author          Goffy - Wedega.com - Email:<webmaster@wedega.com> - Website:<https://wedega.com>
- * @version         $Id: 1.0 infofields.php 1 Sun 2015/12/27 23:18:00Z Goffy - Wedega $
  */
 
 use Xmf\Request;
@@ -30,13 +27,14 @@ require __DIR__ . '/header.php';
 // It recovered the value of argument op in URL$
 $op = Request::getString('op', 'list');
 // Request infofield_id
-$addField_id = Request::getInt('infofield_id');
+$infofieldId = Request::getInt('infofield_id');
 // Switch options
 switch ($op) {
     case 'list':
     default:
         $start        = Request::getInt('start');
         $limit        = Request::getInt('limit', $helper->getConfig('adminpager'));
+        $useDetails   = (int)$helper->getConfig('wgteams_usedetails');
         $templateMain = 'wgteams_admin_infofields.tpl';
         $GLOBALS['xoopsTpl']->assign('navigation', $adminObject->displayNavigation('infofields.php'));
         $adminObject->addItemButton(_AM_WGTEAMS_INFOFIELD_ADD, 'infofields.php?op=new');
@@ -76,17 +74,17 @@ switch ($op) {
         if (!$GLOBALS['xoopsSecurity']->check()) {
             \redirect_header('infofields.php', 3, \implode(',', $GLOBALS['xoopsSecurity']->getErrors()));
         }
-        if (isset($addField_id)) {
-            $infofieldsObj = $infofieldsHandler->get($addField_id);
+        if (isset($infofieldId)) {
+            $infofieldsObj = $infofieldsHandler->get($infofieldId);
         } else {
             $infofieldsObj = $infofieldsHandler->create();
         }
         // Set Vars
-        // Set Var infofield_name
-        $infofieldsObj->setVar('infofield_name', $_POST['infofield_name']);
-        // Set Var infofield_submitter
-        $infofieldsObj->setVar('infofield_submitter', $_POST['infofield_submitter']);
-        // Set Var infofield_date_created
+        $infofieldsObj->setVar('infofield_name', Request::getString('infofield_name'));
+        $infofieldsObj->setVar('infofield_class_index', Request::getInt('infofield_class_index'));
+        $infofieldsObj->setVar('infofield_class_team', Request::getInt('infofield_class_team'));
+        $infofieldsObj->setVar('infofield_class_details', Request::getInt('infofield_class_details'));
+        $infofieldsObj->setVar('infofield_submitter', Request::getInt('infofield_submitter'));
         $infofieldsObj->setVar('infofield_date_created', \time());
         // Insert Data
         if ($infofieldsHandler->insert($infofieldsObj)) {
@@ -104,12 +102,12 @@ switch ($op) {
         $GLOBALS['xoopsTpl']->assign('navigation', $adminObject->displayNavigation('infofields.php'));
         $GLOBALS['xoopsTpl']->assign('buttons', $adminObject->displayButton('left', ''));
         // Get Form
-        $infofieldsObj = $infofieldsHandler->get($addField_id);
+        $infofieldsObj = $infofieldsHandler->get($infofieldId);
         $form          = $infofieldsObj->getFormInfofields();
         $GLOBALS['xoopsTpl']->assign('form', $form->render());
         break;
     case 'delete':
-        $infofieldsObj = $infofieldsHandler->get($addField_id);
+        $infofieldsObj = $infofieldsHandler->get($infofieldId);
         if (1 == Request::getInt('ok', 0)) {
             if (!$GLOBALS['xoopsSecurity']->check()) {
                 \redirect_header('infofields.php', 3, \implode(', ', $GLOBALS['xoopsSecurity']->getErrors()));
@@ -130,7 +128,7 @@ switch ($op) {
                     $infoVar = 'rel_info_' . $i;
 
                     // If the Relation has the Infofield that is being deleted, clear the corresponding rel_info_X field
-                    if ($relation->getVar($infoFieldVar) == $addField_id) {
+                    if ($relation->getVar($infoFieldVar) == $infofieldId) {
                         $relation->setVar($infoFieldVar, 0);
                         $relation->setVar($infoVar, '');
                         $relationModified = true;
@@ -149,7 +147,7 @@ switch ($op) {
                 $GLOBALS['xoopsTpl']->assign('error', $infofieldsObj->getHtmlErrors());
             }
         } else {
-            xoops_confirm(['ok' => 1, 'infofield_id' => $addField_id, 'op' => 'delete'], $_SERVER['REQUEST_URI'], \sprintf(_AM_WGTEAMS_FORM_SURE_DELETE, $infofieldsObj->getVar('infofield_name')));
+            xoops_confirm(['ok' => 1, 'infofield_id' => $infofieldId, 'op' => 'delete'], $_SERVER['REQUEST_URI'], \sprintf(_AM_WGTEAMS_FORM_SURE_DELETE, $infofieldsObj->getVar('infofield_name')));
         }
         break;
 }
