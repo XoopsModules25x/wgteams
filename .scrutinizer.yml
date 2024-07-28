@@ -1,8 +1,8 @@
 # language: php
 build:
-environment:
-  php:
-    versions: ['7.4', '8.0', '8.1', '8.2']
+  environment:
+    php:
+      versions: ['7.4', '8.0', '8.1', '8.2']
   nodes:
     tests: true
     analysis:
