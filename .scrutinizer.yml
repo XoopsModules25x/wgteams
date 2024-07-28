@@ -17,44 +17,26 @@ build:
     php74:
       environment:
         php: 7.4
-      tests:
-        override:
-          - php-scrutinizer-run --enable-security-analysis
 
     php80:
       environment:
         php: 8.0
-      tests:
-        override:
-          - php-scrutinizer-run --enable-security-analysis
 
     php81:
       environment:
         php: 8.1
-      tests:
-        override:
-          - php-scrutinizer-run --enable-security-analysis
 
     php82:
       environment:
         php: 8.2
-      tests:
-        override:
-          - php-scrutinizer-run --enable-security-analysis
 
     php83:
       environment:
         php: 8.3
-      tests:
-        override:
-          - php-scrutinizer-run --enable-security-analysis
 
     php84:
       environment:
         php: 8.4
-      tests:
-        override:
-          - php-scrutinizer-run --enable-security-analysis
 
 filter:
   excluded_paths:
