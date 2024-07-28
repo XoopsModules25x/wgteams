@@ -19,42 +19,42 @@ build:
         php: 7.4
       tests:
         override:
-          - command: phpunit
+          - php-scrutinizer-run --enable-security-analysis
 
     php80:
       environment:
         php: 8.0
       tests:
         override:
-          - command: phpunit
+          - php-scrutinizer-run --enable-security-analysis
 
     php81:
       environment:
         php: 8.1
       tests:
         override:
-          - command: phpunit
+          - php-scrutinizer-run --enable-security-analysis
 
     php82:
       environment:
         php: 8.2
       tests:
         override:
-          - command: phpunit
+          - php-scrutinizer-run --enable-security-analysis
 
     php83:
       environment:
         php: 8.3
       tests:
         override:
-          - command: phpunit
+          - php-scrutinizer-run --enable-security-analysis
 
     php84:
       environment:
         php: 8.4
       tests:
         override:
-          - command: phpunit
+          - php-scrutinizer-run --enable-security-analysis
 
 filter:
   excluded_paths:
