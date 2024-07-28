@@ -26,7 +26,6 @@ declare(strict_types=1);
  * @return mixed|string
  */
 
-use XoopsModules\Wgteams;
 use XoopsModules\Wgteams\{
     //Constants,
     Helper
@@ -216,39 +215,39 @@ function wgteamsGetTeamMemberDetails(&$teamsAll, $rel_id = 0, $lenghtName = 0, $
                 $member_image = '';
             }
 
-            $relations[$r]['member_id']        = $member_id;
-            $relations[$r]['member_title']     = $member_title;
+            $relations[$r]['member_id'] = $member_id;
+            $relations[$r]['member_title'] = $member_title;
             $relations[$r]['member_firstname'] = $member_firstname;
-            $relations[$r]['member_lastname']  = $member_lastname;
-            $relations[$r]['member_fullname']  = $member_fullname;
-            $relations[$r]['member_name']      = $member_name;
-            $relations[$r]['member_address']   = $member_address;
-            $relations[$r]['member_phone']     = $member_phone;
-            $relations[$r]['member_email']     = $member_email;
-            $relations[$r]['member_image']     = $member_image;
+            $relations[$r]['member_lastname'] = $member_lastname;
+            $relations[$r]['member_fullname'] = $member_fullname;
+            $relations[$r]['member_name'] = $member_name;
+            $relations[$r]['member_address'] = $member_address;
+            $relations[$r]['member_phone'] = $member_phone;
+            $relations[$r]['member_email'] = $member_email;
+            $relations[$r]['member_image'] = $member_image;
             $relations[$r]['member_image_url'] = $member_image_url;
-            $relations[$r]['member_labels']    = $member_labels;
+            $relations[$r]['member_labels'] = $member_labels;
             $relations[$r]['infofield_labels'] = $infofield_labels;
             $relations[$r]['index']            = [];
             $relations[$r]['team']             = [];
             $relations[$r]['details']          = [];
             for ($j = 1; $j <= 5; $j++) {
-                // reset info field
+            // reset info field
                 $rel_info_name          = '';
                 $rel_info_class_index   = 0;
                 $rel_info_class_team    = 0;
                 $rel_info_class_details = 0;
                 // get info
                 $infofield_id = $relsAll[$r]->getVar('rel_info_' . $j . '_field');
-                if ($infofield_id > 0) {
-                    $infofield_obj   = $infofieldsHandler->get($infofield_id);
-                    if ($infofield_obj !== null) {
+            if ($infofield_id > 0) {
+                $infofield_obj   = $infofieldsHandler->get($infofield_id);
+                if ($infofield_obj !== null) {
                         $rel_info_name          = $infofield_obj->getVar('infofield_name', 'n');
                         $rel_info_class_index   = (bool)$infofield_obj->getVar('infofield_class_index');
                         $rel_info_class_team    = (bool)$infofield_obj->getVar('infofield_class_team');
                         $rel_info_class_details = (bool)$infofield_obj->getVar('infofield_class_details');
-                    }
-                    unset($infofield_obj);
+                }
+                unset($infofield_obj);
                     //for old templates
                     $relations[$r]['info_' . $j . '_name'] = $rel_info_name;
                     $relations[$r]['info_' . $j]      = $relsAll[$r]->getVar('rel_info_' . $j, 'n');
@@ -257,22 +256,22 @@ function wgteamsGetTeamMemberDetails(&$teamsAll, $rel_id = 0, $lenghtName = 0, $
                         $relations[$r]['index'][] = [
                             'info_name' => $rel_info_name,
                             'info'      => $relsAll[$r]->getVar('rel_info_' . $j, 'n')
-                        ];
-                    }
+                    ];
+                }
                     if (($usedetails && $rel_info_class_team) || !$usedetails) {
                         $relations[$r]['team'][] = [
                             'info_name' => $rel_info_name,
                             'info'      => $relsAll[$r]->getVar('rel_info_' . $j, 'n')
-                        ];
-                    }
+                    ];
+                }
                     if (($usedetails && $rel_info_class_details) || !$usedetails) {
-                        $relations[$r]['details'][] = [
+                    $relations[$r]['details'][] = [
                             'info_name' => $rel_info_name,
                             'info'      => $relsAll[$r]->getVar('rel_info_' . $j, 'n')
-                        ];
-                    }
-                    $nb_infos++;
+                    ];
                 }
+                $nb_infos++;
+            }
             }
             $counter++;
 

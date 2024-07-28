@@ -23,11 +23,9 @@ namespace XoopsModules\Wgteams\Common;
  * @author       Mamba <mambax7@gmail.com>
  */
 
-use MyTextSanitizer;
-use XoopsFormDhtmlTextArea;
-use XoopsFormTextArea;
-use XoopsModules\Wgteams;
-use XoopsModules\Wgteams\Helper;
+use XoopsModules\Wgteams\{
+    Helper
+};
 
 /**
  * Class Utility
@@ -168,7 +166,7 @@ class SysUtility
 
     /**
      * @param \Xmf\Module\Helper $helper
-     * @param array|null         $options
+     * @param array|null             $options
      * @return \XoopsFormDhtmlTextArea|\XoopsFormEditor
      */
     public static function getEditor($helper = null, $options = null)

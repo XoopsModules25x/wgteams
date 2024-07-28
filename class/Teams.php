@@ -196,7 +196,7 @@ class Teams extends \XoopsObject
         $ret                 = $this->getValues($keys, $format, $maxDepth);
         $ret['id']           = $this->getVar('team_id');
         $ret['name']         = \strip_tags($this->getVar('team_name'));
-        $ret['descr']        = $this->getVar('team_descr', 'n');
+        $ret['descr']        = $helper::truncateHtml($this->getVar('team_descr', 'n'));
         $ret['image']        = $this->getVar('team_image');
         $ret['nb_cols']      = $this->getVar('team_nb_cols');
         $ret['tablestyle']   = $this->getVar('team_tablestyle');

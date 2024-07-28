@@ -21,7 +21,13 @@ declare(strict_types=1);
  * @author          Goffy - Wedega.com - Email:<webmaster@wedega.com> - Website:<https://wedega.com>
  */
 
-use XoopsModules\Wgteams;
+use XoopsModules\Wgteams\{
+    Helper,
+    TeamsHandler,
+    MembersHandler,
+    RelationsHandler,
+    InfofieldsHandler
+};
 
 require \dirname(__DIR__, 3) . '/include/cp_header.php';
 $thisPath = \dirname(__DIR__);
@@ -32,12 +38,12 @@ $pathModuleAdmin = $GLOBALS['xoopsModule']->getInfo('dirmoduleadmin');
 $pathModIcon16   = $GLOBALS['xoopsModule']->getInfo('modicons16');
 $pathModIcon32   = $GLOBALS['xoopsModule']->getInfo('modicons32');
 // Get instance of module
-$helper            = Wgteams\Helper::getInstance();
+$helper            = Helper::getInstance();
 $db                = \XoopsDatabaseFactory::getDatabaseConnection();
-$teamsHandler      = new Wgteams\TeamsHandler($db); //$helper->getHandler('Teams');
-$membersHandler    = new Wgteams\MembersHandler($db); //$helper->getHandler('Members');
-$relationsHandler  = new Wgteams\RelationsHandler($db); //$helper->getHandler('Relations');
-$infofieldsHandler = new Wgteams\InfofieldsHandler($db); //$helper->getHandler('Infofields');
+$teamsHandler      = new TeamsHandler($db); //$helper->getHandler('Teams');
+$membersHandler    = new MembersHandler($db); //$helper->getHandler('Members');
+$relationsHandler  = new RelationsHandler($db); //$helper->getHandler('Relations');
+$infofieldsHandler = new InfofieldsHandler($db); //$helper->getHandler('Infofields');
 
 $myts = \MyTextSanitizer::getInstance();
 if (!isset($xoopsTpl) || !\is_object($xoopsTpl)) {

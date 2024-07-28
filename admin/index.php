@@ -21,6 +21,13 @@ declare(strict_types=1);
  */
 
 use Xmf\Yaml;
+use XoopsModules\Wgteams\{
+    Helper,
+    TeamsHandler,
+    MembersHandler,
+    RelationsHandler,
+    InfofieldsHandler
+};
 
 require __DIR__ . '/header.php';
 
@@ -85,7 +92,7 @@ $adminObject->displayIndex();
  */
 function loadAdminConfig($yamlFile)
 {
-    $config = Yaml::loadWrapped($yamlFile); // work with phpmyadmin YAML dumps
+    $config = Yaml::readWrapped($yamlFile); // work with phpmyadmin YAML dumps
     return $config;
 }
 

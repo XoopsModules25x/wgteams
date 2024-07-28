@@ -1,4 +1,4 @@
-<{if $block|default:false}>
+<{if isset($block) && $block > 0}>
     <div id="team" class="col-xs-12 col-sm-12 col-md-12 col-lg-12 container-team">
         <{if $template == 'bcards'}> 
             <{foreach name=team item=team from=$block}>

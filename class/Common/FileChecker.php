@@ -21,7 +21,6 @@ namespace XoopsModules\Wgteams\Common;
  */
 
 use Xmf\Request;
-use XoopsModules\Wgteams;
 
 //\defined('XOOPS_ROOT_PATH') || die('XOOPS root path not defined');
 

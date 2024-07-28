@@ -22,8 +22,9 @@ declare(strict_types=1);
  */
 
 use Xmf\Request;
-use XoopsModules\Wgteams;
-use XoopsModules\Wgteams\Constants;
+use XoopsModules\Wgteams\{
+    Helper
+};
 
 require __DIR__ . '/header.php';
 
@@ -169,7 +170,7 @@ function returnCleanBytes($val)
 function getUnusedImages(&$unused, $directory, $url)
 {
     // Get instance of module
-    $helper        = \XoopsModules\Wgteams\Helper::getInstance();
+    $helper        = Helper::getInstance();
     $membersHandler = $helper->getHandler('Members');
     $teamsHandler = $helper->getHandler('Teams');
 

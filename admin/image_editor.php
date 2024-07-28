@@ -369,7 +369,7 @@ switch ($op) {
         $height= 0;
         if (\file_exists($image_path)) {
             // get size of current album image
-            list($width, $height, $type, $attr) = \getimagesize($image_path);
+            [$width, $height, $type, $attr] = \getimagesize($image_path);
         }
         $GLOBALS['xoopsTpl']->assign('image_path', $image_path);
         $GLOBALS['xoopsTpl']->assign('albimage_width', $width);

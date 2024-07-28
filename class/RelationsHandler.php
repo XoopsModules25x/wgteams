@@ -94,7 +94,7 @@ class RelationsHandler extends \XoopsPersistableObjectHandler
      *                                   to match
      * @return array  of object IDs
      */
-    public function &getIds(\CriteriaElement $criteria = null)
+    public function &getIds(?\CriteriaElement $criteria = null)
     {
         $temp = &parent::getIds($criteria);
 

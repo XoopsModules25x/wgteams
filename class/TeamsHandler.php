@@ -93,7 +93,7 @@ class TeamsHandler extends \XoopsPersistableObjectHandler
      * @param \CriteriaElement|null $criteria {@link CriteriaElement} to match
      * @return array  of object IDs
      */
-    public function &getIds(\CriteriaElement $criteria = null)
+    public function &getIds(?\CriteriaElement $criteria = null)
     {
         $temp = &parent::getIds($criteria);
 
