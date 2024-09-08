@@ -20,7 +20,10 @@ namespace XoopsModules\Wgteams;
  * @author          Goffy - Wedega.com - Email:<webmaster@wedega.com> - Website:<https://wedega.com>
  */
 
-use XoopsModules\Wgteams\{Constants, Helper};
+use XoopsModules\Wgteams\{
+    Constants, 
+    Helper
+};
 
 \defined('XOOPS_ROOT_PATH') || exit('Restricted access');
 

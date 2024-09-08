@@ -37,6 +37,9 @@
 .wgt-card-panel {padding:5px;}
 .wgt-card {padding:10px;background-color:#ffffff;border: 1px solid #cccccc;border-radius:5px;}
 
+.modal-body {
+    text-align: center;
+}
 .member-image {
     margin-bottom: 20px;
 }
