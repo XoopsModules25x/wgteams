@@ -45,11 +45,13 @@ function wgteams_search($queryarray, $andor, $limit, $offset, $userid)
     $result = $xoopsDB->query($sql, $limit, $offset);
     $ret    = [];
     $i      = 0;
-    while (false !== ($myrow = $xoopsDB->fetchArray($result))) {
-        $ret[$i]['image'] = 'assets/icons/32/blank.gif';
-        $ret[$i]['link']  = 'infofields.php?infofield_id=' . $myrow['infofield_id'];
-        $ret[$i]['title'] = $myrow['infofield_name'];
-        ++$i;
+    if ($xoopsDB->isResultSet($result)) {
+        while (false !== ($myrow = $xoopsDB->fetchArray($result))) {
+            $ret[$i]['image'] = 'assets/icons/32/blank.gif';
+            $ret[$i]['link']  = 'infofields.php?infofield_id=' . $myrow['infofield_id'];
+            $ret[$i]['title'] = $myrow['infofield_name'];
+            ++$i;
+        }
     }
     unset($i);
 }
