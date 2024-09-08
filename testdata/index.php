@@ -10,7 +10,6 @@
  * @copyright       The XOOPS Project http://sourceforge.net/projects/xoops/
  * @license         GNU GPL 2 (http://www.gnu.org/licenses/old-licenses/gpl-2.0.html)
  * @package
- * @since           2.5.9
  * @author          Michael Beck (aka Mamba)
  */
 
@@ -38,7 +37,7 @@ $helper->loadLanguage('common');
 
 switch ($op) {
     case 'load':
-        if (Request::hasVar('ok', 'REQUEST') && 1 == $_REQUEST['ok']) {
+        if (1 == Request::getInt('ok', 0)) {
             if (!$GLOBALS['xoopsSecurity']->check()) {
                 \redirect_header('../admin/index.php', 3, \implode(',', $GLOBALS['xoopsSecurity']->getErrors()));
             }

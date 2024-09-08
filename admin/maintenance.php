@@ -17,16 +17,14 @@ declare(strict_types=1);
  *
  * @copyright      module for xoops
  * @license        GPL 2.0 or later
- * @package        wgteams
- * @since          1.0
- * @min_xoops      2.5.9
- * @author         Wedega - Email:<webmaster@wedega.com> - Website:<https://wedega.com>
- * @version        $Id: 1.0 albums.php 1 Mon 2018-03-19 10:04:49Z XOOPS Project (www.xoops.org) $
+ * @package         wgteams
+ * @author          Goffy - Wedega.com - Email:<webmaster@wedega.com> - Website:<https://wedega.com>
  */
 
 use Xmf\Request;
-use XoopsModules\Wgteams;
-use XoopsModules\Wgteams\Constants;
+use XoopsModules\Wgteams\{
+    Helper
+};
 
 require __DIR__ . '/header.php';
 
@@ -79,7 +77,7 @@ switch ($op) {
         break;
     case 'delete_unused_image':
         $del_img_path = Request::getString('del_img_path', 'none');
-        if (isset($_REQUEST['ok']) && 1 == $_REQUEST['ok']) {
+        if (1 == Request::getInt('ok', 0)) {
             if (!$GLOBALS['xoopsSecurity']->check()) {
                 \redirect_header('maintenance.php', 3, \implode(', ', $GLOBALS['xoopsSecurity']->getErrors()));
             }
@@ -172,7 +170,7 @@ function returnCleanBytes($val)
 function getUnusedImages(&$unused, $directory, $url)
 {
     // Get instance of module
-    $helper        = \XoopsModules\Wgteams\Helper::getInstance();
+    $helper        = Helper::getInstance();
     $membersHandler = $helper->getHandler('Members');
     $teamsHandler = $helper->getHandler('Teams');
 

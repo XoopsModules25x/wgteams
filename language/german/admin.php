@@ -14,10 +14,7 @@
  * @copyright       The XOOPS Project (https://xoops.org)
  * @license         GPL 2.0 or later
  * @package         wgteams
- * @since           1.0
- * @min_xoops       2.5.7
  * @author          Goffy - Wedega.com - Email:<webmaster@wedega.com> - Website:<https://wedega.com>
- * @version         $Id: 1.0 admin.php 1 Sun 2015/12/27 23:18:01Z Goffy - Wedega $
  */
  
 require_once __DIR__ . '/common.php';
@@ -202,3 +199,10 @@ require_once __DIR__ . '/modinfo.php';
 \define('_AM_WGTEAMS_CLONE_CONGRAT', 'Herzliche Glückwünsche! %s wurde erfolgreich erstellt! <br /> Sie können Änderungen in Sprachdateien machen.');
 \define('_AM_WGTEAMS_CLONE_IMAGEFAIL', 'Achtung, wir haben es nicht geschafft, das neue Modul-Logo zu erstellen. Bitte beachten Sie assets / images / logo_module.png manuell zu modifizieren!');
 \define('_AM_WGTEAMS_CLONE_FAIL', "Leider konnten wir den neuen Klon nicht erstellen . Vielleicht müssen Sie die Schreibrechte von 'modules' Verzeichnis auf  (CHMOD 777) festlegen und neu versuchen.");
+//version 2.0.2
+\define('_AM_WGTEAMS_INFOFIELD_CLASS', 'Anzeigeklasse');
+\define('_AM_WGTEAMS_INFOFIELD_CLASS_DEFAULT', 'Immer anzeigen');
+\define('_AM_WGTEAMS_INFOFIELD_CLASS_INDEX', 'Auf Indexseite anzeigen');
+\define('_AM_WGTEAMS_INFOFIELD_CLASS_TEAM', 'Auf Teamseite anzeigen');
+\define('_AM_WGTEAMS_INFOFIELD_CLASS_DETAILS', 'In Details anzeigen');
+\define('_AM_WGTEAMS_USEDETAILS_NONE', 'Das Feature Details ist nicht aktiviert. Aktive zuerst das Feature in den Moduleinstellungen');

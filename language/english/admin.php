@@ -14,10 +14,7 @@
  * @copyright       The XOOPS Project (https://xoops.org)
  * @license         GPL 2.0 or later
  * @package         wgteams
- * @since           1.0
- * @min_xoops       2.5.7
  * @author          Goffy - Wedega.com - Email:<webmaster@wedega.com> - Website:<https://wedega.com>
- * @version         $Id: 1.0 admin.php 1 Sun 2015/12/27 23:18:01Z Goffy - Wedega $
  */
  
 require_once __DIR__ . '/common.php';
@@ -202,3 +199,10 @@ require_once __DIR__ . '/modinfo.php';
 \define('_AM_WGTEAMS_CLONE_CONGRAT', 'Congratulations! %s was sucessfully created!<br>You may want to make changes in language files.');
 \define('_AM_WGTEAMS_CLONE_IMAGEFAIL', 'Attention, we failed creating the new module logo. Please consider modifying assets/images/logo_module.png manually!');
 \define('_AM_WGTEAMS_CLONE_FAIL', 'Sorry, we failed in creating the new clone. Maybe you need to temporally set write permissions (CHMOD 777) to modules folder and try again.');
+//version 2.0.2
+\define('_AM_WGTEAMS_INFOFIELD_CLASS', 'Display class');
+\define('_AM_WGTEAMS_INFOFIELD_CLASS_DEFAULT', 'Show always');
+\define('_AM_WGTEAMS_INFOFIELD_CLASS_INDEX', 'Show on index page');
+\define('_AM_WGTEAMS_INFOFIELD_CLASS_TEAM', 'Show on team page');
+\define('_AM_WGTEAMS_INFOFIELD_CLASS_DETAILS', 'Show in details');
+\define('_AM_WGTEAMS_USEDETAILS_NONE', 'Feature details is not activated. Activate in module preferences first');

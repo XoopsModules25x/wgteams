@@ -21,8 +21,6 @@ namespace XoopsModules\Wgteams\Common;
  */
 
 use Xmf\Request;
-use XoopsModules\Wgteams;
-
 
 require_once \dirname(__DIR__, 4) . '/mainfile.php';
 $moduleDirName      = \basename(\dirname(__DIR__, 2));

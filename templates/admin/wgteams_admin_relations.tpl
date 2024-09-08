@@ -29,7 +29,6 @@
         <{if $relations_count|default:false}>
             <{foreach item=relation from=$relations_list}>
                 <tr class="even" id="rorder_<{$relation.id}>">
-
                     <td class="center">
                     <{if $relation.nb_rels_team|default:0 > 1}>
                         <img src="<{$wgteams_icons_url}>/16/up_down.png" alt="drag&drop" class="icon-sortable">
@@ -67,9 +66,7 @@
 <{/if}>
 
 <{if $error|default:false}>
-    <div class="errorMsg"><strong><{$error}></strong>
-</div>
-
+    <div class="errorMsg"><strong><{$error}></strong></div>
 <{/if}>
 <br>
 <!-- Footer -->

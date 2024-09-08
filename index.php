@@ -18,24 +18,38 @@ declare(strict_types=1);
  * @copyright       The XOOPS Project (https://xoops.org)
  * @license         GPL 2.0 or later
  * @package         wgteams
- * @since           1.0
- * @min_xoops       2.5.7
  * @author          Goffy - Wedega.com - Email:<webmaster@wedega.com> - Website:<https://wedega.com>
- * @version         $Id: 1.0 teams.php 1 Sun 2015/12/27 23:18:00Z Goffy - Wedega $
  */
 
 use Xmf\Request;
-use XoopsModules\Wgteams;
+use XoopsModules\Wgteams\{
+    Constants,
+    Helper,
+    Members
+};
+//use XoopsModules\Wgteams\Common\AjaxHelper;
 
 require __DIR__ . '/header.php';
+
 $GLOBALS['xoopsOption']['template_main'] = 'wgteams_teams.tpl';
 require_once \XOOPS_ROOT_PATH . '/header.php';
-$helper    = Wgteams\Helper::getInstance();
-$startpage = $helper->getConfig('startpage', 0)[0];
 
+$helper     = Helper::getInstance();
 $team_id = Request::getInt('team_id');
 $start   = Request::getInt('start');
 $limit   = Request::getInt('limit', $helper->getConfig('userpager'));
+$rel_id  = Request::getInt('rel_id');
+
+$startpage  = $helper->getConfig('startpage', 0)[0];
+$useDetails = (int)$helper->getConfig('wgteams_usedetails');
+$useModal   = Constants::USEDETAILS_MODAL === $useDetails;
+$GLOBALS['xoopsTpl']->assign('useModal', $useModal);
+if ($useModal) {
+    $xoTheme->addStylesheet(\WGTEAMS_URL . '/assets/css/modal.css');
+    $xoTheme->addScript(\WGTEAMS_URL . '/assets/js/modal.js');
+}
+$useTab = Constants::USEDETAILS_TAB === $useDetails;
+$GLOBALS['xoopsTpl']->assign('useTab', $useTab);
 
 // Define Stylesheet
 $xoTheme->addStylesheet($style);
@@ -60,7 +74,7 @@ $GLOBALS['xoopsTpl']->assign('teamsCount', $teamsCount);
 
 if ($teamsCount > 0) {
     // Get All Teams
-    $teams_list = wgteamsGetTeamMemberDetails($teamsAll);
+    $teams_list = wgteamsGetTeamMemberDetails($teamsAll, $rel_id);
     if (0 == $team_id && 1 == $startpage[0]) {
         $teams_list = wgteamsGetTeamDetails($teamsAll);
     }
@@ -78,10 +92,23 @@ if (\count($teams_list) > 0) {
     unset($teams_list);
 }
 
+if ($rel_id > 0) {
+    $GLOBALS['xoopsTpl']->assign('member_show_details', true);
+} else {
+    $GLOBALS['xoopsTpl']->assign('team_show', true);
+}
+if (0 === $rel_id && 0 === $team_id) {
+    $GLOBALS['xoopsTpl']->assign('member_show_index', true);
+}
+if (0 === $rel_id && $team_id > 0) {
+    $GLOBALS['xoopsTpl']->assign('member_show_team', true);
+}
+
 // fill in template
 $GLOBALS['xoopsTpl']->assign('xoops_icons32_url', XOOPS_ICONS32_URL);
 $GLOBALS['xoopsTpl']->assign('wgteams_upload_url', \WGTEAMS_UPLOAD_URL);
 $GLOBALS['xoopsTpl']->assign('wgteams_teams_upload_url', \WGTEAMS_UPLOAD_URL . '/teams/images/');
+$GLOBALS['xoopsTpl']->assign('wgteams_url', \WGTEAMS_URL);
 
 // Display Navigation
 if ($teamsCount > $limit) {
@@ -99,6 +126,26 @@ if (1 == $helper->getConfig('wgteams_showbreadcrumbs')) {
     }
     $GLOBALS['xoopsTpl']->assign('showbreadcrumbs', '1');
 }
+
+/*
+//---------- AJAX Modal Start -------------------
+//$xoopsLogger->activated = false;
+if (Request::getMethod() === 'POST' && Request::hasVar('member_id', 'POST')) {
+    $memberId = Request::getInt('member_id', 0, 'POST');
+    if ($memberId > 0) {
+        $membersHandler = $helper->getHandler('members');
+        $member = $membersHandler->get($memberId);
+
+        if ($member instanceof Members) {
+            $modalMember = $member->getValuesMember();
+            $GLOBALS['xoopsTpl']->assign('modalMember', $modalMember);
+            $memberDetails = renderMemberDetails($member);
+        }
+    }
+}
+//---------- AJAX Modal End -------------------
+*/
+
 // keywords
 wgteamsMetaKeywords($helper->getConfig('keywords') . ', ' . \implode(', ', $keywords));
 unset($keywords);
@@ -108,3 +155,7 @@ wgteamsMetaDescription(_MA_WGTEAMS_TEAM_DESC);
 $GLOBALS['xoopsTpl']->assign('wgteams_url_index', \WGTEAMS_URL . '/index.php');
 $GLOBALS['xoopsTpl']->assign('xoops_mpageurl', \WGTEAMS_URL . '/index.php');
 require __DIR__ . '/footer.php';
+
+
+
+

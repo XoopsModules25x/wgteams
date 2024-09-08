@@ -17,13 +17,17 @@ declare(strict_types=1);
  * @copyright       The XOOPS Project (https://xoops.org)
  * @license         GPL 2.0 or later
  * @package         wgteams
- * @since           1.0
- * @min_xoops       2.5.7
  * @author          Goffy - Wedega.com - Email:<webmaster@wedega.com> - Website:<https://wedega.com>
- * @version         $Id: 1.0 index.php 1 Sun 2015/12/27 23:18:01Z Goffy - Wedega $
  */
 
 use Xmf\Yaml;
+use XoopsModules\Wgteams\{
+    Helper,
+    TeamsHandler,
+    MembersHandler,
+    RelationsHandler,
+    InfofieldsHandler
+};
 
 require __DIR__ . '/header.php';
 
@@ -88,7 +92,7 @@ $adminObject->displayIndex();
  */
 function loadAdminConfig($yamlFile)
 {
-    $config = Yaml::loadWrapped($yamlFile); // work with phpmyadmin YAML dumps
+    $config = Yaml::readWrapped($yamlFile); // work with phpmyadmin YAML dumps
     return $config;
 }
 

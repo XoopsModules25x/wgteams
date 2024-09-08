@@ -18,13 +18,16 @@ declare(strict_types=1);
  * @copyright       The XOOPS Project (https://xoops.org)
  * @license         GPL 2.0 or later
  * @package         wgteams
- * @since           1.0
- * @min_xoops       2.5.7
  * @author          Goffy - Wedega.com - Email:<webmaster@wedega.com> - Website:<https://wedega.com>
- * @version         $Id: 1.0 header.php 1 Sun 2015/12/27 23:18:01Z Goffy - Wedega $
  */
 
-use XoopsModules\Wgteams;
+use XoopsModules\Wgteams\{
+    Helper,
+    TeamsHandler,
+    MembersHandler,
+    RelationsHandler,
+    InfofieldsHandler
+};
 
 require \dirname(__DIR__, 3) . '/include/cp_header.php';
 $thisPath = \dirname(__DIR__);
@@ -35,12 +38,12 @@ $pathModuleAdmin = $GLOBALS['xoopsModule']->getInfo('dirmoduleadmin');
 $pathModIcon16   = $GLOBALS['xoopsModule']->getInfo('modicons16');
 $pathModIcon32   = $GLOBALS['xoopsModule']->getInfo('modicons32');
 // Get instance of module
-$helper            = Wgteams\Helper::getInstance();
+$helper            = Helper::getInstance();
 $db                = \XoopsDatabaseFactory::getDatabaseConnection();
-$teamsHandler      = new Wgteams\TeamsHandler($db); //$helper->getHandler('Teams');
-$membersHandler    = new Wgteams\MembersHandler($db); //$helper->getHandler('Members');
-$relationsHandler  = new Wgteams\RelationsHandler($db); //$helper->getHandler('Relations');
-$infofieldsHandler = new Wgteams\InfofieldsHandler($db); //$helper->getHandler('Infofields');
+$teamsHandler      = new TeamsHandler($db); //$helper->getHandler('Teams');
+$membersHandler    = new MembersHandler($db); //$helper->getHandler('Members');
+$relationsHandler  = new RelationsHandler($db); //$helper->getHandler('Relations');
+$infofieldsHandler = new InfofieldsHandler($db); //$helper->getHandler('Infofields');
 
 $myts = \MyTextSanitizer::getInstance();
 if (!isset($xoopsTpl) || !\is_object($xoopsTpl)) {

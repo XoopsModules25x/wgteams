@@ -6,6 +6,7 @@
             <tr class="head">
                 <th class="center"><{$smarty.const._AM_WGTEAMS_INFOFIELD_ID}></th>
                 <th class="center"><{$smarty.const._AM_WGTEAMS_INFOFIELD_NAME}></th>
+                <th class="center"><{$smarty.const._AM_WGTEAMS_INFOFIELD_CLASS}></th>
                 <th class="center"><{$smarty.const._AM_WGTEAMS_SUBMITTER}></th>
                 <th class="center"><{$smarty.const._AM_WGTEAMS_DATE_CREATE}></th>
                 <th class="center width5"><{$smarty.const._AM_WGTEAMS_FORM_ACTION}></th>
@@ -17,6 +18,7 @@
                 <tr class="<{cycle values='odd, even'}>">
                     <td class="center"><{$infofield.field_id}></td>
                     <td class="center"><{$infofield.field_name}></td>
+                    <td class="center"><{$infofield.field_class_text|default:false}></td>
                     <td class="center"><{$infofield.field_submitter}></td>
                     <td class="center"><{$infofield.field_date_created}></td>
                     <td class="center  width5">

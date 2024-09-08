@@ -18,10 +18,7 @@ declare(strict_types=1);
  * @copyright       The XOOPS Project (https://xoops.org)
  * @license         GPL 2.0 or later
  * @package         wgteams
- * @since           1.0
- * @min_xoops       2.5.7
  * @author          Goffy - Wedega.com - Email:<webmaster@wedega.com> - Website:<https://wedega.com>
- * @version         $Id: 1.0 relations.php 1 Sun 2015/12/27 23:18:00Z Goffy - Wedega $
  */
 
 use Xmf\Request;
@@ -112,35 +109,25 @@ switch ($op) {
             $relationsObj = $relationsHandler->create();
         }
         // Set Vars
-        // Set Var rel_team_id
-        $relationsObj->setVar('rel_team_id', $_POST['rel_team_id']);
-        // Set Var rel_member_id
-        $relationsObj->setVar('rel_member_id', $_POST['rel_member_id']);
-        // Set Var rel_info_1_field
-        $relationsObj->setVar('rel_info_1_field', $_POST['rel_info_1_field']);
-        // Set Var rel_info_1
-        $relationsObj->setVar('rel_info_1', $_POST['rel_info_1']);
-        // Set Var rel_info_2_field
-        $relationsObj->setVar('rel_info_2_field', $_POST['rel_info_2_field']);
-        // Set Var rel_info_2
-        $relationsObj->setVar('rel_info_2', $_POST['rel_info_2']);
-        // Set Var rel_info_3_field
-        $relationsObj->setVar('rel_info_3_field', $_POST['rel_info_3_field']);
-        // Set Var rel_info_3
-        $relationsObj->setVar('rel_info_3', $_POST['rel_info_3']);
-        // Set Var rel_info_4_field
-        $relationsObj->setVar('rel_info_4_field', $_POST['rel_info_4_field']);
-        // Set Var rel_info_4
-        $relationsObj->setVar('rel_info_4', $_POST['rel_info_4']);
-        // Set Var rel_info_5_field
-        $relationsObj->setVar('rel_info_5_field', $_POST['rel_info_5_field']);
-        // Set Var rel_info_5
-        $relationsObj->setVar('rel_info_5', $_POST['rel_info_5']);
-        // Set Var rel_weight
-        $relationsObj->setVar('rel_weight', $_POST['rel_weight']);
-        // Set Var rel_submitter
-        $relationsObj->setVar('rel_submitter', $_POST['rel_submitter']);
-        // Set Var rel_date_create
+        $relationsObj->setVar('rel_team_id', Request::getInt('rel_team_id'));
+        $relationsObj->setVar('rel_member_id', Request::getInt('rel_member_id'));
+        $relationsObj->setVar('rel_info_1_field', Request::getInt('rel_info_1_field'));
+        $relationsObj->setVar('rel_info_1_class', Request::getInt('rel_info_1_class'));
+        $relationsObj->setVar('rel_info_1', Request::getString('rel_info_1'));
+        $relationsObj->setVar('rel_info_2_field', Request::getInt('rel_info_2_field'));
+        $relationsObj->setVar('rel_info_2_class', Request::getInt('rel_info_2_class'));
+        $relationsObj->setVar('rel_info_2', Request::getString('rel_info_2'));
+        $relationsObj->setVar('rel_info_3_field', Request::getInt('rel_info_3_field'));
+        $relationsObj->setVar('rel_info_3_class', Request::getInt('rel_info_3_class'));
+        $relationsObj->setVar('rel_info_3', Request::getString('rel_info_3'));
+        $relationsObj->setVar('rel_info_4_field', Request::getInt('rel_info_4_field'));
+        $relationsObj->setVar('rel_info_4_class', Request::getInt('rel_info_4_class'));
+        $relationsObj->setVar('rel_info_4', Request::getString('rel_info_4'));
+        $relationsObj->setVar('rel_info_5_field', Request::getInt('rel_info_5_field'));
+        $relationsObj->setVar('rel_info_5_class', Request::getInt('rel_info_5_class'));
+        $relationsObj->setVar('rel_info_5', Request::getString('rel_info_5'));
+        $relationsObj->setVar('rel_weight', Request::getInt('rel_weight'));
+        $relationsObj->setVar('rel_submitter', Request::getInt('rel_submitter'));
         $relationsObj->setVar('rel_date_create', \time());
         // Insert Data
         if ($relationsHandler->insert($relationsObj)) {
@@ -166,7 +153,7 @@ switch ($op) {
         $relationsObj = $relationsHandler->get($relId);
         $teamObj = $teamsHandler->get($relationsObj->getVar('rel_team_id'));
         $memberObj = $membersHandler->get($relationsObj->getVar('rel_member_id'));
-        if (\Xmf\Request::hasVar('ok') && 1 == $_REQUEST['ok']) {
+        if (1 == Request::getInt('ok', 0)) {
             if (!$GLOBALS['xoopsSecurity']->check()) {
                 \redirect_header('relations.php', 3, \implode(', ', $GLOBALS['xoopsSecurity']->getErrors()));
             }
@@ -182,7 +169,7 @@ switch ($op) {
         }
         break;
     case 'order':
-        $rorder = $_POST['rorder'];
+        $rorder = Request::getArray('rorder');
         for ($i = 0, $iMax = \count($rorder); $i < $iMax; $i++) {
             $relationsObj = $relationsHandler->get($rorder[$i]);
             $relationsObj->setVar('rel_weight', $i + 1);

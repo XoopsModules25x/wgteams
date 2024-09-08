@@ -1,3 +1,10 @@
+<h5>2.0.2 Beta1</h5> [2024/04/23]
+- add AJAX modal window (mamba)
+- cosmetics (mamba)
+- added extended block (goffy)
+- updated jquery (goffy)
+- PHP 8.4 compatibility (mamba)
+
 <h5>2.0.1 RC2</h5> [2024/03/07]
  - fixed problems with bootstrap 5 (mamba/goffy)
 

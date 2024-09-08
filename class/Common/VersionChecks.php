@@ -27,7 +27,7 @@ trait VersionChecks
      * @param null|string $requiredVer
      * @return bool true if meets requirements, false if not
      */
-    public static function checkVerXoops(\XoopsModule $module = null, $requiredVer = null)
+    public static function checkVerXoops(?\XoopsModule $module = null, $requiredVer = null)
     {
         $moduleDirName      = \basename(\dirname(__DIR__, 2));
         $moduleDirNameUpper = \mb_strtoupper($moduleDirName);
@@ -59,7 +59,7 @@ trait VersionChecks
      * @param \XoopsModule|null $module
      * @return bool true if meets requirements, false if not
      */
-    public static function checkVerPhp(\XoopsModule $module = null)
+    public static function checkVerPhp(?\XoopsModule $module = null)
     {
         $moduleDirName      = \basename(\dirname(__DIR__, 2));
         $moduleDirNameUpper = \mb_strtoupper($moduleDirName);
@@ -87,8 +87,8 @@ trait VersionChecks
      * compares current module version with the latest GitHub release
      * @static
      * @param \Xmf\Module\Helper $helper
-     * @param string|null        $source
-     * @param string|null        $default
+     * @param string|null            $source
+     * @param string|null            $default
      *
      * @return string|array info about the latest module version, if newer
      */

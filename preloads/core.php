@@ -14,8 +14,6 @@
  * @copyright       The XOOPS Project (http://xoops.org)
  * @license         GPL 2.0 or later
  * @package         wgteams
- * @since           1.0
- * @min_xoops       2.5.7
  * @author          Goffy - Wedega.com - Email:<webmaster@wedega.com> - Website:<https://wedega.com>
  */
 \defined('XOOPS_ROOT_PATH') || die('Restricted access');

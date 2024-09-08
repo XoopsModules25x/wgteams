@@ -18,13 +18,14 @@ declare(strict_types=1);
  * @copyright       The XOOPS Project (https://xoops.org)
  * @license         GPL 2.0 or later
  * @package         wgteams
- * @since           1.0
- * @min_xoops       2.5.7
  * @author          Goffy - Wedega.com - Email:<webmaster@wedega.com> - Website:<https://wedega.com>
- * @version         $Id: 1.0 teams.php 1 Sun 2015/12/27 23:18:00Z Goffy - Wedega $
  */
 
 use XoopsModules\Wgteams;
+use XoopsModules\Wgteams\{
+    Helper,
+    Constants
+};
 
 require_once \XOOPS_ROOT_PATH . '/modules/wgteams/include/common.php';
 
@@ -37,20 +38,33 @@ function b_wgteams_teamsmembers_show($options)
 {
     require_once \XOOPS_ROOT_PATH . '/modules/wgteams/include/functions.php';
 
+    $helper  = Helper::getInstance();
+
     $GLOBALS['xoTheme']->addStylesheet(\XOOPS_URL . '/modules/wgteams/assets/css/style.css');
     $GLOBALS['xoopsTpl']->assign('wgteams_teams_upload_url', \WGTEAMS_UPLOAD_URL . '/teams/images/');
     $GLOBALS['xoopsTpl']->assign('wgteams_url_index', \WGTEAMS_URL . '/index.php');
 
+    $useDetails = (int)$helper->getConfig('wgteams_usedetails');
+    $useModal   = Constants::USEDETAILS_MODAL === $useDetails;
+    $GLOBALS['xoopsTpl']->assign('useModal', $useModal);
+    if ($useModal) {
+        $GLOBALS['xoTheme']->addStylesheet(\WGTEAMS_URL . '/assets/css/modal.css');
+        $GLOBALS['xoTheme']->addScript(\WGTEAMS_URL . '/assets/js/modal.js');
+    }
+    $useTab = Constants::USEDETAILS_TAB === $useDetails;
+    $GLOBALS['xoopsTpl']->assign('useTab', $useTab);
+
     $typeBlock = $options[0];
-    $team_id   = $options[1];
     \array_shift($options);
-    \array_shift($options);
+    $teamIds     = \implode(',', $options);
 
     $helper       = Wgteams\Helper::getInstance();
     $teamsHandler = $helper->getHandler('Teams');
 
     $crit_teams = new \CriteriaCompo();
-    $crit_teams->add(new \Criteria('team_id', $team_id));
+    if (0 !== \mb_strpos($teamIds, '0')) {
+        $crit_teams->add(new \Criteria('team_id', '(' . $teamIds . ')', 'IN'));
+    }
     $crit_teams->add(new \Criteria('team_online', '1'));
     $crit_teams->setSort('team_weight');
     $crit_teams->setOrder('ASC');
@@ -85,10 +99,12 @@ function b_wgteams_teamsmembers_edit($options)
     $criteria->setOrder('ASC');
     $teamsAll = $teamsHandler->getAll($criteria);
     unset($criteria);
-    $form .= "<select name='options[]' size='5'>";
+    $showAll = \in_array(0, $options);
+    $form .= "<select name='options[]'  multiple='multiple' size='5'>";
+    $form .= "<option value='0' " . ($showAll ? ' selected' : ' ') . '>-- ' . \_MB_WGTEAMS_ALL_TEAMS . ' --</option>';
     foreach (\array_keys($teamsAll) as $i) {
         $team_id = $teamsAll[$i]->getVar('team_id');
-        $form    .= "<option value='" . $team_id . "' " . (false === \array_search($team_id, $options, true) ? '' : 'selected') . '>' . $teamsAll[$i]->getVar('team_name') . '</option>';
+        $form    .= "<option value='" . $team_id . "'" . (!$showAll && \in_array($team_id, $options) ? ' selected' : ' ') . '>' . $teamsAll[$i]->getVar('team_name') . '</option>';
     }
     $form .= '</select>';
 
