@@ -1,6 +1,6 @@
 <div class="member_list row">
     <{foreach item=member from=$members name=fe_members}>
-        <{if $member_show_details|default:false}>
+        <{if $member_show_single|default:false}>
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 member-panel" <{if $useModal|default:false}>data-toggle="modal" data-target="#memberModal<{$member.member_id}>" data-member-id="<{$member.member_id}>" data-bs-toggle="modal" data-bs-target="#memberModal<{$member.member_id}>"<{/if}>>
         <{elseif $member.rel_nb_cols|default:0 == 2}>
             <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 member-panel" <{if $useModal|default:false}>data-toggle="modal" data-target="#memberModal<{$member.member_id}>" data-member-id="<{$member.member_id}>" data-bs-toggle="modal" data-bs-target="#memberModal<{$member.member_id}>"<{/if}>>

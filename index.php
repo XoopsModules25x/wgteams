@@ -94,6 +94,7 @@ if (\count($teams_list) > 0) {
 
 if ($rel_id > 0) {
     $GLOBALS['xoopsTpl']->assign('member_show_details', true);
+    $GLOBALS['xoopsTpl']->assign('member_show_single', true);
 } else {
     $GLOBALS['xoopsTpl']->assign('team_show', true);
 }
