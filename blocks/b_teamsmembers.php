@@ -76,7 +76,7 @@ function b_wgteams_teamsmembers_show($options)
         $block = wgteamsGetTeamMemberDetails($teamsAll);
     }
 
-    $GLOBALS['xoopsTpl']->assign('member_show_index', Constants::USEDETAILS_NONE !== $useDetails);
+    $GLOBALS['xoopsTpl']->assign('member_show_index', Constants::USEDETAILS_NONE === $useDetails);
 
     return $block;
 }
