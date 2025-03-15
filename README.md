@@ -19,7 +19,9 @@ The templates on user side are fully responsive, but for proper displaying you m
 - PHP 7.4 or higher;
 - MySQL 5.5; -> Minimum Recommended Using InnoDB Version 5.1 or Later
 
-wgTeams is ready for PHP 8.0
+# Info
+
+**wgTeams is ready for PHP 8.4**
 
 #### Demo: 
 * https://xoops.wedega.com/modules/wgteams/
