@@ -2,10 +2,13 @@
 
 ![alt XOOPS CMS](https://xoops.org/images/logoXoopsPhp8.png)
 
-## wgTeams module for  [XOOPS CMS 2.5.11+](https://xoops.org)
 [![Software License](https://img.shields.io/badge/license-GPL-brightgreen.svg?style=flat)](LICENSE)
 [![Latest Pre-Release](https://img.shields.io/github/tag/ggoffy/wgteams.svg?style=flat)](https://github.com/ggoffy/wgteams/tags/)
 [![Latest Version](https://img.shields.io/github/release/ggoffy/wgteams.svg?style=flat)](https://github.com/ggoffy/wgteams/releases/)
+
+## wgTeams module for  [XOOPS CMS 2.5.11+](https://xoops.org)
+
+![module image](./assets/images/wgteams.jpg)
 
 **wgTeams** is a simple module for [XOOPS CMS](https://xoops.org) to present one or more teams.
 
