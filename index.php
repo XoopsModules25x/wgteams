@@ -94,6 +94,7 @@ if (\count($teams_list) > 0) {
 
 if ($rel_id > 0) {
     $GLOBALS['xoopsTpl']->assign('member_show_details', true);
+    $GLOBALS['xoopsTpl']->assign('member_show_single', true);
 } else {
     $GLOBALS['xoopsTpl']->assign('team_show', true);
 }
@@ -126,26 +127,6 @@ if (1 == $helper->getConfig('wgteams_showbreadcrumbs')) {
     }
     $GLOBALS['xoopsTpl']->assign('showbreadcrumbs', '1');
 }
-
-/*
-//---------- AJAX Modal Start -------------------
-//$xoopsLogger->activated = false;
-if (Request::getMethod() === 'POST' && Request::hasVar('member_id', 'POST')) {
-    $memberId = Request::getInt('member_id', 0, 'POST');
-    if ($memberId > 0) {
-        $membersHandler = $helper->getHandler('members');
-        $member = $membersHandler->get($memberId);
-
-        if ($member instanceof Members) {
-            $modalMember = $member->getValuesMember();
-            $GLOBALS['xoopsTpl']->assign('modalMember', $modalMember);
-            $memberDetails = renderMemberDetails($member);
-        }
-    }
-}
-//---------- AJAX Modal End -------------------
-*/
-
 // keywords
 wgteamsMetaKeywords($helper->getConfig('keywords') . ', ' . \implode(', ', $keywords));
 unset($keywords);

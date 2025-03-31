@@ -54,7 +54,7 @@ function b_wgteams_teamsmembers_show($options)
     $useTab = Constants::USEDETAILS_TAB === $useDetails;
     $GLOBALS['xoopsTpl']->assign('useTab', $useTab);
 
-    $typeBlock = $options[0];
+    //$typeBlock = $options[0];
     \array_shift($options);
     $teamIds     = \implode(',', $options);
 
@@ -75,6 +75,8 @@ function b_wgteams_teamsmembers_show($options)
     if ($teamsCount > 0) {
         $block = wgteamsGetTeamMemberDetails($teamsAll);
     }
+
+    $GLOBALS['xoopsTpl']->assign('member_show_index', Constants::USEDETAILS_NONE === $useDetails);
 
     return $block;
 }

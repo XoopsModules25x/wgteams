@@ -2,10 +2,13 @@
 
 ![alt XOOPS CMS](https://xoops.org/images/logoXoopsPhp8.png)
 
-## wgTeams module for  [XOOPS CMS 2.5.11+](https://xoops.org)
 [![Software License](https://img.shields.io/badge/license-GPL-brightgreen.svg?style=flat)](LICENSE)
 [![Latest Pre-Release](https://img.shields.io/github/tag/ggoffy/wgteams.svg?style=flat)](https://github.com/ggoffy/wgteams/tags/)
 [![Latest Version](https://img.shields.io/github/release/ggoffy/wgteams.svg?style=flat)](https://github.com/ggoffy/wgteams/releases/)
+
+## wgTeams module for  [XOOPS CMS 2.5.11+](https://xoops.org)
+
+![module image](./assets/images/wgteams.jpg)
 
 **wgTeams** is a simple module for [XOOPS CMS](https://xoops.org) to present one or more teams.
 
@@ -19,7 +22,9 @@ The templates on user side are fully responsive, but for proper displaying you m
 - PHP 7.4 or higher;
 - MySQL 5.5; -> Minimum Recommended Using InnoDB Version 5.1 or Later
 
-wgTeams is ready for PHP 8.0
+# Info
+
+**wgTeams is ready for PHP 8.4**
 
 #### Demo: 
 * https://xoops.wedega.com/modules/wgteams/
