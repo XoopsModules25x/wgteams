@@ -27,14 +27,19 @@ class Modulemenu
 
     /** function to create an array for XOOPS main menu
      *
+     * @param bool $includeUrl
      * @return array
      */
-    public function getMenuitemsDefault()
+    public function getMenuitemsDefault($includeUrl = false)
     {
 
         $moduleDirName = \basename(\dirname(__DIR__));
         $pathname      = \XOOPS_ROOT_PATH . '/modules/' . $moduleDirName . '/';
-        $urlModule     = \XOOPS_URL . '/modules/' . $moduleDirName . '/';
+
+        $urlModule = '';
+        if ($includeUrl) {
+            $urlModule = \XOOPS_URL . '/modules/' . $moduleDirName . '/';
+        }
 
         require_once $pathname . 'include/common.php';
 
@@ -53,7 +58,7 @@ class Modulemenu
         foreach (\array_keys($teamsAll) as $i) {
             $items[] = [
                 'name' => $teamsAll[$i]->getVar('team_name'),
-                'url'  =>  $urlModule . 'index.php?team_id=' . $teamsAll[$i]->getVar('team_id'),
+                'url'  => $urlModule . 'index.php?team_id=' . $teamsAll[$i]->getVar('team_id'),
             ];
         }
         // end creation of link list as array
@@ -67,7 +72,7 @@ class Modulemenu
      */
     public function getMenuitemsSbadmin5()
     {
-        return $this->getMenuitemsDefault();
+        return $this->getMenuitemsDefault(true);
     }
 
 
