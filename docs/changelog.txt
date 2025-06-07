@@ -1,3 +1,6 @@
+<h5>2.0.2 Stable</h5> [2025/06/07]
+- last stable version for PHP 7 (goffy)
+
 <h5>2.0.2 Beta1</h5> [2024/04/23]
 - add AJAX modal window (mamba)
 - cosmetics (mamba)
