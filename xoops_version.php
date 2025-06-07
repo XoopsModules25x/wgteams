@@ -34,8 +34,9 @@ $moduleDirNameUpper = \mb_strtoupper($moduleDirName);
 // ------------------- Information ------------------- /
 $modversion = [
     'version'             => '2.0.2',
-    'module_status'       => 'Beta1',
-    'release'             => '2024/04/23', // format: yyyy/mm/dd
+    'module_status'       => 'Stable',
+    'release'             => '2025/06/07', // format: yyyy/mm/dd
+    'release_date'        => '2025/06/07', // format: yyyy/mm/dd
     'name'                => _MI_WGTEAMS_NAME,
     'description'         => _MI_WGTEAMS_DESC,
     'author'              => 'Goffy - Wedega.com',
@@ -48,7 +49,6 @@ $modversion = [
     'help'                => 'page=help',
     'release_info'           => 'release_info',
     'release_file'        => \XOOPS_URL . '/modules/wgteams/docs/release_info file',
-    'release_date'        => '2024/03/07', // format: yyyy/mm/dd
     'manual'              => 'link to manual file',
     'manual_file'         => \XOOPS_URL . '/modules/wgteams/docs/install.txt',
     'min_php'             => '7.4',
@@ -129,26 +129,11 @@ $modversion['search']['func'] = 'wgteams_search';
 // ------------------- Submenu ------------------- //
 global $xoopsModule;
 if (\is_object($xoopsModule) && $xoopsModule->getVar('dirname') == $moduleDirName) {
-    global $xoopsModuleConfig, $xoopsUser;
-
-    $s = 0;
-
-    /** @var Wgteams\Helper $helper */
-    $helper = Wgteams\Helper::getInstance();
-    //    $teamsHandler =  $helper->getHandler('TeamsHandler');
-    $db           = \XoopsDatabaseFactory::getDatabaseConnection();
-    $teamsHandler = new Wgteams\TeamsHandler($db);
-
-    $crit_teams = new \CriteriaCompo();
-    $crit_teams->add(new \Criteria('team_online', '1'));
-    $crit_teams->setSort('team_weight');
-    $crit_teams->setOrder('ASC');
-
-    $teamsAll = $teamsHandler->getAll($crit_teams);
-    foreach (\array_keys($teamsAll) as $i) {
-        $s++;
-        $modversion['sub'][$s]['name'] = $teamsAll[$i]->getVar('team_name');
-        $modversion['sub'][$s]['url']  = 'index.php?team_id=' . $teamsAll[$i]->getVar('team_id');
+    $submenu = new \XoopsModules\Wgteams\Modulemenu;
+    $menuItems = $submenu->getMenuitemsDefault();
+    foreach ($menuItems as $key => $menuItem) {
+        $modversion['sub'][$key]['name'] = $menuItem['name'];
+        $modversion['sub'][$key]['url'] = $menuItem['url'];
     }
 }
 // ------------------- Blocks ------------------- //
