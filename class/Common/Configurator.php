@@ -27,7 +27,7 @@ namespace XoopsModules\Wgteams\Common;
  */
 class Configurator
 {
-    public string $name;
+    public string $name = '';
     public array $paths           = [];
     public array $uploadFolders   = [];
     public array $copyBlankFiles  = [];
