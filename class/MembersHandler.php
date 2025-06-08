@@ -40,10 +40,10 @@ class MembersHandler extends \XoopsPersistableObjectHandler
      *
      * @param \XoopsDatabase $db
      */
-    public function __construct(\XoopsDatabase $db)
+    public function __construct(?\XoopsDatabase $db)
     {
         parent::__construct($db, 'wgteams_members', Members::class, 'member_id', 'member_firstname');
-        /** @var \XoopsModules\Wgteams\Helper $this ->helper */
+        /** @var \XoopsModules\Wgteams\Helper $this->helper */
         $this->helper = \XoopsModules\Wgteams\Helper::getInstance();
     }
 

@@ -206,7 +206,7 @@ class Helper extends \Xmf\Module\Helper
      * @static function addLog
      * @param string $log
      */
-    public function addLog($log)
+    public function addLog($log):void
     {
         if ($this->debug) {
             if (\is_object($GLOBALS['xoopsLogger'])) {

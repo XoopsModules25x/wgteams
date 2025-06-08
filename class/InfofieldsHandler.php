@@ -40,7 +40,7 @@ class InfofieldsHandler extends \XoopsPersistableObjectHandler
      *
      * @param \XoopsDatabase $db
      */
-    public function __construct(\XoopsDatabase $db)
+    public function __construct(?\XoopsDatabase $db)
     {
         parent::__construct($db, 'wgteams_infofields', Infofields::class, 'infofield_id', 'infofield_name');
         /** @var Wgteams\Helper $this ->helper */
