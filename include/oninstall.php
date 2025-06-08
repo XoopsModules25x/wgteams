@@ -19,8 +19,12 @@ declare(strict_types=1);
  * @author          Goffy - Wedega.com - Email:<webmaster@wedega.com> - Website:<https://wedega.com>
  */
 
-use XoopsModules\Wgteams;
-use XoopsModules\Wgteams\Common;
+
+use XoopsModules\Wgteams\{
+    Common\Configurator,
+    Helper,
+    Utility
+};
 
 /**
  * Prepares system prior to attempting to install module
@@ -32,7 +36,7 @@ function xoops_module_pre_install_wgteams(\XoopsModule $module)
 {
     require \dirname(__DIR__) . '/preloads/autoloader.php';
 
-    $utility      = new \XoopsModules\Wgteams\Utility();
+    $utility      = new Utility();
     $xoopsSuccess = $utility::checkVerXoops($module);
     $phpSuccess   = $utility::checkVerPhp($module);
 
@@ -58,9 +62,9 @@ function xoops_module_install_wgteams(\XoopsModule $module)
 
     $moduleDirName      = \basename(\dirname(__DIR__));
 
-    $helper       = Wgteams\Helper::getInstance();
-    $utility      = new Wgteams\Utility();
-    $configurator = new Wgteams\Common\Configurator();
+    $helper       = Helper::getInstance();
+    $utility      = new Utility();
+    $configurator = new Configurator();
     
     // Load language files
     $helper->loadLanguage('admin');
