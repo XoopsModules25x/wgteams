@@ -65,7 +65,8 @@ trait FilesManagement
                 throw new \RuntimeException('The directory ' . $dst . ' could not be created.');
             }
         } catch (\RuntimeException $e) {
-            echo 'Caught exception: ', $e->getMessage(), "<br>\n";
+            // Optionally log the error here
+            throw $e; // Rethrow so the caller can handle it
         }
         while (false !== ($file = \readdir($dir))) {
             if (('.' !== $file) && ('..' !== $file)) {
